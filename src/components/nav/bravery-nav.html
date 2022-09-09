@@ -1,11 +1,13 @@
 <header data-size="normal" class="main-header">
-    <a href="/" title="Wheaton College homepage">{% include "components/svg/logo-main" %}</a>
+    <a href="/" title="Wheaton College homepage"><img id="nav-main-logo" src="../svg/logo-main.svg"/></a>
     <nav class="main-navigation">
         <button class="menu-more" aria-expanded="false" tabindex="0">More {% include "components/svg/icon-menu" %}</button>
     </nav>
     <section class="nav-actions">
         <a href="/apply" class="cta">Apply</a>
         <a href="/visit" class="cta">Visit</a>
-        <button class="search" aria-expanded="false" tabindex="0"><span class="reader-only">Search</span>{% include "components/svg/icon-search" %}</button>
+        <button class="search" aria-expanded="false" tabindex="0">
+            <span class="reader-only">Search</span>{% include "components/svg/icon-search" %}
+        </button>
     </section>
 </header>
