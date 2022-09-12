@@ -1,0 +1,109 @@
+.main-footer {
+    background: #133666;
+}
+
+.footer-column {
+    color: #ffffff;
+    font-family: 'Arno Pro';
+}
+
+#footer-logo-main {
+    height: 80px;
+    width: 242px;
+    display: flex;
+    margin: auto;
+    padding-top: 64px;
+}
+
+.footer-nav {
+    color: #ffffff;
+    font-family: 'Arno Pro';
+}
+
+.footer-nav>a:first-child {
+    color: #ffffff;
+}
+
+.footer-nav li {
+    list-style-type: none;
+    margin: 16px 0 16px 0;
+}
+
+.footer-nav li>a {
+    font-size: 0.875rem;
+    font-family: 'Futura Bk BT';
+    color: #C2E3FF;
+    text-decoration: none;
+}
+
+.footer-nav-header {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-left: 40px;
+    font-family: 'Arno Pro';
+    font-weight: normal;
+}
+
+.footer-nav-header-button {
+    font-size: 1.375rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Arno Pro';
+    padding: 0px;
+}
+
+.footer-nav-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* gap: 1vw; */
+    padding: 72px 172px 72px 172px;
+}
+
+.footer-contact-content {
+    display: block;
+    margin: 16px 0 16px 0;
+    font-size: 0.875rem;
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    color: #C2E3FF;
+    text-decoration: none;
+    padding-left: 40px;
+}
+
+.legal {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    color: #C2E3FF;
+    font-size: 0.75rem;
+    padding-left: 212px;
+}
+
+.legal li {
+    list-style-type: none;
+}
+
+.legal a {
+    text-decoration: none;
+    color: #C2E3FF
+}
+
+.footer-divider {
+    width: 75%;
+    background:#C2E3FF;
+    height: 1px;
+    margin-left: 212px;
+}
+
+.footer-subcontent *{
+    display: flex;
+}
+
+.footer-subcontent a {
+    margin: 24px;
+}
+
+.footer-subcontent a:last-child {
+    margin-right: 0px;
+}

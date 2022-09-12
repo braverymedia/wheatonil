@@ -1,13 +1,20 @@
 <header data-size="normal" class="main-header">
-    <a href="/" title="Wheaton College homepage"><img id="nav-main-logo" src="../svg/logo-main.svg"/></a>
+    <a href="/" title="Wheaton College homepage">
+        <img id="nav-logo-main" src="/public/images/svg/logo-main.svg" />
+    </a>
+
     <nav class="main-navigation">
-        <button class="menu-more" aria-expanded="false" tabindex="0">More {% include "components/svg/icon-menu" %}</button>
+        <a href="/academics">Academics</a>
+        <a href="/costaid">Cost & Aid</a>
+        <a href="/lifeatwheaton">Life at Wheaton</a>
+
+        <button class="menu-button-more" aria-expanded="false" tabindex="0">More<img class="menu-more-icon" src="/public/images/svg/icon-menu.svg"/></button>
     </nav>
     <section class="nav-actions">
-        <a href="/apply" class="cta">Apply</a>
-        <a href="/visit" class="cta">Visit</a>
-        <button class="search" aria-expanded="false" tabindex="0">
-            <span class="reader-only">Search</span>{% include "components/svg/icon-search" %}
+        <a href="/apply" class="nav-actions-link">Apply</a>
+        <a href="/visit" class="nav-actions-link">Visit</a>
+        <button class="search-button" aria-expanded="false" tabindex="0">
+            <img class=search-icon src="/public/images/svg/icon-search.svg"/>
         </button>
     </section>
 </header>
