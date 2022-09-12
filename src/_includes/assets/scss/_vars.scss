@@ -1,0 +1,28 @@
+:root {
+    --font--serif: 'Arno Pro', arno-pro, "Times New Roman", serif;
+    --font--sans-serif: Futura, "Helvetica Neue", sans-serif;
+    --type-size--super: clamp( 3.75rem, calc(1rem + 2.5vw), 9.38rem);
+    --type-size--xxl: clamp( 2.75rem, calc(1rem + 2.5vw), 3.75rem);
+    --type-size--xl: 2.75rem;
+    --type-size--large: 1.875rem;
+    --type-size--medium: 1.5rem;
+    --type-size--base: 1.125rem;
+    --type-size--regular: var(--type-size--base);
+    --type-size--small: 1rem;
+    --type-size--xsmall: 0.875rem;
+    --type-size--tiny: 0.75rem;
+
+    // Colors
+    --color--wheaton-blue: #1B4D92;
+    --color--blue-dark: #133666;
+    --color--white: #fff;
+    --color--wheaton-orange: #D57435;
+    --color--grey-light: #D0D5DD;
+    --color--grey-medium: #A1A8B3;
+
+    // Spacing
+    --space--grid-unit: 8px;
+    --space--gap-regular: 8px;
+    --space--gap-medium: calc(var(--space--grid-unit) * 2);
+    --space--gap-large: calc(var(--space--grid-unit) * 3);
+}
