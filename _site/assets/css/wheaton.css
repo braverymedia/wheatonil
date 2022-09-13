@@ -1,6 +1,6 @@
 :root {
-  --font--serif: "Arno Pro", arno-pro, "Times New Roman", serif;
-  --font--sans-serif: Futura, "Helvetica Neue", sans-serif;
+  --font--serif: arno-pro, "Times New Roman", serif;
+  --font--sans-serif: futura-pt, Futura, "Helvetica Neue", sans-serif;
   --type-size--super: clamp( 3.75rem, calc(1rem + 2.5vw), 9.38rem);
   --type-size--xxl: clamp( 2.75rem, calc(1rem + 2.5vw), 3.75rem);
   --type-size--xl: 2.75rem;
