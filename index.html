@@ -19,12 +19,23 @@
         </a>
 
         <nav class="main-navigation">
-            <a href="/academics">Academics</a>
-            <a href="/costaid">Cost & Aid</a>
-            <a href="/lifeatwheaton">Life at Wheaton</a>
+            <a class="main-navigation-link" href="/academics">Academics</a>
+            <a class="main-navigation-link" href="/costaid">Cost & Aid</a>
+            <a class="main-navigation-link" href="/lifeatwheaton">Life at Wheaton</a>
 
             <button class="menu-button-more" aria-expanded="false" tabindex="0">More<img class="menu-more-icon"
-                    src="/public/images/svg/icon-menu.svg" /></button>
+                    src="/public/images/svg/icon-menu.svg" />
+            </button>
+
+            <button onclick="showMobileMenu()" id="menu-button-more-mobile" aria-expanded="false" tabindex="0"><img
+                    class="menu-more-icon" src="/public/images/svg/icon-menu.svg" />
+            </button>
+            <div id="mobile-menu-content-wrapper">
+                <a class="main-navigation-link-mobile" href="/academics">Academics</a>
+                <a class="main-navigation-link-mobile" href="/costaid">Cost & Aid</a>
+                <a class="main-navigation-link-mobile" href="/lifeatwheaton">Life at Wheaton</a>
+            </div>
+
         </nav>
         <section class="nav-actions">
             <a href="/apply" class="nav-actions-link">Apply</a>
@@ -152,8 +163,10 @@
                                 Wheaton, IL 60187-5501</a>
                         </address>
                     </li>
-                    <li><a class="footer-contact-content footer-contact-content-accordion" href="tel:6307525000">(630) 752-5000</a></li>
-                    <li><a class="footer-contact-content footer-contact-content-accordion" href="mailto:info@wheaton.edu">info@wheaton.edu</a></li>
+                    <li><a class="footer-contact-content footer-contact-content-accordion" href="tel:6307525000">(630)
+                            752-5000</a></li>
+                    <li><a class="footer-contact-content footer-contact-content-accordion"
+                            href="mailto:info@wheaton.edu">info@wheaton.edu</a></li>
                     <li>
                         <aside class="social-links-aside social-links-aside-mobile">
                             <a class="social-link" href="#"><span class="reader-only"></span><img
@@ -189,5 +202,7 @@
 
 <script src="index.js"></script>
 <script src="/src/components/footer/bravery-footer.js"></script>
+<script src="/src/components/nav/bravery-nav.js"></script>
+
 
 </html>
