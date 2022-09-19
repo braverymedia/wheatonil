@@ -1,6 +1,11 @@
-const showMobileMenu = () => {
-    const mobileMenu = document.getElementById("mobile-menu-content-wrapper");
-    console.log(mobileMenu.style)
-    mobileMenu.style.display === "none" ? mobileMenu.style.display = "flex" : mobileMenu.style.display = "none"
+const showOverlay = () => {
+    // const mobileMenu = document.getElementById("menu-overlay-content-wrapper");
+    const overlay = document.getElementById("menu-overlay-content-wrapper")
+    console.log("clicked", overlay)
+    overlay.style.height = "100%";
+}
 
+const closeOverlay = () => {
+    const overlay = document.getElementById("menu-overlay-content-wrapper")
+    overlay.style.height = "0%";
 }

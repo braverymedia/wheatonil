@@ -1,12 +1,11 @@
-//setup for local development, opted for running html in the browser as output is raw HTML, CSS, and JS files and not this file :)
+// setup for local development, opted for running html in the browser as output is raw HTML, CSS, and JS files and not this file :)
 
 // var express = require('express');
 // var app = express();
 // var path = require('path');
 
-console.log("index.js wired up")
 
-// // pages
+// pages
 // app.get('/', function(req, res) {
 //     res.sendFile(path.join(__dirname + '/index.html'));
 // });
@@ -20,10 +19,10 @@ console.log("index.js wired up")
 // });
 
 
-// //serve static files
+//serve static files
 // app.use('/public',express.static(__dirname + '/public'));
 
-// //port and server
+//port and server
 // var PORT = 8080;
 // console.log("now serving on PORT: ", PORT)
 
