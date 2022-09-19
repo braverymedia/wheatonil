@@ -30,30 +30,21 @@
             <button onclick="showOverlay()" id="menu-button-more-mobile" aria-expanded="false" tabindex="0"><img
                     class="menu-more-icon" src="/public/images/svg/icon-menu.svg" />
             </button>
-            
+
             <!-- overlay component start -->
             <div id="menu-overlay-content-wrapper" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeOverlay()">&times;</a>
-
                 <section class="overlay-content" id="bm--full-menu" data-state="hidden" data-feature="nav">
-                    <div class="overlay-content">
-                        <a href="#">About</a>
-                        <a href="#">Services</a>
-                        <a href="#">Clients</a>
-                        <a href="#">Contact</a>
-                    </div>
                     <header class="full-search">
-                        <form class="search" action="https://search.wheaton.edu/s/search.html" method="GET">
+                        <form class="overlay-search" action="https://search.wheaton.edu/s/search.html" method="GET">
                             <input name="collection" type="hidden" value="wheaton-search">
-                            <label for="search-input">Search
-                                <span class="twitter-typeahead"
-                                    style="position: relative; display: inline-block;"><input
-                                        class="search__input tt-input" type="search" placeholder="Search website"
+                            <label for="search-input">
+                                <span class="twitter-typeahead"><input
+                                        class="overlay-search-input" type="search" placeholder="Type & press return to search..."
                                         id="search-input" name="query" autocomplete="off" spellcheck="false" dir="auto"
-                                        style="position: relative; vertical-align: top;">
+                                        >
                                     <pre aria-hidden="true"></pre>
-                                    <div class="tt-menu"
-                                        style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;">
+                                    <div class="tt-menu">
                                         <div class="tt-dataset tt-dataset-organic"></div>
                                     </div>
                                 </span>
@@ -61,6 +52,14 @@
                             <button class="search__button" type="submit"><span class="hide">Search</span></button>
                         </form>
                     </header>
+
+                    <div class="overlay-content">
+                        <a href="#">About</a>
+                        <a href="#">Services</a>
+                        <a href="#">Clients</a>
+                        <a href="#">Contact</a>
+                    </div>
+
 
                 </section>
             </div>
