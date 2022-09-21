@@ -1,33 +1,52 @@
-<!-- overlay is nested/copied in bravery-nav.html and index.html respectively -->
 <div id="menu-overlay-content-wrapper" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeOverlay()">&times;</a>
-
     <section class="overlay-content" id="bm--full-menu" data-state="hidden" data-feature="nav">
-        <div class="overlay-content">
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
         <header class="full-search">
-            <form class="search" action="https://search.wheaton.edu/s/search.html" method="GET">
-                <input name="collection" type="hidden" value="wheaton-search">
-                <label for="search-input">Search
-                    <span class="twitter-typeahead"
-                        style="position: relative; display: inline-block;"><input
-                            class="search__input tt-input" type="search" placeholder="Search website"
-                            id="search-input" name="query" autocomplete="off" spellcheck="false" dir="auto"
-                            style="position: relative; vertical-align: top;">
-                        <pre aria-hidden="true"></pre>
-                        <div class="tt-menu"
-                            style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;">
-                            <div class="tt-dataset tt-dataset-organic"></div>
-                        </div>
-                    </span>
-                </label>
-                <button class="search__button" type="submit"><span class="hide">Search</span></button>
+            <form class="overlay-search" action="https://search.wheaton.edu/s/search.html" method="GET">
+                <!-- <input name="collection" type="hidden" value="wheaton-search"> -->
+                <button class="overlay-search-button" type="submit"><span
+                        class="hide">Search</span></button>
+                <input class="overlay-search-input" type="search"
+                    placeholder="Type & press return to search..." id="search-input" name="query"
+                    autocomplete="off" spellcheck="false" dir="auto">
             </form>
         </header>
 
+        <div class="overlay-content-wrapper">
+            <div class="overlay-content-main">
+                <a href="#">Academics</a>
+                <a href="#">Cost & Aid</a>
+                <a href="#">Admissions</a>
+                <a href="#">Life at Wheaton</a>
+                <a href="#">About Wheaton</a>
+            </div>
+
+            <div class="overlay-content-minor">
+                <div class="content-minor-wrapper">
+                    <h3 class="overlay-content-minor-title">Community</h3>
+                    <a href="#">News</a>
+                    <a href="#">Events</a>
+                    <a href="#">Athletics</a>
+                    <a href="#">Giving</a>
+                    <a href="#">Visit our Campus</a>
+                </div>
+
+                <div>
+                    <h3 class="overlay-content-minor-title">Info for</h3>
+                    <a href="#">News</a>
+                    <a href="#">Events</a>
+                    <a href="#">Athletics</a>
+                    <a href="#">Giving</a>
+                    <a href="#">Visit our Campus</a>
+                </div>
+
+            </div>
+        </div>
+        <section class="legal-overlay">
+            <p class="copyright-overlay">&copy; <span id="copyright-year-overlay"></span> Wheaton College
+            </p>
+            <a href="#">Privacy and Cookies</a>
+        </section>
     </section>
+
 </div>
