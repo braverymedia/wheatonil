@@ -4,11 +4,24 @@
         <header class="full-search">
             <form class="overlay-search" action="https://search.wheaton.edu/s/search.html" method="GET">
                 <!-- <input name="collection" type="hidden" value="wheaton-search"> -->
-                <button class="overlay-search-button" type="submit"><span
-                        class="hide">Search</span></button>
-                <input class="overlay-search-input" type="search"
-                    placeholder="Type & press return to search..." id="search-input" name="query"
-                    autocomplete="off" spellcheck="false" dir="auto">
+                <div class="overlay-search-subwrapper">
+                    <button class="overlay-search-button" type="submit"><span
+                            class="hide">Search</span></button>
+                    <input onclick="showSearchSuggestion(event)" class="overlay-search-input" type="search"
+                        placeholder="Type & press return to search..." id="search-input" name="query"
+                        autocomplete="off" spellcheck="false" dir="auto">
+                </div>
+
+                <div class="hide-search-suggestion-panel">
+                    <p class="search-suggestions-header">Popular Search Terms</p>
+                    <nav>
+                        <a href="#">Admissions</a>
+                        <a href="#">Financial Aid</a>
+                        <a href="#">Undergrad</a>
+                        <a href="#">Housing</a>
+                        <a href="#">Visit Campus</a>
+                    </nav>
+                </div>
             </form>
         </header>
 
@@ -45,7 +58,7 @@
         <section class="legal-overlay">
             <p class="copyright-overlay">&copy; <span id="copyright-year-overlay"></span> Wheaton College
             </p>
-            <a href="#">Privacy and Cookies</a>
+            <a class="legal-overlay-link" href="#">Privacy and Cookies</a>
         </section>
     </section>
 

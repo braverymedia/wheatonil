@@ -256,8 +256,34 @@ input[type="search"]:focus {
     margin: auto 32px;
 }
 
-#search-suggestion-panel {
+.hide-search-suggestion-panel {
     display: none;
+}
+
+.show-search-suggestion-panel {
+    display: flex; 
+    flex-direction: column;
+    margin-left: 48px;
+}
+
+.show-search-suggestion-panel a {
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.show-search-suggestion-panel a:last-child {
+    padding-bottom: 24px;
+}
+
+.search-suggestions-header {
+    padding-left: 8px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #A8D7FF;
 }
 
 
@@ -311,18 +337,19 @@ input[type="search"]:focus {
 
     .overlay-content-wrapper {
         flex-direction: column;
-        align-items: center;
     }
+
     .menu-more-icon {
         height: 24px;
         width: 24px;
     }
+
     .overlay-content-main a {
         font-size: 2.5rem;
     }
 
     .legal-overlay-link {
-        font-size: 14px !important;    
+        font-size: 14px !important;
     }
 
 }
@@ -340,6 +367,6 @@ input[type="search"]:focus {
         margin-top: 40px;
     }
 
-   
+
 
 }

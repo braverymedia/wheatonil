@@ -3,21 +3,27 @@ const getCurrentYearOverlay = () => {
     return new Date().getFullYear()
 }
 var year_ref = document.getElementById("copyright-year-overlay");
-
 year_ref.innerHTML = getCurrentYearOverlay();
 
-const showSearchSuggestion = () => {
-    //TODO - add closeShowSuggestion() logic when user clicks away/out of the input
-    //TODO add nav element around .overlay-content-main
-    var search_panel = document.getElementById("search-suggestion-panel");
-    console.log(search_panel.style)
+var search_panel = document.getElementsByClassName("hide-search-suggestion-panel");
+var search_panel_div = search_panel[0]
 
-    if (search_panel.style.display === "none") {
-        search_panel.style.display = "flex";
-        search_panel.style.flexDirection = "column"
-        console.log("make flex direction column")
-    } else {
-        search_panel.style.display = "flex";
+//listener for click-away from search bar
+window.onclick = () => {
+    if (search_panel_div.classList.contains("show-search-suggestion-panel")) {
+        search_panel_div.classList.remove("show-search-suggestion-panel");
+        search_panel_div.classList.add("hide-search-suggestion-panel")
     }
 }
+
+const showSearchSuggestion = (event) => {
+    if (search_panel_div.classList.contains("hide-search-suggestion-panel")) {
+        search_panel_div.classList.remove("hide-search-suggestion-panel");
+        search_panel_div.classList.add("show-search-suggestion-panel")
+        console.log(search_panel_div)
+    } 
+    event.stopPropagation()
+};
+
+
 
