@@ -1,0 +1,224 @@
+.main-footer {
+    background: #133666;
+}
+
+.footer-column {
+    color: #ffffff;
+    font-family: 'Arno Pro';
+}
+
+#footer-logo-main {
+    height: 80px;
+    width: 242px;
+    display: flex;
+    margin: auto;
+    padding-top: 64px;
+}
+
+.footer-nav {
+    color: #ffffff;
+    font-family: 'Arno Pro';
+}
+
+.footer-nav>a:first-child {
+    color: #ffffff;
+}
+
+.footer-nav li {
+    list-style-type: none;
+    margin: 16px 0 16px 0;
+}
+
+.footer-nav li>a {
+    font-size: 0.875rem;
+    font-family: 'Futura Bk BT';
+    color: #C2E3FF;
+    text-decoration: none;
+}
+
+.footer-nav-header {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-left: 40px;
+    font-family: 'Arno Pro';
+    font-weight: normal;
+}
+
+.footer-nav-header-button {
+    font-size: 1.375rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Arno Pro';
+    padding: 0px;
+    text-align: left;
+}
+
+.footer-nav-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* gap: 1vw; */
+    padding: 72px 172px 72px 172px;
+}
+
+.footer-nav-grid-wrapper:after {
+    content: "";
+    display: block;
+}
+
+.footer-contact-content {
+    display: block;
+    margin: 16px 0 16px 0;
+    font-size: 0.875rem;
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    color: #C2E3FF;
+    text-decoration: none;
+}
+
+.legal {
+    display: flex;
+    justify-content: space-between;
+    color: #C2E3FF;
+    font-size: 0.75rem;
+    margin-left: 212px;
+    margin-right: 172px;
+    border-top: 1px solid #C2E3FF;
+
+}
+
+.legal li {
+    list-style-type: none;
+}
+
+.legal a {
+    text-decoration: none;
+    color: #C2E3FF
+}
+
+.footer-divider {
+    width: 75%;
+    /* background: #C2E3FF; */
+    height: 1px;
+    margin-left: 212px;
+}
+
+.footer-subcontent * {
+    display: flex;
+}
+
+.footer-subcontent a {
+    margin: 0 24px 0 24px;
+}
+
+.footer-subcontent a:last-child {
+    margin-right: 0px;
+}
+
+.footer-social-icon {
+    height: 13px;
+    width: 16px;
+}
+
+.social-links-aside {
+    display: flex;
+}
+
+.social-link {
+    margin-right: 23px;
+}
+
+/* first breakpoint 63em/1008px (based on wheaton.edu) */
+@media only screen and (max-width: 1024px) {
+    .accordion-trigger {
+        border-bottom: 1px solid #ffffff;
+        /* border-top-right-radius: 4px;
+        border-top-left-radius: 4px; */
+        /* box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); */
+        cursor: pointer;
+        transition: all 200ms linear;
+        padding: 10px 18px;
+        padding: 15px;
+        margin-top: 10px;
+        width: 100%
+    }
+
+    .accordion-trigger:after {
+        content: '\002B';
+        float: right;
+    }
+
+    .accordion-trigger.active:after {
+        content: "\2212"
+    }
+
+    .accordion-active,
+    .accordion:hover {
+        background-color: #ccc;
+    }
+
+    .accordion-content {
+        display: none;
+        overflow: hidden;
+        padding-inline-start: 0px;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .accordion-content li {
+        text-align: left;
+    }
+
+    .accordion-content>li>a {
+        font-family: 'Futura Bk BT';
+        padding-left: 15px;
+    }
+
+    .footer-nav-grid-wrapper {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        text-align: center;
+    }
+
+    .footer-nav-header {
+        padding-left: 0;
+    }
+
+    .footer-contact-content-accordion {
+        font-family: 'Futura Bk BT';
+        padding: 0px 0px 0px 15px;
+    }
+
+    .social-links-aside-mobile {
+        padding-left: 15px;
+    }
+
+    .legal {
+        margin-left: 172px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer-nav-grid-wrapper {
+        padding: 72px 10vw 72px 10vw
+    }
+
+    .legal {
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+
+    .footer-subcontent {
+        display: flex;
+        margin-left: -10vw;
+    }
+
+}
+
+
+/* TODO - add breakpoints for 1008px/63em (nav goes to drawer) 768px/48em, 512px/32em, and 320px */

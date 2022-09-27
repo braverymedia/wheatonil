@@ -1,0 +1,372 @@
+#nav-logo-main {
+    height: 72px;
+    width: 218px;
+    margin-left: 32px;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 140px;
+
+}
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 550px;
+    height: 100%;
+}
+
+.main-navigation a {
+    color: #133666;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: 'Arno Pro';
+}
+
+.menu-button-more {
+    display: flex;
+    color: #133666;
+    font-size: 1.5rem;
+    font-family: 'Arno Pro';
+    border: none;
+    background-color: transparent;
+}
+
+.menu-more-icon {
+    height: 20px;
+    width: 20px;
+    margin: 3px 8px auto 8px;
+    color: #133666;
+}
+
+.nav-actions {
+    display: flex;
+}
+
+.nav-actions-link {
+    display: block;
+    color: #1B4D92;
+    font-family: 'Futura';
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 10px 18px 10px 18px;
+    border: 1px solid #D0D5DD;
+    margin-right: 16px;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    margin-right: 35px;
+    padding: 0px;
+}
+
+.overlay-search-button {
+    text-indent: -999px;
+    overflow: hidden;
+    width: 18px;
+    padding: 0;
+    margin: 0;
+    margin-left: 27px;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    background: transparent url("../../../public/images/svg/icon-search-white.svg") no-repeat center;
+    cursor: pointer;
+}
+
+.search-icon {
+    height: 24px;
+    width: 24px;
+}
+
+#main-navigation-mobile {
+    display: none;
+}
+
+#menu-button-more-mobile {
+    display: none;
+}
+
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    margin-top: 18px;
+}
+
+.overlay-content-wrapper {
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-between;
+}
+
+.overlay-content-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-content-main a {
+    font-family: 'Arno Pro';
+    font-size: 5.25rem;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay-content-minor {
+    border-left: 1px solid #0F2A4F;
+    padding: 0px 40px;
+}
+
+.overlay-content-minor a {
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 0px;
+}
+
+.overlay-content-minor-title {
+    font-family: 'Futura';
+    font-style: normal;
+    color: #A8D7FF;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.content-minor-wrapper {
+    margin-bottom: 64px;
+}
+
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    z-index: 2;
+    right: 45px;
+    font-size: 40px;
+    top: 18px;
+}
+
+#menu-overlay-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 36px;
+    flex-direction: column;
+    background-color: #133666;
+    overflow-y: scroll;
+}
+
+#menu-overlay-content-wrapper a {
+    color: #ffffff;
+}
+
+.overlay-search {
+    display: flex;
+    flex-direction: column;
+    background-color: #184481;
+    padding: 2px;
+    border-radius: 12px;
+}
+
+.overlay-search-subwrapper {
+    display: flex;
+}
+
+.overlay-search-input {
+    border-color: transparent;
+    background-color: #184481;
+    color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    height: 68px;
+    border-radius: inherit;
+    padding: 20px;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+*:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: #ffffff
+}
+
+button[type="submit"]:focus,
+input[type="search"]:focus {
+    box-shadow: 0 0 3px 0 #1183d6;
+    border-color: #1183d6;
+    outline: none;
+}
+
+.legal-overlay {
+    display: flex;
+    margin-top: 100px;
+}
+
+.copyright-overlay {
+    color: #ffffff
+}
+
+.copyright-overlay {
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.legal-overlay a {
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    margin: auto 32px;
+}
+
+.hide-search-suggestion-panel {
+    display: none;
+}
+
+.show-search-suggestion-panel {
+    display: flex; 
+    flex-direction: column;
+    margin-left: 48px;
+}
+
+.show-search-suggestion-panel a {
+    font-family: 'Futura Bk BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.show-search-suggestion-panel a:last-child {
+    padding-bottom: 24px;
+}
+
+.search-suggestions-header {
+    padding-left: 8px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #A8D7FF;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .menu-button-more {
+        display: none;
+    }
+
+    .main-navigation-link {
+        display: none;
+    }
+
+    .main-navigation {
+        justify-content: flex-end;
+    }
+
+    #main-navigation-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu-button-more-mobile {
+        display: flex;
+        color: #133666;
+        font-size: 1.5rem;
+        font-family: 'Arno Pro';
+        border: none;
+        background-color: transparent;
+        position: absolute;
+    }
+
+    .mobile-menu-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .overlay a {
+        font-size: 18px
+    }
+
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+        top: 21px;
+    }
+
+    .overlay-content-wrapper {
+        flex-direction: column;
+    }
+
+    .menu-more-icon {
+        height: 24px;
+        width: 24px;
+    }
+
+    .overlay-content-main a {
+        font-size: 2.5rem;
+    }
+
+    .legal-overlay-link {
+        font-size: 14px !important;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 19px;
+        right: 0px;
+    }
+
+    .overlay-content-minor {
+        border-top: 1px solid #0F2A4F;
+        border-left: unset;
+        margin-top: 40px;
+    }
+
+
+
+}
