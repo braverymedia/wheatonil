@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        {% include "components/html-head.njk" %}
+    </head>
+    <body>
+        {% include "components/bravery-nav.njk" %}
+        <main>
+            {% include "components/bm-page-header.njk" %}
+            <section class="bm-cover-image">
+                {% include "components/bm-cover.njk" %}
+            </section>
+            {% include "sections/bm-section-general-content.njk" %}
+            {{ content }}
+        </main>
+        {% include "components/bravery-footer.njk" %}
+    </body>
+</html>
+
+
+

@@ -7,7 +7,7 @@
 		"sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
 		"postcss": "postcss src/_includes/assets/css/*.css --use autoprefixer --no-map --replace",
 		"build:sass": "npm-run-all --sequential sass",
-		"watch:sass": "sass --watch src/_includes/assets/scss:src/_includes/assets/css",
+		"watch:sass": "sass --no-source-map --watch src/_includes/assets/scss:src/_includes/assets/css",
 		"build:js": "rollup -c",
 		"watch:js": "rollup -c --watch",
 		"build:eleventy": "ELEVENTY_ENV=production eleventy",
@@ -43,5 +43,8 @@
 		"rollup-plugin-terser": "^7.0.2",
 		"sass": "^1.54.9",
 		"terser": "^5.15.0"
+	},
+	"dependencies": {
+		"oembed": "^0.1.2"
 	}
 }

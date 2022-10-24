@@ -1,1 +1,13 @@
-@import "vars", "config", "typescale", "buttons", "nav", "footer";
+@import "vars", "config", "typescale", "typesetting", "buttons", "forms", "nav", "footer";
+
+@import "components/01-breadcrumb",
+        "components/02-program-header",
+        "components/03-menu-action",
+        "components/04-program-features",
+        "components/05-stats-bar",
+        "components/06-inquiry",
+        "components/07-cover-image",
+        "components/08-cards",
+        "components/09-section-title";
+
+@import "layouts";

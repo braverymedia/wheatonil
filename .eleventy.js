@@ -10,13 +10,6 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addTransform(
 		"purge-and-inline-css",
 		async function (content) {
-			if (
-				process.env.ELEVENTY_ENV !== "production" ||
-				!this.outputPath.endsWith(".html")
-			) {
-				return content;
-			}
-
 			const purgeCSSResults = await new PurgeCSS().purge({
 				content: [{ raw: content }],
 				css: ["src/_includes/assets/css/wheaton.css"],

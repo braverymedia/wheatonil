@@ -1,8 +1,8 @@
 <footer class="main-footer">
     <a href="/" aria-label="Wheaton College - For Christ &amp; His Kingdom" class="inverse-logo">{% include "components/svg/logo-inverted.njk" %}</a>
-    <nav class="footer-nav">
+    <nav class="footer-nav" data-accordion>
         <section>
-            <h2><button type="button" aria-expanded="true" class="accordion-trigger" aria-controls="fmenu-academics" id="acc-academics">Academics</button></h2>
+            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-academics" id="acc-academics">Academics <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
             <div id="fmenu-academics" role="region" aria-labelledby="acc-academics" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -17,7 +17,7 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="true" class="accordion-trigger" aria-controls="fmenu-cost" id="acc-cost">Cost &amp; Aid</button></h2>
+            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-cost" id="acc-cost">Cost &amp; Aid  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
             <div id="fmenu-cost" role="region" aria-labelledby="acc-cost" class="accordion-panel">
                 <ul>
                     <li><a href="#">Cost &amp; Aid Overview</a></li>
@@ -29,7 +29,7 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="true" class="accordion-trigger" aria-controls="fmenu-admissions" id="acc-admissions">Admissions</button></h2>
+            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-admissions" id="acc-admissions">Admissions <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
             <div id="fmenu-admissions" role="region" aria-labelledby="acc-admissions" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -44,7 +44,7 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="true" class="accordion-trigger" aria-controls="fmenu-campus" id="acc-campus">Campus Life</button></h2>
+            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-campus" id="acc-campus">Campus Life <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
             <div id="fmenu-campus" role="region" aria-labelledby="acc-campus" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -59,8 +59,8 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="true" class="accordion-trigger" aria-controls="fmenu-about" id="acc-about">About Wheaton</button></h2>
-            <div id="fmenu-about" role="region" aria-labelledby="acc-about" class="accordion-panel">
+            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-about" id="acc-about">About Wheaton <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
+            <div id="fmenu-about" role="region" aria-labelledby="acc-about" class="accordion-panel"></div>
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>
@@ -88,10 +88,10 @@
                 <li><a href="#">Video Campus Tour</a></li>
             </ul>
             <aside class="social-links">
-                <a href="#" class="social-link icon-twitter"><span class="reader-only">Wheaton on Twitter</span>{% include "components/svg/icon-twitter.njk" %}</a>
-                <a href="#" class="social-link icon-facebook"><span class="reader-only">Wheaton on Facebook</span>{% include "components/svg/icon-facebook.njk" %}</a>
-                <a href="#" class="social-link icon-youtube"><span class="reader-only">Wheaton on YouTube</span>{% include "components/svg/icon-youtube.njk" %}</a>
-                <a href="#" class="social-link icon-instagram"><span class="reader-only">Wheaton on Instagram</span>{% include "components/svg/icon-instagram.njk" %}</a>
+                <a href="#" class="social-link icon-twitter"><span class="sr-only">Wheaton on Twitter</span>{% include "components/svg/icon-twitter.njk" %}</a>
+                <a href="#" class="social-link icon-facebook"><span class="sr-only">Wheaton on Facebook</span>{% include "components/svg/icon-facebook.njk" %}</a>
+                <a href="#" class="social-link icon-youtube"><span class="sr-only">Wheaton on YouTube</span>{% include "components/svg/icon-youtube.njk" %}</a>
+                <a href="#" class="social-link icon-instagram"><span class="sr-only">Wheaton on Instagram</span>{% include "components/svg/icon-instagram.njk" %}</a>
             </aside>
         </section>
     </nav>

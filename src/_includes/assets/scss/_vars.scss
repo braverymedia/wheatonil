@@ -1,7 +1,14 @@
 :root {
-    --font--serif: arno-pro, "Times New Roman", serif;
-    --font--sans-serif: futura-pt, Futura, "Helvetica Neue", sans-serif;
-    --type-size--super: clamp( 3.75rem, calc(1rem + 2.5vw), 9.38rem);
+    // Fonts
+    --wc-font-family--serif: 'arno-pro', serif;
+    --wc-font-family--sans-serif: 'futura-pt', sans-serif;
+    --wc-font-family--sans-serif-alt-bold: 'futura-pt-bold', sans-serif;
+    --wc-font-family--display: 'arno-pro-display', serif;
+    --wc-font-family--display-extra: 'arno-pro-caption', serif;
+    --wc-font-family--display-extra-italic: 'Arno-Pro-Display', serif;
+
+    // Typesetting
+    --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 9.38rem);
     --type-size--xxl: clamp( 2.75rem, calc(1rem + 2.5vw), 3.75rem);
     --type-size--xl: 2.75rem;
     --type-size--large: 1.875rem;
@@ -12,17 +19,47 @@
     --type-size--xsmall: 0.875rem;
     --type-size--tiny: 0.75rem;
 
+    --wc-line-height: 1.5;
+    --type-size--display-2xl: 4.5rem;
+    --type-size--display-xl: 3.75rem;
+    --type-size--display-lg: 3rem;
+    --type-size--display-md: 2.25rem;
+    --type-size--display-sm: 1.875rem;
+    --type-size--display-xs: 1.5rem;
+    --type-size--text-xl: 1.25rem;
+    --type-size--text-lg: 1.125rem;
+    --type-size--text-md: 1rem;
+    --type-size--text-regular: 1rem;
+    --type-size--text-sm: 0.875rem;
+    --type-size--text-xs: 0.75rem;
+
     // Colors
-    --color--wheaton-blue: #1B4D92;
+    --color--blue-800: #0F2A50;
+    --color--blue-600: #1B4D92;
     --color--blue-dark: #133666;
+    --color--blue-200: #C2E3FF;
     --color--white: #fff;
-    --color--wheaton-orange: #D57435;
-    --color--grey-light: #D0D5DD;
-    --color--grey-medium: #A1A8B3;
+    --color--orange-600: #D57435;
+    --color--grey-300: #D0D5DD;
+    --color--grey-400: #A1A8B3;
+    --color--grey-600: #525B67;
+    --color--grey-700: #434A54;
+
+    // Gradients
+    --gradient--blue-primary: linear-gradient(45deg, var(--color--blue-800) 0%, var(--color--blue-600) 100%);
+
+    // Elevation
+    --elevation--large: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
 
     // Spacing
     --space--grid-unit: 8px;
     --space--gap-regular: 8px;
-    --space--gap-medium: calc(var(--space--grid-unit) * 2);
-    --space--gap-large: calc(var(--space--grid-unit) * 3);
+    --space--gap-medium: calc(var(--space--grid-unit) * 2); // 16px
+    --space--gap-large: calc(var(--space--grid-unit) * 3); // 24px
+    --space--gap-xl: calc(var(--space--grid-unit) * 4); // 32px
+    --space--gap-xxl: calc(var(--space--grid-unit) * 5); // 40px
+
+    // Style
+    --corner--radius: calc(var(--space--grid-unit) / 2);
+    --bm--primary-font: var(--font--serif);
 }

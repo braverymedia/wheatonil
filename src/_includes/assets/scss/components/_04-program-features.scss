@@ -1,0 +1,18 @@
+.bm {
+    &--program-features {
+        h2 {
+            font-family: var(--wc-font-family--sans-serif);
+            letter-spacing: initial;
+        }
+        margin-bottom: var(--space--gap-xl);
+    }
+    &--section-program-features {
+        border-top: 1px solid #D9D9D9;
+        padding-top: var(--space--gap-medium);
+        margin-top: var(--space--gap-xxl);
+        @media (min-width: 1024px) {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}
