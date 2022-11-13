@@ -55,7 +55,8 @@ a {
       text-decoration: none;
     }
   }
-  &.has-arrow {
+  &.has-arrow,
+  .has-arrow & {
     display: inline-flex;
     align-items: center;
     gap: var(--space--grid-unit);

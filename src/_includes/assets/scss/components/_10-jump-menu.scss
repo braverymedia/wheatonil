@@ -1,0 +1,37 @@
+// Layout is in ../_layouts.scss
+.bm {
+    &--jump-menu {
+        background-color: var(--color--white);
+        border-bottom: 1px solid var(--color--grey-300);
+        margin-bottom: calc(var(--space--grid-unit) * 4);
+        position: sticky;
+        bottom: 0;
+        align-self: start;
+        ul,
+        li {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+            display: flex;
+            height: calc(var(--space--grid-unit) * 6);
+            align-content: center;
+        }
+        button { width: 100%; margin-bottom: var(--space--gap-medium)}
+        @media (min-width: 1024px) {
+            bottom: unset;
+            top: 248px;
+            button {
+                display: none;
+            }
+            li {
+                border-top: 1px solid var(--color--grey-300);
+            }
+            a {
+                height: calc(var(--space--grid-unit) * 7);
+            }
+        }
+    }
+}

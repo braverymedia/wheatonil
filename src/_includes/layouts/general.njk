@@ -7,11 +7,7 @@
         {% include "components/bravery-nav.njk" %}
         <main>
             {% include "components/bm-page-header.njk" %}
-            <section class="bm-cover-image">
-                {% include "components/bm-cover.njk" %}
-            </section>
-            {% include "sections/bm-section-general-content.njk" %}
-            {{ content }}
+            {{ content | safe }}
         </main>
         {% include "components/bravery-footer.njk" %}
     </body>

@@ -33,4 +33,34 @@ main {
             padding-bottom: calc(var(--space--grid-unit) * 6);
         }
     }
+    &--content-container {
+        display: flex;
+        justify-content: center;
+        &.has-jump-menu {
+            @media (min-width:1024px) {
+                display: grid;
+                grid-template-columns: min(20vw, 260px) auto;
+                gap: calc( var(--space--grid-unit) * 5);
+                justify-content: start;
+                > .bm--content {
+                    max-width: none;
+                }
+            }
+        }
+        &:not(.has-jump-menu) {
+            padding-top: calc(var(--space--grid-unit) * 8);
+            padding-bottom: calc(var(--space--grid-unit) * 8);
+            @media ( min-width: 1024px) {
+                padding-top: calc(var(--space--grid-unit) * 25);
+                padding-bottom: calc(var(--space--grid-unit) * 25);
+            }
+        }
+    }
+    &--cover-image + .bm--content-container,
+    &--page-title + .bm--content-container {
+        padding-top: calc(var(--space--grid-unit) * 10);
+        @media (min-width: 1024px) {
+            padding-top: calc(var(--space--grid-unit) * 12);
+        }
+    }
 }

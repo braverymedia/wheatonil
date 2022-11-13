@@ -1,19 +1,18 @@
 .bm {
-    &--program-header {
+    &--program-header,
+    &--page-title {
         h1 {
             color: var(--color--blue-dark);
-            font-size: var(--type-size--super);
-            grid-row: 1;
             grid-column: 1;
+        }
+        .bm--actions {
+            grid-column: 2;
+            grid-row: 1 / span 2;
         }
         .bm--content {
             grid-row: 2;
             grid-column: 1;
             max-width: 650px;
-        }
-        .bm--actions {
-            grid-column: 2;
-            grid-row: 1 / span 2;
         }
         @media ( min-width: 1024px ) {
             display: grid;
@@ -22,6 +21,17 @@
             .bm--content {
                 margin-top: var(--space--gap-xl);
             }
+        }
+    }
+    &--page-title {
+       > h1 {
+         max-width: 880px;
+       }
+    }
+    &--program-header {
+        h1 {
+            font-size: var(--type-size--super);
+            grid-row: 1;
         }
     }
 }

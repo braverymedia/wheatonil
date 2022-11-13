@@ -1,4 +1,4 @@
-@import "vars", "config", "typescale", "typesetting", "buttons", "forms", "nav", "footer";
+@import "vars", "config", "typescale", "typesetting", "buttons", "forms", "tables", "nav", "footer";
 
 @import "components/01-breadcrumb",
         "components/02-program-header",
@@ -8,6 +8,9 @@
         "components/06-inquiry",
         "components/07-cover-image",
         "components/08-cards",
-        "components/09-section-title";
+        "components/09-section-title",
+        "components/10-jump-menu",
+        "components/11-quotes",
+        "components/12-collapsibles";
 
-@import "layouts";
+@import "layouts", "content";
