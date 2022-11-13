@@ -4,3 +4,4 @@ yarn-error.log
 .env
 config.codekit3
 .DS_Store
+_site

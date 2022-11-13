@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        {% include "components/html-head.njk" %}
+    </head>
+    <body>
+        {% include "components/bravery-nav.njk" %}
+        <main>
+            {% include "components/bm-page-header.njk" %}
+            {{ content | safe }}
+        </main>
+        {% include "components/bravery-footer.njk" %}
+    </body>
+</html>
+
+
+

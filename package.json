@@ -1,32 +1,51 @@
 {
-  "name": "wheaton2022",
-  "version": "1.0.0",
-  "description": "Website assets for Wheaton College in Illinois.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/braverymedia/wheatonil.git"
-  },
-  "author": "Bravery Media",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/braverymedia/wheatonil/issues"
-  },
-  "homepage": "https://github.com/braverymedia/wheatonil#readme",
-  "devDependencies": {
-    "@11ty/eleventy": "^1.0.1",
-    "autoprefixer": "^10.4.8",
-    "clean-css": "^5.3.1",
-    "cssnano": "^5.1.12",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.16",
-    "postcss-cli": "^10.0.0",
-    "rollup": "^2.77.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.54.3",
-    "terser": "^5.14.2"
-  }
+	"name": "wheaton2022",
+	"version": "1.0.0",
+	"description": "Website assets for Wheaton College in Illinois.",
+	"main": "index.js",
+	"scripts": {
+		"sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
+		"postcss": "postcss src/_includes/assets/css/*.css --use autoprefixer --no-map --replace",
+		"build:sass": "npm-run-all --sequential sass",
+		"watch:sass": "sass --no-source-map --watch src/_includes/assets/scss:src/_includes/assets/css",
+		"build:js": "rollup -c",
+		"watch:js": "rollup -c --watch",
+		"build:eleventy": "ELEVENTY_ENV=production eleventy",
+		"watch:eleventy": "ELEVENTY_ENV=development eleventy --watch --serve",
+		"start": "NODE_ENV=development npm-run-all build:sass --sequential postcss build:js --parallel watch:*",
+		"debug:start": "DEBUG=Eleventy* npm start",
+		"build": "NODE_ENV=production npm-run-all build:sass --sequential --style=compressed postcss build:js --parallel build:eleventy",
+		"debug:build": "DEBUG=Eleventy* npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/braverymedia/wheatonil.git"
+	},
+	"author": "Bravery Media",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/braverymedia/wheatonil/issues"
+	},
+	"homepage": "https://github.com/braverymedia/wheatonil#readme",
+	"devDependencies": {
+		"@11ty/eleventy": "^1.0.2",
+		"@rollup/plugin-commonjs": "^23.0.2",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"autoprefixer": "^10.4.13",
+		"clean-css": "^5.3.1",
+		"cssnano": "^5.1.14",
+		"npm-run-all": "^4.1.5",
+		"path": "^0.12.7",
+		"postcss": "^8.4.18",
+		"postcss-cli": "^10.0.0",
+		"purgecss": "^5.0.0",
+		"rollup": "^3.2.5",
+		"rollup-plugin-terser": "^7.0.2",
+		"sass": "^1.55.0",
+		"terser": "^5.15.1"
+	},
+	"dependencies": {
+		"oembed": "^0.1.2",
+		"oembed-parser": "^3.1.3"
+	}
 }
