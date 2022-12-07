@@ -1,5 +1,5 @@
 <header data-size="normal" class="main-header graduate">
-    <a href="/" title="Wheaton College homepage" class="branding">{% include "components/svg/logo-main.njk" %}</a>
+    <a href="/" title="Wheaton College homepage" class="branding">{% include "components/svg/logo-main--grad.njk" %}</a>
     <nav class="main-navigation">
         <a href="#" class="menu-link">Link 1</a>
         <a href="#" class="menu-link">Link 2</a>
@@ -11,16 +11,5 @@
         <a href="#" class="cta cta--visit">Visit</a>
         <button class="search style-ghost" aria-expanded="false" tabindex="0"><span class="sr-only">Search</span>{% include "components/svg/icon-search.njk" %}</button>
     </section>
-    <nav class="overlay-menu">
-        <section class="overlay-tools">
-            <button class="close-menu style-ghost invert" tabindex="0"><span class="sr-only">Close</span>{% include "components/svg/icon-x.njk" %}</button>
-        </section>
-        <ul>
-            <li><a href="#" class="menu-link">Link 1</a></li>
-            <li><a href="#" class="menu-link">Link 2</a></li>
-            <li><a href="#" class="menu-link">Link 3</a></li>
-            <li><a href="#" class="menu-link">Link 4</a></li>
-            <li><a href="#" class="menu-link">Link 5</a></li>
-        </ul>
-    </nav>
+    {% include "components/overlay.njk" %}
 </header>

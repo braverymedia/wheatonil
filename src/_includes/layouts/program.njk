@@ -4,7 +4,11 @@
         {% include "components/html-head.njk" %}
     </head>
     <body>
-        {% include "components/bravery-nav.njk" %}
+        {% if section == "grad" %}
+            {% include "components/bravery-nav-grad.njk" %}
+        {% else %}
+            {% include "components/bravery-nav.njk" %}
+        {% endif %}
         {{ content | safe}}
         {% include "components/bravery-footer.njk" %}
     </body>

@@ -152,3 +152,12 @@
         }
     }
 }
+
+@media ( max-width: 1024px ) {
+    .has-js .accordion-panel {
+        display: none;
+    }
+    .has-js .accordion-panel.visible {
+        display: block;
+    }
+}

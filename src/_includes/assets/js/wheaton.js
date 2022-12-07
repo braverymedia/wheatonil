@@ -1,30 +1,77 @@
 // a11y Accordions
 window.addEventListener('DOMContentLoaded', (event) => {
-const accordionContainer = document.querySelector("[data-accordion]");
-const collapsibles = document.querySelectorAll("[data-collapsible]");
+	const accordionContainer = document.querySelector("[data-accordion]");
+	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
+	const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
+	const collapsibles = document.querySelectorAll("[data-collapsible]");
+	const showOverlay = document.querySelector(".menu-more");
+	const showSearch = document.querySelector("button.search");
+	const hideOverlay = document.querySelector(".close-menu");
+	const overlay = document.querySelector("[data-feature='nav']");
+	document.body.classList.add('has-js');
+	const accordionClick = (event) => {
+		const target = event.target;
+		if (target instanceof HTMLButtonElement) {
+			const panel = target.parentNode.nextElementSibling;
+			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-const accordionClick = (event) => {
-	const target = event.target;
-	if (target instanceof HTMLButtonElement) {
+			target.setAttribute("aria-expanded", `${!isExpanded}`);
+
+			if (isExpanded) {
+				panel.setAttribute("hidden", "");
+				panel.classList.remove("visible");
+			} else {
+				panel.removeAttribute("hidden");
+				panel.classList.add("visible");
+			}
+		}
+	};
+	const hoverShow = (event) => {
+		const target = event.target;
 		const panel = target.parentNode.nextElementSibling;
-		const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-		target.setAttribute("aria-expanded", `${!isExpanded}`);
+		for (let i = 0; i < menuPanels.length; i++) {
+			let menuPanel = menuPanels[i];
+			if ( menuPanel != panel ) {
+				panel.classList.remove("visible");
+			}
+		}
+		if ( target instanceof HTMLButtonElement ) {
 
-		if (isExpanded) {
-			panel.setAttribute("hidden", "");
-			panel.parentElement.classList.remove("visible");
-		} else {
-			panel.removeAttribute("hidden");
-			panel.parentElement.classList.add("visible");
+			target.setAttribute("aria-expanded", "true");
+			panel.classList.add("visible");
+		}
+
+	}
+
+	const openOverlay = () => {
+		if ( showOverlay.getAttribute('aria-expanded') === "false") {
+			showOverlay.setAttribute('aria-expanded', "true");
+			overlay.dataset.state = "visible";
 		}
 	}
-};
 
-accordionContainer?.addEventListener("click", accordionClick);
-for (let i = 0; i < collapsibles.length; i++) {
-	let collapsible = collapsibles[i];
-	collapsible.addEventListener("click", accordionClick);
-}
+	const closeOverlay = () => {
+		showOverlay.setAttribute('aria-expanded', "false");
+		overlay.dataset.state = "hidden";
+	}
+
+	const openSearch = () => {
+		openOverlay();
+		document.getElementById("site-search").focus({ focusVisible: true });
+	}
+
+	showOverlay?.addEventListener("click", openOverlay);
+	showSearch?.addEventListener("click", openSearch);
+	hideOverlay?.addEventListener("click", closeOverlay);
+
+	accordionContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
+
+	for (let i = 0; i < collapsibles.length; i++) {
+		let collapsible = collapsibles[i];
+		collapsible.addEventListener("click", accordionClick);
+	}
 
 });
