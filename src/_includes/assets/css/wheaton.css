@@ -849,6 +849,7 @@ button.search:hover {
 }
 .bm--menu-links button:hover,
 .bm--menu-links button[aria-expanded=true] {
+  text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
@@ -863,6 +864,9 @@ button.search:hover {
 }
 .bm--menu-links ul a {
   text-decoration: none;
+}
+.bm--menu-links ul a:hover {
+  text-decoration: underline;
 }
 .bm--menu-links .accordion-panel {
   height: 0;
@@ -883,10 +887,20 @@ button.search:hover {
     border-right: 1px solid var(--color--blue-800);
     display: grid;
     gap: var(--space--gap-medium) var(--space--gap-large);
-    grid-template-columns: auto auto;
+    grid-template-columns: 3fr 4fr;
   }
   .bm--menu-links button {
     cursor: auto;
+  }
+  .bm--menu-links button:hover,
+  .bm--menu-links button[aria-expanded=true] {
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 16px;
+  }
+  .bm--menu-links button:hover svg,
+  .bm--menu-links button[aria-expanded=true] svg {
+    transform: rotate(-45deg);
   }
   .bm--menu-links h2 {
     font-size: var(--type-size--xxl);
@@ -896,11 +910,35 @@ button.search:hover {
   .bm--menu-links h2 svg {
     display: none;
   }
+  .bm--menu-links h2 > button {
+    justify-content: start;
+    white-space: ellipsis;
+  }
   .bm--menu-links .accordion-panel {
     grid-column: 2;
     grid-row: 1/span 6;
   }
+  .bm--menu-links .accordion-panel {
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+  }
+  .bm--menu-links .accordion-panel.visible {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+  }
 }
+@media (min-width: 1200px) {
+  .bm--menu-links ul {
+    font-size: var(--type-size--medium);
+  }
+  .bm--menu-links ul a {
+    text-decoration: none;
+  }
+}
+
 .bm--utility-menus {
   grid-area: utilmenu;
   font-size: var(--type-size--regular);

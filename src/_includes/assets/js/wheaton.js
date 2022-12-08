@@ -30,18 +30,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 		const target = event.target;
 		const panel = target.parentNode.nextElementSibling;
 
-		for (let i = 0; i < menuPanels.length; i++) {
-			let menuPanel = menuPanels[i];
-			if ( menuPanel != panel ) {
-				panel.classList.remove("visible");
-			}
-		}
 		if ( target instanceof HTMLButtonElement ) {
-
 			target.setAttribute("aria-expanded", "true");
 			panel.classList.add("visible");
+			menuPanels.forEach((mpanel) => {
+				let labeled = mpanel.getAttribute("id");
+				if (labeled !== target.getAttribute("aria-controls")) {
+					mpanel.classList.remove("visible");
+					document
+						.querySelector(`[aria-controls="${labeled}"]`)
+						.setAttribute("aria-expanded", "false");
+				}
+			});
 		}
-
 	}
 
 	const openOverlay = () => {
