@@ -253,6 +253,7 @@ button.search {
         color: inherit;
         font-size: inherit;
         font-family: inherit;
+        text-align: left;
         svg {
             transform: rotate();
             transition: all 200ms ease-in-out;
@@ -310,7 +311,7 @@ button.search {
             }
         }
         h2 {
-            font-size: var(--type-size--xxl);
+            font-size: var(--type-size--xl);
             grid-column: 1;
             grid-auto-flow: row;
             svg {
@@ -343,6 +344,9 @@ button.search {
             a {
                 text-decoration: none;
             }
+        }
+        h2 {
+            font-size: var(--type-size--xxl);
         }
     }
 }
