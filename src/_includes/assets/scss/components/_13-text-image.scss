@@ -1,0 +1,49 @@
+.bm {
+    &--text-image {
+        width: 100vw;
+        padding-left: 0;
+        padding-right: 0;
+        figure {
+            margin-top: var(--space--gap-xxl);
+            margin-bottom: var(--space--gap-xxl);
+            position: relative;
+        }
+        @media (min-width: 1024px) {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+            figure {
+                flex: 1 50%;
+                max-height: 70vh;
+                overflow: hidden;
+                border-radius: var(--corner--radius);
+                order: 1;
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+
+            }
+            article {
+                flex: 1 50%;
+                padding: 0 calc(var(--space--grid-unit) * 8);
+                order: 2;
+            }
+            &[data-image="right"] {
+                article {
+                    order: 1;
+                    justify-content: flex-end;
+                    padding-left: 7vw;
+                }
+                figure {
+                    order: 2;
+                }
+            }
+        }
+    }
+}

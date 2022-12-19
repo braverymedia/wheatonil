@@ -1,5 +1,8 @@
 .bm {
-    &--section-title {
-        color: var(--color--blue-600)
+    &--section-title h2{
+        color: var(--color--blue-600);
+        .subhead {
+            color: var(--color--grey-700);
+        }
     }
 }

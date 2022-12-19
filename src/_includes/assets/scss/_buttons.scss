@@ -1,6 +1,8 @@
-button,
-.button,
-.cta {
+.bravery button,
+.bravery .button,
+.bravery .bm--cta,
+.bravery .cta,
+.bm--cta {
     appearance: none;
     display: flex;
     justify-content: center;
@@ -49,12 +51,20 @@ button,
     &.style-secondary {
         background-color: var(--color--white);
     }
+    &.style-loud {
+        background-color: var(--color--orange-600);
+        color: var(--color--white);
+        &:hover {
+            background-color: var(--color--orange-700);
+        }
+    }
 }
 
 .menu-more .label {
     display: none;
 }
 a.button,
+a.bm--cta,
 a.cta {
     text-decoration: none;
 }
@@ -65,10 +75,23 @@ a.cta {
     }
     button,
     .button,
+    .bm--cta
     .cta {
         >svg {
             height: 20px;
             width: 20px;
         }
     }
+}
+
+.bm--giving {
+    position: absolute;
+    left: 1.5vw;
+    transform: translateY(-5px);
+    font-weight: 600;
+}
+.bm--buttons {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space--gap-medium);
 }

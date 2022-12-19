@@ -10,6 +10,7 @@
     // Typesetting
     --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 9.38rem);
     --type-size--xxl: clamp( 2.75rem, calc(1rem + 7.26vw), 4.5rem);
+    --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);
     --type-size--xl: 2.75rem;
     --type-size--large: 1.875rem;
     --type-size--medium: 1.5rem;
@@ -45,6 +46,7 @@
     --color--cyan-500: #1C9AD6;
     --color--white: #fff;
     --color--orange-600: #D57435;
+    --color--orange-700: #A84C11;
     --color--grey-50: #F9FAFB;
     --color--grey-100: #F2F4F7;
     --color--grey-300: #D0D5DD;

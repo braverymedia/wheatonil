@@ -16,7 +16,7 @@
         }
         @media ( min-width: 1024px ) {
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: auto minmax(300px, 15vw);
             grid-template-rows: auto auto;
             .bm--content {
                 margin-top: var(--space--gap-xl);

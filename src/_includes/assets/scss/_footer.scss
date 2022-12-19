@@ -1,4 +1,4 @@
-.main-footer {
+.main-footer.bravery {
     background-color: var(--color--blue-dark);
     color: var(--color--white);
     display: flex;
@@ -60,7 +60,7 @@
         }
     }
 }
-.footer-nav {
+.bravery .footer-nav {
     width: 100%;
     section {
         margin-bottom: var(--space--gap-regular);

@@ -5,3 +5,31 @@
         margin-top: calc(var(--space--grid-unit) * 6);
     }
 }
+
+figcaption.bm--quote {
+    padding: var(--space--gap-xl) var(--space--gap-large);
+    font-family: var(--wc-font-family--serif);
+    font-size: var(--type-size--medium);
+    color: var(--color--white);
+    background: rgba(0, 40, 86, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Background blur/md */
+    backdrop-filter: blur(8px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: var(--corner--radius);
+    margin: var(--space--gap-xxl);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    p {
+        margin-bottom: var(--space--gap-regular);
+    }
+    cite {
+        font-size: var(--type-size--small);
+        font-family: var(--wc-font-family--sans-serif);
+        &::first-line {
+            font-size: var(--type-size--base);
+        }
+    }
+}

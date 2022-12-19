@@ -22,6 +22,7 @@ h1,h2,h3 {
 }
 
 h1,
+.h1,
 .type-xxl {
   font-size: var(--type-size--xxl);
   font-weight: normal;
@@ -30,6 +31,7 @@ h1,
 
 
 h2,
+.h2,
 .type-large {
   font-size: var(--type-size--xl);
   font-weight: normal;
@@ -97,6 +99,7 @@ ol {
 li {
   margin-bottom: 0.75rem;
   font-size: var(--wc-font-size--text-regular);
+  font-weight: normal; // transition
 }
 
 p {

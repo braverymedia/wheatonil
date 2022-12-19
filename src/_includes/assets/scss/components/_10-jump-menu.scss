@@ -23,6 +23,7 @@
         @media (min-width: 1024px) {
             bottom: unset;
             top: 248px;
+            grid-column: 1 / span 2;
             button {
                 display: none;
             }

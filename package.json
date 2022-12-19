@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
-		"postcss": "postcss src/_includes/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
+		"postcss": "postcss _site/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
 		"build:sass": "npm-run-all --sequential sass",
 		"watch:sass": "sass --watch src/_includes/assets/scss:src/_includes/assets/css",
 		"build:js": "rollup -c",
@@ -14,7 +14,7 @@
 		"watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
 		"start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential postcss build:js --parallel watch:*",
 		"debug:start": "DEBUG=Eleventy* npm start",
-		"build": "cross-env NODE_ENV=production npm-run-all build:sass --sequential --style=compressed postcss build:js --parallel build:eleventy",
+		"build": "cross-env NODE_ENV=production npm-run-all build:sass --sequential --style=compressed build:js --parallel build:eleventy postcss",
 		"debug:build": "DEBUG=Eleventy* npm run build"
 	},
 	"repository": {
