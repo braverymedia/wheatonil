@@ -1,10 +1,7 @@
 :root {
-  --wc-font-family--serif: "arno-pro", serif;
+  --wc-font-family--serif: "arno-pro-display", serif;
   --wc-font-family--sans-serif: "futura-pt", sans-serif;
-  --wc-font-family--sans-serif-alt-bold: "futura-pt-bold", sans-serif;
-  --wc-font-family--display: "arno-pro-display", serif;
-  --wc-font-family--display-extra: "arno-pro-caption", serif;
-  --wc-font-family--display-extra-italic: "Arno-Pro-Display", serif;
+  --wc-font-family--display: var(--wc-font-family--serif);
   --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 9.38rem);
   --type-size--xxl: clamp( 2.75rem, calc(1rem + 7.26vw), 4.5rem);
   --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);

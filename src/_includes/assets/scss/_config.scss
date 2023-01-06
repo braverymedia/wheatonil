@@ -59,6 +59,15 @@ select {
   font: inherit;
 }
 
+hr {
+  border: none;
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: var(--color--grey-100);
+  transition: all .15s ease-in-out;
+}
+
 .sr-only {
   border: 0;
 	clip: rect(1px, 1px, 1px, 1px);

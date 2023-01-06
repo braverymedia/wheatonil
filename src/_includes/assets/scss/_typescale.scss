@@ -29,6 +29,8 @@ h4,
 .type--small {
     font-size: var(--type-size--small);
     line-height: 1.2;
+    font-weight: 500;
+    color: var(--color--grey-700);
 }
 .type--xs {
     font-size: var(--type-size--xsmall);

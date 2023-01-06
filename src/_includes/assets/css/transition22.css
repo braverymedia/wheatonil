@@ -59,6 +59,15 @@ select {
   font: inherit;
 }
 
+hr {
+  border: none;
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: var(--color--grey-100);
+  transition: all 0.15s ease-in-out;
+}
+
 .sr-only {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -123,6 +132,8 @@ h4,
 .type--small {
   font-size: var(--type-size--small);
   line-height: 1.2;
+  font-weight: 500;
+  color: var(--color--grey-700);
 }
 
 .type--xs {
@@ -156,7 +167,7 @@ h6 {
 }
 
 h1, h2, h3 {
-  color: var(--wc-color--blue-dark);
+  color: var(--color--blue-700);
 }
 
 h1,
@@ -181,7 +192,7 @@ h3,
 
 h4,
 .h4 {
-  color: var(--wc-color--blue-dark);
+  color: var(--color--blue-700);
   font-family: var(--wc-font-family--san-serif);
   font-weight: 500;
   font-size: var(--wc-font-size--text-md);
@@ -257,6 +268,7 @@ p {
   font-size: var(--type-size--super);
 }
 
+button.form_button_submit,
 .bravery button,
 .bravery .button,
 .bravery .bm--cta,
@@ -278,6 +290,7 @@ p {
   color: var(--color--blue-600);
   transition: all 200ms linear;
 }
+button.form_button_submit > svg,
 .bravery button > svg,
 .bravery .button > svg,
 .bravery .bm--cta > svg,
@@ -286,6 +299,7 @@ p {
   width: 24px;
   height: 24px;
 }
+button.form_button_submit:hover,
 .bravery button:hover,
 .bravery .button:hover,
 .bravery .bm--cta:hover,
@@ -295,6 +309,7 @@ p {
   border-color: var(--color--grey-400);
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
 }
+button.form_button_submit:focus,
 .bravery button:focus,
 .bravery .button:focus,
 .bravery .bm--cta:focus,
@@ -302,68 +317,58 @@ p {
 .bm--cta:focus {
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #F2F4F7;
 }
-.bravery button.style-ghost,
-.bravery .button.style-ghost,
-.bravery .bm--cta.style-ghost,
-.bravery .cta.style-ghost,
-.bm--cta.style-ghost {
+
+.style-ghost {
   border: 0;
   box-shadow: none;
   padding-left: var(--space--grid-unit);
   padding-right: var(--space--grid-unit);
 }
-.bravery button.style-ghost.invert,
-.bravery .button.style-ghost.invert,
-.bravery .bm--cta.style-ghost.invert,
-.bravery .cta.style-ghost.invert,
-.bm--cta.style-ghost.invert {
+.style-ghost.invert {
   background-color: transparent;
   color: inherit;
 }
-.bravery button.style-bold, .bravery button.style-primary,
-.bravery .button.style-bold,
-.bravery .button.style-primary,
-.bravery .bm--cta.style-bold,
-.bravery .bm--cta.style-primary,
-.bravery .cta.style-bold,
-.bravery .cta.style-primary,
-.bm--cta.style-bold,
-.bm--cta.style-primary {
+
+.style-bold,
+.style-primary {
   background: var(--color--blue-600);
   color: var(--color--white);
 }
-.bravery button.style-bold:hover, .bravery button.style-primary:hover,
-.bravery .button.style-bold:hover,
-.bravery .button.style-primary:hover,
-.bravery .bm--cta.style-bold:hover,
-.bravery .bm--cta.style-primary:hover,
-.bravery .cta.style-bold:hover,
-.bravery .cta.style-primary:hover,
-.bm--cta.style-bold:hover,
-.bm--cta.style-primary:hover {
+.style-bold:hover,
+.style-primary:hover {
   background-color: var(--color--blue-700);
 }
-.bravery button.style-secondary,
-.bravery .button.style-secondary,
-.bravery .bm--cta.style-secondary,
-.bravery .cta.style-secondary,
-.bm--cta.style-secondary {
+
+.style-secondary {
   background-color: var(--color--white);
 }
-.bravery button.style-loud,
-.bravery .button.style-loud,
-.bravery .bm--cta.style-loud,
-.bravery .cta.style-loud,
-.bm--cta.style-loud {
+
+.style-loud {
   background-color: var(--color--orange-600);
   color: var(--color--white);
 }
-.bravery button.style-loud:hover,
-.bravery .button.style-loud:hover,
-.bravery .bm--cta.style-loud:hover,
-.bravery .cta.style-loud:hover,
-.bm--cta.style-loud:hover {
+.style-loud:hover {
   background-color: var(--color--orange-700);
+}
+
+.bm--callout .style-bold,
+.bm--callout .style-primary {
+  background: var(--color--white);
+  color: var(--color--blue-600);
+}
+.bm--callout .style-bold:hover,
+.bm--callout .style-primary:hover {
+  background-color: var(--color--cyan-500);
+  color: var(--color--white);
+}
+.bm--callout .style-outline {
+  border-color: var(--color--white);
+  background-color: var(--color--blue-600);
+  color: var(--color--white);
+}
+.bm--callout .style-outline:hover {
+  background-color: var(--color--white);
+  color: var(--color--blue-600);
 }
 
 .menu-more .label {
@@ -399,6 +404,28 @@ a.cta {
   display: flex;
   align-items: flex-start;
   gap: var(--space--gap-medium);
+}
+
+.bm--cta-link {
+  font-weight: 500;
+  display: inline-flex;
+  gap: 8px;
+  color: var(--color--blue-600);
+  text-underline-offset: 5px;
+  align-items: center;
+}
+.bm--cta-link:after {
+  content: "";
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.41079 3.57611C9.73622 3.25067 10.2639 3.25067 10.5893 3.57611L16.4226 9.40944C16.7481 9.73488 16.7481 10.2625 16.4226 10.588L10.5893 16.4213C10.2639 16.7467 9.73622 16.7467 9.41079 16.4213C9.08535 16.0958 9.08535 15.5682 9.41079 15.2428L13.8215 10.832H4.16671C3.70647 10.832 3.33337 10.4589 3.33337 9.9987C3.33337 9.53846 3.70647 9.16536 4.16671 9.16536H13.8215L9.41079 4.75462C9.08535 4.42918 9.08535 3.90155 9.41079 3.57611Z' fill='currentColor'/%3E%3C/svg%3E%0A");
+  display: block;
+  width: 20px;
+  height: 20px;
+  transition: all 0.15s ease-in-out;
+  position: relative;
+}
+.bm--cta-link:hover:after {
+  transform: translateX(-2px);
 }
 
 label,
@@ -982,7 +1009,7 @@ body.menu-open {
     gap: calc(var(--space--grid-unit) * 9);
   }
 }
-@media (min-width: 1300px) {
+@media (min-width: 1450px) {
   .main-footer.bravery {
     padding: calc(var(--space--grid-unit) * 8) calc(0.5 * (100vw - 1400px)) calc(var(--space--grid-unit) * 6);
   }

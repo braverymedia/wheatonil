@@ -8,16 +8,24 @@
             margin-bottom: var(--space--gap-xxl);
             position: relative;
         }
+        article {
+            padding-left: 3vw;
+            padding-right: 3vw;
+        }
         @media (min-width: 1024px) {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            max-width: 1800px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100vw;
+            padding-left: 0;
+            padding-right: 0;
+            margin: var(--space--gap-3xl) auto;
             figure {
-                flex: 1 50%;
-                max-height: 70vh;
+                height: 50vw;
+                max-height: 1000px;
+                flex: 1 50vw;
+                width: 50vw;
+                max-width: 50%;
                 overflow: hidden;
                 border-radius: var(--corner--radius);
                 order: 1;
@@ -30,7 +38,9 @@
 
             }
             article {
-                flex: 1 50%;
+                flex: 1 50vw;
+                width: 50vw;
+                max-width: 50%;
                 padding: 0 calc(var(--space--grid-unit) * 8);
                 order: 2;
             }
@@ -38,7 +48,7 @@
                 article {
                     order: 1;
                     justify-content: flex-end;
-                    padding-left: 7vw;
+                    padding: 0 calc(var(--space--grid-unit) * 8) 0 7vw;
                 }
                 figure {
                     order: 2;

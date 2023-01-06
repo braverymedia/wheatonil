@@ -21,7 +21,7 @@
         padding: calc(var(--space--grid-unit) * 8) 5vw calc(var(--space--grid-unit) * 6);
         gap: calc(var(--space--grid-unit) * 9);
     }
-    @media (min-width: 1300px ) {
+    @media (min-width: 1450px ) {
         padding: calc(var(--space--grid-unit) * 8) calc( 0.5 * (100vw - 1400px)) calc(var(--space--grid-unit) * 6);
 
     }
