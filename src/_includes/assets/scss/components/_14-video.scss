@@ -7,9 +7,11 @@
         }
         padding-top: calc(var(--space--grid-unit) * 10);
         padding-bottom: calc(var(--space--grid-unit) * 10);
+        margin-bottom: var(--space--gap-large);
         @media (min-width: 1024px) {
             padding-top: calc(var(--space--grid-unit) * 12);
             padding-bottom: calc(var(--space--grid-unit) * 12);
+            margin-bottom: var(--space--gap-3xl);
         }
     }
     &--video-container {
@@ -31,6 +33,17 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+    }
+    &--content > .bm--video {
+        background-color: transparent;
+        border-top: 1px solid var(--color--grey-100);
+        border-bottom: 1px solid var(--color--grey-100);
+        header {
+            text-align: left;
+        }
+        h2 {
+            font-size: var(--type-size--medium);
         }
     }
 }

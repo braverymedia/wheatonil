@@ -8,7 +8,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	const showSearch = document.querySelector("button.search");
 	const hideOverlay = document.querySelector(".close-menu");
 	const overlay = document.querySelector("[data-feature='nav']");
+	const sectionNavToggle = document.querySelector('.bm--jump-menu > button');
+
 	document.body.classList.add('has-js');
+
 	const accordionClick = (event) => {
 		const target = event.target;
 		if (target instanceof HTMLButtonElement) {
@@ -62,6 +65,25 @@ window.addEventListener('DOMContentLoaded', (event) => {
 		document.getElementById("site-search").focus({ focusVisible: true });
 	}
 
+	const mobileSectionNav = (event) => {
+		const target = event.target;
+
+		if (target instanceof HTMLButtonElement) {
+			const nav = target.nextElementSibling;
+			const isExpanded = target.getAttribute("aria-expanded") === "true";
+
+			target.setAttribute("aria-expanded", `${!isExpanded}`);
+
+			if (isExpanded) {
+				nav.setAttribute("hidden", "");
+				nav.classList.remove("visible");
+			} else {
+				nav.removeAttribute("hidden");
+				nav.classList.add("visible");
+			}
+		}
+	}
+
 	showOverlay?.addEventListener("click", openOverlay);
 	showSearch?.addEventListener("click", openSearch);
 	hideOverlay?.addEventListener("click", closeOverlay);
@@ -69,6 +91,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	accordionContainer?.addEventListener("click", accordionClick);
 	mobileMenuContainer?.addEventListener("click", accordionClick);
 	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
+
+	// Section nav toggle
+	sectionNavToggle?.addEventListener('click', mobileSectionNav);
+
 
 	for (let i = 0; i < collapsibles.length; i++) {
 		let collapsible = collapsibles[i];

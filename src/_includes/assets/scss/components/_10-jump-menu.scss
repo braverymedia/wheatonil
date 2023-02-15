@@ -2,11 +2,14 @@
 .bm {
     &--jump-menu {
         background-color: var(--color--white);
-        border-bottom: 1px solid var(--color--grey-300);
-        margin-bottom: calc(var(--space--grid-unit) * 4);
-        position: sticky;
+        background: rgba(#fff, .65);
+        backdrop-filter: blur(25px);
+        position: fixed;
         bottom: 0;
-        align-self: start;
+        left: 0;
+        width: 100%;
+        z-index: 25;
+        padding: var(--space--gap-medium) var(--space--gap-regular);
         ul,
         li {
             list-style: none;
@@ -19,13 +22,62 @@
             height: calc(var(--space--grid-unit) * 6);
             align-content: center;
         }
-        button { width: 100%; margin-bottom: var(--space--gap-medium)}
+        button {
+            background-color: var(--color--orange-600);
+            color: var(--color--white);
+            font-size: var(--type-size--base);
+            width: 100%;
+            border: 0;
+            z-index: 1;
+            position: relative;
+            &:active {
+                background-color: var(--color--orange-700);
+            }
+        }
+        ul {
+            background: var(--color--white);
+            background: rgba(#fff, .65);
+            backdrop-filter: blur(25px);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            padding: var(--space--gap-xl) var(--space--gap-medium) calc(var(--space--grid-unit) * 10);
+            box-shadow: var(--elevation--large-invert);
+            width: 100%;
+            transform: translateY(95%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all .25s ease-in-out;
+            &.visible {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
         @media (min-width: 1024px) {
+            position: sticky;
             bottom: unset;
             top: 248px;
             grid-column: 1 / span 2;
+            align-self: start;
+            border-bottom: 1px solid var(--color--grey-300);
+            margin-bottom: calc(var(--space--grid-unit) * 4);
+            padding: 0;
+            z-index: unset;
             button {
                 display: none;
+            }
+            ul {
+                position: unset;
+                box-shadow: unset;
+                opacity: 1;
+                visibility: visible;
+                transform: unset;
+                padding: 0;
+                bottom: unset;
+                left: unset;
+                position: static;
             }
             li {
                 border-top: 1px solid var(--color--grey-300);

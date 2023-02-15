@@ -35,7 +35,7 @@ button.form_button_submit,
 // Button Styles
 .style-ghost {
     border: 0;
-    box-shadow: none;
+    box-shadow: none !important;
     padding-left: var(--space--grid-unit);
     padding-right: var(--space--grid-unit);
     &.invert {
@@ -45,10 +45,10 @@ button.form_button_submit,
 }
 .style-bold,
 .style-primary {
-    background: var(--color--blue-600);
-    color: var(--color--white);
+    background: var(--color--blue-600) !important;
+    color: var(--color--white) !important;
     &:hover {
-        background-color: var(--color--blue-700);
+        background-color: var(--color--blue-700) !important;
     }
 }
 .style-secondary {
