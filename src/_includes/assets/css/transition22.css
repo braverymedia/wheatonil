@@ -530,7 +530,7 @@ select:active {
   .main-header.bravery {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    padding: 0 var(--space--gap-lg);
+    padding: 0 var(--space--gap-large);
   }
   .main-header.bravery .branding svg {
     height: 72px;
