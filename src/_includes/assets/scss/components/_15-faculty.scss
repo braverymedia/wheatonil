@@ -14,6 +14,28 @@
     @media (min-width: 1600px) {
         grid-template-columns: repeat( 5, 1fr );
     }
+    [data-layout="3up"] & {
+        @media (min-width: 900px) {
+            grid-template-columns: 100%;
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat( 2, 1fr);
+        }
+        @media (min-width: 1600px) {
+            grid-template-columns: repeat( 3, 1fr );
+        }
+    }
+    [data-layout="2up-half"] & {
+        @media (min-width: 900px) {
+            grid-template-columns: repeat( 2, 1fr);
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat( 2, 1fr);
+        }
+        @media (min-width: 1600px) {
+            grid-template-columns: repeat( 3, 1fr );
+        }
+    }
 }
 .bm-card--faculty {
     img {

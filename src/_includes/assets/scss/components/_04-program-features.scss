@@ -11,13 +11,18 @@
         padding-top: var(--space--gap-medium);
         margin-top: var(--space--gap-xxl);
         @media (min-width: 1024px) {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            gap: var(--space--gap-xl);
+            justify-content: stretch;
+            align-items: flex-start;
             padding-left: 0;
             padding-right: 0;
-            width: 86vw;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
+            > * {
+                flex: 1 auto;
+            }
         }
     }
 }

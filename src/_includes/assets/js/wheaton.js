@@ -4,11 +4,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
 	const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
 	const collapsibles = document.querySelectorAll("[data-collapsible]");
+	const sectionNav = document.querySelector("[data-sectionnav]");
 	const showOverlay = document.querySelector(".menu-more");
 	const showSearch = document.querySelector("button.search");
 	const hideOverlay = document.querySelector(".close-menu");
 	const overlay = document.querySelector("[data-feature='nav']");
-	const sectionNavToggle = document.querySelector('.bm--jump-menu > button');
 
 	document.body.classList.add('has-js');
 
@@ -75,10 +75,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 			target.setAttribute("aria-expanded", `${!isExpanded}`);
 
 			if (isExpanded) {
-				nav.setAttribute("hidden", "");
 				nav.classList.remove("visible");
 			} else {
-				nav.removeAttribute("hidden");
 				nav.classList.add("visible");
 			}
 		}
@@ -93,7 +91,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
 	// Section nav toggle
-	sectionNavToggle?.addEventListener('click', mobileSectionNav);
+	sectionNav?.addEventListener('click', mobileSectionNav);
 
 
 	for (let i = 0; i < collapsibles.length; i++) {

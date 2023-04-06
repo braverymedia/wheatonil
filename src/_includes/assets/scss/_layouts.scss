@@ -1,14 +1,10 @@
 main {
     padding-top: calc(var(--space--grid-unit) * 6);
-    > * {
-        padding-left: 4vw;
-        padding-right: 4vw;
-    }
+    padding-left: 4vw;
+    padding-right: 4vw;
     @media (min-width: 1024px) {
-        > * {
-            padding-left: 7vw;
-            padding-right: 7vw;
-        }
+        padding-left: 7vw;
+        padding-right: 7vw;
         padding-top: calc(var(--space--grid-unit) * 10);
         > section {
             margin-top: var(--space--gap-xxl);
@@ -16,10 +12,46 @@ main {
     }
     @media (min-width: 1300px) {
         padding-top: calc(var(--space--grid-unit) * 23);
+        padding-left: var(--max-1280);
+        padding-right: var(--max-1280);
         > section {
             margin-top: calc( var(--space--gap-3xl) * 2);
         }
     }
+}
+
+.bm-margins {
+    width: 100%;
+    padding: var(--space--gap-medium);
+    @media ( min-width: 1024px ) {
+        padding: 0;
+    }
+}
+.is-fullwidth {
+    width: 100vw;
+    margin-left: -4vw;
+    margin-right: -4vw;
+    @media (min-width: 1024px) {
+        margin-left: -7vw;
+        margin-right: -7vw;
+    }
+    @media ( min-width: 1300px ) {
+        margin-left: var(--full-bleed);
+        margin-right: var(--full-bleed);
+    }
+}
+.is-widewidth {
+    @media (min-width: 1024px) {
+        margin-left: -3.5vw;
+        margin-right: -3.5vw;
+    }
+    @media ( min-width: 1500px ) {
+        max-width: 1480px;
+        width: 100vw;
+        margin-left: var(--max-1480);
+        margin-right: var(--max-1480);
+    }
+
 }
 .has-jump-menu {
     @media (min-width: 1024px) {
@@ -38,7 +70,7 @@ main {
     }
 }
 [data-layout="has-margins"] {
-    max-width: 720px;
+    max-width: 850px;
     margin: calc( var(--space--gap-3xl) * 4) auto;
     padding: 0;
 }
@@ -98,3 +130,5 @@ main > *[data-layout="1up"]{
         }
     }
 }
+
+

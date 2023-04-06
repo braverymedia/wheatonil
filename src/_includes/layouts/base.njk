@@ -5,7 +5,7 @@
     </head>
     <body>
         {% include "components/bravery-nav.njk" %}
-        {{ content }}
+        {{ content | safe }}
         {% include "components/bravery-footer.njk" %}
     </body>
 </html>

@@ -34,14 +34,15 @@
     // Colors
     --color--blue-900: #0B1F3A;
     --color--blue-800: #0F2A50;
-    --color--blue-600: #1B4D92;
+    --color--blue-600: #114F8F;
     --color--blue-dark: #133666;
     --color--blue-700: #133666;
     --color--blue-300: #A8D7FF;
     --color--blue-250: #ACC9EA;
-    --color--blue-200: #C2E3FF;
     --color--cyan-500: #1C9AD6;
+    --color--cyan-25: #F2FBFF;
     --color--white: #fff;
+    --color--cream: #FCFAF5;
     --color--orange-600: #D57435;
     --color--orange-700: #A84C11;
     --color--grey-50: #F9FAFB;
@@ -67,6 +68,11 @@
     --space--gap-xl: calc(var(--space--grid-unit) * 4); // 32px
     --space--gap-xxl: calc(var(--space--grid-unit) * 5); // 40px
     --space--gap-3xl: calc(var(--space--grid-unit) * 6); // 48px
+
+    // Margins
+    --max-1280: calc( (100vw - 1280px) * 0.5);
+    --max-1480: calc( (100vw - 1480px) * -0.5);
+    --full-bleed: calc( (100vw - 1280px) * -0.5);
 
     // Style
     --corner--radius: calc(var(--space--grid-unit) / 2);

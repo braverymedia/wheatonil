@@ -88,3 +88,72 @@
         }
     }
 }
+
+.bm--section-nav {
+    background-color: var(--color--white);
+    width: 100%;
+    margin-top: var(--space--gap-large);
+    margin-bottom: var(--space--gap-large);
+    button {
+        display: flex;
+        align-items: center;
+        padding: var(--space--gap-medium);
+        font-weight: 500;
+        width: 100%;
+        justify-content: space-between;
+        &:after {
+            content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8V16M8 12H16M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+            color: var(--color--blue-600);
+            display: block;
+            height: 24px;
+            width: 24px;
+            transform-origin: center;
+            transform: rotate(0);
+            transition: all ease-in-out .15s;
+        }
+        &[aria-expanded="true"]:after {
+            transform: rotate(-45deg);
+        }
+    }
+    h2 {
+        font-size: var(--type-size--base);
+        font-weight: 500;
+        display: none;
+        font-family: var(--wc-font-family--sans-serif);
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space--gap-large);
+        padding: 0 18px;
+        max-height: 0;
+        opacity: 0;
+        transition: opacity 0.15s ease-in-out, padding 0.2s ease-in-out 0.15s, max-height 0.2s ease-in-out 0.15s;
+        &.visible {
+            padding: var(--space--gap-large) 18px;
+            max-height: 700px;
+            opacity: 1;
+            transition: padding .25s ease-in-out, max-height .25s ease-in-out, opacity .15s ease-in-out .15s;
+        }
+    }
+    @media (min-width: 1024px) {
+        padding: var(--space--gap-large) var(--space--gap-medium);
+        border: 0;
+        background-color: var(--color--grey-100);
+        border-radius: 16px;
+        h2 {
+            display: block;
+        }
+        button {
+            display: none;
+        }
+        div {
+            flex-wrap: wrap;
+            flex-direction: row;
+            opacity: 1;
+            height: auto;
+            max-height: none;
+            padding: 0;
+        }
+    }
+}

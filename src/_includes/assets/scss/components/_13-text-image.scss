@@ -1,6 +1,5 @@
 .bm {
     &--text-image {
-        width: 100vw;
         padding-left: 0;
         padding-right: 0;
         figure {
@@ -16,15 +15,15 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            width: 100vw;
+            width: 100%;
             padding-left: 0;
             padding-right: 0;
             margin: var(--space--gap-3xl) auto;
             figure {
                 height: 50vw;
                 max-height: 1000px;
-                flex: 1 50vw;
-                width: 50vw;
+                flex: 1 50%;
+                width: 50%;
                 max-width: 50%;
                 overflow: hidden;
                 border-radius: var(--corner--radius);
@@ -38,8 +37,8 @@
 
             }
             article {
-                flex: 1 50vw;
-                width: 50vw;
+                flex: 1 50%;
+                width: 50%;
                 max-width: 50%;
                 padding: 0 calc(var(--space--grid-unit) * 8);
                 order: 2;
