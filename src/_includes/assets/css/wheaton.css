@@ -2,7 +2,7 @@
   --wc-font-family--serif: "arno-pro-display", serif;
   --wc-font-family--sans-serif: "futura-pt", sans-serif;
   --wc-font-family--display: var(--wc-font-family--serif);
-  --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 9.38rem);
+  --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 6.38rem);
   --type-size--xxl: clamp( 2.75rem, calc(1rem + 7.26vw), 4.5rem);
   --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);
   --type-size--xl: 2.75rem;
@@ -100,7 +100,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-size: var(--type-size--base);
+  font-size: var(--type-size--base) !important;
 }
 
 /* A elements that don't have a class get default styles */
@@ -242,10 +242,9 @@ h4,
 }
 
 body {
-  line-height: var(--wc-line-height);
-  font-family: var(--wc-font-family--sans-serif);
+  line-height: var(--wc-line-height) !important;
+  font-family: var(--wc-font-family--sans-serif) !important;
   overflow-x: hidden;
-  color: var(--color--grey-600);
 }
 
 h1,
@@ -340,9 +339,9 @@ ol.bm--bullets-check li {
 }
 
 li {
-  margin-bottom: 0.75rem;
-  font-size: var(--wc-font-size--text-regular);
-  font-weight: normal;
+  margin-bottom: 0.75rem !important;
+  font-size: var(--wc-font-size--text-regular) !important;
+  font-weight: normal !important;
 }
 
 p {
@@ -907,7 +906,7 @@ th {
   color: var(--color--white);
 }
 .overlay-menu a {
-  color: inherit;
+  color: inherit !important;
 }
 .overlay-menu a.menu-link {
   padding: var(--space--gap-regular) 0;
@@ -924,6 +923,8 @@ th {
 }
 .overlay-menu li {
   list-style: none;
+  font-family: inherit;
+  font-size: inherit;
 }
 @media (min-width: 1024px) {
   .overlay-menu {
@@ -1578,6 +1579,12 @@ body.menu-open {
   }
 }
 
+.bm-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .bm--rfi {
   text-align: center;
   padding-left: 0;
@@ -1664,6 +1671,15 @@ body.menu-open {
   background-color: var(--color--white);
   padding: var(--space--gap-xl);
   border: 1px solid var(--color--grey-100);
+}
+
+a.bm--card {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  color: unset;
+}
+a.bm--card:hover {
+  box-shadow: var(--elevation--large-invert);
 }
 
 .bm--section-title h2 {
@@ -1906,6 +1922,10 @@ body.menu-open {
 }
 .bm--collapsible button[aria-expanded=true]:after {
   transform: rotate(-45deg);
+}
+.bm--collapsible button:focus, .bm--collapsible button:active {
+  background-color: transparent;
+  color: inherit;
 }
 .bm--collapsible div {
   max-width: 650px;

@@ -162,7 +162,7 @@
         color: var(--color--white);
     }
     a {
-        color: inherit;
+        color: inherit !important;
         &.menu-link {
             padding: var(--space--gap-regular) 0;
             text-decoration: none;
@@ -177,6 +177,8 @@
     }
     li {
         list-style: none;
+        font-family: inherit;
+        font-size: inherit;
     }
     @media (min-width: 1024px) {
         gap: 0 var(--space--gap-large);

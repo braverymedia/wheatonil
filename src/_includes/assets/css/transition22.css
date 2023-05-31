@@ -35,7 +35,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-size: var(--type-size--base);
+  font-size: var(--type-size--base) !important;
 }
 
 /* A elements that don't have a class get default styles */
@@ -177,10 +177,9 @@ h4,
 }
 
 body {
-  line-height: var(--wc-line-height);
-  font-family: var(--wc-font-family--sans-serif);
+  line-height: var(--wc-line-height) !important;
+  font-family: var(--wc-font-family--sans-serif) !important;
   overflow-x: hidden;
-  color: var(--color--grey-600);
 }
 
 h1,
@@ -275,9 +274,9 @@ ol.bm--bullets-check li {
 }
 
 li {
-  margin-bottom: 0.75rem;
-  font-size: var(--wc-font-size--text-regular);
-  font-weight: normal;
+  margin-bottom: 0.75rem !important;
+  font-size: var(--wc-font-size--text-regular) !important;
+  font-weight: normal !important;
 }
 
 p {
@@ -742,7 +741,7 @@ select:active {
   color: var(--color--white);
 }
 .overlay-menu a {
-  color: inherit;
+  color: inherit !important;
 }
 .overlay-menu a.menu-link {
   padding: var(--space--gap-regular) 0;
@@ -759,6 +758,8 @@ select:active {
 }
 .overlay-menu li {
   list-style: none;
+  font-family: inherit;
+  font-size: inherit;
 }
 @media (min-width: 1024px) {
   .overlay-menu {
@@ -1444,6 +1445,10 @@ body.menu-open {
 }
 .bm--collapsible button[aria-expanded=true]:after {
   transform: rotate(-45deg);
+}
+.bm--collapsible button:focus, .bm--collapsible button:active {
+  background-color: transparent;
+  color: inherit;
 }
 .bm--collapsible div {
   max-width: 650px;

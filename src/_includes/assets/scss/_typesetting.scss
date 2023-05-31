@@ -1,9 +1,8 @@
 
 body {
-  line-height: var(--wc-line-height);
-  font-family: var(--wc-font-family--sans-serif);
+  line-height: var(--wc-line-height) !important;
+  font-family: var(--wc-font-family--sans-serif) !important;
   overflow-x: hidden;
-  color: var(--color--grey-600);
 }
 h1,
 h2,
@@ -97,9 +96,9 @@ ol {
 }
 
 li {
-  margin-bottom: 0.75rem;
-  font-size: var(--wc-font-size--text-regular);
-  font-weight: normal; // transition
+  margin-bottom: 0.75rem !important;
+  font-size: var(--wc-font-size--text-regular) !important;
+  font-weight: normal !important; // transition
 }
 
 p {
