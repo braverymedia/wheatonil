@@ -3,7 +3,7 @@
   --wc-font-family--sans-serif: "futura-pt", sans-serif;
   --wc-font-family--display: var(--wc-font-family--serif);
   --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 6.38rem);
-  --type-size--xxl: clamp( 2.75rem, calc(1rem + 7.26vw), 4.5rem);
+  --type-size--xxl: clamp(2.75rem, calc(1rem + 7.26vw), 4.5rem);
   --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);
   --type-size--xl: 2.75rem;
   --type-size--large: 1.875rem;
@@ -47,6 +47,7 @@
   --color--grey-700: #434A54;
   --color--grey-900: #141A28;
   --gradient--blue-primary: linear-gradient(45deg, var(--color--blue-800) 0%, var(--color--blue-600) 100%);
+  --gradient--blue-light: linear-gradient(180deg, rgba(242, 251, 255, 0.5) 0%, var(--color--cyan-25) 100%);
   --elevation--large: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
   --elevation--large-invert: 4px 12px 16px 0 rgba(16, 24, 40, 0.08), 2px 4px 6px 0px rgba(16, 24, 40, 0.03);
   --space--grid-unit: 8px;
@@ -56,9 +57,9 @@
   --space--gap-xl: calc(var(--space--grid-unit) * 4);
   --space--gap-xxl: calc(var(--space--grid-unit) * 5);
   --space--gap-3xl: calc(var(--space--grid-unit) * 6);
-  --max-1280: calc( (100vw - 1280px) * 0.5);
-  --max-1480: calc( (100vw - 1480px) * -0.5);
-  --full-bleed: calc( (100vw - 1280px) * -0.5);
+  --max-1280: calc((100vw - 1280px) * 0.5);
+  --max-1480: calc((100vw - 1480px) * -0.5);
+  --full-bleed: calc((100vw - 1280px) * -0.5);
   --corner--radius: calc(var(--space--grid-unit) / 2);
   --bm--primary-font: var(--font--serif);
 }
@@ -180,6 +181,10 @@ hr {
 .has-bg--blue-gradient {
   background: var(--gradient--blue-primary);
   color: var(--color--white);
+}
+
+.has-bg--blue-gradient-light {
+  background: var(--gradient--blue-light);
 }
 
 .has-bg--blue.has-watermark {
@@ -750,7 +755,7 @@ th {
 @media (min-width: 1024px) {
   .main-header.bravery,
   .main-header.bravery .overlay-tools {
-    height: 144px;
+    height: 96px;
     border-top: 4px solid var(--color--blue-600);
   }
 }
@@ -1154,7 +1159,8 @@ th {
   color: var(--color--blue-300);
   font-size: inherit;
 }
-.bm--utility-menus ul, .bm--utility-menus li {
+.bm--utility-menus ul,
+.bm--utility-menus li {
   padding: 0;
 }
 .bm--utility-menus ul {
@@ -1468,8 +1474,7 @@ body.menu-open {
 }
 .bm--section-program-features {
   border-top: 1px solid #D9D9D9;
-  padding-top: var(--space--gap-medium);
-  margin-top: var(--space--gap-xxl);
+  padding-top: var(--space--gap-3xl);
 }
 @media (min-width: 1024px) {
   .bm--section-program-features {
@@ -1493,9 +1498,7 @@ body.menu-open {
   border-radius: var(--corner--radius);
   box-shadow: var(--elevation--large);
   color: var(--color--white);
-  padding: calc(var(--space--grid-unit) * 8) var(--space--gap-medium);
-  margin-top: var(--space--gap-xxl);
-  margin-bottom: var(--space--gap-xxl);
+  padding: calc(var(--space--grid-unit) * 4) var(--space--gap-medium);
   max-width: 1224px;
 }
 .bm--callout * {
@@ -2111,28 +2114,21 @@ a.bm--card:hover {
 }
 
 main {
-  padding-top: calc(var(--space--grid-unit) * 6);
-  padding-left: 4vw;
-  padding-right: 4vw;
+  padding: calc(var(--space--grid-unit) * 8) 4vw calc(var(--space--grid-unit) * 12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space--gap-xl);
 }
 @media (min-width: 1024px) {
   main {
-    padding-left: 7vw;
-    padding-right: 7vw;
-    padding-top: calc(var(--space--grid-unit) * 10);
-  }
-  main > section {
-    margin-top: var(--space--gap-xxl);
+    padding: calc(var(--space--grid-unit) * 10) 7vw calc(var(--space--grid-unit) * 15);
+    gap: var(--space--gap-3xl);
   }
 }
 @media (min-width: 1300px) {
   main {
-    padding-top: calc(var(--space--grid-unit) * 23);
-    padding-left: var(--max-1280);
-    padding-right: var(--max-1280);
-  }
-  main > section {
-    margin-top: calc(var(--space--gap-3xl) * 2);
+    padding: calc(var(--space--grid-unit) * 23) var(--max-1280) calc(var(--space--grid-unit) * 23);
+    gap: calc(var(--space--grid-unit) * 12);
   }
 }
 
@@ -2200,7 +2196,7 @@ main {
 
 [data-layout=has-margins] {
   max-width: 850px;
-  margin: calc(var(--space--gap-3xl) * 4) auto;
+  margin: 0 auto;
   padding: 0;
 }
 

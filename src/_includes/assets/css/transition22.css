@@ -117,6 +117,10 @@ hr {
   color: var(--color--white);
 }
 
+.has-bg--blue-gradient-light {
+  background: var(--gradient--blue-light);
+}
+
 .has-bg--blue.has-watermark {
   background-blend-mode: multiply;
   background-position: 100% center;
@@ -585,7 +589,7 @@ select:active {
 @media (min-width: 1024px) {
   .main-header.bravery,
   .main-header.bravery .overlay-tools {
-    height: 144px;
+    height: 96px;
     border-top: 4px solid var(--color--blue-600);
   }
 }
@@ -989,7 +993,8 @@ select:active {
   color: var(--color--blue-300);
   font-size: inherit;
 }
-.bm--utility-menus ul, .bm--utility-menus li {
+.bm--utility-menus ul,
+.bm--utility-menus li {
   padding: 0;
 }
 .bm--utility-menus ul {
