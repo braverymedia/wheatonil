@@ -2113,6 +2113,106 @@ a.bm--card:hover {
   font-size: var(--type-size--base);
 }
 
+.bm-home--hero .home--greeting {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: var(--space--gap-3xl);
+  gap: var(--space--gap-xxl);
+  isolation: isolate;
+  color: var(--color--blue-600);
+}
+.bm-home--hero .home--greeting h2 {
+  color: inherit;
+  max-width: 475px;
+}
+.bm-home--hero .home--greeting .prehead {
+  position: relative;
+}
+.bm-home--hero .home--greeting .prehead:after {
+  content: "";
+  background-color: var(--color--orange-600);
+  display: block;
+  height: 3px;
+  width: calc(9 * var(--space--grid-unit));
+  bottom: 0;
+  transform: translateY(var(--space--gap-xl));
+  left: 0;
+}
+.bm-home--hero .home--greeting button {
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .bm-home--hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 75vh;
+  }
+  .bm-home--hero .home--greeting {
+    width: minmax(30%, 500px);
+  }
+}
+.bm-gallery--marquee {
+  height: 100%;
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space--gap-xl);
+  overflow: hidden;
+}
+.bm-gallery--marquee:hover .bm-marquee--group {
+  animation-play-state: paused;
+}
+.bm-marquee {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--space--gap-xl);
+  width: 100%;
+}
+.bm-marquee[data-direction=reverse] .bm-marquee--group {
+  animation-direction: reverse;
+  animation-delay: -3s;
+}
+.bm-marquee--group {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--space--gap-xl);
+  min-width: 100%;
+  animation: scroll-y 180s linear infinite;
+}
+.bm-marquee--group > figure {
+  aspect-ratio: 0.71/1;
+  border-radius: var(--corner--radius);
+  overflow: hidden;
+  width: 100%;
+}
+.bm-marquee--group > figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-marquee--group {
+    animation-play-state: paused;
+  }
+}
+@keyframes scroll-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - 32px));
+  }
+}
 main {
   padding: calc(var(--space--grid-unit) * 8) 4vw calc(var(--space--grid-unit) * 12);
   display: flex;

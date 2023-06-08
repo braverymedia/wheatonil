@@ -118,11 +118,9 @@ hr {
     background: var(--gradient--blue-primary);
     color: var(--color--white);
 }
-
 .has-bg--blue-gradient-light {
     background: var(--gradient--blue-light);
 }
-
 .has-bg--blue.has-watermark {
     background-blend-mode: multiply;
     background-position: 100% center;
