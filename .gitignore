@@ -5,3 +5,4 @@ yarn-error.log
 config.codekit3
 .DS_Store
 _site
+.direnv
