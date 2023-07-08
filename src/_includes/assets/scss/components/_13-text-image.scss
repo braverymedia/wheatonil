@@ -2,6 +2,9 @@
     &--text-image {
         padding-left: 0;
         padding-right: 0;
+        &[class*="has-bg--"] {
+            padding: var(--space--gap-large);
+        }
         figure {
             margin-top: var(--space--gap-xxl);
             margin-bottom: var(--space--gap-xxl);
@@ -28,6 +31,7 @@
                 overflow: hidden;
                 border-radius: var(--corner--radius);
                 order: 1;
+                margin: 0;
                 img {
                     height: 100%;
                     width: 100%;
@@ -42,6 +46,23 @@
                 max-width: 50%;
                 padding: 0 calc(var(--space--grid-unit) * 8);
                 order: 2;
+            }
+            &[data-size="small"] {
+                max-width: 950px;
+                figure {
+                    aspect-ratio: 1 / 1;
+                    height: 250px;
+                    width: 250px;
+                    flex: 0 250px;
+                }
+                article {
+                    flex: 1 auto;
+                    width: auto;
+                    padding-right: 0;
+                }
+                &[class*="has-bg--"] {
+                    border-radius: var(--corner--radius);
+                }
             }
             &[data-image="right"] {
                 article {

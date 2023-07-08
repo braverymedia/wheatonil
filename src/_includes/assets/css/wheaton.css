@@ -1,251 +1,3 @@
-:root {
-  --wc-font-family--serif: "arno-pro-display", serif;
-  --wc-font-family--sans-serif: "futura-pt", sans-serif;
-  --wc-font-family--display: var(--wc-font-family--serif);
-  --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 6.38rem);
-  --type-size--xxl: clamp(2.75rem, calc(1rem + 7.26vw), 4.5rem);
-  --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);
-  --type-size--xl: 2.75rem;
-  --type-size--large: 1.875rem;
-  --type-size--medium: 1.5rem;
-  --type-size--base: 1.125rem;
-  --type-size--regular: var(--type-size--base);
-  --type-size--small: 1rem;
-  --type-size--xsmall: 0.875rem;
-  --type-size--tiny: 0.75rem;
-  --wc-line-height: 1.5;
-  --type-size--display-2xl: 4.5rem;
-  --type-size--display-xl: 3.75rem;
-  --type-size--display-lg: 3rem;
-  --type-size--display-md: 2.25rem;
-  --type-size--display-sm: 1.875rem;
-  --type-size--display-xs: 1.5rem;
-  --type-size--text-xl: 1.25rem;
-  --type-size--text-lg: 1.125rem;
-  --type-size--text-md: 1rem;
-  --type-size--text-regular: 1rem;
-  --type-size--text-sm: 0.875rem;
-  --type-size--text-xs: 0.75rem;
-  --color--blue-900: #0B1F3A;
-  --color--blue-800: #0F2A50;
-  --color--blue-600: #114F8F;
-  --color--blue-dark: #133666;
-  --color--blue-700: #133666;
-  --color--blue-300: #A8D7FF;
-  --color--blue-250: #ACC9EA;
-  --color--cyan-500: #1C9AD6;
-  --color--cyan-25: #F2FBFF;
-  --color--white: #fff;
-  --color--cream: #FCFAF5;
-  --color--orange-600: #D57435;
-  --color--orange-700: #A84C11;
-  --color--grey-50: #F9FAFB;
-  --color--grey-100: #F2F4F7;
-  --color--grey-300: #D0D5DD;
-  --color--grey-400: #A1A8B3;
-  --color--grey-600: #525B67;
-  --color--grey-700: #434A54;
-  --color--grey-900: #141A28;
-  --gradient--blue-primary: linear-gradient(45deg, var(--color--blue-800) 0%, var(--color--blue-600) 100%);
-  --gradient--blue-light: linear-gradient(180deg, rgba(242, 251, 255, 0.5) 0%, var(--color--cyan-25) 100%);
-  --elevation--large: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
-  --elevation--large-invert: 4px 12px 16px 0 rgba(16, 24, 40, 0.08), 2px 4px 6px 0px rgba(16, 24, 40, 0.03);
-  --space--grid-unit: 8px;
-  --space--gap-regular: 8px;
-  --space--gap-medium: calc(var(--space--grid-unit) * 2);
-  --space--gap-large: calc(var(--space--grid-unit) * 3);
-  --space--gap-xl: calc(var(--space--grid-unit) * 4);
-  --space--gap-xxl: calc(var(--space--grid-unit) * 5);
-  --space--gap-3xl: calc(var(--space--grid-unit) * 6);
-  --max-1280: calc((100vw - 1280px) * 0.5);
-  --max-1480: calc((100vw - 1480px) * -0.5);
-  --full-bleed: calc((100vw - 1280px) * -0.5);
-  --corner--radius: calc(var(--space--grid-unit) / 2);
-  --bm--primary-font: var(--font--serif);
-}
-
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Remove default margin */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
-
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role=list],
-ol[role=list] {
-  list-style: none;
-}
-
-/* Set core root defaults */
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
-/* Set core body defaults */
-body {
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-size: var(--type-size--base) !important;
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Make images easier to work with */
-img,
-picture,
-svg {
-  max-width: 100%;
-  display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-hr {
-  border: none;
-  display: block;
-  height: 1px;
-  width: 100%;
-  background-color: var(--color--grey-100);
-  transition: all 0.15s ease-in-out;
-}
-
-.sr-only {
-  border: 0;
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  word-wrap: normal !important;
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-.has-bg--white {
-  background: var(--color--white);
-}
-
-.has-bg--cream {
-  background: var(--color--cream);
-}
-
-.has-bg--light-blue {
-  background: var(--color--cyan-25);
-}
-
-.has-bg--blue {
-  background-color: var(--color--blue-600);
-  color: var(--color--white);
-}
-
-.has-bg--blue-gradient {
-  background: var(--gradient--blue-primary);
-  color: var(--color--white);
-}
-
-.has-bg--blue-gradient-light {
-  background: var(--gradient--blue-light);
-}
-
-.has-bg--blue.has-watermark {
-  background-blend-mode: multiply;
-  background-position: 100% center;
-  background-repeat: no-repeat;
-  background-size: 80% 80%;
-  color: var(--color--white);
-}
-
-h1, h2, h3, h4, h5 {
-  font-weight: normal;
-}
-
-h1,
-.type--xxl {
-  font-size: var(--type-size--xxl);
-  line-height: 1;
-}
-
-h2,
-.type--xl {
-  font-size: var(--type-size--xl);
-  line-height: 1.1;
-}
-
-h3,
-.type--lg {
-  font-size: var(--type-size--large);
-  line-height: 1.13;
-}
-
-h4,
-.type--md {
-  font-size: var(--type-size--medium);
-  line-height: 1.165;
-}
-
-h4,
-.type--regular {
-  font-size: var(--type-size--regular);
-  line-height: 1.23;
-}
-
-.type--small {
-  font-size: var(--type-size--small);
-  line-height: 1.2;
-  font-weight: 500;
-  color: var(--color--grey-700);
-}
-
-.type--xs {
-  font-size: var(--type-size--xsmall);
-  line-height: 1.2;
-}
-
-.type--tiny {
-  font-size: var(--type-size--tiny);
-  line-height: 1.2;
-}
-
 body {
   line-height: var(--wc-line-height) !important;
   font-family: var(--wc-font-family--sans-serif) !important;
@@ -361,10 +113,6 @@ p {
   display: block;
   color: var(--color--grey-600);
   margin-bottom: var(--space--gap-medium);
-}
-
-.layout-program h1 {
-  font-size: var(--type-size--super);
 }
 
 button.form_button_submit,
@@ -1416,6 +1164,7 @@ body.menu-open {
 .bm--program-header h1, .bm--page-title h1 {
   color: var(--color--blue-dark);
   grid-column: 1;
+  font-size: var(--type-size--super);
 }
 .bm--program-header .bm--actions, .bm--page-title .bm--actions {
   grid-column: 2;
@@ -1942,6 +1691,9 @@ a.bm--card:hover {
   padding-left: 0;
   padding-right: 0;
 }
+.bm--text-image[class*=has-bg--] {
+  padding: var(--space--gap-large);
+}
 .bm--text-image figure {
   margin-top: var(--space--gap-xxl);
   margin-bottom: var(--space--gap-xxl);
@@ -1970,6 +1722,7 @@ a.bm--card:hover {
     overflow: hidden;
     border-radius: var(--corner--radius);
     order: 1;
+    margin: 0;
   }
   .bm--text-image figure img {
     height: 100%;
@@ -1983,6 +1736,23 @@ a.bm--card:hover {
     max-width: 50%;
     padding: 0 calc(var(--space--grid-unit) * 8);
     order: 2;
+  }
+  .bm--text-image[data-size=small] {
+    max-width: 950px;
+  }
+  .bm--text-image[data-size=small] figure {
+    aspect-ratio: 1/1;
+    height: 250px;
+    width: 250px;
+    flex: 0 250px;
+  }
+  .bm--text-image[data-size=small] article {
+    flex: 1 auto;
+    width: auto;
+    padding-right: 0;
+  }
+  .bm--text-image[data-size=small][class*=has-bg--] {
+    border-radius: var(--corner--radius);
   }
   .bm--text-image[data-image=right] article {
     order: 1;
@@ -2431,6 +2201,36 @@ main > *[data-layout="1up"] {
   .bm--cover-image + .bm--content-container {
     padding-top: calc(var(--space--grid-unit) * 12);
   }
+}
+
+[data-ar="2:3"] {
+  aspect-ratio: 2/3;
+  overflow: hidden;
+}
+[data-ar="2:3"] > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-ar="1:1"] {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+[data-ar="1:1"] > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-ar="3:2"] {
+  aspect-ratio: 3/2;
+  overflow: hidden;
+}
+[data-ar="3:2"] > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .bm--content > section:not(:first-child) {

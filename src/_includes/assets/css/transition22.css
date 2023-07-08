@@ -297,10 +297,6 @@ p {
   margin-bottom: var(--space--gap-medium);
 }
 
-.layout-program h1 {
-  font-size: var(--type-size--super);
-}
-
 button.form_button_submit,
 .bravery button,
 .bravery .button,
