@@ -6,11 +6,11 @@
         }
         p {
             font-size: var(--type-size--regular);
-            margin-bottom: calc(var(--space--grid-unit) * 6);
+            margin-block-end: calc(var(--space--grid-unit) * 6);
         }
-        padding-left: 0;
-        padding-right: 0;
-        margin-bottom: var(--space--gap-xxl);
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        margin-block-end: var(--space--gap-xxl);
         @media (min-width: 1024px) {
             display: flex;
             align-items: stretch;

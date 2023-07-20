@@ -5,8 +5,9 @@
         gap: var(--space--gap-large);
         > article {
             position: relative;
-            max-width: 850px;
-            padding-top: var(--space--gap-3xl);
+            max-inline-size: 850px;
+            padding-block-start: var(--space--gap-3xl);
+            flex: 1 auto;
             &:before {
                 content: "";
                 background-color: var(--color--orange-600);
@@ -14,8 +15,8 @@
                 height: 3px;
                 position: absolute;
                 width: calc(9 * var(--space--grid-unit));
-                top: 0;
-                left: 0;
+                inset-block-start: 0;
+                inset-inline-start: 0;
             }
             h2 {
                 max-width: 768px;
@@ -29,8 +30,10 @@
         @media (min-width: 1024px) {
             flex-direction: row;
             justify-content: space-between;
+            gap: calc(var(--space--gap-3xl) * 3);
             .bm--actions {
-                padding-top: var(--space--gap-3xl);
+                padding-block-start: var(--space--gap-3xl);
+                flex: 1 0 auto;
             }
         }
     }

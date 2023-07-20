@@ -5,22 +5,22 @@
             letter-spacing: initial;
         }
 
-        margin-bottom: var(--space--gap-xl);
+        margin-block-end: var(--space--gap-xl);
     }
 
     &--section-program-features {
         border-top: 1px solid #D9D9D9;
-        padding-top: var(--space--gap-3xl);
+        padding-block-start: var(--space--gap-3xl);
         @media (min-width: 1024px) {
             display: flex;
             gap: var(--space--gap-xl);
             justify-content: stretch;
             align-items: flex-start;
-            padding-left: 0;
-            padding-right: 0;
+            padding-inline-start: 0;
+            padding-inline-end: 0;
             width: 100%;
-            margin-left: auto;
-            margin-right: auto;
+            margin-inline-start: auto;
+            margin-inline-end: auto;
 
             >* {
                 flex: 1 auto;

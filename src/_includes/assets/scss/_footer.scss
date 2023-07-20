@@ -36,7 +36,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--space--gap-medium);
-        padding-top: var(--space--gap-regular);
+        padding-block-start: var(--space--gap-regular);
         border-top: 1px solid rgba(255, 255, 255, 0.25);
         width: 100%;
         a {
@@ -63,23 +63,23 @@
 .bravery .footer-nav {
     width: 100%;
     section {
-        margin-bottom: var(--space--gap-regular);
-        padding-top: var(--space--gap-regular);
+        margin-block-end: var(--space--gap-regular);
+        padding-block-start: var(--space--gap-regular);
         border-top: 1px solid var(--color--blue-200);
         &:first-child {
             border-top: 0;
         }
     }
     .contact {
-        padding-top: var(--space--gap-large);
+        padding-block-start: var(--space--gap-large);
     }
     h2,
     h2 > button {
         appearance: none;
         background: transparent;
         color: inherit;
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
         border: 0;
         font-size: var(--type-size--medium);
         font-family: var(--wc-font-family--serif);
@@ -106,8 +106,8 @@
     }
     a {
         display: block;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
+        padding-block-start: 0.5rem;
+        padding-block-end: 0.5rem;
         text-decoration: none;
         color: var(--color--blue-200);
         &:hover {
@@ -118,7 +118,7 @@
     .social-links {
         display: flex;
         gap: var(--space--gap-medium);
-        margin-top: var(--space--gap-large);
+        margin-block-start: var(--space--gap-large);
         svg {
             height: var(--type-size--medium);
             width: var(--type-size--medium);
@@ -140,7 +140,7 @@
             }
         }
         .contact {
-            padding-top: calc(var(--space--gap-regular) + 10px);
+            padding-block-start: calc(var(--space--gap-regular) + 10px);
         }
         .social-links svg {
             height: var(--type-size--small);

@@ -1,0 +1,26 @@
+// Gallery layouts.
+.bm-gallery {
+
+    &--staggered {
+        display: flex;
+        gap: var(--space--gap-xxl);
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: 0;
+        flex: 0 0 calc(40% - var(--space--gap-xl) * 0.5);
+        > figure {
+            height: 508px;
+            aspect-ratio: 2 / 3;
+            scroll-margin-inline-start: 1rem;
+            &:nth-child(even) {
+                margin-block-start: 3vw;
+            }
+            &:nth-child(3) {
+                scroll-snap-align: center;
+            }
+        }
+    }
+
+}
