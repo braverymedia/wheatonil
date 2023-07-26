@@ -137,24 +137,26 @@
       <form>
         <fieldset class="credential_types">
           <legend>1. Select program type</legend>
-          {#each credential_types as t}
-            <input
-              class="v-hidden"
-              type="checkbox"
-              bind:group={selected_credential_types}
-              name="credential_types"
-              value={t}
-            />
-            <button
-              aria-hidden="true"
-              type="button"
-              class="bm--cta style-primary"
-              class:selected={selected_credential_types.includes(t)}
-              on:click={() => {
-                $: toggleCredentialType(t);
-              }}>{t}</button
-            >
-          {/each}
+          <div class="scroller">
+            {#each credential_types as t}
+              <input
+                class="v-hidden"
+                type="checkbox"
+                bind:group={selected_credential_types}
+                name="credential_types"
+                value={t}
+              />
+              <button
+                aria-hidden="true"
+                type="button"
+                class="bm--cta style-primary"
+                class:selected={selected_credential_types.includes(t)}
+                on:click={() => {
+                  $: toggleCredentialType(t);
+                }}>{t}</button
+              >
+            {/each}
+          </div>
         </fieldset>
 
         <fieldset class="areas_of_study">
@@ -207,9 +209,11 @@
   h1 {
     color: var(--color--white);
   }
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  @media (min-width: 1024px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   .orange-line {
     width: 4.5rem;
@@ -223,7 +227,12 @@
   }
   .finder {
     background-color: var(--color--blue-600);
-    padding: 5.5rem;
+    padding: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .finder {
+      padding: 5.5rem;
+    }
   }
   label {
     display: block;
@@ -238,10 +247,21 @@
     border: none;
     padding: 0;
   }
+  form {
+  }
   fieldset.credential_types {
     margin-top: 3.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    min-width: 0; /* https://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content#answer-17863685 */
+  }
+  fieldset.credential_types .scroller {
     display: flex;
     gap: 0.75rem;
+    flex-direction: row;
+    overflow-x: auto;
+    width: calc(100% + 2rem);
   }
   fieldset.credential_types legend {
     margin-bottom: 1.5rem;
@@ -261,7 +281,12 @@
   .col2 {
     margin: 0;
     grid-column: 2;
-    padding: 5.5rem;
+    padding: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .col2 {
+      padding: 5.5rem;
+    }
   }
   ul {
     list-style: none;
@@ -277,6 +302,8 @@
   }
   .details {
     display: flex;
+    justify-content: flex-start;
+    gap: 6rem;
   }
   .detail_type {
     font-size: var(--type-size--text-sm);
@@ -292,7 +319,7 @@
     color: var(--color--grey-800, #232c39);
     margin: 0;
     margin-top: 0.5rem;
-    margin-right: 6rem;
+    max-width: 8rem;
   }
   .results li {
     margin-top: 3rem;
