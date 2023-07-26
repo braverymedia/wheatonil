@@ -67,3 +67,7 @@ body {
     --corner--radius: calc(var(--space--grid-unit) / 2);
     --bm--primary-font: var(--font--serif);
 }
+// Centers Color themes
+[data-center="wade"] {
+    --center-color: #32553B;
+}

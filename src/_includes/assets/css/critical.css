@@ -52,6 +52,10 @@ body {
   --bm--primary-font: var(--font--serif);
 }
 
+[data-center=wade] {
+  --center-color: #32553B;
+}
+
 /* Box sizing rules */
 *,
 *::before,

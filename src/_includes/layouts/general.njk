@@ -3,8 +3,12 @@
     <head>
         {% include "components/html-head.njk" %}
     </head>
-    <body>
-        {% include "components/bravery-nav.njk" %}
+    <body data-center="wade">
+        {% if section == 'center' %}
+            {% include "components/bravery-nav-centers.njk" %}
+        {% else %}
+            {% include "components/bravery-nav.njk" %}
+        {% endif %}
         <main class="is-new-style">
             {% include "components/bm-page-header.njk" %}
             {{ content | safe }}
@@ -12,6 +16,3 @@
         {% include "components/bravery-footer.njk" %}
     </body>
 </html>
-
-
-
