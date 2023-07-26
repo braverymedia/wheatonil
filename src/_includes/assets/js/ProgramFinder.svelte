@@ -272,10 +272,11 @@
   label.checkbox {
     color: var(--color--white);
     margin-top: 1rem;
+    display: flex;
+    align-items: center;
   }
   label.checkbox input {
     margin-right: 0.75rem;
-    background-color: var(--color--blue-600);
   }
 
   .col2 {
