@@ -129,7 +129,7 @@
   }
 </script>
 
-<div class="container">
+<div class="program-finder-2023 container">
   <div class="col1">
     <div class="finder">
       <div class="orange-line" />
@@ -183,7 +183,7 @@
     </p>
     <ul class="results" aria-live="polite" aria-relevant="additions removals">
       {#each programs_filtered as program}
-        <li>
+        <li class="result">
           <p class="program_name">{program.name}</p>
           <div class="details">
             {#if program.credential_types && program.credential_types.length > 0}
