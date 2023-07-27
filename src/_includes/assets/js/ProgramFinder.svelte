@@ -1,14 +1,14 @@
 <script>
   export let title = "Finder";
   /* these constant initializers can be changed to [] to reduce bundle size since we're going to pull from the programs we're passed from the markup instead of using these hard coded ones */
-  export let credential_types = [
+  let credential_types = [
     "Bachelor",
     "Minor",
     "Certificate",
     "Master",
     "Doctoral",
   ];
-  export let degree_types = [
+  let degree_types = [
     "BA",
     "BM",
     "BS",
@@ -20,7 +20,7 @@
     "Special Program",
     "Study Abroad",
   ];
-  export let areas_of_study = [
+  let areas_of_study = [
     "Art, Communication, Design, and Music",
     "Business, Economics, and Marketing",
     "Education and Teaching",
@@ -36,13 +36,18 @@
     "Theology and Biblical Studies",
     "Pre-College Programs",
   ];
-  //
+
   export let programs = [];
   let programs_filtered = programs;
   let selected_areas_of_study = [];
   let selected_credential_types = [];
   if (programs && programs.length) {
     /* pull credential_types, areas_of_study and degree_types from the data passed into this component */
+    /* for credential_types, we get two bits of data in each program: credential_types and credential_type_values. 
+      the first looks like Doctorate|Minor and the latter looks like doctorate-5|minor-2
+      the first are the labels we should show.  the numbers in the latter dictate position
+      in case we don't have good numbers in the second, we'll load the former into credential_types, then overwrite if we have good numbers
+    */
     credential_types = Object.keys(
       programs.reduce((acc, p) => {
         if (p.credential_types && Array.isArray(p.credential_types)) {
@@ -55,6 +60,32 @@
         return acc;
       }, {})
     );
+    // fill array with credential_type labels based on the string-of-integer suffix on values.  will then clear out the empty slots and compare length to the ones we collected from just the names.  If they're the same, use the order set in credential_types_maybe
+    let credential_types_maybe = [];
+    programs.forEach((p) => {
+      if (p.credential_type_values) {
+        let ctvs = Array.isArray(p.credential_type_values)
+          ? p.credential_type_values
+          : [p.credential_type_values];
+        ctvs.forEach((ctv, idx) => {
+          let parts = ctv.split("-");
+          let maybe_num = Number.parseInt(parts[parts.length - 1], 10);
+          if (Number.isInteger(maybe_num)) {
+            if (maybe_num >= 0) {
+              credential_types_maybe[maybe_num] = Array.isArray(
+                p.credential_types
+              )
+                ? p.credential_types[idx]
+                : p.credential_types;
+            }
+          }
+        });
+      }
+    });
+    credential_types_maybe = credential_types_maybe.filter((ct) => !!ct);
+    if (credential_types_maybe.length == credential_types.length) {
+      credential_types = credential_types_maybe;
+    }
     areas_of_study = Object.keys(
       programs.reduce((acc, p) => {
         if (p.areas_of_study && Array.isArray(p.areas_of_study)) {
@@ -125,7 +156,6 @@
     } else {
       selected_credential_types = [...selected_credential_types, t];
     }
-    console.log(selected_credential_types);
   }
 </script>
 

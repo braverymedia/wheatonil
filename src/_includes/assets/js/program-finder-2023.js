@@ -15,6 +15,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
           credential_types: (element.dataset.credentialTypes || "")
             .split("|")
             .map((e) => e.trim()),
+          credential_type_values: (element.dataset.credentialTypeValues || "")
+            .split("|")
+            .map((e) => e.trim()),
           degree_types: (element.dataset.degreeTypes || "")
             .split("|")
             .map((e) => e.trim()),
