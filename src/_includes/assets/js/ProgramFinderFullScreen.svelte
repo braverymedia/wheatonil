@@ -216,7 +216,7 @@
     <ul class="results" aria-live="polite" aria-relevant="additions removals">
       {#each programs_filtered as program}
         <li class="result">
-          <p class="program_name">{program.name}</p>
+          <p class="program_name"><a href={program.link}>{program.name}</a></p>
           <div class="details">
             {#if program.credential_types && program.credential_types.length > 0}
               <div class="detail credential_types">

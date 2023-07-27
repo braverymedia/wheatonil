@@ -24,6 +24,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           areas_of_study: (element.dataset.areasOfStudy || "")
             .split("|")
             .map((e) => e.trim()),
+          link: element.dataset.link || "",
         };
       }),
     },
