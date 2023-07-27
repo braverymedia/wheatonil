@@ -97,6 +97,8 @@
         }
         return acc;
       }, {})
+    ).sort((a, b) =>
+      (a || "").toLowerCase().localeCompare((b || "").toLowerCase())
     );
     degree_types = Object.keys(
       programs.reduce((acc, p) => {
