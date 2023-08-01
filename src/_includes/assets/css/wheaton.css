@@ -361,6 +361,53 @@ select:active {
   color: var(--color--white);
 }
 
+input[type=checkbox]:checked {
+  background-color: var(--color--white);
+  border-color: var(--color--white);
+}
+
+input[type=checkbox] {
+  --background-color: var(--color--blue-600);
+  --border-color: var(--color--white);
+  --check-color: var(--color--blue-600);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: currentColor;
+  font: inherit;
+  height: 1rem;
+  margin: 0;
+  margin-right: 0px;
+  margin-right: var(0.4375rem);
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  width: 1rem;
+}
+
+input[type=checkbox]:checked::before {
+  opacity: 1;
+  transform: scale(1) translateY(-2px);
+}
+
+input[type=checkbox]::before {
+  --check: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 14 15%27%3E%3Cpath fill=%27%23FFC200%27 fill-rule=%27evenodd%27 d=%27M10.862 4.646a.523.523 0 0 1 0 .708l-4.706 6a.451.451 0 0 1-.665 0l-2.353-2.5a.522.522 0 0 1 0-.708.451.451 0 0 1 .665 0l2.02 2.147 4.374-5.647a.451.451 0 0 1 .665 0Z%27 clip-rule=%27evenodd%27/%3E%3C/svg%3E");
+  background-color: var(--color--blue-600);
+  content: "";
+  height: 1rem;
+  left: 0;
+  -webkit-mask: var(--check);
+  mask: var(--check);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(0.5) translateY(-2px);
+  transform-origin: center;
+  transition: transform 0.2s ease-in-out;
+  width: 1rem;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -542,33 +589,6 @@ th {
     height: 95px;
     width: auto;
   }
-}
-
-.bm-centers-back {
-  display: flex;
-  align-items: center;
-  background-color: var(--center-color);
-  font-size: var(--type-size--xsmall);
-  text-decoration: none;
-  width: 100%;
-  color: var(--color--white);
-  gap: var(--space--grid-unit);
-  padding-inline: var(--space--gap-regular);
-  padding-block: calc(var(--space--grid-unit) / 2);
-  transition: all 0.2s ease-in-out;
-}
-.bm-centers-back:hover {
-  background-color: var(--color--blue-800);
-}
-.bm-centers-back svg {
-  color: inherit;
-  height: calc(var(--space--grid-unit) * 2);
-  width: calc(var(--space--grid-unit) * 2);
-  transform: rotate(-180deg);
-}
-
-.bm-centers-back + .main-header.bravery {
-  border-top-color: var(--center-color);
 }
 
 .nav-actions,
