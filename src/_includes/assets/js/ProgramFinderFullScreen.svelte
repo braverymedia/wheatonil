@@ -8,6 +8,8 @@
   export let title = "Finder";
   export let programs = [];
   let programs_filtered = programs;
+  let selected_areas_of_study;
+  let selected_credential_types;
   ({ selected_areas_of_study, selected_credential_types } =
     processUrlSearchParams(location));
 
