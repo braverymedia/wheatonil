@@ -1,46 +1,22 @@
 <script>
   import ProgramFinderSearch from "./ProgramFinderSearch.svelte";
+  import {
+    compute_programs_filtered,
+    processUrlSearchParams,
+  } from "./program-finder-utils";
+
   export let title = "Finder";
   export let programs = [];
   let programs_filtered = programs;
-  let selected_areas_of_study = [];
-  let selected_credential_types = [];
+  ({ selected_areas_of_study, selected_credential_types } =
+    processUrlSearchParams(location));
+
   $: {
-    /* compute which programs to show */
-    programs_filtered = programs
-      .filter((program) => {
-        let pass = true;
-        if (selected_areas_of_study.length > 0) {
-          /* if there are selected areas of study, and the program has areas of study specified, conditionally show it */
-          pass = false;
-          if (program.areas_of_study) {
-            program.areas_of_study.forEach((aos) => {
-              if (selected_areas_of_study.includes(aos)) {
-                pass = true;
-              }
-            });
-          }
-          if (!pass) return pass;
-        }
-        if (selected_credential_types.length > 0) {
-          /* if there are selected credential types, and the program has credential types specified, conditionally show it */
-          pass = false;
-          if (program.credential_types) {
-            program.credential_types.forEach((ct) => {
-              if (selected_credential_types.includes(ct)) {
-                pass = true;
-              }
-            });
-          }
-          if (!pass) return pass;
-        }
-        return pass;
-      })
-      .sort((a, b) => {
-        return (a.name || "")
-          .toLowerCase()
-          .localeCompare((b.name || "").toLowerCase());
-      });
+    programs_filtered = compute_programs_filtered({
+      programs,
+      selected_areas_of_study,
+      selected_credential_types,
+    });
   }
 </script>
 

@@ -1,5 +1,11 @@
 <script>
+  import { writable } from "svelte/store";
+  import {
+    processUrlSearchParams,
+    setSearchParamsOnURL,
+  } from "./program-finder-utils";
   export let title = "Finder";
+  export let inOverlay = false;
   /* these constant initializers can be changed to [] to reduce bundle size since we're going to pull from the programs we're passed from the markup instead of using these hard coded ones */
   let credential_types = [
     "Bachelor",
@@ -40,6 +46,7 @@
   export let programs = [];
   export let selected_areas_of_study = [];
   export let selected_credential_types = [];
+  let pass = 0;
   if (programs && programs.length) {
     /* pull credential_types, areas_of_study and degree_types from the data passed into this component */
     /* for credential_types, we get two bits of data in each program: credential_types and credential_type_values. 
@@ -112,7 +119,6 @@
       }, {})
     );
   }
-
   function toggleCredentialType(t) {
     if (selected_credential_types.includes(t)) {
       selected_credential_types = selected_credential_types.filter(
@@ -122,9 +128,33 @@
       selected_credential_types = [...selected_credential_types, t];
     }
   }
+
+  let inPopState = false;
+  $: {
+    if (!inPopState && pass > 1) {
+      // MAYBE for some reason this'll run a couple of times before we really want it to.  Not sure why, but skipping the first two passes (either embedded in the overlay or on the full screen) is correct
+      const url = new URL(location);
+      setSearchParamsOnURL({
+        url,
+        selected_areas_of_study,
+        selected_credential_types,
+      });
+      inPopState = false;
+      history.pushState(null, "", url);
+    }
+    pass++;
+  }
 </script>
 
-<div class="finder">
+<svelte:window
+  on:popstate={(e) => {
+    inPopState = true;
+    ({ selected_areas_of_study, selected_credential_types } =
+      processUrlSearchParams(location));
+  }}
+/>
+
+<div class="finder" class:notInOverlay={!inOverlay}>
   <div class="orange-line" />
   <h1>{title}</h1>
   <form>
@@ -166,6 +196,7 @@
       {/each}
     </fieldset>
   </form>
+  <slot />
 </div>
 
 <style>
@@ -183,7 +214,7 @@
     padding: 1rem;
   }
   @media (min-width: 1024px) {
-    .finder {
+    .finder.notInOverlay {
       padding: 5.5rem;
     }
   }
