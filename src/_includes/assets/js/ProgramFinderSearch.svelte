@@ -157,7 +157,7 @@
 <div class="finder" class:notInOverlay={!inOverlay}>
   <div class="orange-line" />
   <h1>{title}</h1>
-  <form>
+  <form class="form_bluebg">
     <fieldset class="credential_types">
       <legend>1. Select program type</legend>
       <div class="scroller">
