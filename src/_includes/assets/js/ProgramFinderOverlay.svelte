@@ -18,6 +18,12 @@
 
   ({ selected_areas_of_study, selected_credential_types } =
     processUrlSearchParams(location));
+  //   console.log(
+  //     "stuff2",
+  //     location,
+  //     selected_areas_of_study,
+  //     selected_credential_types
+  //   );
 
   $: {
     programs_filtered = compute_programs_filtered({

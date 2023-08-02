@@ -67,3 +67,25 @@ export function processUrlSearchParams(location) {
       (url && url.searchParams && url.searchParams.getAll("pf-ct")) || [],
   };
 }
+
+export function locationMatchesSelectedItems(
+  location,
+  { selected_areas_of_study, selected_credential_types }
+) {
+  const url = new URL(location);
+  if (
+    url &&
+    url.searchParams &&
+    selected_areas_of_study &&
+    selected_credential_types
+  ) {
+    return (
+      url.searchParams.getAll("pf-aos").sort().toString() ==
+        selected_areas_of_study.sort().toString() &&
+      url.searchParams.getAll("pf-ct").sort().toString() ==
+        selected_credential_types.sort().toString()
+    );
+  } else {
+    return false;
+  }
+}

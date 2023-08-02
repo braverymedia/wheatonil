@@ -1,6 +1,7 @@
 <script>
   import { writable } from "svelte/store";
   import {
+    locationMatchesSelectedItems,
     processUrlSearchParams,
     setSearchParamsOnURL,
   } from "./program-finder-utils";
@@ -131,16 +132,37 @@
 
   let inPopState = false;
   $: {
-    if (!inPopState && pass > 1) {
-      // MAYBE for some reason this'll run a couple of times before we really want it to.  Not sure why, but skipping the first two passes (either embedded in the overlay or on the full screen) is correct
-      const url = new URL(location);
-      setSearchParamsOnURL({
-        url,
+    if (
+      !locationMatchesSelectedItems(location, {
         selected_areas_of_study,
         selected_credential_types,
-      });
-      inPopState = false;
-      history.pushState(null, "", url);
+      })
+    ) {
+      if (!inPopState) {
+        const url = new URL(location);
+        setSearchParamsOnURL({
+          url,
+          selected_areas_of_study,
+          selected_credential_types,
+        });
+        // console.log("pushState", pass, url.toString());
+        history.pushState(null, "", url);
+      } else {
+        // console.log(
+        //   "url not looking good, but was in a popstate so not pushingstate",
+        //   location,
+        //   pass
+        // );
+      }
+    } else {
+      //console.log("already looking good, not doing a pushState", pass);
+      if (inPopState) {
+        // console.log(
+        //   "since the URL looks good and we are in a popstate, removing that state",
+        //   inPopState
+        // );
+        inPopState = false;
+      }
     }
     pass++;
   }
@@ -151,6 +173,12 @@
     inPopState = true;
     ({ selected_areas_of_study, selected_credential_types } =
       processUrlSearchParams(location));
+    console.log(
+      "stuff3 popstate",
+      location,
+      selected_areas_of_study,
+      selected_credential_types
+    );
   }}
 />
 
