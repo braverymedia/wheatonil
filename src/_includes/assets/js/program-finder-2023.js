@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           props: {
             title: "Find your program",
             programs: programs,
-            fullScreenPath: "/programfinder/",
+            fullScreenPath: "/programs/",
           },
         });
       }
