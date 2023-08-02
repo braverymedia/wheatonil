@@ -44,13 +44,8 @@
             font-size: var(--type-size--medium);
             font-family: var(--wc-font-family--sans-serif);
             letter-spacing: normal;
-
-            .is-large {
-                font-size: var(--type-size--xl) !important;
-                font-family: var(--wc-font-family--serif) !important;
-                display: block;
-                line-height: 1.5;
-                letter-spacing: -.02em;
+            span {
+                font-family: var(--wc-font-family--serif);
             }
         }
 
@@ -97,10 +92,4 @@
             font-size: var(--type-size--medium);
         }
     }
-}
-
-.bm-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

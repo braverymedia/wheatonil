@@ -180,6 +180,20 @@ h4,
   line-height: 1.2;
 }
 
+.is-large {
+  font-size: var(--type-size--xl) !important;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+sup {
+  font-size: 0.5em;
+}
+
 body {
   line-height: var(--wc-line-height) !important;
   font-family: var(--wc-font-family--sans-serif) !important;
@@ -1299,7 +1313,8 @@ body.menu-open {
   left: 0;
   width: 100%;
   z-index: 25;
-  padding: var(--space--gap-medium) var(--space--gap-regular);
+  padding-block: var(--space--gap-medium);
+  padding-inline: var(--space--gap-regular);
 }
 .bm--jump-menu ul,
 .bm--jump-menu li {
