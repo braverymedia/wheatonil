@@ -6,36 +6,47 @@ section: home
 <main class="is-new-style">
     {% include "components/bm-content-ctas.njk" %}
     {% include "components/bm-gallery-staggered.njk" %}
-    <section class="bm--content-container has-bg--light-blue is-fullwidth text-centered align-center">
-            <header class="bm--section-title">
-                <h2>Rigorous, respected &amp; recognized</h2>
-                <p>A top-tier liberal arts education in a Christ-centered community</p>
-            </header>
-            <section data-layout="4up">
-                <div class="bm-stat">
-                    <h3><span class="is-large">99<sup>%</sup></span> Employed or in graduate school</h3>
-                    <p>Wheaton graduates are highly prepared for what comes next, whether it’s a dream job or an advanced degree.</p>
-                    <p><cite>(Class of 2022 data)</cite></p>
-                </div>
-                <div class="bm-stat">
-                    <h3><span class="is-large"><sup>#</sup>12</span> Top 20 best alumni networks</h3>
-                    <p>Our thriving international alumni network is active, engaged, and always willing to help other Wheaties succeed.</p>
-                    <p><cite>(Princeton Review, 2023)</cite></p>
-                </div>
-                <div class="bm-stat">
-                    <h3><span class="is-large"><sup>TOP</sup>100</span> National liberal arts colleges</h3>
-                    <p>Wheaton is consistently ranked among the nation’s best liberal arts colleges.</p>
-                    <p><cite>(U.S. News &amp; World Report, 2022)</cite></p>
-                </div>
-                <div class="bm-stat">
-                    <h3><span class="is-large"><sup>#</sup>12</span> Top 20 best alumni networks</h3>
-                    <p>Our thriving international alumni network is active, engaged, and always willing to help other Wheaties succeed.</p>
-                    <p><cite>(Princeton Review, 2023)</cite></p>
-                </div>
-            </section>
-        </article>
-        <div class="bm--buttons">
-            <a href="#" class="bm--cta style-outline has-arrow"> More rankings and distinctions</a>
+    {% include "sections/bm-section-stats.njk" %}
+    <section class="bm--content-container has-bg--cream is-fullwidth">
+        <div class="bm--content">
+            {% include "components/bm-section-header.njk" %}
+            <article class="bm--text-image" data-image="left" data-size="normal">
+                <figure>
+                    <img src="https://placehold.jp/384x587.png" />
+                </figure>
+                <article class="content">
+                    <header>
+                        <h2>The component title</h2>
+                        <p class="type--lg">Title subhead</p>
+                    </header>
+                    <div data-layout="2up-half" data-align="start">
+                        <div class="bm-stat">
+                            <h3><span class="is-large">99<sup>%</sup></span> Employed or in graduate school</h3>
+                            <p>Wheaton graduates are highly prepared for what comes next, whether it’s a dream job or an advanced degree.</p>
+                            <p><cite>(Class of 2022 data)</cite></p>
+                        </div>
+                        <div class="bm-stat">
+                            <h3><span class="is-large">99<sup>%</sup></span> Employed or in graduate school</h3>
+                            <p>Wheaton graduates are highly prepared for what comes next, whether it’s a dream job or an advanced degree.</p>
+                            <p><cite>(Class of 2022 data)</cite></p>
+                        </div>
+                    </div>
+                </article>
+            </article>
+            <article class="bm--text-image" data-image="right" data-size="normal">
+                <figure>
+                    <img src="https://placehold.jp/450x450.png" />
+                </figure>
+                <article class="content">
+                    <span class="subhead">Title subhead</span>
+                    <h2>The component title</h2>
+                </article>
+            </article>
+        </div>
+    </section>
+    <section class="bm--content-container">
+        <div class="bm--content">
+            {% include "components/bm-carousel-cards.njk" %}
         </div>
     </section>
     {{ content | safe }}

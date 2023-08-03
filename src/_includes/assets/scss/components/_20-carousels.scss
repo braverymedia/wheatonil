@@ -1,0 +1,73 @@
+.bm-carousel--items {
+	--gap: 16px;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+
+	&::after {
+		content: "";
+		display: block;
+		width: var(--offset);
+		height: 100%;
+		flex-shrink: 0;
+	}
+
+	> * {
+		width: var(--width);
+		min-width: var(--min-width);
+		max-width: var(--max-width);
+		scroll-snap-align: start;
+		flex-grow: 1;
+		flex-shrink: 0;
+	}
+
+	> * + * {
+		margin-left: var(--gap);
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.bm-carousel--controls {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: var(--space--gap-medium);
+	gap: var(--space--grid-unit);
+}
+
+.bm-carousel--control {
+	border: 1px solid var(--color--grey-300);
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+	width: calc(var(--space--grid-unit) * 7);
+	height: calc(var(--space--grid-unit) * 7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: border-color .2s ease-in-out;
+	> svg {
+		height: calc(var(--space--grid-unit) * 3);
+		width: calc(var(--space--grid-unit) * 3);
+	}
+
+	&[disabled] {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	&:hover:not([disabled]) {
+		border-color: var(--color--blue-700);
+	}
+}
+
+.is-carousel-side-panel {
+    display: none;
+    @media (min-width: 1024px) {
+        display: flex;
+    }
+}

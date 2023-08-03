@@ -4,21 +4,33 @@
     &--staggered {
         display: flex;
         gap: var(--space--gap-xxl);
+        padding-inline: 3vw;
         flex-wrap: nowrap;
-        overflow-x: scroll;
+        overflow-x: auto;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
         scrollbar-width: 0;
-        flex: 0 0 calc(40% - var(--space--gap-xl) * 0.5);
         > figure {
-            height: 508px;
             aspect-ratio: 2 / 3;
             scroll-margin-inline-start: 1rem;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            height: 60vh;
             &:nth-child(even) {
                 margin-block-start: 3vw;
             }
-            &:nth-child(3) {
+
+        }
+        @media ( min-width: 1024px ) {
+            flex: 0 0 calc(40% - var(--space--gap-xl) * 0.5);
+            padding-inline: none;
+            > figure {
+                height: 508px;
+                width: auto;
                 scroll-snap-align: center;
+                &:nth-child(3) {
+                    scroll-snap-align: center;
+                }
             }
         }
     }
