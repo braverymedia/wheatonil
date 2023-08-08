@@ -70,12 +70,19 @@ select {
 
 input[type="checkbox"]:checked {
     background-color: var(--color--white);
-    border-color: var(--color--white);
+    border-color: var(--color--grey-600);
+    form.form_bluebg & {
+        border-color: var(--color--white);
+    }
 }
 
 input[type="checkbox"] {
-    --background-color: var(--color--blue-600);
-    --border-color: var(--color--white);
+    --background-color: var(--color--white);
+    --border-color: var(--color--grey-600);
+    form.form_bluebg & {
+        --background-color: var(--color--blue-600);
+        --border-color: var(--color--white);
+    }
     --check-color: var(--color--blue-600);
     -webkit-appearance: none;
     appearance: none;
@@ -100,7 +107,7 @@ input[type="checkbox"]:checked::before {
 
 input[type="checkbox"]::before {
     --check: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 14 15%27%3E%3Cpath fill=%27%23FFC200%27 fill-rule=%27evenodd%27 d=%27M10.862 4.646a.523.523 0 0 1 0 .708l-4.706 6a.451.451 0 0 1-.665 0l-2.353-2.5a.522.522 0 0 1 0-.708.451.451 0 0 1 .665 0l2.02 2.147 4.374-5.647a.451.451 0 0 1 .665 0Z%27 clip-rule=%27evenodd%27/%3E%3C/svg%3E");
-    background-color: var(--color--blue-600);
+    background-color: var(--color--blue-dark);
     content: "";
     height: 1rem;
     left: 0;
