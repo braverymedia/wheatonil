@@ -40,3 +40,15 @@ h4,
     font-size: var(--type-size--tiny);
     line-height: 1.2;
 }
+
+.is-large {
+    font-size: var(--type-size--xl) !important;
+    line-height: 1.5;
+    letter-spacing: -.02em;
+}
+.text-centered {
+    text-align: center;
+}
+sup {
+    font-size: 0.5em;
+}

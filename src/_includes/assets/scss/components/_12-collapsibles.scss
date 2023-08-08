@@ -1,7 +1,7 @@
 .bm {
     &--collapsible {
         padding: var(--space--gap-xl);
-        margin-bottom: var(--space--gap-medium);
+        margin-block-end: var(--space--gap-medium);
         transition: all .2s ease-in-out;
         &:hover,
         &.visible,
@@ -10,7 +10,7 @@
             border-radius: var(--corner--radius);
         }
         h3 {
-            margin-bottom: 0;
+            margin-block-end: 0;
             font-family: var(--wc-font-family--sans-serif);
         }
         button {
@@ -24,9 +24,9 @@
             font-size: var(--type-size--text-xl);
             font-weight: 500;
             gap: 24px;
-            padding-top: 0;
-            padding-left: 0;
-            padding-right: 0;
+            padding-block-start: 0;
+            padding-inline-start: 0;
+            padding-inline-end: 0;
             box-shadow: none;
             cursor: pointer;
             &:after {
@@ -50,10 +50,10 @@
         }
         div {
             max-width: 650px;
-            padding-top: inherit;
+            padding-block-start: inherit;
         }
         p:last-of-type {
-            margin-bottom: 0;
+            margin-block-end: 0;
         }
     }
 }

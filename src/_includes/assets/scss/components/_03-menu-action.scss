@@ -8,7 +8,7 @@
             padding: 0;
         }
         li {
-            margin-bottom: var(--space--gap-regular);
+            margin-block-end: var(--space--gap-regular);
         }
         @media( min-width: 1024px ) {
             display: block;

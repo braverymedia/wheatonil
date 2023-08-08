@@ -36,8 +36,8 @@ button.form_button_submit,
 .style-ghost {
     border: 0;
     box-shadow: none !important;
-    padding-left: var(--space--grid-unit);
-    padding-right: var(--space--grid-unit);
+    padding-inline-start: var(--space--grid-unit);
+    padding-inline-end: var(--space--grid-unit);
     &.invert {
         background-color: transparent;
         color: inherit;

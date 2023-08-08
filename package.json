@@ -4,7 +4,6 @@
 	"description": "Website assets for Wheaton College in Illinois.",
 	"main": "index.js",
 	"scripts": {
-		"sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
 		"postcss": "postcss _site/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
 		"build:sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
 		"build-compressed:sass": "sass --style=compressed src/_includes/assets/scss:src/_includes/assets/css",

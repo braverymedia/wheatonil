@@ -1,26 +1,26 @@
 .bm {
     &--text-image {
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
         &[class*="has-bg--"] {
             padding: var(--space--gap-large);
         }
         figure {
-            margin-top: var(--space--gap-xxl);
-            margin-bottom: var(--space--gap-xxl);
+            margin-block-start: var(--space--gap-xxl);
+            margin-block-end: var(--space--gap-xxl);
             position: relative;
         }
         article {
-            padding-left: 3vw;
-            padding-right: 3vw;
+            padding-inline-start: 3vw;
+            padding-inline-end: 3vw;
         }
         @media (min-width: 1024px) {
             display: flex;
             align-items: center;
             justify-content: flex-start;
             width: 100%;
-            padding-left: 0;
-            padding-right: 0;
+            padding-inline-start: 0;
+            padding-inline-end: 0;
             margin: var(--space--gap-3xl) auto;
             figure {
                 height: 50vw;
@@ -58,7 +58,7 @@
                 article {
                     flex: 1 auto;
                     width: auto;
-                    padding-right: 0;
+                    padding-inline-end: 0;
                 }
                 &[class*="has-bg--"] {
                     border-radius: var(--corner--radius);

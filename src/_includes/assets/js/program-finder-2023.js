@@ -1,6 +1,6 @@
+
 import ProgramFinderFullScreen from "./ProgramFinderFullScreen.svelte";
 import ProgramFinderOverlay from "./ProgramFinderOverlay.svelte";
-
 window.addEventListener("DOMContentLoaded", (event) => {
   /* here's where we get the data elements written to the DOM by the T4 nav system */
   const data_elements = document.getElementsByClassName("program-data-2023");

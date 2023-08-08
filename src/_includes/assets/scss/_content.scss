@@ -1,8 +1,8 @@
 .bm {
     &--content {
         > section:not(:first-child) {
-            margin-top: calc(var(--space--grid-unit) * 6);
-            padding-top: var(--space--gap-xl);
+            margin-block-start: calc(var(--space--grid-unit) * 6);
+            padding-block-start: var(--space--gap-xl);
             position: relative;
         }
         p, ul, ol, li, address {
@@ -33,16 +33,16 @@
         color: var(--color--grey-900);
     }
     hr {
-        margin-bottom: var(--space--gap-large);
+        margin-block-end: var(--space--gap-large);
         &:not(:first-child) {
-            margin-top: var(--space--gap-large);
+            margin-block-start: var(--space--gap-large);
         }
     }
     @media ( min-width: 1024px ){
         hr {
-           margin-bottom: var(--space--gap-3xl);
+           margin-block-end: var(--space--gap-3xl);
             &:not(:first-child) {
-                margin-top: var(--space--gap-3xl);
+                margin-block-start: var(--space--gap-3xl);
             }
         }
     }
@@ -50,14 +50,14 @@
 
 .has-text-2col {
     & + * {
-        margin-top: var(--space--gap-xl);
+        margin-block-start: var(--space--gap-xl);
     }
     @media ( min-width: 1024px ){
         columns: 2;
         column-gap: var(--space--gap-3xl);
         max-width: 1024px;
         & + * {
-            margin-top: var(--space--gap-3xl);
+            margin-block-start: var(--space--gap-3xl);
         }
     }
 }

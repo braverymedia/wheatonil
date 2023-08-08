@@ -2,9 +2,53 @@
 layout: layouts/base.njk
 section: home
 ---
-{% include "components/bm-home-hero.njk" %}
 {% include "components/bm-program-finder-2023-data.njk" %}
 <main class="is-new-style">
+    {% include "components/bm-home-hero.njk" %}
     {% include "components/bm-content-ctas.njk" %}
+    {% include "components/bm-gallery-staggered.njk" %}
+    {% include "sections/bm-section-stats.njk" %}
+    <section class="bm--content-container has-bg--cream is-fullwidth">
+        <div class="bm--content">
+            {% include "components/bm-section-header.njk" %}
+            <article class="bm--text-image" data-image="left" data-size="normal">
+                <figure>
+                    <img src="https://placehold.jp/384x587.png" />
+                </figure>
+                <article class="content">
+                    <header>
+                        <h2>The component title</h2>
+                        <p class="type--lg">Title subhead</p>
+                    </header>
+                    <div data-layout="2up-half" data-align="start">
+                        <div class="bm-stat">
+                            <h3><span class="is-large">99<sup>%</sup></span> Employed or in graduate school</h3>
+                            <p>Wheaton graduates are highly prepared for what comes next, whether it’s a dream job or an advanced degree.</p>
+                            <p><cite>(Class of 2022 data)</cite></p>
+                        </div>
+                        <div class="bm-stat">
+                            <h3><span class="is-large">99<sup>%</sup></span> Employed or in graduate school</h3>
+                            <p>Wheaton graduates are highly prepared for what comes next, whether it’s a dream job or an advanced degree.</p>
+                            <p><cite>(Class of 2022 data)</cite></p>
+                        </div>
+                    </div>
+                </article>
+            </article>
+            <article class="bm--text-image" data-image="right" data-size="normal">
+                <figure>
+                    <img src="https://placehold.jp/450x450.png" />
+                </figure>
+                <article class="content">
+                    <span class="subhead">Title subhead</span>
+                    <h2>The component title</h2>
+                </article>
+            </article>
+        </div>
+    </section>
+    <section class="bm--content-container">
+        <div class="bm--content">
+            {% include "components/bm-carousel-cards.njk" %}
+        </div>
+    </section>
     {{ content | safe }}
 </main>

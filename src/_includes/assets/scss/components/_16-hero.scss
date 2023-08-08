@@ -1,26 +1,25 @@
 .bm {
     &-home--hero {
         .bm-mobile {
-            margin-left: calc(var(--space--gap-medium) * -1);
+            margin-inline-start: calc(var(--space--gap-medium) * -1);
+            margin-inline-end: calc(var(--space--gap-medium) * -1);
             width: 100vw;
             overflow: hidden;
             flex: 1 auto;
-            img {
-                height: 100%;
-                object-fit: cover;
-                width: 100%;
-            }
+            border-radius: 0;
+            align-items: stretch;
         }
         .home--greeting {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            padding: 0 var(--space--gap-medium) var(--space--gap-medium);
+            padding-inline: var(--space--gap-medium);
+            padding-block-end: var(--space--gap-xxl);
             gap: var(--space--gap-large);
             isolation: isolate;
             color: var(--color--blue-600);
-            height: calc(100vh - 72px);
+            block-size: calc(100dvh - 72px);
             h2 {
                 color: inherit;
                 max-width: 475px;

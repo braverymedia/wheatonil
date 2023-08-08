@@ -52,6 +52,10 @@ body {
   --bm--primary-font: var(--font--serif);
 }
 
+[data-center=wade] {
+  --center-color: #32553B;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -234,6 +238,20 @@ h4,
   line-height: 1.2;
 }
 
+.is-large {
+  font-size: var(--type-size--xl) !important;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+sup {
+  font-size: 0.5em;
+}
+
 body {
   line-height: var(--wc-line-height) !important;
   font-family: var(--wc-font-family--sans-serif) !important;
@@ -247,7 +265,7 @@ h4,
 h5,
 h6 {
   font-family: var(--wc-font-family--display);
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -316,12 +334,12 @@ a.has-arrow:hover:after, .has-arrow a:hover:after {
 
 ul,
 ol {
-  padding-left: 2.5rem;
+  padding-inline-start: 2.5rem;
   font-size: var(--wc-font-size--text-regular);
 }
 ul.bm--bullets-check,
 ol.bm--bullets-check {
-  padding-left: 20px;
+  padding-inline-start: 20px;
 }
 ul.bm--bullets-check li,
 ol.bm--bullets-check li {
@@ -332,13 +350,13 @@ ol.bm--bullets-check li {
 }
 
 li {
-  margin-bottom: 0.75rem !important;
+  margin-block-end: 0.75rem !important;
   font-size: var(--wc-font-size--text-regular) !important;
   font-weight: normal !important;
 }
 
 p {
-  margin-bottom: 2rem;
+  margin-block-end: 2rem;
   font-size: var(--wc-font-size--text-lg);
 }
 
@@ -348,7 +366,7 @@ p {
   letter-spacing: initial;
   display: block;
   color: var(--color--grey-600);
-  margin-bottom: var(--space--gap-medium);
+  margin-block-end: var(--space--gap-medium);
 }
 
 /*# sourceMappingURL=critical.css.map */
