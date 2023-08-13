@@ -3,7 +3,7 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import path from "path";
 
-const ASSETS_DIR = "src/_includes/assets";
+const ASSETS_DIR = "src//assets";
 const DIST_DIR = "_site";
 
 const JS_SRC = path.join(ASSETS_DIR, "js");

@@ -1,5 +1,4 @@
 @import "typesetting", "buttons", "forms", "tables", "icons", "nav", "footer";
-
 @import "components/01-breadcrumb",
         "components/02-program-header",
         "components/03-menu-action",
@@ -20,5 +19,4 @@
         "components/18-galleries",
         "components/19-stats",
         "components/20-carousels";
-
-@import "layouts", "content";
+        @import "layouts", "content";

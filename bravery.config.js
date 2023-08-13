@@ -1,7 +1,7 @@
 module.exports = {
   dir: {
     src: 'src/_includes',
-    assets: 'src/_includes/assets',
+    assets: 'src/assets',
     dist: '_site',
   }
 };

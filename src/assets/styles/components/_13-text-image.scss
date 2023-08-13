@@ -74,6 +74,9 @@
                     order: 2;
                 }
             }
+            & + .bm--text-image:not([data-size="small"]) {
+                margin-block-start: calc(var(--space--grid-unit) * 16);
+            }
         }
     }
 }

@@ -4,10 +4,6 @@
 	"description": "Website assets for Wheaton College in Illinois.",
 	"main": "index.js",
 	"scripts": {
-		"postcss": "postcss _site/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
-		"build:sass": "sass src/_includes/assets/scss:src/_includes/assets/css",
-		"build-compressed:sass": "sass --style=compressed src/_includes/assets/scss:src/_includes/assets/css",
-		"watch:sass": "sass --watch src/_includes/assets/scss:src/_includes/assets/css",
 		"build:js": "rollup -c",
 		"watch:js": "rollup -c --watch",
 		"build:eleventy": "ELEVENTY_ENV=production eleventy",

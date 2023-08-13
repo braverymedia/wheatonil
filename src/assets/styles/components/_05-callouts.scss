@@ -3,7 +3,8 @@
     border-radius: var(--corner--radius);
     box-shadow: var(--elevation--large);
     color: var(--color--white);
-    padding: calc(var(--space--grid-unit) * 4) var(--space--gap-medium);
+    padding-block: calc(var(--space--grid-unit) * 4) !important;
+    padding-inline: var(--space--gap-xl);
     max-width: 1224px;
 
     * {
@@ -13,10 +14,8 @@
     @media (min-width: 1024px) {
         display: flex;
         gap: var(--space--gap-xl);
-        padding-inline-start: var(--space--gap-xl);
-        padding-inline-end: var(--space--gap-xl);
-        margin-inline-start: auto;
-        margin-inline-end: auto;
+        padding-inline: var(--space--gap-xxl);
+        margin-inline: auto;
     }
 }
 
@@ -27,12 +26,15 @@
 
         >h2 {
             color: var(--color--blue-600);
+            margin-bottom: var(--space--gap-xl);
         }
     }
 
     &--stat-callout {
         text-align: inherit;
-
+        gap: var(--space--gap-3xl);
+        display: flex;
+        flex-direction: column;
         .bm--icon {
             height: 60px;
             width: 60px !important;
@@ -44,6 +46,7 @@
             font-size: var(--type-size--medium);
             font-family: var(--wc-font-family--sans-serif);
             letter-spacing: normal;
+
             span {
                 font-family: var(--wc-font-family--serif);
             }
@@ -51,7 +54,7 @@
 
         @media (min-width: 1024px) {
             flex-basis: 33%;
-
+            flex-direction: row;
             .bm-stat {
                 flex: 0 33%;
             }
@@ -76,8 +79,7 @@
     @media (min-width: 1024px) {
         gap: var(--space--gap-3xl);
         justify-content: space-between;
-        padding-inline-start: var(--space--gap-3xl);
-        padding-inline-end: var(--space--gap-3xl);
+        padding-inline: var(--space--gap-3xl);
 
         header {
             flex: 1 auto;

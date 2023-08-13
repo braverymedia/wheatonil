@@ -3,7 +3,7 @@ main.is-new-style {
     & > * + * {
         padding-block: var(--space--gap-xl);
     }
-    & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint) {
+    & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint):not(header) {
         padding-block-start: calc(var(--space--grid-unit) * 8);
     }
     @media (min-width: 1024px) {
@@ -25,10 +25,16 @@ main.is-new-style {
             margin-block-start: calc( var(--space--grid-unit) * -6);
         }
         & > * + * {
-            padding-block: var(--space--gap-xl);
+            padding-block: calc(var(--space--grid-unit) * 18);
         }
         & > *:first-child:not(.bm-home--hero) {
             padding-block-start: calc(var(--space--grid-unit) * 23);
+        }
+        & > .has-bg--white + .has-bg--white,
+        & > .has-bg--cream + .has-bg--cream,
+        & > .has-bg--light-blue + .has-bg--light-blue,
+        & > .has-bg--blue + .has-bg--blue {
+            padding-block-start: 0;
         }
     }
 }
@@ -231,7 +237,6 @@ main > *[data-layout="1up"]{
 
 .is-layout-flex {
     display: flex;
-    gap: var();
     &.is-vertical {
         align-items: flex-start;
         flex-direction: column;

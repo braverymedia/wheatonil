@@ -1,7 +1,6 @@
 .bm-stat {
     display: flex;
     flex-direction: column;
-    color: var(--color--grey-900);
     h3 {
         font-size: var(--type-size--medium);
         span {
@@ -28,5 +27,8 @@
     }
     header > p {
         font-size: var(--type-size--large);
+    }
+    .bm-stat {
+        color: var(--color--grey-900);
     }
 }
