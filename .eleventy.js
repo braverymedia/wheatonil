@@ -1,32 +1,42 @@
-const { PurgeCSS } = require("purgecss");
+const sass = require("sass");
+const path = require("node:path");
+const browserslist = require("browserslist");
+const {
+	bundle,
+	browserslistToTargets,
+	composeVisitors,
+} = require("lightningcss");
 
 module.exports = function (eleventyConfig) {
-	/**
-	 * Remove any CSS not used on the page and inline the remaining CSS in the
-	 * <head>.
-	 *
-	 * @see {@link https://github.com/FullHuman/purgecss}
-	 */
-	eleventyConfig.addTransform(
-		"purge-and-inline-css",
-		async function (content) {
-			const purgeCSSResults = await new PurgeCSS().purge({
-				content: [{ raw: content }],
-				css: ["src/_includes/assets/css/wheaton.css"],
-				keyframes: true,
+	eleventyConfig.addTemplateFormats("scss");
+
+	eleventyConfig.addExtension("scss", {
+		outputFileExtension: "css", // optional, default: "html"
+
+		// can be an async function
+		compile: async function (inputContent, inputPath) {
+			// Skip files like _fileName.scss
+			let parsed = path.parse(inputPath);
+			if (parsed.name.startsWith("_")) {
+				return;
+			}
+
+			// Run file content through Sass
+			let result = sass.compileString(inputContent, {
+				loadPaths: [parsed.dir || "."],
+				sourceMap: false, // or true, your choice!
 			});
 
-			return content.replace(
-				"<!-- INLINE CSS-->",
-				"<style>" + purgeCSSResults[0].css + "</style>"
-			);
-		}
-	);
+			// Allow included files from @use or @import to
+			// trigger rebuilds when using --incremental
+			this.addDependencies(inputPath, result.loadedUrls);
 
-	eleventyConfig.addWatchTarget("src/_includes/assets/scss");
-	eleventyConfig.addPassthroughCopy({
-		"src/_includes/assets/css": "assets/css",
+			return async () => {
+				return result.css;
+			};
+		},
 	});
+
 	eleventyConfig.addPassthroughCopy({
 		"src/_includes/assets/js": "assets/js",
 	});
@@ -47,7 +57,7 @@ module.exports = function (eleventyConfig) {
 		// Accepts an Array of file paths or globs (passed to `chokidar.watch`).
 		// Works great with a separate bundler writing files to your output folder.
 		// e.g. `watch: ["_site/**/*.css"]`
-		watch: [],
+		watch: ["_site/**/*.css"],
 
 		// Show local network IP addresses for device testing
 		showAllHosts: false,
