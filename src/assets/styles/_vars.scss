@@ -5,7 +5,7 @@ body {
     --wc-font-family--display: var(--wc-font-family--serif);
 
     // Typesetting
-    --type-size--super: clamp(2.75rem, calc(2.30rem + 7.26vw), 6.38rem);
+    --type-size--super: clamp(2.75rem, calc(2.30rem + 5.26vw), 5.85rem);
     --type-size--xxl: clamp(2.75rem, calc(1rem + 7.26vw), 4.5rem);
     --type-size--xl-fluid: clamp(2.55rem, calc(-0.25rem + 4.39vw), 4.50rem);
     --type-size--xl: 2.75rem;
@@ -21,12 +21,13 @@ body {
 
     // Colors
     --color--blue-900: #0B1F3A;
-    --color--blue-800: #0F2A50;
+    --color--blue-800: #0A2853;
     --color--blue-600: #114F8F;
     --color--blue-dark: #133666;
     --color--blue-700: #133666;
     --color--blue-300: #A8D7FF;
     --color--blue-250: #ACC9EA;
+    --color--cyan-400: #6E9BAE;
     --color--cyan-500: #1C9AD6;
     --color--cyan-25: #F2FBFF;
     --color--white: #fff;

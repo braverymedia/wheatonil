@@ -13,7 +13,8 @@
             margin-block-end: var(--space--gap-3xl);
         }
     }
-    &--video-container {
+    &--video-container,
+    [data-media="video"] {
         width: 100%;
         max-width: 1200px;
         height: auto;

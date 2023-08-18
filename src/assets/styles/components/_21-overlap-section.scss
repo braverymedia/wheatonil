@@ -1,0 +1,50 @@
+.bm--overlap {
+    & + * {
+        padding-block-start: calc(var(--space--grid-unit) * 20) !important;
+    }
+    article > *{
+        max-width: 500px !important;
+    }
+    aside {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space--gap-3xl);
+    }
+    nav ul {
+        list-style: none;
+        text-align: right;
+        a:after {
+            background-color: var(--color--white);
+        }
+    }
+    figure {
+        margin-bottom: calc(var(--space--grid-unit) * -10);
+    }
+    [data-media="image"] {
+        display: flex;
+        gap: var(--space--gap-xl);
+    }
+    h2 {
+        position: relative;
+        &::before {
+            content: "";
+            display: block;
+            width: calc(var(--space--grid-unit) * 9);
+            height: 3px;
+            background-color: var(--cyan-400, #6E9BAE);
+            margin-block-end: 48px;
+        }
+    }
+    @media (min-width: 1024px) {
+        h2:before {
+            transform: translateY(-48px);
+            margin-block-end: unset;
+        }
+        aside {
+            gap: calc(var(--space--grid-unit) * 15);
+        }
+        figure {
+            margin-bottom: calc(var(--space--grid-unit) * -25);
+        }
+    }
+}

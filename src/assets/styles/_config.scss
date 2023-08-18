@@ -112,6 +112,12 @@ hr {
 .has-bg--blue {
     background-color: var(--color--blue-600);
     color: var(--color--white);
+    h1, h2, h3 {
+        color: inherit;
+    }
+    a {
+        color: inherit;
+    }
 }
 
 .has-bg--blue-gradient {
