@@ -1,10 +1,11 @@
 .bm {
     &--program-header,
-    &--page-title {
+    &--page-title,
+    &--page-header {
         h1 {
             color: var(--color--blue-dark);
             grid-column: 1;
-            font-size: var(--type-size--super);
+            font-size: var(--type-size--xxl);
         }
         .bm--actions {
             grid-column: 2;

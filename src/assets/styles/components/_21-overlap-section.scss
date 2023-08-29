@@ -17,8 +17,11 @@
             background-color: var(--color--white);
         }
     }
-    figure {
-        margin-bottom: calc(var(--space--grid-unit) * -10);
+    > figure {
+        margin-block-end: calc(var(--space--grid-unit) * -10);
+        > * {
+            flex: 0 1 auto;
+        }
     }
     [data-media="image"] {
         display: flex;
@@ -31,7 +34,7 @@
             display: block;
             width: calc(var(--space--grid-unit) * 9);
             height: 3px;
-            background-color: var(--cyan-400, #6E9BAE);
+            background-color: var(--color--cyan-400, #6E9BAE);
             margin-block-end: 48px;
         }
     }

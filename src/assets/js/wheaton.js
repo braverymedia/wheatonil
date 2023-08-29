@@ -1,4 +1,5 @@
 let carousels = {};
+let marquees = {};
 
 const initResizing = () => {
 	const resizeCarousels = () => {
@@ -168,6 +169,41 @@ const initCarousel = (carousel) => {
 		}
 	});
 };
+
+const initMarquee = (marquee) => {
+	const items = marquee.element.querySelectorAll("picture");
+	let images = [...items];
+	const half = Math.ceil(images.length / 2);
+	const firstHalf = images.slice(0, half);
+	const secondHalf = images.slice(half);
+
+	// Prep Group 1
+	const column = marquee.element.querySelector(".bm-gallery-col");
+	let group = document.createElement("div");
+	group.className = "bm-marquee--group";
+
+	const group1 = group.cloneNode(true);
+	group1.append(...firstHalf);
+	const group1Copy = group1.cloneNode(true);
+	const group2 = group.cloneNode(true);
+	group2.append(...secondHalf);
+	const group2Copy = group2.cloneNode(true);
+
+	group1Copy.setAttribute('aria-hidden', true);
+	group2Copy.setAttribute("aria-hidden", true);
+
+	let reversed = document.createElement('section');
+	reversed.className = "bm-gallery-col bm-marquee";
+	reversed.setAttribute('data-direction', 'reverse');
+
+
+	// Build it
+	column.innerHTML = "";
+	column.append(group1, group1Copy);
+	reversed.append(group2, group2Copy);
+	marquee.element.append(reversed);
+
+};
 window.addEventListener("DOMContentLoaded", (event) => {
 	const accordionContainer = document.querySelector("[data-accordion]");
 	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
@@ -265,6 +301,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	for (let i = 0; i < collapsibles.length; i++) {
 		let collapsible = collapsibles[i];
 		collapsible.addEventListener("click", accordionClick);
+	}
+	// Marquee
+	marquees = [...document.querySelectorAll(".bm-gallery--marquee")].map(
+		(element, index) => ({
+			id: index + 1,
+			element,
+		})
+	);
+
+	for ( const marquee of marquees ) {
+		initMarquee(marquee);
 	}
 
 	// Carousel

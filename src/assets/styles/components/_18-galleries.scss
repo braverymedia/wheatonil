@@ -13,7 +13,7 @@
         scroll-snap-stop: always;
         scrollbar-width: 0;
         > * {
-            aspect-ratio: 2 / 3;
+            // aspect-ratio: 2 / 3;
             scroll-snap-align: center;
             height: 60vh;
             &:nth-child(even) {
@@ -22,13 +22,33 @@
 
         }
         @media ( min-width: 1024px ) {
-            flex: 0 0 calc(40% - var(--space--gap-xl) * 0.5);
+
             scroll-snap-align: center;
             > * {
+                flex: 0 0 auto;
                 height: 508px;
                 width: auto;
             }
         }
     }
 
+}
+[class*="bm-gallery"] {
+    figure {
+        position: relative;
+        & > img + figcaption {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            align-items: flex-end;
+            flex-shrink: 0;
+            color: var(--color--white);
+            height: 25% !important;
+            padding-block-end: var(--space--gap-large);
+            padding-inline: var(--space--gap-large);
+            font-size: var(--type-size--xsmall);
+            font-family: var(--wc-font-family--sans-serif);
+        }
+    }
 }

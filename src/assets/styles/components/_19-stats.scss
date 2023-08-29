@@ -9,6 +9,9 @@
             display: block;
         }
     }
+    p {
+        margin-block-start: 0 !important;
+    }
     cite {
         font-style: normal;
         font-size: var(--type-size--xsmall);
