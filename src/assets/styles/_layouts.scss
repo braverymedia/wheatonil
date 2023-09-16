@@ -1,12 +1,14 @@
 main.is-new-style {
     padding: 0 4vw calc(var(--space--grid-unit) * 12);
-    & > * + *:not(.bm--section-nav):not(.accordion-single):not(span):not([data-size="small"]) {
+    & > * + *:not(.bm--section-nav):not(.accordion-single):not(span):not([data-size="small"]):not(.bm--cover-image) {
         padding-block: clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18));
     }
-    & > .bm--section-nav + .bm--content {
+    & > .bm--section-nav + .bm--content,
+    & > .bm--content + *.has-bg--white {
         padding-block-end: 0;
     }
     & > *.has-bg--white + *.has-bg--white,
+    & > *.bm--content + *.has-bg--white,
     & > *.has-bg--cream + *.has-bg--cream,
     & > *.has-bg--light-blue + *.has-bg--light-blue,
     & > *.has-bg--blue + *.has-bg--blue {
@@ -28,39 +30,38 @@ main.is-new-style {
 }
 
 .bm-margins {
-    width: 100%;
+    width: 100vw;
     padding: var(--space--gap-medium);
-    @media ( min-width: 1024px ) {
-        padding: 0;
-        // max-width: 1230px;
+    margin-inline: -4vw;
+    @media (min-width: 1024px) {
+        margin-inline: -7vw;
+    }
+    @media ( min-width: 1300px ) {
+        padding-inline: var(--max-1280);
+        margin-inline: calc(var(--max-1280) * -1);
     }
 }
 .is-fullwidth {
     width: 100vw;
-    margin-inline-start: -4vw;
-    margin-inline-end: -4vw;
+    margin-inline: -4vw;
     > .bm--content {
         padding-inline: 4vw;
     }
     @media (min-width: 1024px) {
-        margin-inline-start: -7vw;
-        margin-inline-end: -7vw;
+        margin-inline: -7vw;
     }
     @media ( min-width: 1300px ) {
-        margin-inline-start: var(--full-bleed);
-        margin-inline-end: var(--full-bleed);
+        margin-inline: var(--full-bleed);
     }
 }
 .is-widewidth {
     @media (min-width: 1024px) {
-        margin-inline-start: -3.5vw;
-        margin-inline-end: -3.5vw;
+        margin-inline: -3.5vw;
     }
     @media ( min-width: 1500px ) {
         max-width: 1480px;
         width: 100vw;
-        margin-inline-start: var(--max-1480);
-        margin-inline-end: var(--max-1480);
+        margin-inline: var(--max-1480);
     }
 
 }
@@ -226,12 +227,18 @@ main > *[data-layout="1up"]{
 
 .is-layout-flex {
     display: flex;
-    &.is-vertical {
+    &.is-vertical,
+    &.is-layout--stacked {
         align-items: flex-start;
         flex-direction: column;
     }
     &.is-equal {
         align-items: stretch !important;
+    }
+    &.is-layout--row {
+        flex-direction: row;
+        flex-basis: 50%;
+        align-items: flex-end;
     }
 }
 

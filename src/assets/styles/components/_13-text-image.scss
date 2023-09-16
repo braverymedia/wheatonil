@@ -5,7 +5,8 @@
         &[class*="has-bg--"] {
             padding: var(--space--gap-large);
         }
-        figure {
+        > figure,
+        > picture {
             margin-block-start: var(--space--gap-xxl);
             margin-block-end: var(--space--gap-xxl);
             position: relative;
@@ -22,7 +23,8 @@
             padding-inline-start: 0;
             padding-inline-end: 0;
             margin: var(--space--gap-3xl) auto;
-            figure {
+            > figure,
+            > picture {
                 height: 50vw;
                 max-height: 1000px;
                 flex: 1 50%;
@@ -49,7 +51,8 @@
             }
             &[data-size="small"] {
                 max-width: 950px;
-                figure {
+                > figure,
+                > picture {
                     aspect-ratio: 1 / 1;
                     height: 250px;
                     width: 250px;
@@ -70,7 +73,8 @@
                     justify-content: flex-end;
                     padding: 0 calc(var(--space--grid-unit) * 8) 0 7vw;
                 }
-                figure {
+                > figure,
+                > picture {
                     order: 2;
                 }
             }

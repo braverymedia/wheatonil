@@ -4,6 +4,13 @@ label,
     color: var(--color--grey-700);
     font-weight: 500;
 }
+.has-bg--blue,
+.has-bg--blue-gradient {
+ label,
+ .form_label {
+    color: var(--color--white);
+ }
+}
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -33,6 +40,15 @@ select {
     width: 100%;
     &:hover {
         background-color: var(--color--blue-600);
+    }
+    .has-bg--blue &,
+    .has-bg--blue-gradient & {
+        background-color: var(--color--white);
+        color: var(--color--blue-600);
+        &:hover {
+            background-color: var(--color--orange-400);
+            color: var(--color--white);
+        }
     }
 }
 .form_responses {

@@ -110,6 +110,7 @@ hr {
 }
 
 .has-bg--blue {
+    --color--accent: var(--color--cyan-400, #6E9BAE);
     background-color: var(--color--blue-600);
     color: var(--color--white);
     h1, h2, h3 {
@@ -133,4 +134,16 @@ hr {
     background-repeat: no-repeat;
     background-size: 80% 80%;
     color: var(--color--white);
+}
+
+.is-fancy {
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        width: calc(var(--space--grid-unit) * 9);
+        height: 3px;
+        background-color: var(--color--accent, #A84C11);
+        margin-block-end: 48px;
+    }
 }
