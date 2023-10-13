@@ -7,7 +7,6 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addTemplateFormats("scss");
 	eleventyConfig.addExtension("scss", {
 		outputFileExtension: "css",
-		outputFileExtension: "css",
 		compile: async function (inputContent, inputPath) {
 			// Skip files like _fileName.scss
 			let parsed = path.parse(inputPath);

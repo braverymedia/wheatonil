@@ -122,8 +122,15 @@ hr {
 }
 
 .has-bg--blue-gradient {
+    --color--accent: var(--color--cyan-400, #6E9BAE);
     background: var(--gradient--blue-primary);
     color: var(--color--white);
+    h1, h2, h3 {
+        color: inherit !important;
+    }
+    a {
+        color: inherit !important;
+    }
 }
 .has-bg--blue-gradient-light {
     background: var(--gradient--blue-light);

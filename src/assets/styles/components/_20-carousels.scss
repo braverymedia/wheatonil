@@ -176,5 +176,15 @@
 .bm--sticky-split {
 	.bm--card {
 		gap: var(--space--gap-xl);
+		align-items: flex-start !important;
+		margin-block: var(--space--gap-3xl);
+		picture {
+			height: auto;
+			width: auto;
+			flex: 1 0 40%;
+		}
+		.card--content {
+			margin-block-start: var(--space--gap-medium) !important;
+		}
 	}
 }
