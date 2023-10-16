@@ -89,3 +89,21 @@ export function locationMatchesSelectedItems(
     return false;
   }
 }
+
+export function isShowableProgram(p) {
+  // require all this data to be present before a Program, or the credential types, degrees or areas of study contained therein, are revealed in the Program Finder
+  const rtn =
+    p &&
+    !!p.name &&
+    !!p.credential_types &&
+    p.credential_types.length > 0 &&
+    !!p.credential_type_values &&
+    p.credential_type_values.length > 0 &&
+    !!p.degree_types &&
+    p.degree_types.length > 0 &&
+    !!p.areas_of_study &&
+    p.areas_of_study.length > 0 &&
+    !!p.link;
+  //console.log("isp", rtn, p);
+  return rtn;
+}
