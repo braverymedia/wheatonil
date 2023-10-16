@@ -1,0 +1,48 @@
+---
+layout: layouts/base.njk
+section: home
+title: Program Finder 2023
+---
+
+<!-- demo of the program finder.  This is the JS bundle we'll need to pull into T4. -->
+<script src="/assets/js/program-finder-2023.bundle.js"></script>
+<main>
+    {{ content | safe }}
+    <div id="program-finder-mountpoint"></div>
+    <div
+        class="finder__filter__cards--hidden">
+        <!-- each .program-data-2023 div contains data elements we'll read in JS and pass to the Svelte component.
+        
+        This is what the T4 NavObj output will look like -->
+        <div
+            class="program-data-2023"
+            data-credential-types="Bachelor"
+            data-degree-types="BA"
+            data-areas-of-study="Humanities"
+            data-name="Anthropology"></div>
+        <div
+            class="program-data-2023"
+            data-credential-types="Certificate"
+            data-degree-types="PsyD"
+            data-areas-of-study="Military"
+            data-name="Computer Science"></div>
+        <div
+            class="program-data-2023"
+            data-credential-types="Master"
+            data-degree-types="BA"
+            data-areas-of-study="Education and Teaching"
+            data-name="Mathematics"></div>
+        <div
+            class="program-data-2023"
+            data-credential-types="Doctoral"
+            data-degree-types="Multiple|PsyD|PhD"
+            data-areas-of-study="Education and Teaching|Science, Technology, Engineering, and Mathematics"
+            data-name="Botany"></div>
+        <div
+            class="program-data-2023"
+            data-credential-types="Certificate|Doctoral"
+            data-degree-types="BA|BS"
+            data-areas-of-study="Business, Economics, and Marketing|Health"
+            data-name="Anthropology"></div>
+    </div>
+</main>

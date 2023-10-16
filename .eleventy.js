@@ -1,34 +1,46 @@
-const { PurgeCSS } = require("purgecss");
+const path = require("path");
+const sass = require("sass");
+const browserslist = require("browserslist");
+const { transform, browserslistToTargets, Features } = require("lightningcss");
 
 module.exports = function (eleventyConfig) {
-	/**
-	 * Remove any CSS not used on the page and inline the remaining CSS in the
-	 * <head>.
-	 *
-	 * @see {@link https://github.com/FullHuman/purgecss}
-	 */
-	eleventyConfig.addTransform(
-		"purge-and-inline-css",
-		async function (content) {
-			const purgeCSSResults = await new PurgeCSS().purge({
-				content: [{ raw: content }],
-				css: ["src/_includes/assets/css/wheaton.css"],
-				keyframes: true,
+	eleventyConfig.addTemplateFormats("scss");
+	eleventyConfig.addExtension("scss", {
+		outputFileExtension: "css",
+		compile: async function (inputContent, inputPath) {
+			// Skip files like _fileName.scss
+			let parsed = path.parse(inputPath);
+			if (parsed.name.startsWith("_")) {
+				return;
+			}
+
+			// Run file content through Sass
+			let result = sass.compileString(inputContent, {
+				loadPaths: [parsed.dir || "."],
+				sourceMap: true,
 			});
 
-			return content.replace(
-				"<!-- INLINE CSS-->",
-				"<style>" + purgeCSSResults[0].css + "</style>"
-			);
-		}
-	);
+			// Allow included files from @use or @import to
+			// trigger rebuilds when using --incremental
+			this.addDependencies(inputPath, result.loadedUrls);
 
-	eleventyConfig.addWatchTarget("src/_includes/assets/scss");
-	eleventyConfig.addPassthroughCopy({
-		"src/_includes/assets/css": "assets/css",
+			let targets = browserslistToTargets(
+				browserslist("> 5% and not dead")
+			);
+
+			return async () => {
+				let { code } = transform({
+					code: Buffer.from(result.css),
+					minify: true,
+					sourceMap: true,
+					targets
+				});
+				return code;
+			};
+		},
 	});
 	eleventyConfig.addPassthroughCopy({
-		"src/_includes/assets/js": "assets/js",
+		"src/assets/js": "assets/js",
 	});
 	eleventyConfig.setServerOptions({
 		// Default values are shown:
@@ -65,17 +77,16 @@ module.exports = function (eleventyConfig) {
 		showVersion: false,
 	});
 	return {
-		templateFormats: ["md", "njk", "html"],
-		pathPrefix: "/",
-		markdownTemplateEngine: "liquid",
-		htmlTemplateEngine: "njk",
-		dataTemplateEngine: "njk",
-		passthroughFileCopy: true,
 		dir: {
 			input: "src",
 			includes: "_includes",
 			data: "_data",
 			output: "_site",
 		},
+		templateFormats: ["md", "njk", "html"],
+		markdownTemplateEngine: "njk",
+		htmlTemplateEngine: "njk",
+		dataTemplateEngine: "njk",
+		passthroughFileCopy: true,
 	};
 };

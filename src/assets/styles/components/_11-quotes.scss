@@ -1,0 +1,31 @@
+.bm {
+    &--section-quotes {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        margin-block-start: calc(var(--space--grid-unit) * 6);
+    }
+}
+
+.bm--quote {
+    padding: 0;
+    padding-inline-start: var(--space--gap-large);
+    margin: var(--space--gap-large) 0;
+    font-family: var(--wc-font-family--serif);
+    font-size: var(--type-size--large);
+    color: var(--color--blue-600);
+    border-left: 2px solid var(--color--orange-600);
+    p {
+        margin-block-end: var(--space--gap-regular);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+    }
+    cite {
+        font-size: var(--type-size--small);
+        font-family: var(--wc-font-family--sans-serif);
+        font-style: normal;
+        &::first-line {
+            font-size: var(--type-size--base);
+            font-weight: normal;
+        }
+    }
+}

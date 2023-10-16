@@ -25,3 +25,36 @@
         <h2>The component title</h2>
     </article>
 </section>
+
+<code>
+  <section class="<?php echo $classes; ?>" data-image="<?php echo $image_position; ?>" data-size="<?php echo $size; ?>">
+    <figure>
+      <?php if ( $image_ar === 'square' ) { ?>
+        <t4 type="content" name="Image" output="normal" formatter="image/resp-square" cdn="true" />
+      <?php } elseif ( $image_ar === 'landscape' ) { ?>
+        <t4 type="content" name="Image" output="normal" formatter="image/resp-landscape" cdn="true" />
+      <?php } else { ?>
+        <t4 type="content" name="Image" output="normal" formatter="image/resp-portrait" cdn="true" />
+      <?php }
+      ?>
+    </figure>
+    <article class="content">
+        <?php if ( $icon ) { ?>
+          <span class="bm--icon <?php echo $icon; ?>"></span>
+        <?php } ?>
+
+        <t4 type="content" name="Subhead" output="selective-output" modifiers="medialibrary,nav_sections" process-format="true" format="<span class=&quot;subhead&quot;><t4 type=&quot;content&quot; name=&quot;Subhead&quot; output=&quot;normal&quot; modifiers=&quot;medialibrary,nav_sections&quot; /></span>" />
+        <h2><t4 type="content" name="Title" output="normal" modifiers="striptags,htmlentities" /></h2>
+
+      <t4 type="content" name="Optional Quote" output="selective-output" process-format="true" format="<div class=&quot;bm--quote&quot;>
+  <blockquote><p><t4 type=&quot;content&quot; name=&quot;Optional Quote&quot; output=&quot;normal&quot; /></p></blockquote>
+  <cite><t4 type=&quot;content&quot; name=&quot;Quote Citation&quot; output=&quot;normal&quot; /></cite>
+  </div>" />
+
+        <t4 type="content" name="Content" output="normal" modifiers="medialibrary,nav_sections" />
+        <?php if ( $cta ) { ?>
+          <a href="<t4 type="content" name="Call to Action" output="linkurl" modifiers="nav_sections" />" class="bm--cta style-secondary has-arrow"><t4 type="content" name="Call to Action" output="linktext" modifiers="nav_sections" /></a>
+        <?php } ?>
+    </article>
+  </section>
+</code>

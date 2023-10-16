@@ -6,3 +6,4 @@ config.codekit3
 .DS_Store
 _site
 .direnv
+src/_includes/assets/css

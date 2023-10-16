@@ -1,0 +1,163 @@
+.main-footer.bravery {
+    background-color: var(--color--blue-800);
+    color: var(--color--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space--gap-large) 5vw var(--space--gap-regular);
+    gap: var(--space--gap-large);
+
+    &.slate-footer {
+        align-items: flex-start;
+    }
+    a {
+        color: inherit;
+    }
+    .inverse-logo {
+        width: 45vw;
+        max-width: 240px;
+    }
+    @media (min-width: 1024px) {
+        padding: calc(var(--space--grid-unit) * 8) 5vw calc(var(--space--grid-unit) * 6);
+        gap: calc(var(--space--grid-unit) * 9);
+    }
+    @media (min-width: 1450px ) {
+        padding: calc(var(--space--grid-unit) * 8) calc( 0.5 * (100vw - 1400px)) calc(var(--space--grid-unit) * 6);
+
+    }
+    ul, li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .legal {
+        font-family: var(--wc-font-family--sans-serif);
+        font-size: var(--type-size--xsmall);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space--gap-medium);
+        padding-block-start: var(--space--gap-regular);
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        width: 100%;
+        a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: var(--space--gap-medium);
+        }
+        @media (min-width: 900px) {
+            flex-direction: row;
+            justify-content: space-between;
+            ul {
+                flex-direction: row;
+            }
+        }
+    }
+}
+.bravery .footer-nav {
+    width: 100%;
+    section {
+        margin-block-end: var(--space--gap-regular);
+        padding-block-start: var(--space--gap-regular);
+        border-top: 1px solid var(--color--blue-200);
+        &:first-child {
+            border-top: 0;
+        }
+    }
+    .contact {
+        padding-block-start: var(--space--gap-large);
+    }
+    h2,
+    h2 > button {
+        appearance: none;
+        background: transparent;
+        color: inherit;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        border: 0;
+        font-size: var(--type-size--medium);
+        font-family: var(--wc-font-family--serif);
+    }
+    button[aria-expanded] {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        transform: rotate(0deg);
+        > svg {
+            width: 24px;
+            height: 24px;
+            transition: all .15s ease-in-out;
+        }
+    }
+    button[aria-expanded=true] > svg {
+        transform: rotate(-45deg);
+    }
+    section,
+    address {
+        font-family: var(--wc-font-family--sans-serif);
+        font-style: normal;
+    }
+    a {
+        display: block;
+        padding-block-start: 0.5rem;
+        padding-block-end: 0.5rem;
+        text-decoration: none;
+        color: var(--color--blue-200);
+        &:hover {
+            color: var(--color--white);
+            text-decoration: underline;
+        }
+    }
+    .social-links {
+        display: flex;
+        gap: var(--space--gap-medium);
+        margin-block-start: var(--space--gap-large);
+        svg {
+            height: var(--type-size--medium);
+            width: var(--type-size--medium);
+        }
+    }
+    @media (min-width: 1144px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--space--gap-large);
+        > section {
+            border: 0;
+            flex-basis: 15%;
+            button > svg {
+                display: none;
+            }
+            *:not(h2):not(button) {
+                font-size: var(--type-size--xsmall);
+            }
+        }
+        .contact {
+            padding-block-start: calc(var(--space--gap-regular) + 10px);
+        }
+        .social-links svg {
+            height: var(--type-size--small);
+            width: var(--type-size--small);
+        }
+        h2 > button {
+            cursor: inherit;
+            pointer-events: none; // disable button on desktop
+        }
+    }
+}
+
+@media ( max-width: 1024px ) {
+    .has-js .accordion-panel {
+        display: none;
+    }
+    .has-js .accordion-panel.visible {
+        display: block;
+    }
+}

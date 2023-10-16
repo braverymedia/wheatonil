@@ -1,0 +1,12 @@
+@media (min-width: 1024px) {
+    .program-finder-2023 {
+        .finder {
+            min-height: calc(100vh - 100px);
+            position: sticky;
+            top: 100px;
+        }
+    }
+}
+#program-finder-mountpoint {
+    padding-block: 0;
+}

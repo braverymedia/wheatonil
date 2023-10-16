@@ -1,0 +1,40 @@
+.bm {
+    &--content-cta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space--gap-large);
+        > article {
+            position: relative;
+            max-inline-size: 850px;
+            padding-block-start: var(--space--gap-3xl);
+            flex: 1 auto;
+            &:before {
+                content: "";
+                background-color: var(--color--orange-600);
+                display: block;
+                height: 3px;
+                position: absolute;
+                width: calc(9 * var(--space--grid-unit));
+                inset-block-start: 0;
+                inset-inline-start: 0;
+            }
+            h2 {
+                max-width: 768px;
+            }
+        }
+        .bm--actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space--gap-large);
+        }
+        @media (min-width: 1024px) {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: calc(var(--space--gap-3xl) * 3);
+            .bm--actions {
+                padding-block-start: var(--space--gap-3xl);
+                flex: 1 0 auto;
+            }
+        }
+    }
+}
