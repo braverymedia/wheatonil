@@ -1,12 +1,33 @@
 @media (min-width: 1024px) {
     .program-finder-2023 {
         .finder {
-            min-height: calc(100vh - 100px);
+            min-height: calc(100vh - 96px);
             position: sticky;
-            top: 100px;
+            top: 96px;
         }
     }
 }
 #program-finder-mountpoint {
     padding-block: 0;
+}
+
+.program-finder-2023-popover {
+    .finder {
+        padding: var(--space--gap-large) !important;
+    }
+}
+.result .program_name a {
+    text-decoration-thickness: 2px;
+}
+.details .detail {
+    max-width: 50% !important;
+}
+
+fieldset.credential_types .scroller {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
 }
