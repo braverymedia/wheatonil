@@ -1,4 +1,5 @@
 <script>
+  import { afterUpdate } from "svelte";
   import ProgramFinderSearch from "./ProgramFinderSearch.svelte";
   import {
     compute_programs_filtered,
@@ -25,6 +26,12 @@
       selected_credential_types,
     });
   }
+  let pf_element;
+  afterUpdate(() => {
+    if (pf_element) {
+      pf_element.scrollIntoView({ block: "start", inline: "start" });
+    }
+  });
 </script>
 
 <div class="program-finder-2023 container">
@@ -36,7 +43,7 @@
       bind:selected_credential_types
     />
   </div>
-  <div class="col2">
+  <div class="col2" bind:this={pf_element}>
     <p>
       Viewing {programs_filtered.length} program{programs_filtered.length == 1
         ? ""
