@@ -259,8 +259,6 @@
     border: none;
     padding: 0;
   }
-  form {
-  }
   fieldset.credential_types {
     margin-top: 3.5rem;
     overflow-x: auto;
