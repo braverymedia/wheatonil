@@ -23,11 +23,22 @@
     max-width: 50% !important;
 }
 
-fieldset.credential_types .scroller {
+fieldset.credential_types .scroller,
+.bm-gallery--staggered {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    scroll-behavior: smooth;
     &::-webkit-scrollbar{
         display: none;
+        width:0px;
+    }
+    /*track*/
+    &::-webkit-scrollbar-track {
+        background:transparent;
     }
 
+    /*thumb*/
+    &::-webkit-scrollbar-thumb {
+        background:transparent;
+    }
 }
