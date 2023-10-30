@@ -66,6 +66,12 @@
                 <p>{program.degree_types.join(", ")}</p>
               </div>
             {/if}
+            {#if program.concentrations && program.concentrations.length > 0}
+              <div class="detail concentrations">
+                <p class="detail_type">Concentrations</p>
+                <p>{program.concentrations}</p>
+              </div>
+            {/if}
           </div>
         </li>
       {/each}
@@ -110,7 +116,9 @@
   .details {
     display: flex;
     justify-content: flex-start;
-    gap: 6rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+    row-gap: 1rem;
   }
   .detail_type {
     font-size: var(--type-size--text-sm);
@@ -127,6 +135,9 @@
     margin: 0;
     margin-top: 0.5rem;
     max-width: 8rem;
+  }
+  .detail.concentrations p {
+    max-width: 10rem;
   }
   .results li {
     margin-top: 3rem;

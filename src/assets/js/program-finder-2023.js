@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           .map((e) => e.trim())
           .filter((e) => !!e),
         link: element.dataset.link || "",
+        concentrations: element.dataset.concentrations || "",
       };
     })
     .filter(isShowableProgram);
