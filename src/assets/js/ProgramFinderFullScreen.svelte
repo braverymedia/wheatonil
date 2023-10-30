@@ -1,4 +1,5 @@
 <script>
+  import { afterUpdate } from "svelte";
   import ProgramFinderSearch from "./ProgramFinderSearch.svelte";
   import {
     compute_programs_filtered,
@@ -25,6 +26,12 @@
       selected_credential_types,
     });
   }
+  let pf_element;
+  afterUpdate(() => {
+    if (pf_element) {
+      pf_element.scrollIntoView({ block: "start", inline: "start" });
+    }
+  });
 </script>
 
 <div class="program-finder-2023 container">
@@ -36,7 +43,7 @@
       bind:selected_credential_types
     />
   </div>
-  <div class="col2">
+  <div class="col2" bind:this={pf_element}>
     <p>
       Viewing {programs_filtered.length} program{programs_filtered.length == 1
         ? ""
@@ -57,6 +64,12 @@
               <div class="detail degree_types">
                 <p class="detail_type">Offered As</p>
                 <p>{program.degree_types.join(", ")}</p>
+              </div>
+            {/if}
+            {#if program.concentrations && program.concentrations.length > 0}
+              <div class="detail concentrations">
+                <p class="detail_type">Concentrations</p>
+                <p>{program.concentrations}</p>
               </div>
             {/if}
           </div>
@@ -103,7 +116,9 @@
   .details {
     display: flex;
     justify-content: flex-start;
-    gap: 6rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+    row-gap: 1rem;
   }
   .detail_type {
     font-size: var(--type-size--text-sm);
@@ -120,6 +135,9 @@
     margin: 0;
     margin-top: 0.5rem;
     max-width: 8rem;
+  }
+  .detail.concentrations p {
+    max-width: 10rem;
   }
   .results li {
     margin-top: 3rem;

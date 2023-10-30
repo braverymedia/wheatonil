@@ -166,6 +166,28 @@
     }
     pass++;
   }
+  let area_of_study_revealed = false;
+  let area_of_study_reveal_button = null;
+  let area_of_study_dialog = null;
+  function handle_keypress(event) {
+    if (event.key === "Escape") {
+      if (area_of_study_revealed) {
+        area_of_study_revealed = false;
+        if (area_of_study_reveal_button) {
+          area_of_study_reveal_button.focus();
+        }
+        event.stopPropagation();
+      }
+    }
+  }
+  function handle_focusout(event) {
+    if (
+      area_of_study_dialog &&
+      area_of_study_dialog.contains(event.relatedTarget)
+    )
+      return;
+    area_of_study_revealed = false;
+  }
 </script>
 
 <svelte:window
@@ -212,16 +234,38 @@
 
     <fieldset class="areas_of_study">
       <legend>2. Area of study</legend>
-      {#each areas_of_study as area}
-        <label class="checkbox"
-          ><input
-            type="checkbox"
-            bind:group={selected_areas_of_study}
-            name="areas_of_study"
-            value={area}
-          />{area}</label
-        >
-      {/each}
+      <button
+        type="button"
+        class="bm--cta style-primary"
+        on:click={() => (area_of_study_revealed = !area_of_study_revealed)}
+        bind:this={area_of_study_reveal_button}
+        aria-controls="areas-dialog"
+        aria-haspopup="dialog"
+        aria-expanded={area_of_study_revealed}
+        >{area_of_study_revealed
+          ? "Hide Areas of Study"
+          : "Select Areas of Study"}</button
+      >
+      <div
+        class="scroller"
+        id="areas-dialog"
+        role="dialog"
+        class:hidden={!area_of_study_revealed}
+        on:keyup={handle_keypress}
+        on:focusout={handle_focusout}
+        bind:this={area_of_study_dialog}
+      >
+        {#each areas_of_study as area}
+          <label class="checkbox"
+            ><input
+              type="checkbox"
+              bind:group={selected_areas_of_study}
+              name="areas_of_study"
+              value={area}
+            />{area}</label
+          >
+        {/each}
+      </div>
     </fieldset>
   </form>
   <slot />
@@ -259,8 +303,6 @@
     border: none;
     padding: 0;
   }
-  form {
-  }
   fieldset.credential_types {
     margin-top: 3.5rem;
     overflow-x: auto;
@@ -275,7 +317,8 @@
     overflow-x: auto;
     width: calc(100% + 2rem);
   }
-  fieldset.credential_types legend {
+  fieldset.credential_types legend,
+  fieldset.areas_of_study legend {
     margin-bottom: 1.5rem;
   }
   legend {
@@ -289,6 +332,25 @@
   }
   label.checkbox input {
     margin-right: 0.75rem;
+  }
+  fieldset.areas_of_study {
+    position: relative;
+  }
+  fieldset.areas_of_study .scroller {
+    overflow-y: scroll;
+    border: 1px solid white;
+    min-height: 5rem;
+    max-height: 20rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    position: absolute;
+    bottom: 0rem;
+    right: 1rem;
+    max-width: 19rem;
+    background-color: var(--color--blue-600);
+  }
+  fieldset.areas_of_study .scroller.hidden {
+    display: none;
   }
   .v-hidden {
     clip: rect(0, 0, 0, 0);
