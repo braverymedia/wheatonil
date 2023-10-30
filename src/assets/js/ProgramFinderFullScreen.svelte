@@ -117,8 +117,13 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 2rem;
-    row-gap: 1rem;
+    column-gap: 24px;
+    row-gap: 0;
+  }
+  @media (min-width: 1024px) {
+    .details {
+      flex-wrap: nowrap;
+    }
   }
   .detail_type {
     font-size: var(--type-size--text-sm);
@@ -134,10 +139,10 @@
     color: var(--color--grey-800, #232c39);
     margin: 0;
     margin-top: 0.5rem;
-    max-width: 8rem;
+    flex: 0 1 25%;
   }
-  .detail.concentrations p {
-    max-width: 10rem;
+  .detail.concentrations {
+    flex: 0 1 50%;
   }
   .results li {
     margin-top: 3rem;
