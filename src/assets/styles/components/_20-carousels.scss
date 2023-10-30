@@ -122,7 +122,7 @@
 	header {
 		display: none;
 		align-items: flex-start;
-		justify-content: flex-end;
+		justify-content: flex-start;
 		flex-direction: column;
 		max-width: 40%;
 	}
@@ -133,12 +133,13 @@
 			display: flex;
 			border-right: 1px solid var(--color--grey-300);
 			flex: 1 0 375px;
+
 		}
     }
 }
 [data-bravery-carousel="simple-heading"] {
 	header {
-		padding: 0 calc(var(--space--grid-unit) * 12);
+		padding: var(--space--gap-xxl) calc(var(--space--grid-unit) * 12);
 	}
 	h2 	{
 		font-family: var(--wc-font-family--sans-serif);
