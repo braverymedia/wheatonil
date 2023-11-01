@@ -1,49 +1,75 @@
-.bm-carousel--items {
-	@media ( max-width: 1023px ) {
-		--max-width: 100vw;
+* {
+	outline: 1px dotted red;
+}
+[data-bravery-carousel] {
+	padding-block: var(--space--gap-xxl);
+	max-width: 100%;
+	.bm--card {
+		margin-block: 0;
+		padding: 0;
+		article {
+			padding: var(--space--gap-medium);
+		}
+		&.is-layout--stacked,
+		&.is-vertical {
+			picture {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+				width: 100%;
+			}
+		}
+		&.is-layout--row {
+			@media (min-width: 1024px) {
+				picture {
+					flex: 1 62%;
+				}
+			}
+
+		}
 	}
-	--gap: 32px;
+	@media ( max-width: 1023px ) {
+		.bm-carousel--controls {
+			display: none;
+		}
+	}
+}
+
+.bm-carousel--items {
+	--gap: 16px;
+	--min-width: 75vw;
+	padding-inline: var(--full-bleed, 3.5vw);
 	display: flex;
 	flex-wrap: nowrap;
 	overflow-x: auto;
-	overflow-y: visible;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	scrollbar-width: none;
-	padding-block-end: var(--gap);
-	padding-inline: var(--gap);
-	border-top-left-radius: var(--corner--radius);
-	border-bottom-left-radius: var(--corner--radius);
-	&::after {
-		content: "";
-		display: block;
-		width: var(--offset);
-		height: 100%;
-		flex-shrink: 0;
+	gap: var(--gap);
+	@media (min-width: 1024px) {
+		--gap: 32px;
+		--min-width: 33vw;
 	}
-
 	> * {
-		width: var(--width);
+		scroll-snap-align: center;
 		min-width: var(--min-width);
-		max-width: var(--max-width);
-		scroll-snap-align: start;
-		flex: 0;
+		width: auto;
+		height: 65dvh;
+		@media (min-width: 1024px) {
+			&.is-vertical {
+				min-width: var(--min-width);
+			}
+			&.is-layout--row {
+				min-width: 40vw;
+				height: auto;
+				max-height: 65dvh;
+			}
+		}
 	}
-
-	> * + * {
-		margin-inline-start: var(--gap);
-	}
-
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	@media ( min-width: 1024px ) {
-		> *:first-child {
-			margin-inline-start: calc(var(--space--grid-unit) * 12);
-		}
-		> *:last-child {
-			margin-inline-end: calc(var(--space--grid-unit) * 12);
-		}
+	.is-fullwidth & {
+		margin-inline: calc( var(--full-bleed) * -1);
 	}
 }
 
@@ -78,61 +104,33 @@
 		border-color: var(--color--blue-700);
 	}
 }
-[data-bravery-carousel] {
-	padding-block: var(--space--gap-xxl);
-	.bm--card {
-		margin-block: 0;
-		padding: 0;
-		picture {
-			width: 50%;
-		}
-		article {
-			padding: var(--space--gap-xl);
-		}
-		&.is-layout--stacked {
-			picture {
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0;
-				width: 100%;
-			}
-		}
-		&.is-layout--row {
-			picture {
-				flex: 1 60%;
-			}
-		}
-	}
-}
+
 [data-bravery-carousel="simple"] {
-	padding-inline-start: var(--space--gap-3xl);
 	header {
 		display: flex;
 		gap: var(--space--gap-medium);
-		padding-inline-end: var(--space--gap-3xl);
 		margin-block-end: var(--space--gap-xxl);
 		@media	(min-width: 1024px) {
 			justify-content: space-between;
 			align-items: center;
+			padding-inline-end: var(--space--gap-3xl);
 		}
 	}
 }
 [data-bravery-carousel="simple-heading"],
 [data-bravery-carousel="full-heading"] {
-	display: flex;
-	header {
-		display: none;
-		align-items: flex-start;
-		justify-content: flex-start;
-		flex-direction: column;
-		max-width: 40%;
-	}
-
     @media (min-width: 1024px) {
-		gap: calc(var(--space--grid-unit) * 12);
+		display: flex;
 		header {
 			display: flex;
 			border-right: 1px solid var(--color--grey-300);
 			flex: 1 0 375px;
+			max-width: 40%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
 
 		}
     }
@@ -145,15 +143,14 @@
 		font-family: var(--wc-font-family--sans-serif);
 		font-size: var(--type-size--medium);
 	}
+	@media ( min-width: 1024px ) {
+		header {
+			padding: var(--space--gap-xxl) calc(var(--space--grid-unit) * 6);
+		}
+	}
 }
 [data-bravery-carousel="full-heading"] {
 	header {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		padding: calc( var(--space--grid-unit) * 5) calc( var(--space--grid-unit) * 10);
 		&:before {
 			content: "";
 			display: block;
@@ -161,6 +158,14 @@
 			height: 3px;
 			background-color: var(--color--orange-600);
 			margin-block-end: var(--space--gap-3xl);
+		}
+		@media( min-width: 1024px ) {
+			padding: calc( var(--space--grid-unit) * 5);
+		}
+	}
+	@media( min-width: 1024px ) {
+		.bm-carousel--items {
+			--gap: 64px;
 		}
 	}
 	.bm-carousel--controls {
