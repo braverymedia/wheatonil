@@ -12,9 +12,12 @@
     }
     nav ul {
         list-style: none;
-        text-align: right;
+        padding-inline: 0;
         a:after {
             background-color: var(--color--white);
+        }
+        @media (min-width: 960px) {
+            text-align: right;
         }
     }
     > figure {

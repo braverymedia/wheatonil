@@ -5,6 +5,7 @@
         display: flex;
         gap: var(--space--gap-xxl);
         padding-inline: 3vw;
+        align-items: stretch;
         flex-wrap: nowrap;
         overflow-x: auto;
         scroll-behavior: smooth;
@@ -15,7 +16,9 @@
         > * {
             // aspect-ratio: 2 / 3;
             scroll-snap-align: center;
-            height: 60vh;
+            padding: 0 !important;
+            flex: 0 0 auto;
+            max-height: 55dvh;
             &:nth-child(even) {
                 margin-block-start: 3vw;
             }
@@ -25,9 +28,9 @@
 
             scroll-snap-align: center;
             > * {
-                flex: 0 0 auto;
                 height: 508px;
                 width: auto;
+                max-height: unset;
             }
         }
     }

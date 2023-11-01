@@ -5,8 +5,8 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        margin-block-start: var(--space--gap-xxl);
-        margin-block-end: var(--space--gap-xxl);
+        margin-block: var(--space--gap-xxl);
+        padding: var(--space--gap-medium) !important;
         figure,
         picture {
             border-radius: var(--corner--radius);
