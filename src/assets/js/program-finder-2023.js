@@ -61,7 +61,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
           return;
         }
         const fullScreenPath =
-          event.target.dataset.finderpath || "/academics/programs";
+          event.target.dataset.finderpath ||
+          window.program_finder_path ||
+          "/academics/programs";
 
         pf_overlay = new ProgramFinderOverlay({
           /* this is the mountpoint element where the svelte component gets attached */

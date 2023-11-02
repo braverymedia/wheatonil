@@ -32,8 +32,12 @@
       selected_credential_types,
     });
 
-    fullScreenUrl = new URL(location);
-    fullScreenUrl.pathname = fullScreenPath;
+    if (fullScreenPath.startsWith("http")) {
+      fullScreenUrl = new URL(fullScreenPath);
+    } else {
+      fullScreenUrl = new URL(location);
+      fullScreenUrl.pathname = fullScreenPath;
+    }
     fullScreenUrl.search = "";
 
     setSearchParamsOnURL({
