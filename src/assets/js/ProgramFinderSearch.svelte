@@ -212,6 +212,7 @@
 
     <fieldset class="areas_of_study">
       <legend>2. Area of study</legend>
+      <div class="checkbox-container">
       {#each areas_of_study as area}
         <label class="checkbox"
           ><input
@@ -222,6 +223,7 @@
           />{area}</label
         >
       {/each}
+      </div>
     </fieldset>
   </form>
   <slot />
