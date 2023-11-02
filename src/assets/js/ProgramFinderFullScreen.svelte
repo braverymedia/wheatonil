@@ -27,12 +27,15 @@
     });
   }
   let pf_element;
+  let windowWidth = 0;
   afterUpdate(() => {
-    if (pf_element) {
+    if (pf_element && windowWidth >= 1024) {
       pf_element.scrollIntoView({ block: "start", inline: "start" });
     }
   });
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <div class="program-finder-2023 container">
   <div class="col1">

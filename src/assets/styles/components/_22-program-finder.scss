@@ -44,3 +44,16 @@ fieldset.credential_types .scroller,
         background:transparent;
     }
 }
+.checkbox-container {
+    max-height: 250px;
+    overflow-y: auto;
+    border-bottom: 2px solid var(--color--white);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    &::-webkit-scrollbar{
+        display: none;
+        width:0px;
+    }
+}
