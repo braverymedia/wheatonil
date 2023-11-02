@@ -2,6 +2,9 @@
 .bm-gallery {
 
     &--staggered {
+        &.is-full-width {
+            padding-inline: unset;
+        }
         display: flex;
         gap: var(--space--gap-xxl);
         padding-inline: 3vw;
@@ -18,9 +21,9 @@
             scroll-snap-align: center;
             padding: 0 !important;
             flex: 0 0 auto;
-            max-height: 55dvh;
+            max-height: 50dvh;
             &:nth-child(even) {
-                margin-block-start: 3vw;
+                margin-block-start: 3.5dvh;
             }
 
         }

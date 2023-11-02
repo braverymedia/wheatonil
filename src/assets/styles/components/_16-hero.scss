@@ -1,5 +1,8 @@
 .bm {
     &-home--hero {
+        &.is-fullwidth {
+            padding: unset;
+        }
         .bm-mobile {
             margin-inline-start: calc(var(--space--gap-medium) * -1);
             margin-inline-end: calc(var(--space--gap-medium) * -1);

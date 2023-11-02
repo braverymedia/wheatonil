@@ -10,11 +10,13 @@
         flex-direction: column;
         gap: var(--space--gap-3xl);
     }
-    nav ul {
-        list-style: none;
-        padding-inline: 0;
-        a:after {
-            background-color: var(--color--white);
+    nav {
+        ul {
+            list-style: none;
+            padding-inline: 0;
+            a:after {
+                background-color: var(--color--white);
+            }
         }
         @media (min-width: 960px) {
             text-align: right;
