@@ -173,12 +173,12 @@
     inPopState = true;
     ({ selected_areas_of_study, selected_credential_types } =
       processUrlSearchParams(location));
-    console.log(
-      "stuff3 popstate",
-      location,
-      selected_areas_of_study,
-      selected_credential_types
-    );
+    // console.log(
+    //   "stuff3 popstate",
+    //   location,
+    //   selected_areas_of_study,
+    //   selected_credential_types
+    // );
   }}
 />
 
