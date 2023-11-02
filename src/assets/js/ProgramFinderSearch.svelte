@@ -50,7 +50,7 @@
   let pass = 0;
   if (programs && programs.length) {
     /* pull credential_types, areas_of_study and degree_types from the data passed into this component */
-    /* for credential_types, we get two bits of data in each program: credential_types and credential_type_values. 
+    /* for credential_types, we get two bits of data in each program: credential_types and credential_type_values.
       the first looks like Doctorate|Minor and the latter looks like doctorate-5|minor-2
       the first are the labels we should show.  the numbers in the latter dictate position
       in case we don't have good numbers in the second, we'll load the former into credential_types, then overwrite if we have good numbers
@@ -247,7 +247,7 @@
           : "Select Areas of Study"}</button
       >
       <div
-        class="scroller"
+        class="scroller pf-areas"
         id="areas-dialog"
         role="dialog"
         class:hidden={!area_of_study_revealed}
@@ -308,14 +308,20 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    margin: 3.5rem -1rem 0;
     min-width: 0; /* https://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content#answer-17863685 */
   }
   fieldset.credential_types .scroller {
     display: flex;
     gap: 0.75rem;
     flex-direction: row;
+    scroll-behavior: smooth;
     overflow-x: auto;
-    width: calc(100% + 2rem);
+    scrollbar-width: none;
+    padding-inline: 1rem;
+  }
+  fieldset.credential_types legend {
+    margin-inline: 1rem;
   }
   fieldset.credential_types legend,
   fieldset.areas_of_study legend {
@@ -344,8 +350,9 @@
     padding: 1rem;
     margin-top: 1rem;
     position: absolute;
-    bottom: 0rem;
-    right: 1rem;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
     max-width: 19rem;
     background-color: var(--color--blue-600);
   }

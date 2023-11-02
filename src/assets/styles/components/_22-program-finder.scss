@@ -15,12 +15,14 @@
     .finder {
         padding: var(--space--gap-large) !important;
     }
+    .scroller.pf-areas {
+        transform: none !important;
+        right: 7% !important;
+        left: auto !important;
+    }
 }
 .result .program_name a {
     text-decoration-thickness: 2px;
-}
-.details .detail {
-    max-width: 50% !important;
 }
 
 fieldset.credential_types .scroller,

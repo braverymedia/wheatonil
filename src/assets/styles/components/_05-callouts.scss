@@ -95,3 +95,6 @@
         }
     }
 }
+:not(.has-bg--white) + .bm--cta-callout {
+    margin-top: var(--space--gap-3xl);
+}
