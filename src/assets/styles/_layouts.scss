@@ -17,6 +17,10 @@ main.is-new-style {
     & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint):not(header) {
         padding-block-start: clamp(calc(var(--space--grid-unit) * 8), 8vw, calc(var(--space--grid-unit) * 23));
     }
+    & > .bm--content {
+        max-width: 720px;
+        margin-inline: auto;
+    }
     .bm--page-title,
     .bm--page-header {
         padding-block-start: clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18));
@@ -71,7 +75,7 @@ main.is-new-style {
     @media ( min-width: 1500px ) {
         max-width: 1480px;
         width: 100vw;
-        margin-inline: auto;
+        margin-inline: calc( ((100vw - 1480px) * -1) / 2 );
     }
 }
 .has-jump-menu {

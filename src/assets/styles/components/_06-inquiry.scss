@@ -24,9 +24,9 @@
         }
     }
     &--rfi-form {
+        text-align: left;
         padding: var(--space--gap-xl) 4vw;
         @media ( min-width: 1024px ) {
-            text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: center;

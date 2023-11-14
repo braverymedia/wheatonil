@@ -123,6 +123,7 @@
         display: none;
         font-family: var(--wc-font-family--sans-serif);
         margin: 0;
+        flex: 1 0 100px;
     }
     div {
         display: flex;
@@ -147,6 +148,7 @@
         border-radius: 16px;
         display: flex;
         gap: var(--space--gap-large);
+        align-items: baseline;
         h2 {
             display: block;
             line-height: inherit;
@@ -155,6 +157,7 @@
             display: none;
         }
         div {
+            row-gap: var(--space--gap-regular);
             flex-wrap: wrap;
             flex-direction: row;
             opacity: 1;

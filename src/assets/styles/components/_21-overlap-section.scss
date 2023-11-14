@@ -22,7 +22,7 @@
             text-align: right;
         }
     }
-    > figure {
+    figure {
         margin-block-end: calc(var(--space--grid-unit) * -10);
         > * {
             flex: 0 1 auto;
