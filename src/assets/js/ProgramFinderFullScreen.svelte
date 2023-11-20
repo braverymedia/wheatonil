@@ -113,6 +113,7 @@
     font-size: var(--type-size--xl);
     font-weight: 400;
     color: var(--color--blue-600);
+    color: var(--color--blue-600);
     margin-bottom: 1rem;
     line-height: 120%;
   }

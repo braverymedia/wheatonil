@@ -183,8 +183,7 @@
 />
 
 <div class="finder" class:notInOverlay={!inOverlay}>
-  <div class="orange-line" />
-  <h1>{title}</h1>
+  <h1 class="is-fancy">{title}</h1>
   <form class="form_bluebg">
     <fieldset class="credential_types">
       <legend>1. Select program type</legend>
@@ -233,20 +232,21 @@
   h1 {
     color: var(--color--white);
   }
-  .orange-line {
-    width: 4.5rem;
-    height: 0.1875rem;
-    background-color: var(--color--orange-600);
-    margin-bottom: 2rem;
-  }
   .finder {
     background-color: var(--color--blue-600);
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   @media (min-width: 1024px) {
     .finder.notInOverlay {
-      padding: 5.5rem;
+      padding: var(--space--gap-xxl);
     }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space--gap-xxl);
+    flex-shrink: 1;
   }
   label {
     display: block;
@@ -257,16 +257,15 @@
   }
   fieldset.credential_types,
   fieldset.areas_of_study {
-    margin-top: 2.5rem;
     border: none;
     padding: 0;
+    padding-block: unset;
   }
   fieldset.credential_types {
-    margin-top: 3.5rem;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    margin: 3.5rem -1rem 0;
+    margin-inline: -1rem;
     min-width: 0; /* https://stackoverflow.com/questions/17408815/fieldset-resizes-wrong-appears-to-have-unremovable-min-width-min-content#answer-17863685 */
   }
   fieldset.credential_types .scroller {
@@ -276,26 +275,22 @@
     scroll-behavior: smooth;
     overflow-x: auto;
     scrollbar-width: none;
-    padding-inline: 1rem;
+    padding-inline: var(--space--gap-medium);
   }
   fieldset.credential_types legend {
-    margin-inline: 1rem;
-  }
-  fieldset.credential_types legend,
-  fieldset.areas_of_study legend {
-    margin-bottom: 1.5rem;
+    margin-inline: var(--space--gap-medium);
   }
   legend {
     color: var(--color--white);
+    margin-bottom: var(--space--gap-medium)
   }
   label.checkbox {
     color: var(--color--white);
-    margin-top: 1rem;
     display: flex;
     align-items: center;
   }
   label.checkbox input {
-    margin-right: 0.75rem;
+    margin-right: var(--space--gap-regular);
   }
   .v-hidden {
     clip: rect(0, 0, 0, 0);

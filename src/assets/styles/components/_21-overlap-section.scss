@@ -26,6 +26,8 @@
         margin-block-end: calc(var(--space--grid-unit) * -10);
         > * {
             flex: 0 1 auto;
+            display: flex;
+            z-index: 1;
         }
     }
     [data-media="image"] {
