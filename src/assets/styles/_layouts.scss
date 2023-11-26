@@ -212,6 +212,7 @@ main > *[data-layout="1up"]{
 
 [data-ar] {
     overflow: hidden;
+    background-color: var(--color--grey-300);
     border-radius: var(--corner--radius);
     > * {
         width: 100%;
