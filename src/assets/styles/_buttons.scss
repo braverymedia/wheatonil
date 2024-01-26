@@ -111,10 +111,16 @@ a.cta {
     transform: translateY(-5px);
     font-weight: 600;
 }
-.bm--buttons {
+.bm--buttons,
+.bm--actions {
     display: flex;
     align-items: flex-start;
     gap: var(--space--gap-medium);
+    &.is-stacked {
+        flex-direction: column;
+        margin-block-end: var(--space--gap-large);
+        align-items: stretch;
+    }
 }
 .bm--cta-link {
     font-weight: 500;

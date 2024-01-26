@@ -1,3 +1,4 @@
+import "a11y-dialog";
 let carousels = {};
 let marquees = {};
 
@@ -189,20 +190,18 @@ const initMarquee = (marquee) => {
 	group2.append(...secondHalf);
 	const group2Copy = group2.cloneNode(true);
 
-	group1Copy.setAttribute('aria-hidden', true);
+	group1Copy.setAttribute("aria-hidden", true);
 	group2Copy.setAttribute("aria-hidden", true);
 
-	let reversed = document.createElement('section');
+	let reversed = document.createElement("section");
 	reversed.className = "bm-gallery-col bm-marquee";
-	reversed.setAttribute('data-direction', 'reverse');
-
+	reversed.setAttribute("data-direction", "reverse");
 
 	// Build it
 	column.innerHTML = "";
 	column.append(group1, group1Copy);
 	reversed.append(group2, group2Copy);
 	marquee.element.append(reversed);
-
 };
 window.addEventListener("DOMContentLoaded", (event) => {
 	const accordionContainer = document.querySelector("[data-accordion]");
@@ -214,6 +213,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const showSearch = document.querySelector("button.search");
 	const hideOverlay = document.querySelector(".close-menu");
 	const overlay = document.querySelector("[data-feature='nav']");
+	const jumpMenu = document.querySelector(".bm--jump-menu > button");
 
 	document.body.classList.add("has-js");
 
@@ -295,6 +295,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	mobileMenuContainer?.addEventListener("click", accordionClick);
 	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
+	jumpMenu?.addEventListener("click", toggleMobileJumpMenu);
+
 	// Section nav toggle
 	sectionNav?.addEventListener("click", mobileSectionNav);
 
@@ -310,7 +312,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		})
 	);
 
-	for ( const marquee of marquees ) {
+	for (const marquee of marquees) {
 		initMarquee(marquee);
 	}
 
@@ -332,3 +334,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		carousel.element.setAttribute("data-bravery-carousel-init", "");
 	}
 });
+
+// video embed from url
+const embedVideo = (url) => {
+	let video_id_regExp =
+			/^.*((youtu.be\/|vimeo.com\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
+		match = url.match(video_id_regExp),
+		video_id;
+
+	if (match && match[7]) {
+		//valid
+		video_id = match[7];
+	} else {
+		//invalid
+		alert("Invalid Video URL");
+	}
+}
