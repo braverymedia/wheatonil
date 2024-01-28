@@ -248,7 +248,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const showSearch = document.querySelector("button.search");
 	const hideOverlay = document.querySelector(".close-menu");
 	const overlay = document.querySelector("[data-feature='nav']");
-	const jumpMenu = document.querySelector(".bm--jump-menu > button");
+	const jumpNavs = document.querySelectorAll("[data-jumpnav]");
 
 	document.body.classList.add("has-js");
 
@@ -269,6 +269,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			}
 		}
 	};
+
 	const hoverShow = (event) => {
 		const target = event.target;
 		const panel = target.parentNode.nextElementSibling;
@@ -333,6 +334,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	// Section nav toggle
 	sectionNav?.addEventListener("click", mobileSectionNav);
 
+	// Jump nav toggles
+	for (let i = 0; i < jumpNavs.length; i++) {
+		let jumpnav = jumpNavs[i];
+		jumpnav.addEventListener("click", mobileSectionNav);
+	}
+
+	// Collapsibles toggle
 	for (let i = 0; i < collapsibles.length; i++) {
 		let collapsible = collapsibles[i];
 		collapsible.addEventListener("click", accordionClick);
