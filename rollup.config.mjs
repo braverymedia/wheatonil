@@ -17,7 +17,7 @@ export default [
       file: path.join(JS_DIST, "wheaton.bundle.js"),
       format: "iife",
     },
-    plugins: [terser()],
+    plugins: [terser(), resolve()],
   },
   {
     input: path.join(JS_SRC, "program-finder-2023.js"),

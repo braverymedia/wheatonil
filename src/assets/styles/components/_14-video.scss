@@ -92,3 +92,65 @@
     }
 
 }
+.dialog-container,
+.dialog-overlay {
+  position: fixed; /* 1 */
+  height: 100dvh;
+  width: 100dvw;
+  top: 0; /* 1 */
+  right: 0; /* 1 */
+  bottom: 0; /* 1 */
+  left: 0; /* 1 */
+}
+.dialog-container {
+  z-index: 50; /* 1 */
+  display: flex; /* 2 */
+  align-items: center;
+  justify-content: center;
+}
+.dialog-container[aria-hidden='true'] {
+  display: none; /* 1 */
+}
+.dialog-overlay {
+  background-color: rgba(#0A2853, 0.95);
+    z-index: -1;
+    backdrop-filter: blur(10px);
+    animation: fade-in 200ms both;
+}
+
+.bm--modal-content {
+  margin: auto; /* 1 */
+  z-index: 2; /* 2 */
+  position: relative; /* 2 */
+  background-color: white; /* 3 */
+  animation: modal-in 400ms 200ms both;
+  box-shadow: var(--elevation--large);
+  aspect-ratio: 16 / 9;
+  width: 95%;
+  iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    @media ( min-width: 1024px ) {
+        width: 65vw;
+    }
+}
+iframe {
+    border: 0;
+    margin: 0;
+}
+button[data-a11y-dialog-hide] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    color: var(--color--white);
+    width: 65px;
+    height: 65px;
+    &:hover {
+        background: inherit;
+    }
+}

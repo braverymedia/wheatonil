@@ -1,4 +1,4 @@
-import "a11y-dialog";
+import A11yDialog from "a11y-dialog";
 let carousels = {};
 let marquees = {};
 
@@ -203,6 +203,41 @@ const initMarquee = (marquee) => {
 	reversed.append(group2, group2Copy);
 	marquee.element.append(reversed);
 };
+
+// video embed from url
+const embedVideo = (url) => {
+	let embedUrl, videoId;
+
+	// Check if the URL is from YouTube
+	if (url.includes("youtube.com")) {
+		videoId = url.split("v=")[1];
+		const ampersandPosition = videoId.indexOf("&");
+		if (ampersandPosition !== -1) {
+			videoId = videoId.substring(0, ampersandPosition);
+		}
+		embedUrl = `https://www.youtube.com/embed/${videoId}`;
+	}
+	// Check if the URL is from Vimeo
+	else if (url.includes("vimeo.com")) {
+		videoId = url.split(".com/")[1];
+		embedUrl = `https://player.vimeo.com/video/${videoId}`;
+	}
+	// If the URL is neither from YouTube nor Vimeo, return null
+	else {
+		return null;
+	}
+
+	// Create an iframe for the video embed
+	const iframe = document.createElement("iframe");
+	iframe.src = embedUrl;
+	iframe.width = "640";
+	iframe.height = "390";
+	iframe.allow = "autoplay";
+
+	// Return iframe to the body of the document
+	return iframe;
+}
+
 window.addEventListener("DOMContentLoaded", (event) => {
 	const accordionContainer = document.querySelector("[data-accordion]");
 	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
@@ -295,8 +330,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	mobileMenuContainer?.addEventListener("click", accordionClick);
 	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
-	jumpMenu?.addEventListener("click", toggleMobileJumpMenu);
-
 	// Section nav toggle
 	sectionNav?.addEventListener("click", mobileSectionNav);
 
@@ -333,20 +366,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	for (const carousel of carousels) {
 		carousel.element.setAttribute("data-bravery-carousel-init", "");
 	}
+
+	/**
+	 * Video Modal
+	 */
+	const a11ymodal = document.getElementById("bm-modal-dialog");
+	const dialog = new A11yDialog(a11ymodal);
+	const videoTriggers = document.querySelectorAll("[data-bm-modal]");
+	const modalContentContainer = document.querySelector(".bm--modal-content");
+	videoTriggers.forEach((link) => {
+		link.addEventListener("click", (e) => {
+			e.preventDefault(); // This will prevent the default link behavior
+			let url = link.getAttribute("href");
+			let embedMarkup = embedVideo(url);
+			modalContentContainer.append(embedMarkup);
+			dialog.show();
+		});
+	});
+	// Clear contents on hide
+	dialog
+		.on("show", () => (document.documentElement.style.overflowY = "hidden"))
+		.on("hide", function (event) {
+			document.documentElement.style.overflowY = "";
+			const container = event.target;
+			container.querySelector("iframe").remove();
+
+			const target = event.detail.target;
+			const closer = target.closest("[data-a11y-dialog-hide]");
+		});
+
 });
-
-// video embed from url
-const embedVideo = (url) => {
-	let video_id_regExp =
-			/^.*((youtu.be\/|vimeo.com\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
-		match = url.match(video_id_regExp),
-		video_id;
-
-	if (match && match[7]) {
-		//valid
-		video_id = match[7];
-	} else {
-		//invalid
-		alert("Invalid Video URL");
-	}
-}

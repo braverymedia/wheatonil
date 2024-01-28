@@ -1,31 +1,12 @@
 <!-- Accessible modal using a11y-dialog.js -->
 <div
-  id="bm--modal"
-  aria-labelledby="modal-label"
+  id="bm-modal-dialog"
+  class="dialog-container"
   aria-hidden="true"
 >
-  <div data-a11y-dialog-hide></div>
-  <div role="document">
-    <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
+  <div data-a11y-dialog-hide class="dialog-overlay"></div>
+  <button type="button" data-a11y-dialog-hide aria-label="Close dialog" class="bm--cta style-ghost">
         {% include "components/svg/icon-x.njk" %}
-    </button>
-    <span class="sr-only" id="modal-label">Your dialog title</span>
-  </div>
+  </button>
+  <div role="document" class="bm--modal-content"></div>
 </div>
-
-<pre>
-<!-- Should be included in the footer of each page -->
-<div
-  id="bm--modal"
-  aria-labelledby="modal-label"
-  aria-hidden="true"
->
-  <div data-a11y-dialog-hide></div>
-  <div role="document">
-    <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
-        {% include "components/svg/icon-x.njk" %}
-    </button>
-    <span class="sr-only" id="modal-label">Your dialog title</span>
-  </div>
-</div>
-</pre>
