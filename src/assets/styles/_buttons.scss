@@ -56,9 +56,17 @@ button.form_button_submit,
 }
 .style-loud {
     background-color: var(--color--orange-600);
+    border-color: var(--color--orange-700);
     color: var(--color--white);
+    box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
     &:hover {
+        box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
         background-color: var(--color--orange-700);
+        border-color: var(--color--orange-700);
+    }
+    &:active {
+        box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
+        border-color: var(--color--orange-700);
     }
 }
 .bm--callout {
