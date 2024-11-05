@@ -1,0 +1,97 @@
+.bm--faculty-social {
+    display: flex;
+    gap: 10px;
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s, color 0.3s;
+
+        &:hover {
+            color: #333;
+        }
+
+        > svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+    .icon-x {
+        color: #000;
+        &:hover {
+            color: var(--color--grey-700);
+        }
+    }
+    .icon-li {
+        color: #0077b5; // LinkedIn brand color
+
+        &:hover {
+            color: #005582; // Darker shade for hover effect
+        }
+    }
+
+    .icon-fb {
+        color: #3b5998; // Facebook brand color
+
+        &:hover {
+            color: #2d4373; // Darker shade for hover effect
+        }
+    }
+
+    .icon-tw {
+        color: #1da1f2; // Twitter brand color
+
+        &:hover {
+            color: #0d95e8; // Darker shade for hover effect
+        }
+    }
+
+    .icon-ig {
+        color: #e1306c; // Instagram brand color
+
+
+        &:hover {
+            color: #c13584; // Darker shade for hover effect
+        }
+    }
+    .icon-yt {
+        color: #ff0000; // YouTube brand color
+
+        &:hover {
+            color: #cc0000; // Darker shade for hover effect
+        }
+    }
+    .icon-pod {
+        color: #872EC4; // Podcast brand color
+
+        &:hover {
+            color: #4B1A6D; // Darker shade for hover effect
+        }
+    }
+    .icon-edu {
+        color: #42454a; // Edu brand color
+
+        &:hover {
+            color: #121212; // Darker shade for hover effect
+        }
+    }
+    .icon-chain {
+        background-color: var(--color--orange-600); // Chain link color
+        color: #fff;
+        border-radius: 50%;
+        height: 28px;
+        width: 28px;
+        &:hover {
+            background-color: var(--color--orange-700); // Darker shade for hover effect
+            color: #fff;
+        }
+        > svg {
+            width: 18px;
+            height: 18px;
+
+        }
+    }
+}

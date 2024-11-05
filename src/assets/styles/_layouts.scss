@@ -250,20 +250,25 @@ main > *[data-layout="1up"]{
 
 .is-layout-flex {
     display: flex;
+    gap: var(--space--gap-large);
     &.is-vertical,
     &.is-layout--stacked {
-        align-items: flex-start;
+        align-items: stretch;
         flex-direction: column;
+        justify-content: flex-start;
     }
     &.is-equal {
         align-items: stretch !important;
     }
-    &.is-layout--row {
+    &.is-layout--row:not(.bm--content) {
         @media ( min-width: 1024px ) {
             flex-direction: row;
             flex-basis: 50%;
             align-items: flex-end;
         }
+    }
+    &.bm--content {
+        gap: var(--space--gap-3xl);
     }
 }
 

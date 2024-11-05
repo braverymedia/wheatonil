@@ -85,6 +85,7 @@ const initCarousel = (carousel) => {
 	});
 
 	if (!controls) {
+		console.log('none');
 		return;
 	}
 
@@ -114,10 +115,8 @@ const initCarousel = (carousel) => {
 
 		return closestItem.child;
 	};
-
 	prevButton.addEventListener("click", () => {
 		nextButton.removeAttribute("disabled");
-
 		const closestItem = getClosestItem();
 
 		let distanceToScroll;
@@ -133,10 +132,8 @@ const initCarousel = (carousel) => {
 			if (!prevItem) {
 				prevItem = items.firstElementChild;
 			}
-
 			distanceToScroll = prevItem.offsetWidth;
 		}
-
 		items.scrollTo({
 			left: items.scrollLeft - distanceToScroll,
 			behavior: "smooth",

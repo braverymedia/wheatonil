@@ -1,8 +1,8 @@
 .filter-map {
     .rep-map--usa {
-        fill: var(--color--blue-300);
         .rep__map__item {
             cursor: pointer;
+            fill: var(--color--blue-300);
             .rep__map__item__letters {
                 fill: var(--color--blue-900);
             }
@@ -30,7 +30,8 @@
             gap: var(--space--gap-medium);
             align-items: center;
             justify-content: flex-start;
-            figure {
+            figure,
+            picture {
                 flex: 0 150px;
                 order: -1;
             }
@@ -55,6 +56,7 @@
         display: grid;
         grid-template-columns: 4fr 3fr;
         gap: var(--space--gap-xl);
+        align-items: start;
         .filter-list {
             grid-column: 2;
             grid-row: 1;
@@ -64,7 +66,7 @@
             grid-row: 1;
             padding-block: var(--space--gap-3xl);
             position: sticky;
-            top: 10dvh;
+            top: 15dvh;
         }
     }
 }

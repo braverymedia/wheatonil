@@ -70,7 +70,6 @@ const initCarousel = (carousel) => {
 	const nextButton = carousel.element.querySelector(
 		"[data-bravery-carousel-next]"
 	);
-
 	carousels = carousels.map((carouselObject) => {
 		if (carousel.id === carouselObject.id) {
 			return {
@@ -116,16 +115,12 @@ const initCarousel = (carousel) => {
 	};
 
 	prevButton.addEventListener("click", () => {
-		nextButton.removeAttribute("disabled");
+		// nextButton.removeAttribute("disabled");
 
 		const closestItem = getClosestItem();
 
 		let distanceToScroll;
 		const rect = closestItem.getBoundingClientRect();
-
-		if (rect.x < 0) {
-			distanceToScroll = Math.abs(rect.x);
-		}
 
 		if (!distanceToScroll) {
 			let prevItem = closestItem.previousElementSibling;
@@ -136,7 +131,6 @@ const initCarousel = (carousel) => {
 
 			distanceToScroll = prevItem.offsetWidth;
 		}
-
 		items.scrollTo({
 			left: items.scrollLeft - distanceToScroll,
 			behavior: "smooth",
@@ -144,7 +138,7 @@ const initCarousel = (carousel) => {
 	});
 
 	nextButton.addEventListener("click", () => {
-		prevButton.removeAttribute("disabled");
+		// prevButton.removeAttribute("disabled");
 
 		const closestItem = getClosestItem();
 

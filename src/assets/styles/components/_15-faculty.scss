@@ -54,3 +54,86 @@
         font-size: var(--type-size--base);
     }
 }
+
+.bm--faculty-header {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+        font-size: var(--type-size--xl-fluid);
+    }
+    picture {
+        width: calc(var(--space--grid-unit) * 27);
+        margin-bottom: calc(var(--space--grid-unit) * 2);
+    }
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -4vw;
+        width: 100vw;
+        height: 170px;
+        background: var(--gradient--blue-primary);
+        border-block-end: 8px solid var(--color--accent);
+        z-index: -1;
+    }
+    @media ( width >= 1024px ) {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--space--gap-large);
+        picture {
+            flex: 1 336px;
+        }
+        .bm--faculty-intro {
+            flex: 0 1 850px;
+            padding-block-start: 168px;
+        }
+        &:before {
+            height: 180px;
+            left: -7vw;
+        }
+        > *:not(picture) {
+            grid-column: 2;
+        }
+    }
+    @media ( width <= 1024px ) {
+        text-align: center;
+        .bm--faculty-titles {
+            text-align: center;
+            > * {
+                font-size: var(--type-size--small);
+            }
+        }
+    }
+    @media ( width >= 1300px ) {
+        &:before {
+            left: calc( var(--max-1280) * -1);
+        }
+    }
+}
+.bm--faculty-titles {
+    font-weight: 500;
+}
+.bm--faculty-vitals {
+    border-block: 1px solid var(--color--grey-300);
+    margin-block: var(--space--gap-large);
+    text-align: left;
+    ul {
+        list-style: none;
+        padding-inline-start: 0;
+        > li {
+            display: flex;
+            gap: calc(2 * var(--space--grid-unit));
+            strong {
+                flex: 0 0 100px;
+            }
+        }
+        @media ( width >= 1024px ) {
+            columns: 2;
+            column-gap: var(--space--gap-large);
+            break-inside: avoid-column;
+            orphans: 6;
+        }
+    }
+}

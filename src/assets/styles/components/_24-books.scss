@@ -1,0 +1,48 @@
+.bm {
+    &-book {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space--gap-large);
+        flex: 1 30%;
+        h2 {
+            font-family: var(--wc-font-family--serif);
+        }
+        h3 {
+            margin-block:0;
+        }
+        figure {
+            height: 570px;
+            picture {
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        @media ( width <= 824px ) {
+            flex: 0 1 45%;
+            figure {
+                height: auto;
+            }
+        }
+        @media( width <= 650px ) {
+            align-items: center;
+            text-align: center;
+            figure {
+                height: 45vh;
+            }
+        }
+    }
+    &-featured-books {
+        gap: var(--space--gap-large);
+        flex-wrap: wrap;
+        @media ( width <= 824px ) {
+            justify-content: center;
+        }
+        @media( width <= 650px ) {
+            flex-direction: column;
+        }
+    }
+}
+
+.hanging-indent {text-indent: -36px; padding-left: 36px;}
