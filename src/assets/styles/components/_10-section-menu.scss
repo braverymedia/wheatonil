@@ -1,11 +1,12 @@
 // Layout is in ../_layouts.scss
 .bm--section-nav,
 .bm--jump-menu {
-    background-color: var(--color--white);
     width: 100%;
     margin-block-start: var(--space--gap-large);
     margin-block-end: var(--space--gap-large);
     font-size: var(--type-size--base);
+    position: sticky;
+    top: 68px;
     button {
         display: flex;
         align-items: center;
@@ -26,6 +27,9 @@
         &[aria-expanded="true"]:after {
             transform: rotate(-45deg);
         }
+        & + div {
+            background-color: var(--color--white);
+        }
     }
     h2 {
         font-size: inherit;
@@ -44,15 +48,27 @@
         opacity: 0;
         transition: opacity 0.15s ease-in-out, padding 0.2s ease-in-out 0.15s, max-height 0.2s ease-in-out 0.15s;
         font-size: var(--type-size--small);
-        &.visible {
-            padding: var(--space--gap-large) 18px;
-            max-height: 700px;
-            opacity: 1;
-            transition: padding .25s ease-in-out, max-height .25s ease-in-out, opacity .15s ease-in-out .15s;
+        visibility: collapse;
+        @media ( width <= 1023px ) {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            box-shadow: var(--elevation--large);
+            ul {
+                height: 100%;
+                overflow-y: scroll;
+            }
+            &.visible {
+                padding: var(--space--gap-large) 18px;
+                max-height: 78dvh;
+                opacity: 1;
+                transition: padding .25s ease-in-out, max-height .25s ease-in-out, opacity .15s ease-in-out .15s;
+                visibility: visible;
+            }
         }
     }
-    @media (min-width: 1024px) {
-        padding: var(--space--gap-large) var(--space--gap-medium);
+    @media (width >= 1024px) {
+        padding-inline: var(--space--gap-medium);
         border: 0;
         background-color: var(--color--grey-100);
         border-radius: 16px;
@@ -75,36 +91,39 @@
             max-height: none;
             padding: 0;
             align-items: flex-start;
+            visibility: visible !important;
         }
     }
 }
 .bm {
     &--jump-menu {
         padding-block: var(--space--gap-medium);
-        padding-inline: var(--space--gap-regular);
         ul,
         li {
             list-style: none;
             padding-inline-start: 0;
             margin: 0;
         }
-        a {
+        li a {
             text-decoration: none;
             display: flex;
-            height: calc(var(--space--grid-unit) * 6);
             align-content: center;
+            padding: var(--space--gap-regular) 4px;
+
+            &:hover {
+                background-color: var(--color--grey-100);
+            }
         }
         @media (min-width: 1024px) {
+            padding-inline: var(--space--gap-regular);
             background-color: var(--color--white);
             border: 0;
             border-radius: 0;
-            position: sticky;
             bottom: unset;
             top: 248px;
             grid-column: 1 / span 2;
             align-self: start;
-            border-bottom: 1px solid var(--color--grey-300);
-            margin-block-end: calc(var(--space--grid-unit) * 4);
+            margin-block: 0 calc(var(--space--grid-unit) * 4);
             padding: 0;
             z-index: unset;
             div {
@@ -119,9 +138,9 @@
             li {
                 border-top: 1px solid var(--color--grey-300);
                 margin-block-end: 0 !important;
-            }
-            a {
-                height: calc(var(--space--grid-unit) * 7);
+                &:last-child {
+                    border-block-end: 1px solid var(--color--grey-300);
+                }
             }
         }
     }

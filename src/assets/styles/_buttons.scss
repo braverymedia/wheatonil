@@ -49,6 +49,8 @@ button.form_button_submit,
 }
 .style-bold,
 .style-primary,
+a.button-download,
+.button.download,
 .button-primary > a,
 .button-download > a {
     background: var(--color--blue-600) !important;
@@ -171,7 +173,7 @@ a.cta {
 .button-download > a {
     display: inline-flex;
     gap: var(--space--gap-regular);
-    text-decoration: none;
+    text-decoration: none !important;
     align-items: center;
     color: inherit;
     &:after {
@@ -188,4 +190,13 @@ a.cta {
 }
 .button-download {
     display: inline-flex !important;
+}
+
+.icon-reverse svg {
+    rotate: 180deg;
+}
+
+.is-style-fill {
+    width: 100%;
+    flex: 1 100%;
 }

@@ -511,3 +511,13 @@
 body.menu-open {
     overflow: hidden;
 }
+.bm--back-link {
+    font-size: var(--type-size--small);
+    display: inline-flex;
+    gap: var(--space--gap-small);
+    align-items: center;
+    justify-content: flex-start;
+    > svg {
+        height: 16px;;
+    }
+}

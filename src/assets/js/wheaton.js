@@ -316,6 +316,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			}
 		}
 	};
+	// Close jump menu on mobile when link is clicked
+	const mobileJumpNavigation = (event) => {
+		const target = event.target;
+
+		if (target instanceof HTMLAnchorElement) {
+			const button = target.closest("nav").querySelector("button");
+			const nav = button?.nextElementSibling;
+			const isExpanded = button?.getAttribute("aria-expanded") === "true";
+			console.log(button);
+			if (button) {
+				button.setAttribute("aria-expanded", `${!isExpanded}`);
+			}
+
+			if (nav) {
+				if (isExpanded) {
+					nav.classList.remove("visible");
+				} else {
+					nav.classList.add("visible");
+				}
+			}
+		}
+	};
 
 	showOverlay?.addEventListener("click", openOverlay);
 	showSearch?.addEventListener("click", openSearch);
@@ -330,8 +352,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 	// Jump nav toggles
 	for (let i = 0; i < jumpNavs.length; i++) {
-		let jumpnav = jumpNavs[i];
-		jumpnav.addEventListener("click", mobileSectionNav);
+		let jumpNav = jumpNavs[i];
+		jumpNav.addEventListener("click", mobileSectionNav);
+
+		// Run mobileSectionNav when child "a" is clicked
+		for (let j = 0; j < jumpNav.children.length; j++) {
+			let jumpNavChild = jumpNav.children[j];
+			jumpNavChild.addEventListener("click", mobileJumpNavigation);
+		}
 	}
 
 	// Collapsibles toggle
@@ -396,5 +424,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			const target = event.detail.target;
 			const closer = target.closest("[data-a11y-dialog-hide]");
 		});
-
 });

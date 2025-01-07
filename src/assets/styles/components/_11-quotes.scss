@@ -18,6 +18,7 @@
         margin-block-end: var(--space--gap-regular);
         line-height: 1.1;
         letter-spacing: -0.02em;
+        border: 0;
     }
     cite {
         font-size: var(--type-size--small);
@@ -27,5 +28,10 @@
             font-size: var(--type-size--base);
             font-weight: normal;
         }
+    }
+    blockquote {
+        padding-inline: 0;
+        margin-inline: 0;
+        border: 0;
     }
 }
