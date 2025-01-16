@@ -3,6 +3,7 @@ body {
   line-height: var(--wc-line-height) !important;
   font-family: var(--wc-font-family--sans-serif) !important;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 h1,
 h2,
