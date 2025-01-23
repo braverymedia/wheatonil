@@ -35,20 +35,45 @@ button.form_button_submit,
     &:focus {
         box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #F2F4F7;
     }
-}
-// Button Styles
-.style-ghost {
-    border: 0;
-    box-shadow: none !important;
-    padding-inline-start: var(--space--grid-unit);
-    padding-inline-end: var(--space--grid-unit);
-    &.invert {
-        background-color: transparent;
-        color: inherit;
+
+    // Button Styles
+    &.style-ghost {
+        border: 0;
+        box-shadow: none !important;
+        padding-inline-start: var(--space--grid-unit);
+        padding-inline-end: var(--space--grid-unit);
+        &.invert {
+            background-color: transparent;
+            color: inherit;
+        }
+    }
+    &.style-bold,
+    &.style-primary {
+        background: var(--color--blue-600) !important;
+        color: var(--color--white) !important;
+        &:hover {
+            background-color: var(--color--blue-700) !important;
+        }
+    }
+    &.style-secondary {
+        background-color: var(--color--white);
+    }
+    &.style-loud {
+        background-color: var(--color--orange-600);
+        border-color: var(--color--orange-700);
+        color: var(--color--white);
+        box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
+        &:hover {
+            box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
+            background-color: var(--color--orange-700);
+            border-color: var(--color--orange-700);
+        }
+        &:active {
+            box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
+            border-color: var(--color--orange-700);
+        }
     }
 }
-.style-bold,
-.style-primary,
 a.button-download,
 .button.download,
 .button-primary > a,
@@ -59,24 +84,7 @@ a.button-download,
         background-color: var(--color--blue-700) !important;
     }
 }
-.style-secondary {
-    background-color: var(--color--white);
-}
-.style-loud {
-    background-color: var(--color--orange-600);
-    border-color: var(--color--orange-700);
-    color: var(--color--white);
-    box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
-    &:hover {
-        box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
-        background-color: var(--color--orange-700);
-        border-color: var(--color--orange-700);
-    }
-    &:active {
-        box-shadow: 0px 1px 2px rgba(#D57435, 0.05);
-        border-color: var(--color--orange-700);
-    }
-}
+
 .bm--callout {
     .style-bold,
     .style-primary {

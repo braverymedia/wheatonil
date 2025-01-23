@@ -1,25 +1,32 @@
 ---
-layout: layouts/general.njk
+layout: layouts/faculty.njk
 section: pages
 ---
-{% include "components/bm-section-menu.njk" %}
-{% include "sections/bm-section-video.njk" %}
-
-
-{% include "sections/bm-section-general-content.njk" %}
-{% include "sections/bm-section-content-middle.njk" %}
-<section class="bm--content-container bm-margins has-bg--white has-jump-menu">
-    {% include "components/bm-jump-menu.njk" %}
-    <article class="bm--content">
-        {% include "components/bm-video-grid.njk" %}
-    </article>
-</section>
 <section class="bm--fluid has-bg--white">
-    <header>
-
+    <header class="bm-faculty-filter">
+        <div class="bm-faculty-filter--controls">
+            <label for="nameFilter">Filter Faculty</label>
+            <input type="text" id="nameFilter" placeholder="Type a name..." aria-label="Filter by name" />
+            <div class="bm-filter--dept dropdown">
+                <button
+                    class="button style-loud dropdown-toggle"
+                    id="departmentFilterButton"
+                    aria-expanded="false"
+                    aria-controls="departmentFilterMenu"
+                    aria-haspopup="true">
+                    <span>Filter by department</span>
+                </button>
+                <menu
+                    class="filter-department"
+                    id="departmentFilterMenu"
+                    aria-labelledby="departmentFilterButton"
+                    hidden>
+                </menu>
+            </div>
+        </div>
     </header>
     <div class="bm-grid--faculty" data-filterable>
-        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="art">
+        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="Science,Ancient Languages,Anthropology">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -28,16 +35,16 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Rebecca" data-department="art">
+        <figure class="bm-card--faculty" data-name="Rebecca" data-department="Music,sociology,biblical studies,biology">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
             <figcaption>
-                <h3><a href="#">rebecca</a></h3>
+                <h3><a href="#">Rebecca</a></h3>
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Annie" data-department="art">
+        <figure class="bm-card--faculty" data-name="Annie" data-department="Theology,Coding,christian formation and ministry">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -46,7 +53,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Les" data-department="art">
+        <figure class="bm-card--faculty" data-name="Les" data-department="Marketing,Music, communication">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -55,7 +62,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Joel" data-department="art">
+        <figure class="bm-card--faculty" data-name="Joel" data-department="Marketing,Art">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -64,7 +71,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="art">
+        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="Music">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -73,7 +80,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="art">
+        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="Art">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -82,7 +89,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="art">
+        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="Science">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -91,7 +98,7 @@ section: pages
                 <span class="faculty--title">Associate Professor of Art, Department Chair</span>
             </figcaption>
         </figure>
-        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="art">
+        <figure class="bm-card--faculty" data-name="Cherith Lundin" data-department="Art">
             <div class="bm-image--mask" data-ar="2:3">
                 <img src="https://picsum.photos/270/405/" alt="Wheaton College Meyer Science Center Exterior in Sun" width="270" height="405">
             </div>
@@ -102,5 +109,3 @@ section: pages
         </figure>
     </div>
 </section>
-{% include "components/bm-card-linked.njk" %}
-{% include "components/bm-card-image-top.njk" %}

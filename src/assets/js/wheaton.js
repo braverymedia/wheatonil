@@ -232,196 +232,367 @@ const embedVideo = (url) => {
 	return iframe;
 }
 
+const filterFacultyItems = () => {
+    // Get DOM elements
+    const nameFilter = document.getElementById('nameFilter');
+    const filterMenu = document.getElementById('departmentFilterMenu');
+    const filterButton = document.getElementById('departmentFilterButton');
+    const filterableContainer = document.querySelector('[data-filterable]');
+
+    // Guard against missing elements
+    if (!nameFilter || !filterMenu || !filterButton || !filterableContainer) {
+        console.warn('Faculty filter: Required elements not found');
+        return;
+    }
+
+    const filterableItems = filterableContainer.querySelectorAll('.bm-card--faculty');
+
+    if (!filterableItems.length) {
+        console.warn('Faculty filter: No filterable items found');
+        return;
+    }
+
+    // Create an indexed data structure for faster lookups
+    const facultyIndex = new Map();
+    const departmentIndex = new Map();
+    const departmentSet = new Set();
+    
+    // Initialize indexes
+    const initializeIndexes = () => {
+        filterableItems.forEach(item => {
+            const name = item.getAttribute('data-name')?.toLowerCase() || '';
+            const departmentStr = item.getAttribute('data-department');
+            
+            // Only process departments if the attribute exists and has content
+            const departments = departmentStr
+                ? departmentStr
+                    .split(',')
+                    .map(dep => dep.trim())
+                    .filter(dep => dep && dep.length > 0) // Filter out empty strings
+                : [];
+            
+            // Index by name and departments
+            facultyIndex.set(item, {
+                element: item,
+                name,
+                departments: new Set(departments)
+            });
+
+            // Build department index and set
+            departments.forEach(dept => {
+                if (dept) { // Additional check to ensure department is not empty
+                    departmentSet.add(dept);
+                    if (!departmentIndex.has(dept)) {
+                        departmentIndex.set(dept, new Set());
+                    }
+                    departmentIndex.get(dept).add(item);
+                }
+            });
+        });
+    };
+
+    // Debounce function
+    const debounce = (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    };
+
+    // Function to populate department filters
+    const populateDepartmentFilters = () => {
+        // Filter out any empty departments and sort
+        const departments = Array.from(departmentSet)
+            .filter(dept => dept && dept.trim().length > 0)
+            .sort((a, b) => a.localeCompare(b));
+
+        const fragment = document.createDocumentFragment();
+
+        departments.forEach(department => {
+            const menuItem = document.createElement('li');
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            const labelText = document.createElement('span');
+
+            checkbox.type = 'checkbox';
+            checkbox.value = department;
+            checkbox.setAttribute('data-department', '');
+            checkbox.id = `department-${department.toLowerCase().replace(/\s+/g, '-')}`;
+
+            labelText.textContent = department;
+            labelText.id = `label-${department.toLowerCase().replace(/\s+/g, '-')}`;
+
+            label.appendChild(checkbox);
+            label.appendChild(labelText);
+            menuItem.appendChild(label);
+            fragment.appendChild(menuItem);
+        });
+
+        filterMenu.innerHTML = '';
+        filterMenu.appendChild(fragment);
+    };
+
+    // Toggle menu visibility
+    const toggleMenu = () => {
+        const isExpanded = filterButton.getAttribute('aria-expanded') === 'true';
+        filterButton.setAttribute('aria-expanded', !isExpanded);
+        filterMenu.hidden = isExpanded;
+    };
+
+    // Close menu when clicking outside
+    const handleClickOutside = (event) => {
+        if (!filterMenu.contains(event.target) && !filterButton.contains(event.target)) {
+            filterButton.setAttribute('aria-expanded', 'false');
+            filterMenu.hidden = true;
+        }
+    };
+
+    // Handle keyboard navigation
+    const handleKeydown = (event) => {
+        if (event.key === 'Escape') {
+            filterButton.setAttribute('aria-expanded', 'false');
+            filterMenu.hidden = true;
+            filterButton.focus();
+        }
+    };
+
+    // Filter items when input changes
+    const filterItems = debounce(() => {
+        const nameValue = nameFilter.value.toLowerCase();
+        const selectedDepartments = new Set(
+            Array.from(filterMenu.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value)
+        );
+
+        // Use requestAnimationFrame for smooth DOM updates
+        requestAnimationFrame(() => {
+            filterableItems.forEach(item => {
+                const itemData = facultyIndex.get(item);
+                const nameMatch = !nameValue || itemData.name.includes(nameValue);
+                const deptMatch = !selectedDepartments.size || 
+                    Array.from(selectedDepartments).some(dept => itemData.departments.has(dept));
+
+                // Batch DOM updates by only changing if needed
+                const shouldShow = nameMatch && deptMatch;
+                const isCurrentlyShown = item.style.display !== 'none';
+                
+                if (shouldShow !== isCurrentlyShown) {
+                    item.style.display = shouldShow ? '' : 'none';
+                }
+            });
+        });
+    }, 150);
+
+    // Initialize
+    initializeIndexes();
+    populateDepartmentFilters();
+
+    // Initialize event listeners
+    filterButton.addEventListener('click', toggleMenu);
+    document.addEventListener('click', handleClickOutside);
+    filterMenu.addEventListener('keydown', handleKeydown);
+    nameFilter.addEventListener('input', filterItems);
+    filterMenu.addEventListener('change', filterItems);
+};
+
 window.addEventListener("DOMContentLoaded", (event) => {
-	const accordionContainer = document.querySelector("[data-accordion]");
-	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
-	const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
-	const collapsibles = document.querySelectorAll("[data-collapsible]");
-	const sectionNav = document.querySelector("[data-sectionnav]");
-	const showOverlay = document.querySelector(".menu-more");
-	const showSearch = document.querySelector("button.search");
-	const hideOverlay = document.querySelector(".close-menu");
-	const overlay = document.querySelector("[data-feature='nav']");
-	const jumpNavs = document.querySelectorAll("[data-jumpnav]");
+    // Initialize faculty filters
+    filterFacultyItems();
 
-	document.body.classList.add("has-js");
+    const accordionContainer = document.querySelector("[data-accordion]");
+    const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
+    const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
+    const collapsibles = document.querySelectorAll("[data-collapsible]");
+    const sectionNav = document.querySelector("[data-sectionnav]");
+    const showOverlay = document.querySelector(".menu-more");
+    const showSearch = document.querySelector("button.search");
+    const hideOverlay = document.querySelector(".close-menu");
+    const overlay = document.querySelector("[data-feature='nav']");
+    const jumpNavs = document.querySelectorAll("[data-jumpnav]");
 
-	const accordionClick = (event) => {
-		const target = event.target;
-		if (target instanceof HTMLButtonElement) {
-			const panel = target.parentNode.nextElementSibling;
-			const isExpanded = target.getAttribute("aria-expanded") === "true";
+    document.body.classList.add("has-js");
 
-			target.setAttribute("aria-expanded", `${!isExpanded}`);
+    const accordionClick = (event) => {
+        const target = event.target;
+        if (target instanceof HTMLButtonElement) {
+            const panel = target.parentNode.nextElementSibling;
+            const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-			if (isExpanded) {
-				panel.setAttribute("hidden", "");
-				panel.classList.remove("visible");
-			} else {
-				panel.removeAttribute("hidden");
-				panel.classList.add("visible");
-			}
-		}
-	};
+            target.setAttribute("aria-expanded", `${!isExpanded}`);
 
-	const hoverShow = (event) => {
-		const target = event.target;
-		const panel = target.parentNode.nextElementSibling;
+            if (isExpanded) {
+                panel.setAttribute("hidden", "");
+                panel.classList.remove("visible");
+            } else {
+                panel.removeAttribute("hidden");
+                panel.classList.add("visible");
+            }
+        }
+    };
 
-		if (target instanceof HTMLButtonElement) {
-			target.setAttribute("aria-expanded", "true");
-			panel.classList.add("visible");
-			menuPanels.forEach((mpanel) => {
-				let labeled = mpanel.getAttribute("id");
-				if (labeled !== target.getAttribute("aria-controls")) {
-					mpanel.classList.remove("visible");
-					document
-						.querySelector(`[aria-controls="${labeled}"]`)
-						.setAttribute("aria-expanded", "false");
-				}
-			});
-		}
-	};
+    const hoverShow = (event) => {
+        const target = event.target;
+        const panel = target.parentNode.nextElementSibling;
 
-	const openOverlay = () => {
-		if (showOverlay.getAttribute("aria-expanded") === "false") {
-			showOverlay.setAttribute("aria-expanded", "true");
-			overlay.dataset.state = "visible";
-		}
-	};
+        if (target instanceof HTMLButtonElement) {
+            target.setAttribute("aria-expanded", "true");
+            panel.classList.add("visible");
+            menuPanels.forEach((mpanel) => {
+                let labeled = mpanel.getAttribute("id");
+                if (labeled !== target.getAttribute("aria-controls")) {
+                    mpanel.classList.remove("visible");
+                    document
+                        .querySelector(`[aria-controls="${labeled}"]`)
+                        .setAttribute("aria-expanded", "false");
+                }
+            });
+        }
+    };
 
-	const closeOverlay = () => {
-		showOverlay.setAttribute("aria-expanded", "false");
-		overlay.dataset.state = "hidden";
-	};
+    const openOverlay = () => {
+        if (showOverlay.getAttribute("aria-expanded") === "false") {
+            showOverlay.setAttribute("aria-expanded", "true");
+            overlay.dataset.state = "visible";
+        }
+    };
 
-	const openSearch = () => {
-		openOverlay();
-		document.getElementById("site-search").focus({ focusVisible: true });
-	};
+    const closeOverlay = () => {
+        showOverlay.setAttribute("aria-expanded", "false");
+        overlay.dataset.state = "hidden";
+    };
 
-	const mobileSectionNav = (event) => {
-		const target = event.target;
+    const openSearch = () => {
+        openOverlay();
+        document.getElementById("site-search").focus({ focusVisible: true });
+    };
 
-		if (target instanceof HTMLButtonElement) {
-			const nav = target.nextElementSibling;
-			const isExpanded = target.getAttribute("aria-expanded") === "true";
+    const mobileSectionNav = (event) => {
+        const target = event.target;
 
-			target.setAttribute("aria-expanded", `${!isExpanded}`);
+        if (target instanceof HTMLButtonElement) {
+            const nav = target.nextElementSibling;
+            const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-			if (isExpanded) {
-				nav.classList.remove("visible");
-			} else {
-				nav.classList.add("visible");
-			}
-		}
-	};
-	// Close jump menu on mobile when link is clicked
-	const mobileJumpNavigation = (event) => {
-		const target = event.target;
+            target.setAttribute("aria-expanded", `${!isExpanded}`);
 
-		if (target instanceof HTMLAnchorElement) {
-			const button = target.closest("nav").querySelector("button");
-			const nav = button?.nextElementSibling;
-			const isExpanded = button?.getAttribute("aria-expanded") === "true";
-			console.log(button);
-			if (button) {
-				button.setAttribute("aria-expanded", `${!isExpanded}`);
-			}
+            if (isExpanded) {
+                nav.classList.remove("visible");
+            } else {
+                nav.classList.add("visible");
+            }
+        }
+    };
+    // Close jump menu on mobile when link is clicked
+    const mobileJumpNavigation = (event) => {
+        const target = event.target;
 
-			if (nav) {
-				if (isExpanded) {
-					nav.classList.remove("visible");
-				} else {
-					nav.classList.add("visible");
-				}
-			}
-		}
-	};
+        if (target instanceof HTMLAnchorElement) {
+            const button = target.closest("nav").querySelector("button");
+            const nav = button?.nextElementSibling;
+            const isExpanded = button?.getAttribute("aria-expanded") === "true";
+            console.log(button);
+            if (button) {
+                button.setAttribute("aria-expanded", `${!isExpanded}`);
+            }
 
-	showOverlay?.addEventListener("click", openOverlay);
-	showSearch?.addEventListener("click", openSearch);
-	hideOverlay?.addEventListener("click", closeOverlay);
+            if (nav) {
+                if (isExpanded) {
+                    nav.classList.remove("visible");
+                } else {
+                    nav.classList.add("visible");
+                }
+            }
+        }
+    };
 
-	accordionContainer?.addEventListener("click", accordionClick);
-	mobileMenuContainer?.addEventListener("click", accordionClick);
-	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
+    showOverlay?.addEventListener("click", openOverlay);
+    showSearch?.addEventListener("click", openSearch);
+    hideOverlay?.addEventListener("click", closeOverlay);
 
-	// Section nav toggle
-	sectionNav?.addEventListener("click", mobileSectionNav);
+    accordionContainer?.addEventListener("click", accordionClick);
+    mobileMenuContainer?.addEventListener("click", accordionClick);
+    mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
-	// Jump nav toggles
-	for (let i = 0; i < jumpNavs.length; i++) {
-		let jumpNav = jumpNavs[i];
-		jumpNav.addEventListener("click", mobileSectionNav);
+    // Section nav toggle
+    sectionNav?.addEventListener("click", mobileSectionNav);
 
-		// Run mobileSectionNav when child "a" is clicked
-		for (let j = 0; j < jumpNav.children.length; j++) {
-			let jumpNavChild = jumpNav.children[j];
-			jumpNavChild.addEventListener("click", mobileJumpNavigation);
-		}
-	}
+    // Jump nav toggles
+    for (let i = 0; i < jumpNavs.length; i++) {
+        let jumpNav = jumpNavs[i];
+        jumpNav.addEventListener("click", mobileSectionNav);
 
-	// Collapsibles toggle
-	for (let i = 0; i < collapsibles.length; i++) {
-		let collapsible = collapsibles[i];
-		collapsible.addEventListener("click", accordionClick);
-	}
-	// Marquee
-	marquees = [...document.querySelectorAll(".bm-gallery--marquee")].map(
-		(element, index) => ({
-			id: index + 1,
-			element,
-		})
-	);
+        // Run mobileSectionNav when child "a" is clicked
+        for (let j = 0; j < jumpNav.children.length; j++) {
+            let jumpNavChild = jumpNav.children[j];
+            jumpNavChild.addEventListener("click", mobileJumpNavigation);
+        }
+    }
 
-	for (const marquee of marquees) {
-		initMarquee(marquee);
-	}
+    // Collapsibles toggle
+    for (let i = 0; i < collapsibles.length; i++) {
+        let collapsible = collapsibles[i];
+        collapsible.addEventListener("click", accordionClick);
+    }
+    // Marquee
+    marquees = [...document.querySelectorAll(".bm-gallery--marquee")].map(
+        (element, index) => ({
+            id: index + 1,
+            element,
+        })
+    );
 
-	// Carousel
-	carousels = [...document.querySelectorAll("[data-bravery-carousel]")].map(
-		(element, index) => ({
-			id: index + 1,
-			element,
-		})
-	);
+    for (const marquee of marquees) {
+        initMarquee(marquee);
+    }
 
-	for (const carousel of carousels) {
-		initCarousel(carousel);
-	}
+    // Carousel
+    carousels = [...document.querySelectorAll("[data-bravery-carousel]")].map(
+        (element, index) => ({
+            id: index + 1,
+            element,
+        })
+    );
 
-	initResizing();
+    for (const carousel of carousels) {
+        initCarousel(carousel);
+    }
 
-	for (const carousel of carousels) {
-		carousel.element.setAttribute("data-bravery-carousel-init", "");
-	}
+    initResizing();
 
-	/**
-	 * Video Modal
-	 */
-	const a11ymodal = document.getElementById("bm-modal-dialog");
-	const dialog = new A11yDialog(a11ymodal);
-	const videoTriggers = document.querySelectorAll("[data-bm-modal]");
-	const modalContentContainer = document.querySelector(".bm--modal-content");
-	videoTriggers.forEach((link) => {
-		link.addEventListener("click", (e) => {
-			e.preventDefault(); // This will prevent the default link behavior
-			let url = link.getAttribute("href");
-			let embedMarkup = embedVideo(url);
-			modalContentContainer.append(embedMarkup);
-			dialog.show();
-		});
-	});
-	// Clear contents on hide
-	dialog
-		.on("show", () => (document.documentElement.style.overflowY = "hidden"))
-		.on("hide", function (event) {
-			document.documentElement.style.overflowY = "";
-			const container = event.target;
-			container.querySelector("iframe").remove();
+    for (const carousel of carousels) {
+        carousel.element.setAttribute("data-bravery-carousel-init", "");
+    }
 
-			const target = event.detail.target;
-			const closer = target.closest("[data-a11y-dialog-hide]");
-		});
+    /**
+     * Video Modal
+     */
+    const a11ymodal = document.getElementById("bm-modal-dialog");
+    const dialog = new A11yDialog(a11ymodal);
+    const videoTriggers = document.querySelectorAll("[data-bm-modal]");
+    const modalContentContainer = document.querySelector(".bm--modal-content");
+    videoTriggers.forEach((link) => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault(); // This will prevent the default link behavior
+            let url = link.getAttribute("href");
+            let embedMarkup = embedVideo(url);
+            modalContentContainer.append(embedMarkup);
+            dialog.show();
+        });
+    });
+    // Clear contents on hide
+    dialog
+        .on("show", () => (document.documentElement.style.overflowY = "hidden"))
+        .on("hide", function (event) {
+            document.documentElement.style.overflowY = "";
+            const container = event.target;
+            container.querySelector("iframe").remove();
+
+            const target = event.detail.target;
+            const closer = target.closest("[data-a11y-dialog-hide]");
+        });
 });
