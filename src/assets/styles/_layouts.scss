@@ -275,14 +275,3 @@ main > *[data-layout="1up"]{
         gap: var(--space--gap-3xl);
     }
 }
-
-[data-media="video"] {
-    position: relative;
-    padding-block-end: 56.26%;
-    > * {
-        position: absolute;
-        inset: 0;
-        height: 100%;
-        width: 100%;
-    }
-}

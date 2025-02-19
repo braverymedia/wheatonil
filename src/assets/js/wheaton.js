@@ -230,369 +230,461 @@ const embedVideo = (url) => {
 
 	// Return iframe to the body of the document
 	return iframe;
-}
+};
 
 const filterFacultyItems = () => {
-    // Get DOM elements
-    const nameFilter = document.getElementById('nameFilter');
-    const filterMenu = document.getElementById('departmentFilterMenu');
-    const filterButton = document.getElementById('departmentFilterButton');
-    const filterableContainer = document.querySelector('[data-filterable]');
+	// Get DOM elements
+	const nameFilter = document.getElementById("nameFilter");
+	const filterMenu = document.getElementById("departmentFilterMenu");
+	const filterButton = document.getElementById("departmentFilterButton");
+	const filterableContainer = document.querySelector("[data-filterable]");
 
-    // Guard against missing elements
-    if (!nameFilter || !filterMenu || !filterButton || !filterableContainer) {
-        console.warn('Faculty filter: Required elements not found');
-        return;
-    }
+	// Guard against missing elements
+	if (!nameFilter || !filterMenu || !filterButton || !filterableContainer) {
+		console.warn("Faculty filter: Required elements not found");
+		return;
+	}
 
-    const filterableItems = filterableContainer.querySelectorAll('.bm-card--faculty');
+	const filterableItems =
+		filterableContainer.querySelectorAll(".bm-card--faculty");
 
-    if (!filterableItems.length) {
-        console.warn('Faculty filter: No filterable items found');
-        return;
-    }
+	if (!filterableItems.length) {
+		console.warn("Faculty filter: No filterable items found");
+		return;
+	}
 
-    // Create an indexed data structure for faster lookups
-    const facultyIndex = new Map();
-    const departmentIndex = new Map();
-    const departmentSet = new Set();
-    
-    // Initialize indexes
-    const initializeIndexes = () => {
-        filterableItems.forEach(item => {
-            const name = item.getAttribute('data-name')?.toLowerCase() || '';
-            const departmentStr = item.getAttribute('data-department');
-            
-            // Only process departments if the attribute exists and has content
-            const departments = departmentStr
-                ? departmentStr
-                    .split(',')
-                    .map(dep => dep.trim())
-                    .filter(dep => dep && dep.length > 0) // Filter out empty strings
-                : [];
-            
-            // Index by name and departments
-            facultyIndex.set(item, {
-                element: item,
-                name,
-                departments: new Set(departments)
-            });
+	// Create an indexed data structure for faster lookups
+	const facultyIndex = new Map();
+	const departmentIndex = new Map();
+	const departmentSet = new Set();
 
-            // Build department index and set
-            departments.forEach(dept => {
-                if (dept) { // Additional check to ensure department is not empty
-                    departmentSet.add(dept);
-                    if (!departmentIndex.has(dept)) {
-                        departmentIndex.set(dept, new Set());
-                    }
-                    departmentIndex.get(dept).add(item);
-                }
-            });
-        });
-    };
+	// Initialize indexes
+	const initializeIndexes = () => {
+		filterableItems.forEach((item) => {
+			const name = item.getAttribute("data-name")?.toLowerCase() || "";
+			const departmentStr = item.getAttribute("data-department");
 
-    // Debounce function
-    const debounce = (func, wait) => {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
+			// Only process departments if the attribute exists and has content
+			const departments = departmentStr
+				? departmentStr
+						.split("|")
+						.map((dep) => dep.trim())
+						.filter((dep) => dep && dep.length > 0) // Filter out empty strings
+				: [];
 
-    // Function to populate department filters
-    const populateDepartmentFilters = () => {
-        // Filter out any empty departments and sort
-        const departments = Array.from(departmentSet)
-            .filter(dept => dept && dept.trim().length > 0)
-            .sort((a, b) => a.localeCompare(b));
+			// Index by name and departments
+			facultyIndex.set(item, {
+				element: item,
+				name,
+				departments: new Set(departments),
+			});
 
-        const fragment = document.createDocumentFragment();
+			// Build department index and set
+			departments.forEach((dept) => {
+				if (dept) {
+					// Additional check to ensure department is not empty
+					departmentSet.add(dept);
+					if (!departmentIndex.has(dept)) {
+						departmentIndex.set(dept, new Set());
+					}
+					departmentIndex.get(dept).add(item);
+				}
+			});
+		});
+	};
 
-        departments.forEach(department => {
-            const menuItem = document.createElement('li');
-            const label = document.createElement('label');
-            const checkbox = document.createElement('input');
-            const labelText = document.createElement('span');
+	// Debounce function
+	const debounce = (func, wait) => {
+		let timeout;
+		return function executedFunction(...args) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	};
 
-            checkbox.type = 'checkbox';
-            checkbox.value = department;
-            checkbox.setAttribute('data-department', '');
-            checkbox.id = `department-${department.toLowerCase().replace(/\s+/g, '-')}`;
+	// Function to populate department filters
+	const populateDepartmentFilters = () => {
+		// Filter out any empty departments and sort
+		const departments = Array.from(departmentSet)
+			.filter((dept) => dept && dept.trim().length > 0)
+			.sort((a, b) => a.localeCompare(b));
 
-            labelText.textContent = department;
-            labelText.id = `label-${department.toLowerCase().replace(/\s+/g, '-')}`;
+		const fragment = document.createDocumentFragment();
 
-            label.appendChild(checkbox);
-            label.appendChild(labelText);
-            menuItem.appendChild(label);
-            fragment.appendChild(menuItem);
-        });
+		departments.forEach((department) => {
+			const menuItem = document.createElement("li");
+			const label = document.createElement("label");
+			const checkbox = document.createElement("input");
+			const labelText = document.createElement("span");
 
-        filterMenu.innerHTML = '';
-        filterMenu.appendChild(fragment);
-    };
+			checkbox.type = "checkbox";
+			checkbox.value = department;
+			checkbox.setAttribute("data-department", "");
+			checkbox.id = `department-${department
+				.toLowerCase()
+				.replace(/\s+/g, "-")}`;
 
-    // Toggle menu visibility
-    const toggleMenu = () => {
-        const isExpanded = filterButton.getAttribute('aria-expanded') === 'true';
-        filterButton.setAttribute('aria-expanded', !isExpanded);
-        filterMenu.hidden = isExpanded;
-    };
+			labelText.textContent = department;
+			labelText.id = `label-${department
+				.toLowerCase()
+				.replace(/\s+/g, "-")}`;
 
-    // Close menu when clicking outside
-    const handleClickOutside = (event) => {
-        if (!filterMenu.contains(event.target) && !filterButton.contains(event.target)) {
-            filterButton.setAttribute('aria-expanded', 'false');
-            filterMenu.hidden = true;
-        }
-    };
+			label.appendChild(checkbox);
+			label.appendChild(labelText);
+			menuItem.appendChild(label);
+			fragment.appendChild(menuItem);
+		});
 
-    // Handle keyboard navigation
-    const handleKeydown = (event) => {
-        if (event.key === 'Escape') {
-            filterButton.setAttribute('aria-expanded', 'false');
-            filterMenu.hidden = true;
-            filterButton.focus();
-        }
-    };
+		filterMenu.innerHTML = "";
+		filterMenu.appendChild(fragment);
+	};
 
-    // Filter items when input changes
-    const filterItems = debounce(() => {
-        const nameValue = nameFilter.value.toLowerCase();
-        const selectedDepartments = new Set(
-            Array.from(filterMenu.querySelectorAll('input[type="checkbox"]:checked'))
-                .map(checkbox => checkbox.value)
-        );
+	// Toggle menu visibility
+	const toggleMenu = () => {
+		const isExpanded =
+			filterButton.getAttribute("aria-expanded") === "true";
+		filterButton.setAttribute("aria-expanded", !isExpanded);
+		filterMenu.hidden = isExpanded;
+	};
 
-        // Use requestAnimationFrame for smooth DOM updates
-        requestAnimationFrame(() => {
-            filterableItems.forEach(item => {
-                const itemData = facultyIndex.get(item);
-                const nameMatch = !nameValue || itemData.name.includes(nameValue);
-                const deptMatch = !selectedDepartments.size || 
-                    Array.from(selectedDepartments).some(dept => itemData.departments.has(dept));
+	// Close menu when clicking outside
+	const handleClickOutside = (event) => {
+		if (
+			!filterMenu.contains(event.target) &&
+			!filterButton.contains(event.target)
+		) {
+			filterButton.setAttribute("aria-expanded", "false");
+			filterMenu.hidden = true;
+		}
+	};
 
-                // Batch DOM updates by only changing if needed
-                const shouldShow = nameMatch && deptMatch;
-                const isCurrentlyShown = item.style.display !== 'none';
-                
-                if (shouldShow !== isCurrentlyShown) {
-                    item.style.display = shouldShow ? '' : 'none';
-                }
-            });
-        });
-    }, 150);
+	// Handle keyboard navigation
+	const handleKeydown = (event) => {
+		if (event.key === "Escape") {
+			filterButton.setAttribute("aria-expanded", "false");
+			filterMenu.hidden = true;
+			filterButton.focus();
+		}
+	};
 
-    // Initialize
-    initializeIndexes();
-    populateDepartmentFilters();
+	// Filter items when input changes
+	const filterItems = debounce(() => {
+		const nameValue = nameFilter.value.toLowerCase();
+		const selectedDepartments = new Set(
+			Array.from(
+				filterMenu.querySelectorAll('input[type="checkbox"]:checked')
+			).map((checkbox) => checkbox.value)
+		);
 
-    // Initialize event listeners
-    filterButton.addEventListener('click', toggleMenu);
-    document.addEventListener('click', handleClickOutside);
-    filterMenu.addEventListener('keydown', handleKeydown);
-    nameFilter.addEventListener('input', filterItems);
-    filterMenu.addEventListener('change', filterItems);
+		// Use requestAnimationFrame for smooth DOM updates
+		requestAnimationFrame(() => {
+			filterableItems.forEach((item) => {
+				const itemData = facultyIndex.get(item);
+				const nameMatch =
+					!nameValue || itemData.name.includes(nameValue);
+				const deptMatch =
+					!selectedDepartments.size ||
+					Array.from(selectedDepartments).some((dept) =>
+						itemData.departments.has(dept)
+					);
+
+				// Batch DOM updates by only changing if needed
+				const shouldShow = nameMatch && deptMatch;
+				const isCurrentlyShown = item.style.display !== "none";
+
+				if (shouldShow !== isCurrentlyShown) {
+					item.style.display = shouldShow ? "" : "none";
+				}
+			});
+		});
+	}, 150);
+
+	// Initialize
+	initializeIndexes();
+	populateDepartmentFilters();
+
+	// Initialize event listeners
+	filterButton.addEventListener("click", toggleMenu);
+	document.addEventListener("click", handleClickOutside);
+	filterMenu.addEventListener("keydown", handleKeydown);
+	nameFilter.addEventListener("input", filterItems);
+	filterMenu.addEventListener("change", filterItems);
 };
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    // Initialize faculty filters
-    filterFacultyItems();
+	// Initialize faculty filters
+	filterFacultyItems();
 
-    const accordionContainer = document.querySelector("[data-accordion]");
-    const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
-    const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
-    const collapsibles = document.querySelectorAll("[data-collapsible]");
-    const sectionNav = document.querySelector("[data-sectionnav]");
-    const showOverlay = document.querySelector(".menu-more");
-    const showSearch = document.querySelector("button.search");
-    const hideOverlay = document.querySelector(".close-menu");
-    const overlay = document.querySelector("[data-feature='nav']");
-    const jumpNavs = document.querySelectorAll("[data-jumpnav]");
+	const accordionContainer = document.querySelector("[data-accordion]");
+	const mobileMenuContainer = document.querySelector("[data-mobilemenu]");
+	const menuPanels = mobileMenuContainer.querySelectorAll(".accordion-panel");
+	const collapsibles = document.querySelectorAll("[data-collapsible]");
+	const sectionNav = document.querySelector("[data-sectionnav]");
+	const showOverlay = document.querySelector(".menu-more");
+	const showSearch = document.querySelector("button.search");
+	const hideOverlay = document.querySelector(".close-menu");
+	const overlay = document.querySelector("[data-feature='nav']");
+	const jumpNavs = document.querySelectorAll("[data-jumpnav]");
 
-    document.body.classList.add("has-js");
+	document.body.classList.add("has-js");
 
-    const accordionClick = (event) => {
-        const target = event.target;
-        if (target instanceof HTMLButtonElement) {
-            const panel = target.parentNode.nextElementSibling;
-            const isExpanded = target.getAttribute("aria-expanded") === "true";
+	const accordionClick = (event) => {
+		const target = event.target;
+		if (target instanceof HTMLButtonElement) {
+			const panel = target.parentNode.nextElementSibling;
+			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-            target.setAttribute("aria-expanded", `${!isExpanded}`);
+			target.setAttribute("aria-expanded", `${!isExpanded}`);
 
-            if (isExpanded) {
-                panel.setAttribute("hidden", "");
-                panel.classList.remove("visible");
-            } else {
-                panel.removeAttribute("hidden");
-                panel.classList.add("visible");
-            }
-        }
-    };
+			if (isExpanded) {
+				panel.setAttribute("hidden", "");
+				panel.classList.remove("visible");
+			} else {
+				panel.removeAttribute("hidden");
+				panel.classList.add("visible");
+			}
+		}
+	};
 
-    const hoverShow = (event) => {
-        const target = event.target;
-        const panel = target.parentNode.nextElementSibling;
+	const hoverShow = (event) => {
+		const target = event.target;
+		const panel = target.parentNode.nextElementSibling;
 
-        if (target instanceof HTMLButtonElement) {
-            target.setAttribute("aria-expanded", "true");
-            panel.classList.add("visible");
-            menuPanels.forEach((mpanel) => {
-                let labeled = mpanel.getAttribute("id");
-                if (labeled !== target.getAttribute("aria-controls")) {
-                    mpanel.classList.remove("visible");
-                    document
-                        .querySelector(`[aria-controls="${labeled}"]`)
-                        .setAttribute("aria-expanded", "false");
-                }
-            });
-        }
-    };
+		if (target instanceof HTMLButtonElement) {
+			target.setAttribute("aria-expanded", "true");
+			panel.classList.add("visible");
+			menuPanels.forEach((mpanel) => {
+				let labeled = mpanel.getAttribute("id");
+				if (labeled !== target.getAttribute("aria-controls")) {
+					mpanel.classList.remove("visible");
+					document
+						.querySelector(`[aria-controls="${labeled}"]`)
+						.setAttribute("aria-expanded", "false");
+				}
+			});
+		}
+	};
 
-    const openOverlay = () => {
-        if (showOverlay.getAttribute("aria-expanded") === "false") {
-            showOverlay.setAttribute("aria-expanded", "true");
-            overlay.dataset.state = "visible";
-        }
-    };
+	const openOverlay = () => {
+		if (showOverlay.getAttribute("aria-expanded") === "false") {
+			showOverlay.setAttribute("aria-expanded", "true");
+			overlay.dataset.state = "visible";
+		}
+	};
 
-    const closeOverlay = () => {
-        showOverlay.setAttribute("aria-expanded", "false");
-        overlay.dataset.state = "hidden";
-    };
+	const closeOverlay = () => {
+		showOverlay.setAttribute("aria-expanded", "false");
+		overlay.dataset.state = "hidden";
+	};
 
-    const openSearch = () => {
-        openOverlay();
-        document.getElementById("site-search").focus({ focusVisible: true });
-    };
+	const openSearch = () => {
+		openOverlay();
+		document.getElementById("site-search").focus({ focusVisible: true });
+	};
 
-    const mobileSectionNav = (event) => {
-        const target = event.target;
+	const mobileSectionNav = (event) => {
+		const target = event.target;
 
-        if (target instanceof HTMLButtonElement) {
-            const nav = target.nextElementSibling;
-            const isExpanded = target.getAttribute("aria-expanded") === "true";
+		if (target instanceof HTMLButtonElement) {
+			const nav = target.nextElementSibling;
+			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
-            target.setAttribute("aria-expanded", `${!isExpanded}`);
+			target.setAttribute("aria-expanded", `${!isExpanded}`);
 
-            if (isExpanded) {
-                nav.classList.remove("visible");
-            } else {
-                nav.classList.add("visible");
-            }
-        }
-    };
-    // Close jump menu on mobile when link is clicked
-    const mobileJumpNavigation = (event) => {
-        const target = event.target;
+			if (isExpanded) {
+				nav.classList.remove("visible");
+			} else {
+				nav.classList.add("visible");
+			}
+		}
+	};
+	// Close jump menu on mobile when link is clicked
+	const mobileJumpNavigation = (event) => {
+		const target = event.target;
 
-        if (target instanceof HTMLAnchorElement) {
-            const button = target.closest("nav").querySelector("button");
-            const nav = button?.nextElementSibling;
-            const isExpanded = button?.getAttribute("aria-expanded") === "true";
-            console.log(button);
-            if (button) {
-                button.setAttribute("aria-expanded", `${!isExpanded}`);
-            }
+		if (target instanceof HTMLAnchorElement) {
+			const button = target.closest("nav").querySelector("button");
+			const nav = button?.nextElementSibling;
+			const isExpanded = button?.getAttribute("aria-expanded") === "true";
+			console.log(button);
+			if (button) {
+				button.setAttribute("aria-expanded", `${!isExpanded}`);
+			}
 
-            if (nav) {
-                if (isExpanded) {
-                    nav.classList.remove("visible");
-                } else {
-                    nav.classList.add("visible");
-                }
-            }
-        }
-    };
+			if (nav) {
+				if (isExpanded) {
+					nav.classList.remove("visible");
+				} else {
+					nav.classList.add("visible");
+				}
+			}
+		}
+	};
 
-    showOverlay?.addEventListener("click", openOverlay);
-    showSearch?.addEventListener("click", openSearch);
-    hideOverlay?.addEventListener("click", closeOverlay);
+	showOverlay?.addEventListener("click", openOverlay);
+	showSearch?.addEventListener("click", openSearch);
+	hideOverlay?.addEventListener("click", closeOverlay);
 
-    accordionContainer?.addEventListener("click", accordionClick);
-    mobileMenuContainer?.addEventListener("click", accordionClick);
-    mobileMenuContainer?.addEventListener("mouseover", hoverShow);
+	accordionContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
-    // Section nav toggle
-    sectionNav?.addEventListener("click", mobileSectionNav);
+	// Section nav toggle
+	sectionNav?.addEventListener("click", mobileSectionNav);
 
-    // Jump nav toggles
-    for (let i = 0; i < jumpNavs.length; i++) {
-        let jumpNav = jumpNavs[i];
-        jumpNav.addEventListener("click", mobileSectionNav);
+	// Jump nav toggles
+	for (let i = 0; i < jumpNavs.length; i++) {
+		let jumpNav = jumpNavs[i];
+		jumpNav.addEventListener("click", mobileSectionNav);
 
-        // Run mobileSectionNav when child "a" is clicked
-        for (let j = 0; j < jumpNav.children.length; j++) {
-            let jumpNavChild = jumpNav.children[j];
-            jumpNavChild.addEventListener("click", mobileJumpNavigation);
-        }
-    }
+		// Run mobileSectionNav when child "a" is clicked
+		for (let j = 0; j < jumpNav.children.length; j++) {
+			let jumpNavChild = jumpNav.children[j];
+			jumpNavChild.addEventListener("click", mobileJumpNavigation);
+		}
+	}
 
-    // Collapsibles toggle
-    for (let i = 0; i < collapsibles.length; i++) {
-        let collapsible = collapsibles[i];
-        collapsible.addEventListener("click", accordionClick);
-    }
-    // Marquee
-    marquees = [...document.querySelectorAll(".bm-gallery--marquee")].map(
-        (element, index) => ({
-            id: index + 1,
-            element,
-        })
-    );
+	// Collapsibles toggle
+	for (let i = 0; i < collapsibles.length; i++) {
+		let collapsible = collapsibles[i];
+		collapsible.addEventListener("click", accordionClick);
+	}
 
-    for (const marquee of marquees) {
-        initMarquee(marquee);
-    }
+	// Marquee
+	marquees = [...document.querySelectorAll(".bm-gallery--marquee")].map(
+		(element, index) => ({
+			id: index + 1,
+			element,
+		})
+	);
 
-    // Carousel
-    carousels = [...document.querySelectorAll("[data-bravery-carousel]")].map(
-        (element, index) => ({
-            id: index + 1,
-            element,
-        })
-    );
+	for (const marquee of marquees) {
+		initMarquee(marquee);
+	}
 
-    for (const carousel of carousels) {
-        initCarousel(carousel);
-    }
+	// Carousel
+	carousels = [...document.querySelectorAll("[data-bravery-carousel]")].map(
+		(element, index) => ({
+			id: index + 1,
+			element,
+		})
+	);
 
-    initResizing();
+	for (const carousel of carousels) {
+		initCarousel(carousel);
+	}
 
-    for (const carousel of carousels) {
-        carousel.element.setAttribute("data-bravery-carousel-init", "");
-    }
+	initResizing();
 
-    /**
-     * Video Modal
-     */
-    const a11ymodal = document.getElementById("bm-modal-dialog");
-    const dialog = new A11yDialog(a11ymodal);
-    const videoTriggers = document.querySelectorAll("[data-bm-modal]");
-    const modalContentContainer = document.querySelector(".bm--modal-content");
-    videoTriggers.forEach((link) => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault(); // This will prevent the default link behavior
-            let url = link.getAttribute("href");
-            let embedMarkup = embedVideo(url);
-            modalContentContainer.append(embedMarkup);
-            dialog.show();
-        });
-    });
-    // Clear contents on hide
-    dialog
-        .on("show", () => (document.documentElement.style.overflowY = "hidden"))
-        .on("hide", function (event) {
-            document.documentElement.style.overflowY = "";
-            const container = event.target;
-            container.querySelector("iframe").remove();
+	for (const carousel of carousels) {
+		carousel.element.setAttribute("data-bravery-carousel-init", "");
+	}
 
-            const target = event.detail.target;
-            const closer = target.closest("[data-a11y-dialog-hide]");
-        });
+	/**
+	 * Media Modal
+	 */
+	const a11ymodal = document.getElementById("bm-modal-dialog");
+	const dialog = new A11yDialog(a11ymodal);
+	const mediaTriggers = document.querySelectorAll("[data-bm-modal]");
+	const modalContentContainer = document.querySelector(".bm--modal-content");
+
+	function embedVideo(url) {
+		const videoId = url.includes('youtu')
+			? url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/)[1]
+			: url.match(/vimeo\.com\/(?:.*\/)?([0-9]+)/)[1];
+
+		const iframe = document.createElement('iframe');
+		iframe.className = 'bm--modal-media';
+		// Set width to 100% to allow responsive scaling while maintaining 16:9 aspect ratio
+		iframe.style.width = '100%';
+		iframe.style.aspectRatio = '16 / 9';
+		iframe.style.height = 'auto';
+		if (url.includes('youtu')) {
+			iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+		} else {
+			iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+		}
+
+		iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+		iframe.allowFullscreen = true;
+		return iframe;
+	}
+
+	function embedImage(url, trigger) {
+		// Find the parent figure element
+		const sourceFigure = trigger.closest('figure');
+		if (!sourceFigure) {
+			// Fallback to simple image if no figure found
+			const img = document.createElement('img');
+			img.className = 'bm--modal-media';
+			img.src = url;
+			img.alt = trigger.getAttribute('data-alt') || '';
+			return img;
+		}
+
+		// Create a new figure for the modal
+		const figure = document.createElement('figure');
+		figure.className = 'bm--modal-media';
+
+		// Get the source image, excluding the button
+		const sourceImg = sourceFigure.querySelector('img:not(.bm--modal-trigger)');
+		if (sourceImg) {
+			const img = document.createElement('img');
+			img.src = url;
+			img.alt = trigger.getAttribute('data-alt') || sourceImg.alt;
+			// Copy any relevant attributes from source image
+			['loading', 'decoding'].forEach(attr => {
+				if (sourceImg.hasAttribute(attr)) {
+					img.setAttribute(attr, sourceImg.getAttribute(attr));
+				}
+			});
+			figure.appendChild(img);
+		}
+
+		// Clone the figcaption if it exists
+		const sourceCaption = sourceFigure.querySelector('figcaption');
+		if (sourceCaption) {
+			const figcaption = sourceCaption.cloneNode(true);
+			figure.appendChild(figcaption);
+		}
+
+		return figure;
+	}
+
+	mediaTriggers.forEach((trigger) => {
+		trigger.addEventListener("click", (e) => {
+			e.preventDefault(); // Prevent default for links
+
+			// Get the media URL either from href (for links) or data-src (for buttons)
+			let url = trigger.tagName.toLowerCase() === 'a'
+				? trigger.getAttribute("href")
+				: trigger.getAttribute("data-src");
+
+			if (!url) {
+				console.warn('No media URL provided for modal trigger');
+				return;
+			}
+
+			let mediaType = trigger.getAttribute("data-media-type") || "video";
+			let embedMarkup = mediaType === "image" ? embedImage(url, trigger) : embedVideo(url);
+			modalContentContainer.appendChild(embedMarkup);
+			dialog.show();
+		});
+	});
+
+	// Clear contents on hide
+	dialog
+		.on("show", () => (document.documentElement.style.overflowY = "hidden"))
+		.on("hide", function (event) {
+			document.documentElement.style.overflowY = "";
+			const container = event.target;
+			const mediaElement = container.querySelector('.bm--modal-media');
+			if (mediaElement) {
+				mediaElement.remove();
+			}
+		});
 });
