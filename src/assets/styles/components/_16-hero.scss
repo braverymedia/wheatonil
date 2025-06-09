@@ -118,12 +118,3 @@
     animation-play-state: paused;
   }
 }
-
-@keyframes scroll-y {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(calc(-100% - 32px));
-  }
-}

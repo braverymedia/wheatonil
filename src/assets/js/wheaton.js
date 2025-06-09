@@ -470,15 +470,30 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	};
 
 	const openOverlay = () => {
-		if (showOverlay.getAttribute("aria-expanded") === "false") {
+		if (showOverlay && showOverlay.getAttribute("aria-expanded") === "false") {
+			// Set expanded state
 			showOverlay.setAttribute("aria-expanded", "true");
-			overlay.dataset.state = "visible";
+			
+			// Reset animations by temporarily removing the visible state
+			if (overlay) {
+				overlay.dataset.state = "opening";
+				
+				// Force reflow to ensure the state is applied before adding visible state
+				void overlay.offsetHeight;
+				
+				// Set the visible state to trigger animations
+				overlay.dataset.state = "visible";
+			}
 		}
 	};
 
 	const closeOverlay = () => {
-		showOverlay.setAttribute("aria-expanded", "false");
-		overlay.dataset.state = "hidden";
+		if (showOverlay) {
+			showOverlay.setAttribute("aria-expanded", "false");
+		}
+		if (overlay) {
+			overlay.dataset.state = "hidden";
+		}
 	};
 
 	const openSearch = () => {
@@ -486,22 +501,98 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		document.getElementById("site-search").focus({ focusVisible: true });
 	};
 
-	const mobileSectionNav = (event) => {
+	// Handle hover on desktop
+	const handleHoverIn = (event) => {
+		if (window.innerWidth >= 1024) {
+			const header = event.currentTarget;
+			const button = header.querySelector('.nav-menu--toggle');
+			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
+			
+			if (panel) {
+				panel.classList.add('visible');
+				header.classList.add('is-expanded');
+				button.setAttribute('aria-expanded', 'true');
+			}
+		}
+	};
+
+	// Handle hover out on desktop
+	const handleHoverOut = (event) => {
+		if (window.innerWidth >= 1024) {
+			const header = event.currentTarget;
+			const button = header.querySelector('.nav-menu--toggle');
+			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
+			
+			if (panel) {
+				panel.classList.remove('visible');
+				header.classList.remove('is-expanded');
+				button.setAttribute('aria-expanded', 'false');
+			}
+		}
+	};
+
+	// Handle mobile touch interactions
+	const handleMobileClick = (event) => {
+		event.stopPropagation();
 		const target = event.target;
 
-		if (target instanceof HTMLButtonElement) {
-			const nav = target.nextElementSibling;
+		// Handle button clicks (toggle panel)
+		if (target.classList.contains('nav-menu--toggle')) {
+			event.preventDefault();
+			const header = target.closest('.nav-menu--header');
+			const panel = document.getElementById(target.getAttribute('aria-controls'));
 			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
 			target.setAttribute("aria-expanded", `${!isExpanded}`);
 
 			if (isExpanded) {
-				nav.classList.remove("visible");
+				header?.classList.remove('is-expanded');
+				panel.classList.remove("visible");
 			} else {
-				nav.classList.add("visible");
+				header?.classList.add('is-expanded');
+				panel.classList.add("visible");
 			}
+		} 
+		// Handle link clicks inside header
+		else if (target.closest('.nav-menu--header')) {
+			const header = target.closest('.nav-menu--header');
+			const link = header.querySelector('.nav-menu--link');
+			const button = header.querySelector('.nav-menu--toggle');
+			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
+
+			// On mobile, if clicking the link and panel is closed, prevent default and open panel
+			if (window.innerWidth < 1024 && target === link && panel && button.getAttribute('aria-expanded') === 'false') {
+				event.preventDefault();
+				button.setAttribute('aria-expanded', 'true');
+				header.classList.add('is-expanded');
+				panel.classList.add('visible');
+			}
+			// On desktop or if panel is already open, let the default link behavior happen
 		}
 	};
+
+	// Main function to handle both hover and click events
+	const mobileSectionNav = (event) => {
+		if (window.innerWidth >= 1024) {
+			// On desktop, handle hover events
+			if (event.type === 'mouseenter') {
+				handleHoverIn(event);
+			} else if (event.type === 'mouseleave') {
+				handleHoverOut(event);
+			}
+		} else {
+			// On mobile, handle click events
+			handleMobileClick(event);
+		}
+	};
+
+	// Initialize event listeners for navigation headers
+	const navHeaders = document.querySelectorAll('.nav-menu--header');
+	navHeaders.forEach(header => {
+		header.addEventListener('mouseenter', mobileSectionNav);
+		header.addEventListener('mouseleave', mobileSectionNav);
+		header.addEventListener('click', mobileSectionNav);
+	});
 	// Close jump menu on mobile when link is clicked
 	const mobileJumpNavigation = (event) => {
 		const target = event.target;
@@ -529,22 +620,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	showSearch?.addEventListener("click", openSearch);
 	hideOverlay?.addEventListener("click", closeOverlay);
 
-	accordionContainer?.addEventListener("click", accordionClick);
-	mobileMenuContainer?.addEventListener("click", accordionClick);
-	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
+	// Add hover behavior for desktop
+	accordionContainer?.addEventListener("mouseover", hoverShow);
+
+	// Handle mobile navigation - add click handler to headers
+	document.querySelectorAll(".nav-menu--header").forEach((header) => {
+		header.addEventListener("click", mobileSectionNav);
+	});
+
+	// Handle toggle button clicks separately
+	document.querySelectorAll(".nav-menu--toggle").forEach((button) => {
+		button.addEventListener("click", mobileSectionNav);
+	});
+
+	// Handle jump navigation
+	document.querySelectorAll(".bm--menu-jump button").forEach((button) => {
+		button.addEventListener("click", mobileJumpNavigation);
+	});
 
 	// Section nav toggle
 	sectionNav?.addEventListener("click", mobileSectionNav);
 
-	// Jump nav toggles
+	// Jump nav toggles - only add click handlers to the buttons
 	for (let i = 0; i < jumpNavs.length; i++) {
 		let jumpNav = jumpNavs[i];
-		jumpNav.addEventListener("click", mobileSectionNav);
-
-		// Run mobileSectionNav when child "a" is clicked
-		for (let j = 0; j < jumpNav.children.length; j++) {
-			let jumpNavChild = jumpNav.children[j];
-			jumpNavChild.addEventListener("click", mobileJumpNavigation);
+		const button = jumpNav.querySelector('button');
+		if (button) {
+			button.addEventListener("click", mobileJumpNavigation);
 		}
 	}
 
