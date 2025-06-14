@@ -59,16 +59,71 @@
     // Mark as initialized
     marqueeElement.classList.add("is-initialized");
 
-    // Lazy load all images
-    marqueeElement.querySelectorAll("img").forEach((img) => {
+    // Get all images in the marquee
+    const imagesInMarquee = marqueeElement.querySelectorAll("img");
+    
+    // Function to check if an element is in the viewport
+    const isInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0 &&
+        rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+        rect.right >= 0
+      );
+    };
+    
+    // Function to load an image
+    const loadImage = (img) => {
       if (img.complete) {
-        img.classList.add("is-loaded");
+        img.classList.add('is-loaded');
       } else {
-        img.addEventListener("load", () => {
-          img.classList.add("is-loaded");
+        // Force load by setting src again if it's a data-src
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+        if (img.dataset.srcset) {
+          img.srcset = img.dataset.srcset;
+        }
+        
+        img.addEventListener('load', () => {
+          img.classList.add('is-loaded');
         });
       }
+    };
+    
+    // Immediately load images that are in the viewport
+    imagesInMarquee.forEach(img => {
+      if (isInViewport(img)) {
+        loadImage(img);
+      }
     });
+    
+    // Set up IntersectionObserver for remaining images
+    if ('IntersectionObserver' in window) {
+      const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            loadImage(img);
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '50% 0px', // Start loading when within 50% of the viewport
+        threshold: 0.01
+      });
+      
+      // Observe all images that aren't already loaded
+      imagesInMarquee.forEach(img => {
+        if (!img.classList.contains('is-loaded')) {
+          lazyImageObserver.observe(img);
+        }
+      });
+    } else {
+      // Fallback: Load all images if IntersectionObserver is not supported
+      imagesInMarquee.forEach(loadImage);
+    }
   }
 
   /**
