@@ -13,6 +13,10 @@
             align-items: stretch;
         }
         .home--greeting {
+            // Set up container queries
+            container-type: inline-size;
+            container-name: greeting;
+            
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -23,9 +27,18 @@
             isolation: isolate;
             color: var(--color--blue-600);
             block-size: calc(100dvh - 72px);
+            
             h2 {
                 color: inherit;
-                max-width: 475px;
+                max-width: 100%;
+                margin: 0 0 0.5em;
+                font-size: var(--type-size--xl-fluid);
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+                
+                @container greeting (min-width: 48rem) {
+                    max-width: 475px;
+                }
             }
             .prehead {
                 position: relative;
@@ -58,10 +71,14 @@
                 gap: var(--space--gap-xxl);
                 height: unset;
                 justify-content: flex-end;
-                flex-basis: minmax(30%, 500px);
+                flex-basis: 500px;
+                max-width: 30%;
 
             }
         }
+    }
+    &-gallery-col {
+        flex-basis: 50%;
     }
     &-gallery--marquee {
         display: none;
@@ -75,6 +92,9 @@
             animation-play-state: paused;
         }
         @media (min-width: 1024px) {
+            picture {
+                width: 100%;
+            }
             display: flex;
         }
     }

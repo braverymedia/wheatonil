@@ -1,81 +1,103 @@
-(function(wheaton) {
-    'use strict';
+(function (wheaton) {
+  "use strict";
 
-    let marquees = [];
+  const marquees = [];
 
-    /**
-     * Initialize a marquee
-     * @param {Object} marquee - The marquee to initialize
-     */
-    function initMarquee(marquee) {
-        const items = marquee.element.querySelectorAll('picture');
-        if (!items.length) return;
+  /**
+   * Initialize a marquee with proper structure
+   * @param {HTMLElement} marqueeElement - The marquee element to initialize
+   */
+  function initMarquee(marqueeElement) {
+    // Show the marquee if it was hidden
+    marqueeElement.hidden = false;
 
-        const images = [...items];
-        const half = Math.ceil(images.length / 2);
-        const firstHalf = images.slice(0, half);
-        const secondHalf = images.slice(half);
+    // Get all picture elements
+    const items = marqueeElement.querySelectorAll("picture");
+    const images = [...items];
+    if (!images.length) return;
 
-        // Create groups
-        const column = marquee.element.querySelector('.bm-gallery-col');
-        if (!column) return;
+    // Split images into two groups
+    const half = Math.ceil(images.length / 2);
+    const firstHalf = images.slice(0, half);
+    const secondHalf = images.slice(half);
 
-        const group = document.createElement('div');
-        group.className = 'bm-marquee--group';
+    // Create first column
+    const column = document.createElement("div");
+    column.className = "bm-gallery-col";
 
-        // Create first group and its copy
-        const group1 = group.cloneNode(true);
-        group1.append(...firstHalf);
-        const group1Copy = group1.cloneNode(true);
-        
-        // Create second group and its copy
-        const group2 = group.cloneNode(true);
-        group2.append(...secondHalf);
-        const group2Copy = group2.cloneNode(true);
+    // Create groups for first column
+    const group1 = document.createElement("div");
+    group1.className = "bm-marquee--group";
+    group1.append(...firstHalf);
 
-        // Set aria-hidden on copies for better accessibility
-        group1Copy.setAttribute('aria-hidden', 'true');
-        group2Copy.setAttribute('aria-hidden', 'true');
+    // Create clone of first group
+    const group1Copy = group1.cloneNode(true);
+    group1Copy.setAttribute("aria-hidden", "true");
 
-        // Create reversed column for second group
-        const reversed = document.createElement('section');
-        reversed.className = 'bm-gallery-col bm-marquee';
-        reversed.setAttribute('data-direction', 'reverse');
+    // Create second column (reversed)
+    const reversed = document.createElement("div");
+    reversed.className = "bm-gallery-col bm-marquee";
+    reversed.setAttribute("data-direction", "reverse");
 
-        // Build the marquee structure
-        column.innerHTML = '';
-        column.append(group1, group1Copy);
-        reversed.append(group2, group2Copy);
-        marquee.element.append(reversed);
-    }
+    // Create groups for second column
+    const group2 = document.createElement("div");
+    group2.className = "bm-marquee--group";
+    group2.append(...secondHalf);
 
-    /**
-     * Initialize all marquees on the page
-     */
-    function init() {
-        const marqueeElements = document.querySelectorAll('.bm-gallery--marquee');
-        
-        marquees = Array.from(marqueeElements).map((element, index) => ({
-            id: index + 1,
-            element
-        }));
+    // Create clone of second group
+    const group2Copy = group2.cloneNode(true);
+    group2Copy.setAttribute("aria-hidden", "true");
 
-        marquees.forEach(marquee => {
-            initMarquee(marquee);
+    // Build the structure
+    column.append(group1, group1Copy);
+    reversed.append(group2, group2Copy);
+
+    // Clear and rebuild marquee content
+    marqueeElement.innerHTML = "";
+    marqueeElement.append(column, reversed);
+
+    // Mark as initialized
+    marqueeElement.classList.add("is-initialized");
+
+    // Lazy load all images
+    marqueeElement.querySelectorAll("img").forEach((img) => {
+      if (img.complete) {
+        img.classList.add("is-loaded");
+      } else {
+        img.addEventListener("load", () => {
+          img.classList.add("is-loaded");
         });
-    }
+      }
+    });
+  }
 
-    // Public API
-    wheaton.marquee = {
-        init,
-        marquees: () => marquees
-    };
+  /**
+   * Initialize all marquees on the page
+   */
+  function init() {
+    const marqueeElements = document.querySelectorAll(
+      ".bm-gallery--marquee:not(.is-initialized)"
+    );
 
-    // Auto-initialize
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    marqueeElements.forEach((element, index) => {
+      initMarquee(element);
+      marquees.push({
+        id: `marquee-${index + 1}`,
+        element,
+      });
+    });
+  }
 
+  // Export public API
+  wheaton.marquee = {
+    init,
+    marquees: () => marquees,
+  };
+
+  // Auto-initialize
+  if (document.readyState !== "loading") {
+    init();
+  } else {
+    document.addEventListener("DOMContentLoaded", init);
+  }
 })(window.wheaton = window.wheaton || {});
