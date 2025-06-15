@@ -73,27 +73,22 @@
 figure.bm--modal-media {
     border-radius: var(--corner--radius);
     overflow: hidden;
-    width: 95%;
+    max-width: 90vw;
     max-height: 95dvh;
-    margin: 0;
-    display: flex;
+    margin: 0 auto;
+    display: inline-flex;
     flex-direction: column;
+    position: relative;
+    width: auto;
+    height: auto;
 
     img {
         max-width: 100%;
-        max-height: calc(95dvh - 4rem); /* Account for potential caption */
+        max-height: calc(95dvh - 4rem);
         width: auto;
         height: auto;
         object-fit: contain;
-    }
-
-    figcaption {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
-        color: var(--color--white);
-        padding: var(--space--gap-large);
-        font-size: var(--type-size--xsmall);
-        font-family: var(--wc-font-family--sans-serif);
-        width: 100%;
-        margin-top: auto;
+        object-position: center;
+        display: block;
     }
 }
