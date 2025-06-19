@@ -1,10 +1,51 @@
 <head>
+    <script>document.documentElement.className += ' js';</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patterns: Wheaton College, IL</title>
     <link rel="stylesheet" href="https://use.typekit.net/frw7phk.css" type="text/css">
-    <link rel="stylesheet" href="/assets/styles/critical.css">
-    <link rel="stylesheet" href="/assets/styles/wheaton.css">
-    <script src="/assets/js/wheaton.bundle.js"></script>
+    <link rel="stylesheet" href="/assets/css/critical.css">
+    <link rel="stylesheet" href="/assets/css/wheaton.css">
+    <link rel="preconnect" href="https://pxl-wheatonedu.terminalfour.net">
+    <!-- Initialize wheaton namespace and load a11y-dialog -->
+    <script>
+    // Initialize namespace
+    window.wheaton = window.wheaton || {};
+
+    // Function to load scripts after a11y-dialog is loaded
+    function loadAppScripts() {
+        // Load modern or legacy JavaScript
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = '/assets/js/main.js';
+        script.onerror = function() {
+            console.error('Failed to load main.js');
+        };
+        document.head.appendChild(script);
+
+        // Load legacy script for non-module browsers
+        if (!('noModule' in script)) {
+            const legacyScript = document.createElement('script');
+            legacyScript.nomodule = true;
+            legacyScript.src = '/assets/js/legacy.js';
+            legacyScript.onerror = function() {
+                console.error('Failed to load legacy.js');
+            };
+            document.head.appendChild(legacyScript);
+        }
+    }
+
+    // Load a11y-dialog first
+    const a11yScript = document.createElement('script');
+    a11yScript.src = 'https://unpkg.com/a11y-dialog@8.0.0/dist/a11y-dialog.min.js';
+    a11yScript.onload = loadAppScripts;
+    a11yScript.onerror = function() {
+        console.error('Failed to load a11y-dialog');
+        loadAppScripts(); // Still try to load the rest
+    };
+    document.head.appendChild(a11yScript);
+    </script>
+
+    <!-- Program finder -->
     <script src="/assets/js/program-finder-2023.bundle.js"></script>
 </head>

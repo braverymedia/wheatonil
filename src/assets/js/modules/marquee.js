@@ -58,7 +58,11 @@
 
     // Mark as initialized
     marqueeElement.classList.add("is-initialized");
-
+    
+    // Also add is-initialized to the columns
+    const columns = marqueeElement.querySelectorAll('.bm-gallery-col');
+    columns.forEach(col => col.classList.add('is-initialized'));
+    
     // Get all images in the marquee
     const imagesInMarquee = marqueeElement.querySelectorAll("img");
     

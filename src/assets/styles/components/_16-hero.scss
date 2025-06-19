@@ -79,6 +79,14 @@
     }
     &-gallery-col {
         flex-basis: 50%;
+        
+        /* Hide columns until JS initializes */
+        .js & {
+            display: none;
+        }
+        .js &.is-initialized {
+            display: block;
+        }
     }
     &-gallery--marquee {
         display: none;
@@ -88,6 +96,17 @@
         gap: var(--space--gap-xl);
         overflow: hidden;
         padding-inline: 0 !important;
+        
+        /* Hide content until JS initializes */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        
+        /* Show once JS adds is-initialized class */
+        &.is-initialized {
+            opacity: 1;
+            visibility: visible;
+        }
         &:hover .bm-marquee--group {
             animation-play-state: paused;
         }
@@ -105,6 +124,14 @@
         user-select: none;
         gap: var(--space--gap-xl);
         width: 100%;
+        
+        /* Prevent FOUC (Flash of Unstyled Content) */
+        .js & {
+            display: none;
+        }
+        .js &.is-initialized {
+            display: flex;
+        }
         &[data-direction="reverse"] .bm-marquee--group {
             animation-direction: reverse;
             animation-delay: -3s;
