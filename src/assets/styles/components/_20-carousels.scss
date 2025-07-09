@@ -13,6 +13,19 @@
 				border-bottom-left-radius: 0;
 				border-bottom-right-radius: 0;
 				width: 100%;
+				aspect-ratio: 1 / 1;
+				min-height: 200px;
+				max-height: 420px;
+				position: relative;
+				display: block;
+				img {
+					object-fit: cover;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
 			}
 		}
 		&.is-layout--row {
@@ -44,27 +57,151 @@
 	}
 }
 
+// Animation keyframes for fade-in effect
+
+
 .bm-carousel--items {
 	--gap: 16px;
 	--min-width: 75vw;
-	padding-inline: var(--full-bleed, 3.5vw);
+	--scroll-indicator-size: 40px;
+	position: relative;
 	display: flex;
 	flex-wrap: nowrap;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
+
+	// Scroll indicator - right side
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: var(--scroll-indicator-size);
+		background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%);
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+		z-index: 1;
+	}
+
+	// Hide scroll indicator when at the end
+	&.at-end::after {
+		opacity: 0;
+	}
+
+	// Scroll indicator - left side (for RTL)
+	&.at-start::before {
+		opacity: 0;
+	}
+
+	// Hide scroll indicators when not scrollable
+	&:not(.is-scrollable)::before,
+	&:not(.is-scrollable)::after {
+		display: none;
+	}
+	/* Smooth scrolling for WebKit */
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+	// Add smooth scrolling for all interactive elements
+	a, button {
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	// Add animation to cards
+	.bm--card {
+		animation: fadeInUp 0.5s ease-out forwards;
+		transform-origin: center bottom;
+
+		// Stagger animations for each card
+		@for $i from 1 through 12 {
+			&:nth-child(#{$i}) {
+				animation-delay: #{$i * 0.05}s;
+			}
+		}
+	}
+
+	/* Custom scrollbar for WebKit */
+	&::-webkit-scrollbar {
+		height: 4px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
 	scrollbar-width: none;
 	gap: var(--gap);
 	padding-block-end: 2em;
-	@media (min-width: 1024px) {
-		--gap: 32px;
+	scroll-padding-inline-start: 32px;
+	--carousel-gap: clamp(32px, 8vw, 128px);
+	will-change: transform; /* Optimize for animations */
+	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+	backface-visibility: hidden; /* Improve performance on mobile */
+	-webkit-font-smoothing: subpixel-antialiased; /* Smoother text */
+
+	/* Optimize for GPU acceleration */
+	transform: translateZ(0);
+	perspective: 1000px;
+
+	/* Custom scrollbar for WebKit */
+	&::-webkit-scrollbar {
+		height: 4px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: rgba(0,0,0,0.2);
+		border-radius: 2px;
+	}
+	&::before,
+	&::after {
+		content: "";
+		min-width: var(--carousel-gap);
+		max-width: var(--carousel-gap);
+		flex: 0 0 var(--carousel-gap);
+		width: var(--carousel-gap);
+		height: 1px;
+		display: block;
+		scroll-snap-align: start;
+	}
+	&::after {
+		pointer-events: none; /* Prevent interactions with pseudo-elements */
+	}
+	/* Card hover effects */
+.bm--card {
+	transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	backface-visibility: hidden;
+	transform: translateZ(0);
+	will-change: transform;
+
+	/* Only apply hover effects to cards with is-card class */
+	&.bm--is-card {
+		transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+		box-shadow 0.3s ease;
+		will-change: transform, box-shadow;
+
+		&:hover {
+			transform: translateY(-4px) scale(1.02) translateZ(0);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+			z-index: 2;
+		}
+	}
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+	--gap: 32px;
 		--min-width: 33vw;
 	}
-	> * {
-		scroll-snap-align: center;
+	> *:not(.bm-carousel--spacer) {
+		scroll-snap-align: start;
 		min-width: var(--min-width);
 		width: auto;
-		max-height: 65dvh;
+		/* Removed max-height: 65dvh to allow images/cards to grow taller on short viewports */
 		@media (min-width: 1024px) {
 			&.is-vertical {
 				min-width: var(--min-width);
@@ -83,33 +220,79 @@
 
 .bm-carousel--controls {
 	display: flex;
-	justify-content: flex-start;
-	margin-block-end: var(--space--gap-medium);
-	gap: var(--space--grid-unit);
+	gap: 1rem;
+	align-items: center;
+	justify-content: flex-end;
+	margin-block-end: 1.5rem;
+
+	// Ensure buttons are properly stacked on mobile
+	@media (max-width: 767px) {
+		justify-content: center;
+	}
 }
 
 .bm-carousel--control {
-	border: 1px solid var(--color--grey-300);
-	border-radius: 50%;
-	background: var(--color--white);
-	cursor: pointer;
-	width: calc(var(--space--grid-unit) * 7);
-	height: calc(var(--space--grid-unit) * 7);
-	display: flex;
+	--size: 3rem;
+	color: var(--color--blue-700);
+	width: var(--size);
+	height: var(--size);
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	transition: border-color .2s ease-in-out;
+	border-radius: 50%;
+	border: 1px solid currentColor;
+	background: var(--color--white);
+	cursor: pointer;
+	padding: 0;
+
+	/* Hardware acceleration and performance optimizations */
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	-webkit-font-smoothing: antialiased;
+
+	/* Optimized transitions with coordinated timing */
+	transition:
+		color 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+		border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+		transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+		box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+
+	/* Will-change hints for the browser */
+	will-change: transform, box-shadow;
+
+	/* Hover and focus states */
+	&:not(:disabled):hover,
+	&:not(:disabled):focus-visible {
+		color: var(--color--orange-600);
+		border-color: var(--color--blue-700);
+		transform: translateY(-2px) translateZ(0);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Active state */
+	&:not(:disabled):active {
+		transform: translateY(0);
+		transition-duration: 0.1s;
+	}
+
+	// Disabled state
+	&:disabled {
+		opacity: 0.3;
+		cursor: not-allowed;
+	}
+
+	// Icon inside button
+	svg {
+		width: 1.5rem;
+		height: 1.5rem;
+		transition: transform 0.2s ease;
+	}
+
+	// Icon styles
 	> svg {
 		height: calc(var(--space--grid-unit) * 3);
 		width: calc(var(--space--grid-unit) * 3);
-	}
-
-	&[disabled] {
-		opacity: 0.5;
-		pointer-events: none;
-	}
-	&:hover:not([disabled]) {
-		border-color: var(--color--blue-700);
+		transition: transform 0.2s ease, color 0.2s ease;
 	}
 }
 

@@ -153,11 +153,12 @@
     }
 }
 
+// Make these styles specific to footer accordions only
 @media ( max-width: 1024px ) {
-    .has-js .accordion-panel {
+    .site-footer .has-js .accordion-panel {
         display: none;
     }
-    .has-js .accordion-panel.visible {
+    .site-footer .has-js .accordion-panel.visible {
         display: block;
     }
 }

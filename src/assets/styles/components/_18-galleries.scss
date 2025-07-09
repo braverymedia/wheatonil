@@ -1,21 +1,29 @@
 // Gallery layouts.
 .bm-gallery {
-
     &--staggered {
-        &.is-full-width {
-            padding-inline: unset;
-        }
         display: flex;
         gap: var(--space--gap-xxl);
         padding-inline: 3vw;
         align-items: stretch;
         flex-wrap: nowrap;
         overflow-x: auto;
-        scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
         scroll-snap-align: start;
         scroll-snap-stop: always;
         scrollbar-width: 0;
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
+        /* Add padding to start and end */
+        &::before,
+        &::after {
+            content: '';
+            flex: 0 0 1px;
+            width: 1px;
+            height: 1px;
+            display: block;
+            flex-shrink: 0;
+        }
         > * {
             // aspect-ratio: 2 / 3;
             scroll-snap-align: center;
@@ -40,6 +48,15 @@
     }
 
 }
+
+.staggered-gallery .bm-carousel--controls {
+    display: flex;
+    justify-content: flex-end;
+    @media (pointer: coarse) and (width <= 1023px) {
+        display: none;
+    }
+}
+
 [class*="bm-gallery"] figure,
 .bm--modal-media {
     position: relative;

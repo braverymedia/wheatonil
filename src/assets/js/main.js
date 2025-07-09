@@ -16,6 +16,7 @@ import './modules/modal.js';
 import './modules/accordion.js';
 import './modules/marquee.js';
 import './modules/faculty-filter.js';
+import './modules/gallery-staggered.js';
 
 // Initialize modules when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'carousel',
         'modal',
         'accordion',
+        'galleryStaggered',
         'marquee',
         'facultyFilter'
     ];

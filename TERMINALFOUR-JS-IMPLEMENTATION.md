@@ -3,6 +3,7 @@
 This guide explains how to implement and manage the modular JavaScript architecture in the Wheaton College website within the TerminalFour CMS environment.
 
 ## Table of Contents
+
 1. [Module Overview](#module-overview)
 2. [Implementation Options](#implementation-options)
 3. [Module Reference](#module-reference)
@@ -85,7 +86,7 @@ For more control over performance, you can implement dynamic loading:
    document.addEventListener('DOMContentLoaded', () => {
        document.querySelectorAll('[data-module]').forEach(el => {
            const moduleNames = el.getAttribute('data-module').split(' ');
-           
+
            moduleNames.forEach(moduleName => {
                if (modules[moduleName]) {
                    // Create script element
@@ -93,7 +94,7 @@ For more control over performance, you can implement dynamic loading:
                    script.src = `{{media url='${modules[moduleName]}'}}?v={{now 'yyyyMMdd'}}`;
                    script.onload = () => {
                        // Initialize the module if it has an init function
-                       if (window.wheaton && window.wheaton[moduleName] && 
+                       if (window.wheaton && window.wheaton[moduleName] &&
                            typeof window.wheaton[moduleName].init === 'function') {
                            window.wheaton[moduleName].init(el);
                        }
@@ -108,8 +109,8 @@ For more control over performance, you can implement dynamic loading:
 ## Module Reference
 
 ### 1. Carousel Module
-**Selector:** `[data-bravery-carousel]`  
-**Dependencies:** None  
+**Selector:** `[data-bravery-carousel]`
+**Dependencies:** None
 **Usage:**
 ```html
 <div data-module="carousel" data-bravery-carousel>
@@ -122,8 +123,8 @@ For more control over performance, you can implement dynamic loading:
 ```
 
 ### 2. Navigation Module
-**Selector:** `[data-bravery-nav]`  
-**Dependencies:** None  
+**Selector:** `[data-bravery-nav]`
+**Dependencies:** None
 **Usage:**
 ```html
 <nav data-module="navigation" data-bravery-nav>
@@ -132,8 +133,8 @@ For more control over performance, you can implement dynamic loading:
 ```
 
 ### 3. Modal Module
-**Selector:** `[data-bm-modal]`  
-**Dependencies:** a11y-dialog (included in bundle)  
+**Selector:** `[data-bm-modal]`
+**Dependencies:** a11y-dialog (included in bundle)
 **Usage:**
 ```html
 <button data-module="modal" data-bm-modal data-media-type="image" data-src="image.jpg">
@@ -142,22 +143,22 @@ For more control over performance, you can implement dynamic loading:
 ```
 
 ### 4. Accordion Module
-**Selector:** `[data-accordion]`  
-**Dependencies:** None  
+**Selector:** `[data-accordion]`
+**Dependencies:** None
 **Usage:**
 ```html
 <div data-module="accordion" data-accordion>
     <button aria-expanded="false" aria-controls="panel1">Section 1</button>
     <div id="panel1" hidden>Content 1</div>
-    
+
     <button aria-expanded="false" aria-controls="panel2">Section 2</button>
     <div id="panel2" hidden>Content 2</div>
 </div>
 ```
 
 ### 5. Marquee Module
-**Selector:** `[data-bravery-marquee]`  
-**Dependencies:** None  
+**Selector:** `[data-bravery-marquee]`
+**Dependencies:** None
 **Usage:**
 ```html
 <div data-module="marquee" data-bravery-marquee>
@@ -168,8 +169,8 @@ For more control over performance, you can implement dynamic loading:
 ```
 
 ### 6. Faculty Filter Module
-**Selector:** `[data-faculty-filter]`  
-**Dependencies:** None  
+**Selector:** `[data-faculty-filter]`
+**Dependencies:** None
 **Usage:**
 ```html
 <div data-module="faculty-filter" data-faculty-filter>
@@ -211,24 +212,24 @@ For more control over performance, you can implement dynamic loading:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}} | Wheaton College</title>
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{media url='css/main.css'}}">
-    
+
     <!-- JavaScript -->
     <script src="{{media url='js/wheaton.bundle.js'}}?v={{now 'yyyyMMdd'}}" defer></script>
-    
+
     {{! Optionally, for dynamic loading: }}
     {{! <script src="{{media url='js/module-loader.js'}}?v={{now 'yyyyMMdd'}}" defer></script> }}
 </head>
 <body>
     {{! Content }}
     {{> header }}
-    
+
     <main>
         {% block content %}{% endblock %}
     </main>
-    
+
     {{> footer }}
 </body>
 </html>
@@ -251,15 +252,15 @@ For more control over performance, you can implement dynamic loading:
             </div>
         {% endfor %}
     </div>
-    
-    <button class="carousel__nav carousel__nav--prev" 
-            data-bravery-carousel-prev 
+
+    <button class="carousel__nav carousel__nav--prev"
+            data-bravery-carousel-prev
             aria-controls="{{carouselId}}">
         <span class="sr-only">Previous</span>
     </button>
-    
-    <button class="carousel__nav carousel__nav--next" 
-            data-bravery-carousel-next 
+
+    <button class="carousel__nav carousel__nav--next"
+            data-bravery-carousel-next
             aria-controls="{{carouselId}}">
         <span class="sr-only">Next</span>
     </button>

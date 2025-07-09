@@ -167,14 +167,14 @@ const initCarousel = (carousel) => {
 
 const initMarquee = (marquee) => {
 	const items = marquee.element.querySelectorAll("picture");
-	let images = [...items];
+	const images = [...items];
 	const half = Math.ceil(images.length / 2);
 	const firstHalf = images.slice(0, half);
 	const secondHalf = images.slice(half);
 
 	// Prep Group 1
 	const column = marquee.element.querySelector(".bm-gallery-col");
-	let group = document.createElement("div");
+	const group = document.createElement("div");
 	group.className = "bm-marquee--group";
 
 	const group1 = group.cloneNode(true);
@@ -187,7 +187,7 @@ const initMarquee = (marquee) => {
 	group1Copy.setAttribute("aria-hidden", true);
 	group2Copy.setAttribute("aria-hidden", true);
 
-	let reversed = document.createElement("section");
+	const reversed = document.createElement("section");
 	reversed.className = "bm-gallery-col bm-marquee";
 	reversed.setAttribute("data-direction", "reverse");
 
@@ -458,7 +458,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			target.setAttribute("aria-expanded", "true");
 			panel.classList.add("visible");
 			menuPanels.forEach((mpanel) => {
-				let labeled = mpanel.getAttribute("id");
+				const labeled = mpanel.getAttribute("id");
 				if (labeled !== target.getAttribute("aria-controls")) {
 					mpanel.classList.remove("visible");
 					document
@@ -470,30 +470,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	};
 
 	const openOverlay = () => {
-		if (showOverlay && showOverlay.getAttribute("aria-expanded") === "false") {
-			// Set expanded state
+		if (showOverlay.getAttribute("aria-expanded") === "false") {
 			showOverlay.setAttribute("aria-expanded", "true");
-			
-			// Reset animations by temporarily removing the visible state
-			if (overlay) {
-				overlay.dataset.state = "opening";
-				
-				// Force reflow to ensure the state is applied before adding visible state
-				void overlay.offsetHeight;
-				
-				// Set the visible state to trigger animations
-				overlay.dataset.state = "visible";
-			}
+			overlay.dataset.state = "visible";
 		}
 	};
 
 	const closeOverlay = () => {
-		if (showOverlay) {
-			showOverlay.setAttribute("aria-expanded", "false");
-		}
-		if (overlay) {
-			overlay.dataset.state = "hidden";
-		}
+		showOverlay.setAttribute("aria-expanded", "false");
+		overlay.dataset.state = "hidden";
 	};
 
 	const openSearch = () => {
@@ -501,98 +486,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		document.getElementById("site-search").focus({ focusVisible: true });
 	};
 
-	// Handle hover on desktop
-	const handleHoverIn = (event) => {
-		if (window.innerWidth >= 1024) {
-			const header = event.currentTarget;
-			const button = header.querySelector('.nav-menu--toggle');
-			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
-			
-			if (panel) {
-				panel.classList.add('visible');
-				header.classList.add('is-expanded');
-				button.setAttribute('aria-expanded', 'true');
-			}
-		}
-	};
-
-	// Handle hover out on desktop
-	const handleHoverOut = (event) => {
-		if (window.innerWidth >= 1024) {
-			const header = event.currentTarget;
-			const button = header.querySelector('.nav-menu--toggle');
-			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
-			
-			if (panel) {
-				panel.classList.remove('visible');
-				header.classList.remove('is-expanded');
-				button.setAttribute('aria-expanded', 'false');
-			}
-		}
-	};
-
-	// Handle mobile touch interactions
-	const handleMobileClick = (event) => {
-		event.stopPropagation();
+	const mobileSectionNav = (event) => {
 		const target = event.target;
 
-		// Handle button clicks (toggle panel)
-		if (target.classList.contains('nav-menu--toggle')) {
-			event.preventDefault();
-			const header = target.closest('.nav-menu--header');
-			const panel = document.getElementById(target.getAttribute('aria-controls'));
+		if (target instanceof HTMLButtonElement) {
+			const nav = target.nextElementSibling;
 			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
 			target.setAttribute("aria-expanded", `${!isExpanded}`);
 
 			if (isExpanded) {
-				header?.classList.remove('is-expanded');
-				panel.classList.remove("visible");
+				nav.classList.remove("visible");
 			} else {
-				header?.classList.add('is-expanded');
-				panel.classList.add("visible");
+				nav.classList.add("visible");
 			}
-		} 
-		// Handle link clicks inside header
-		else if (target.closest('.nav-menu--header')) {
-			const header = target.closest('.nav-menu--header');
-			const link = header.querySelector('.nav-menu--link');
-			const button = header.querySelector('.nav-menu--toggle');
-			const panel = button ? document.getElementById(button.getAttribute('aria-controls')) : null;
-
-			// On mobile, if clicking the link and panel is closed, prevent default and open panel
-			if (window.innerWidth < 1024 && target === link && panel && button.getAttribute('aria-expanded') === 'false') {
-				event.preventDefault();
-				button.setAttribute('aria-expanded', 'true');
-				header.classList.add('is-expanded');
-				panel.classList.add('visible');
-			}
-			// On desktop or if panel is already open, let the default link behavior happen
 		}
 	};
-
-	// Main function to handle both hover and click events
-	const mobileSectionNav = (event) => {
-		if (window.innerWidth >= 1024) {
-			// On desktop, handle hover events
-			if (event.type === 'mouseenter') {
-				handleHoverIn(event);
-			} else if (event.type === 'mouseleave') {
-				handleHoverOut(event);
-			}
-		} else {
-			// On mobile, handle click events
-			handleMobileClick(event);
-		}
-	};
-
-	// Initialize event listeners for navigation headers
-	const navHeaders = document.querySelectorAll('.nav-menu--header');
-	navHeaders.forEach(header => {
-		header.addEventListener('mouseenter', mobileSectionNav);
-		header.addEventListener('mouseleave', mobileSectionNav);
-		header.addEventListener('click', mobileSectionNav);
-	});
 	// Close jump menu on mobile when link is clicked
 	const mobileJumpNavigation = (event) => {
 		const target = event.target;
@@ -620,39 +529,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	showSearch?.addEventListener("click", openSearch);
 	hideOverlay?.addEventListener("click", closeOverlay);
 
-	// Add hover behavior for desktop
-	accordionContainer?.addEventListener("mouseover", hoverShow);
-
-	// Handle mobile navigation - add click handler to headers
-	document.querySelectorAll(".nav-menu--header").forEach((header) => {
-		header.addEventListener("click", mobileSectionNav);
-	});
-
-	// Handle toggle button clicks separately
-	document.querySelectorAll(".nav-menu--toggle").forEach((button) => {
-		button.addEventListener("click", mobileSectionNav);
-	});
-
-	// Handle jump navigation
-	document.querySelectorAll(".bm--menu-jump button").forEach((button) => {
-		button.addEventListener("click", mobileJumpNavigation);
-	});
+	accordionContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("click", accordionClick);
+	mobileMenuContainer?.addEventListener("mouseover", hoverShow);
 
 	// Section nav toggle
 	sectionNav?.addEventListener("click", mobileSectionNav);
 
-	// Jump nav toggles - only add click handlers to the buttons
+	// Jump nav toggles
 	for (let i = 0; i < jumpNavs.length; i++) {
-		let jumpNav = jumpNavs[i];
-		const button = jumpNav.querySelector('button');
-		if (button) {
-			button.addEventListener("click", mobileJumpNavigation);
+		const jumpNav = jumpNavs[i];
+		jumpNav.addEventListener("click", mobileSectionNav);
+
+		// Run mobileSectionNav when child "a" is clicked
+		for (let j = 0; j < jumpNav.children.length; j++) {
+			const jumpNavChild = jumpNav.children[j];
+			jumpNavChild.addEventListener("click", mobileJumpNavigation);
 		}
 	}
 
 	// Collapsibles toggle
 	for (let i = 0; i < collapsibles.length; i++) {
-		let collapsible = collapsibles[i];
+		const collapsible = collapsibles[i];
 		collapsible.addEventListener("click", accordionClick);
 	}
 
@@ -695,51 +593,56 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const modalContentContainer = document.querySelector(".bm--modal-content");
 
 	function embedVideo(url) {
-		const videoId = url.includes('youtu')
-			? url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/)[1]
+		const videoId = url.includes("youtu")
+			? url.match(
+					/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/
+			  )[1]
 			: url.match(/vimeo\.com\/(?:.*\/)?([0-9]+)/)[1];
 
-		const iframe = document.createElement('iframe');
-		iframe.className = 'bm--modal-media';
+		const iframe = document.createElement("iframe");
+		iframe.className = "bm--modal-media";
 		// Set width to 100% to allow responsive scaling while maintaining 16:9 aspect ratio
-		iframe.style.width = '100%';
-		iframe.style.aspectRatio = '16 / 9';
-		iframe.style.height = 'auto';
-		if (url.includes('youtu')) {
+		iframe.style.width = "100%";
+		iframe.style.aspectRatio = "16 / 9";
+		iframe.style.height = "auto";
+		if (url.includes("youtu")) {
 			iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 		} else {
 			iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
 		}
 
-		iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+		iframe.allow =
+			"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
 		iframe.allowFullscreen = true;
 		return iframe;
 	}
 
 	function embedImage(url, trigger) {
 		// Find the parent figure element
-		const sourceFigure = trigger.closest('figure');
+		const sourceFigure = trigger.closest("figure");
 		if (!sourceFigure) {
 			// Fallback to simple image if no figure found
-			const img = document.createElement('img');
-			img.className = 'bm--modal-media';
+			const img = document.createElement("img");
+			img.className = "bm--modal-media";
 			img.src = url;
-			img.alt = trigger.getAttribute('data-alt') || '';
+			img.alt = trigger.getAttribute("data-alt") || "";
 			return img;
 		}
 
 		// Create a new figure for the modal
-		const figure = document.createElement('figure');
-		figure.className = 'bm--modal-media';
+		const figure = document.createElement("figure");
+		figure.className = "bm--modal-media";
 
 		// Get the source image, excluding the button
-		const sourceImg = sourceFigure.querySelector('img:not(.bm--modal-trigger)');
+		const sourceImg = sourceFigure.querySelector(
+			"img:not(.bm--modal-trigger)"
+		);
 		if (sourceImg) {
-			const img = document.createElement('img');
+			const img = document.createElement("img");
 			img.src = url;
-			img.alt = trigger.getAttribute('data-alt') || sourceImg.alt;
+			img.alt = trigger.getAttribute("data-alt") || sourceImg.alt;
 			// Copy any relevant attributes from source image
-			['loading', 'decoding'].forEach(attr => {
+			["loading", "decoding"].forEach((attr) => {
 				if (sourceImg.hasAttribute(attr)) {
 					img.setAttribute(attr, sourceImg.getAttribute(attr));
 				}
@@ -748,7 +651,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		}
 
 		// Clone the figcaption if it exists
-		const sourceCaption = sourceFigure.querySelector('figcaption');
+		const sourceCaption = sourceFigure.querySelector("figcaption");
 		if (sourceCaption) {
 			const figcaption = sourceCaption.cloneNode(true);
 			figure.appendChild(figcaption);
@@ -762,17 +665,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			e.preventDefault(); // Prevent default for links
 
 			// Get the media URL either from href (for links) or data-src (for buttons)
-			let url = trigger.tagName.toLowerCase() === 'a'
-				? trigger.getAttribute("href")
-				: trigger.getAttribute("data-src");
+			const url =
+				trigger.tagName.toLowerCase() === "a"
+					? trigger.getAttribute("href")
+					: trigger.getAttribute("data-src");
 
 			if (!url) {
-				console.warn('No media URL provided for modal trigger');
+				console.warn("No media URL provided for modal trigger");
 				return;
 			}
 
-			let mediaType = trigger.getAttribute("data-media-type") || "video";
-			let embedMarkup = mediaType === "image" ? embedImage(url, trigger) : embedVideo(url);
+			const mediaType = trigger.getAttribute("data-media-type") || "video";
+			const embedMarkup =
+				mediaType === "image"
+					? embedImage(url, trigger)
+					: embedVideo(url);
 			modalContentContainer.appendChild(embedMarkup);
 			dialog.show();
 		});
@@ -784,7 +691,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		.on("hide", function (event) {
 			document.documentElement.style.overflowY = "";
 			const container = event.target;
-			const mediaElement = container.querySelector('.bm--modal-media');
+			const mediaElement = container.querySelector(".bm--modal-media");
 			if (mediaElement) {
 				mediaElement.remove();
 			}

@@ -96,33 +96,39 @@
         const { items, prevButton, nextButton } = carousel;
 
         const getClosestItem = () => {
-            const children = items.children;
+            const children = Array.from(items.children);
             if (!children.length) return null;
 
             const parentRect = items.getBoundingClientRect();
             const parentX = parentRect.x;
 
-            return Array.from(children).reduce((closest, child) => {
+            return children.reduce((closest, child) => {
                 const rect = child.getBoundingClientRect();
                 const x = rect.x;
 
                 if (!closest.child) return { x, child };
-                return Math.abs(x - parentX) < Math.abs(closest.x - parentX) 
-                    ? { x, child } 
+                return Math.abs(x - parentX) < Math.abs(closest.x - parentX)
+                    ? { x, child }
                     : closest;
             }, { x: 0, child: null }).child;
         };
+
 
         prevButton.addEventListener('click', () => {
             const closestItem = getClosestItem();
             if (!closestItem) return;
 
-            let prevItem = closestItem.previousElementSibling || items.lastElementChild;
-            const distanceToScroll = prevItem.offsetWidth;
-
+            const prevItem = closestItem.previousElementSibling;
+            if (!prevItem) return;
+            const distanceToScroll = prevItem.offsetWidth + 
+                parseFloat(getComputedStyle(items).getPropertyValue('--gap') || '0');
+                
+            const targetScroll = items.scrollLeft - distanceToScroll;
+            
+            // Use smooth scrolling with a more performant approach
             items.scrollTo({
-                left: items.scrollLeft - distanceToScroll,
-                behavior: 's'
+                left: targetScroll,
+                behavior: 'smooth'
             });
         });
 
@@ -130,27 +136,64 @@
             const closestItem = getClosestItem();
             if (!closestItem) return;
 
+            const nextItem = closestItem.nextElementSibling;
+            if (!nextItem) return;
+
+            const distanceToScroll = closestItem.offsetWidth + 
+                parseFloat(getComputedStyle(items).getPropertyValue('--gap') || '0');
+                
+            const targetScroll = items.scrollLeft + distanceToScroll;
+            
             items.scrollTo({
-                left: items.scrollLeft + closestItem.offsetWidth,
-                behavior: 's'
+                left: targetScroll,
+                behavior: 'smooth'
             });
         });
 
-        items.addEventListener('scroll', wheaton.utils.debounce(() => {
-            const itemsScrollWidth = items.scrollWidth;
-            const itemsOuterWidth = items.clientWidth;
+        // Function to handle scroll events and update UI
+        const handleScroll = wheaton.utils.debounce(() => {
+            if (!items) return;
+            
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+                const { scrollLeft, scrollWidth, clientWidth } = items;
+                const maxScroll = scrollWidth - clientWidth;
+                const isAtStart = scrollLeft <= 0;
+                const isAtEnd = scrollLeft >= maxScroll - 1; // Account for subpixel rounding
+                
+                // Update navigation buttons
+                if (prevButton) {
+                    prevButton.toggleAttribute('disabled', isAtStart);
+                }
+                if (nextButton) {
+                    nextButton.toggleAttribute('disabled', isAtEnd);
+                }
+                
+                // Update scroll indicators
+                items.classList.toggle('at-start', isAtStart);
+                items.classList.toggle('at-end', isAtEnd);
+                items.classList.toggle('is-scrollable', scrollWidth > clientWidth);
+            });
+        }, 100);
 
-            prevButton.removeAttribute('disabled');
-            nextButton.removeAttribute('disabled');
-
-            if (items.scrollLeft <= 0) {
-                prevButton.setAttribute('disabled', '');
-            }
-
-            if (Math.ceil(items.scrollLeft) >= itemsScrollWidth - itemsOuterWidth) {
-                nextButton.setAttribute('disabled', '');
-            }
-        }, 100));
+        // Only add event listeners if elements exist
+        if (items) {
+            // Add scroll event using the handleScroll function
+            items.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // Initial setup
+            handleScroll();
+            
+            // Also check on window resize
+            const resizeObserver = new ResizeObserver(handleScroll);
+            resizeObserver.observe(items);
+            
+            // Return cleanup function
+            return () => {
+                items.removeEventListener('scroll', handleScroll, { passive: true });
+                resizeObserver.disconnect();
+            };
+        }
     }
 
     /**
@@ -158,7 +201,7 @@
      */
     function init() {
         const carouselElements = document.querySelectorAll('[data-bravery-carousel]');
-        
+
         carousels = Array.from(carouselElements).map((element, index) => ({
             id: index + 1,
             element

@@ -11,7 +11,8 @@ let html = fs.readFileSync(htmlHeadPath, 'utf8');
 const newScripts = `
     <script type="module" src="/assets/js/wheaton.js"></script>
     <script nomodule src="/assets/js/legacy.js"></script>
-    <script src="/assets/js/program-finder-2023.bundle.js"></script>`;
+    <script src="/assets/js/program-finder-2023.bundle.js"></script>
+    <script>window.wheaton = window.wheaton || {};</script>`;
 
 // Update the HTML
 const updatedHtml = html.replace(

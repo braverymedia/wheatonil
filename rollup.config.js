@@ -1,10 +1,17 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from '@rollup/plugin-terser';
 
 // Common plugins
 const plugins = [
     nodeResolve({
-        browser: true
+        browser: true,
+        preferBuiltins: false,
+        modulesOnly: true
+    }),
+    commonjs({
+        include: /node_modules/,
+        requireReturnsDefault: 'auto'
     })
 ];
 
@@ -22,30 +29,59 @@ if (process.env.NODE_ENV === 'production') {
     );
 }
 
+// Base configuration for all builds
+const baseConfig = {
+    output: {
+        dir: '_site/assets/js',
+        sourcemap: process.env.NODE_ENV === 'development',
+        format: 'esm',
+        entryFileNames: '[name].bundle.js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+    },
+    plugins: [
+        nodeResolve({
+            browser: true,
+            preferBuiltins: false,
+            modulesOnly: true
+        }),
+        commonjs({
+            include: /node_modules/,
+            sourceMap: process.env.NODE_ENV === 'development',
+            requireReturnsDefault: 'auto'
+        }),
+        ...(process.env.NODE_ENV === 'production' ? [terser({
+            format: {
+                comments: false,
+            },
+            compress: {
+                drop_console: true,
+            },
+        })] : [])
+    ]
+};
+
 export default [
     // Modern bundle (ES modules)
     {
+        ...baseConfig,
         input: 'src/assets/js/main.js',
         output: {
-            file: 'dist/assets/js/wheaton.js',
+            ...baseConfig.output,
+            file: '_site/assets/js/main.js',
             format: 'esm',
-            sourcemap: process.env.NODE_ENV === 'development',
         },
-        plugins
     },
     // Legacy bundle (IIFE for older browsers)
     {
+        ...baseConfig,
         input: 'src/assets/js/main.js',
         output: {
-            file: 'dist/assets/js/legacy-bundle.js',
+            ...baseConfig.output,
+            file: '_site/assets/js/legacy-bundle.js',
             format: 'iife',
             name: 'wheaton',
-            sourcemap: process.env.NODE_ENV === 'development',
         },
-        plugins: [
-            ...plugins,
-            // Add any legacy-specific plugins here
-        ]
     },
     // Legacy loader
     {
