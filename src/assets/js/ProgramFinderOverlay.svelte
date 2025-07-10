@@ -136,6 +136,8 @@
     position: fixed;
     right: 0;
     top: 0;
+    backdrop-filter: blur(4px);
+    transition: backdrop-filter 0.3s cubic-bezier(0, 0, 0.2, 1);
   }
   .program-finder-2023-popover__container {
     background-color: var(--color--black);
@@ -143,6 +145,11 @@
     max-height: 100%;
     overflow-y: auto;
     width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .program-finder-2023-popover.isOpen .program-finder-2023-popover__container {
+    transform: translateX(0);
   }
   @media (min-width: 768px) {
     .program-finder-2023-popover__container {
@@ -154,6 +161,8 @@
   .disabled {
     pointer-events: none;
     cursor: default;
+    opacity: 0.5;
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
   }
   .program-finder-2023-overlay-inner {
     position: relative;
@@ -176,17 +185,30 @@
     right: 1rem;
     top: 1rem;
     cursor: pointer;
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .program-finder-2023-popover__close:hover {
+    opacity: 0.8;
   }
   .program-finder-2023-popover__close svg {
     width: 44px;
     height: 44px;
+    transition: stroke 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .program-finder-2023-popover__close:hover svg {
+    stroke: var(--color--accent, #A84C11);
   }
   .program-finder-2023-popover__link {
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .program-finder-2023-popover__link:hover:not(.disabled) {
+    opacity: 0.8;
   }
   .program-finder-2023-popover__footer {
     margin-top: 1rem;
     display: flex;
     justify-content: flex-end;
+    animation: fadeInUp 0.4s cubic-bezier(0, 0, 0.2, 1) 0.2s both;
   }
   .v-hidden {
     clip: rect(0, 0, 0, 0);
@@ -198,5 +220,46 @@
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  /* Animation keyframes */
+  @keyframes bppfadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes bppslideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>

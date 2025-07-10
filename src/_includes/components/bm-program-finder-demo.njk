@@ -1,0 +1,225 @@
+{# Program Finder Demo - Vanilla JS Implementation #}
+{# This template includes sample data and the vanilla JS implementation for local testing #}
+
+{# Program Data Container (Hidden) with Sample Data #}
+<div class="program-data-container" style="display: none;" aria-hidden="true">
+    <!-- Sample program data for testing -->
+    <div class="program-data-2023"
+         data-credential-types="Bachelor"
+         data-credential-type-values="bachelor-1"
+         data-degree-types="BA"
+         data-areas-of-study="Humanities"
+         data-link="http://google.com"
+         data-concentrations="soft, medium and hard types of concentrations"
+         data-name="Anthropology"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate"
+         data-credential-type-values="certificate-3"
+         data-degree-types="PsyD"
+         data-areas-of-study="Military"
+         data-link="http://google.com"
+         data-concentrations="we don't concentrate very hard in this department"
+         data-name="Computer Science"></div>
+    <div class="program-data-2023"
+         data-credential-types="Master"
+         data-credential-type-values="master-4"
+         data-degree-types="BA"
+         data-areas-of-study="Education and Teaching"
+         data-link="http://google.com"
+         data-concentrations="orange, lime and kiwi fruit juice concentrations"
+         data-name="Mathematics"></div>
+    <div class="program-data-2023"
+         data-credential-types="Doctoral"
+         data-credential-type-values="doctoral-5"
+         data-degree-types="Multiple|PsyD|PhD"
+         data-areas-of-study="Education and Teaching|Science, Technology, Engineering, and Mathematics"
+         data-link="http://google.com"
+         data-name="Botany"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate|Doctoral"
+         data-credential-type-values="certificate-3|doctoral-5"
+         data-degree-types="BA|BS"
+         data-areas-of-study="Business, Economics, and Marketing|Health"
+         data-link="http://google.com"
+         data-name="Business Administration"></div>
+    <div class="program-data-2023"
+         data-credential-types="Bachelor"
+         data-credential-type-values="bachelor-1"
+         data-degree-types="BA"
+         data-areas-of-study="Humanities"
+         data-link="http://google.com"
+         data-name="English Literature"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate"
+         data-credential-type-values="certificate-3"
+         data-degree-types="PsyD"
+         data-areas-of-study="Military"
+         data-link="http://google.com"
+         data-name="Psychology"></div>
+    <div class="program-data-2023"
+         data-credential-types="Master"
+         data-credential-type-values="master-4"
+         data-degree-types="MA"
+         data-areas-of-study="Education and Teaching"
+         data-link="http://google.com"
+         data-name="Education"></div>
+    <div class="program-data-2023"
+         data-credential-types="Doctoral"
+         data-credential-type-values="doctoral-5"
+         data-degree-types="PhD"
+         data-areas-of-study="Science, Technology, Engineering, and Mathematics"
+         data-link="http://google.com"
+         data-name="Physics"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate|Doctoral"
+         data-credential-type-values="certificate-3|doctoral-5"
+         data-degree-types="BA|BS"
+         data-areas-of-study="Business, Economics, and Marketing|Health"
+         data-link="http://google.com"
+         data-name="Economics"></div>
+    <div class="program-data-2023"
+         data-credential-types="Bachelor"
+         data-credential-type-values="bachelor-1"
+         data-degree-types="BA"
+         data-areas-of-study="Humanities"
+         data-link="http://google.com"
+         data-name="History"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate"
+         data-credential-type-values="certificate-3"
+         data-degree-types="PsyD"
+         data-areas-of-study="Military"
+         data-link="http://google.com"
+         data-name="Counseling"></div>
+    <div class="program-data-2023"
+         data-credential-types="Master"
+         data-credential-type-values="master-4"
+         data-degree-types="MA"
+         data-areas-of-study="Education and Teaching"
+         data-link="http://google.com"
+         data-name="Teaching"></div>
+    <div class="program-data-2023"
+         data-credential-types="Doctoral"
+         data-credential-type-values="doctoral-5"
+         data-degree-types="PhD"
+         data-areas-of-study="Science, Technology, Engineering, and Mathematics"
+         data-link="http://google.com"
+         data-name="Chemistry"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate|Doctoral"
+         data-credential-type-values="certificate-3|doctoral-5"
+         data-degree-types="BA|BS"
+         data-areas-of-study="Business, Economics, and Marketing|Health"
+         data-link="http://google.com"
+         data-name="Marketing"></div>
+    <div class="program-data-2023"
+         data-credential-types="Bachelor"
+         data-credential-type-values="bachelor-1"
+         data-degree-types="BA"
+         data-areas-of-study="Humanities"
+         data-link="http://google.com"
+         data-name="Philosophy"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate"
+         data-credential-type-values="certificate-3"
+         data-degree-types="PsyD"
+         data-areas-of-study="Military"
+         data-link="http://google.com"
+         data-name="Social Work"></div>
+    <div class="program-data-2023"
+         data-credential-types="Master"
+         data-credential-type-values="master-4"
+         data-degree-types="MA"
+         data-areas-of-study="Education and Teaching"
+         data-link="http://google.com"
+         data-name="Curriculum Development"></div>
+    <div class="program-data-2023"
+         data-credential-types="Doctoral"
+         data-credential-type-values="doctoral-5"
+         data-degree-types="PhD"
+         data-areas-of-study="Science, Technology, Engineering, and Mathematics"
+         data-link="http://google.com"
+         data-name="Biology"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate|Doctoral"
+         data-credential-type-values="certificate-3|doctoral-5"
+         data-degree-types="BA|BS"
+         data-areas-of-study="Business, Economics, and Marketing|Health"
+         data-link="http://google.com"
+         data-name="Finance"></div>
+    <div class="program-data-2023"
+         data-credential-types="Bachelor"
+         data-credential-type-values="bachelor-1"
+         data-degree-types="BA"
+         data-areas-of-study="Humanities"
+         data-link="http://google.com"
+         data-name="Religious Studies"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate"
+         data-credential-type-values="certificate-3"
+         data-degree-types="PsyD"
+         data-areas-of-study="Military"
+         data-link="http://google.com"
+         data-name="Clinical Psychology"></div>
+    <div class="program-data-2023"
+         data-credential-types="Master"
+         data-credential-type-values="master-4"
+         data-degree-types="MA"
+         data-areas-of-study="Education and Teaching"
+         data-link="http://google.com"
+         data-name="Educational Leadership"></div>
+    <div class="program-data-2023"
+         data-credential-types="Doctoral"
+         data-credential-type-values="doctoral-5"
+         data-degree-types="PhD"
+         data-areas-of-study="Science, Technology, Engineering, and Mathematics"
+         data-link="http://google.com"
+         data-name="Engineering"></div>
+    <div class="program-data-2023"
+         data-credential-types="Certificate|Doctoral"
+         data-credential-type-values="certificate-3|doctoral-5"
+         data-degree-types="BA|BS"
+         data-areas-of-study="Business, Economics, and Marketing|Health"
+         data-link="http://google.com"
+         data-name="Healthcare Administration"></div>
+</div>
+
+{# Mount Point for Vanilla JS Component #}
+<div id="program-finder-mountpoint"
+     aria-live="polite"
+     aria-relevant="additions removals">
+</div>
+
+{# Trigger Button for Overlay Testing #}
+<div style="margin: 2rem 0; text-align: center;">
+    <button class="program-finder-trigger"
+            data-widget="program-finder"
+            aria-label="Find your program"
+            aria-expanded="false"
+            aria-controls="program-finder-mountpoint">
+        <span class="trigger-text">Find your program</span>
+        <svg class="trigger-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 1L15 8L8 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+
+{# Include the vanilla JS module (CSS is included in main build) #}
+<script src="/assets/js/modules/program-finder.js"></script>
+
+{# Demo Instructions #}
+<div style="margin: 2rem 0; padding: 1rem; background: #f5f5f5; border-radius: 4px;">
+    <h3>Program Finder Demo</h3>
+    <p><strong>Features to test:</strong></p>
+    <ul>
+        <li>✅ Fullscreen program finder with two-column layout</li>
+        <li>✅ Filter by credential types (Bachelor, Certificate, Master, Doctoral)</li>
+        <li>✅ Filter by areas of study (Humanities, Military, Education, etc.)</li>
+        <li>✅ URL synchronization - filters are saved in URL parameters</li>
+        <li>✅ Overlay mode - click the trigger button above</li>
+        <li>✅ Responsive design - try different screen sizes</li>
+        <li>✅ Accessibility - keyboard navigation and screen reader support</li>
+        <li>✅ Animations - subtle transitions with reduced motion support</li>
+    </ul>
+    <p><strong>Sample data includes:</strong> 20 programs with various combinations of credential types, degree types, and areas of study.</p>
+</div>

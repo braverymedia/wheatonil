@@ -1,0 +1,34 @@
+{# Program Finder - Vanilla JS Implementation #}
+{# This template provides the data structure and mount points for the vanilla JS program finder #}
+
+{# Program Data Container (Hidden) - This would be populated by TerminalFour's NavObj system #}
+<div class="program-data-container" style="display: none;" aria-hidden="true">
+    {# Each program content item would render this structure #}
+    <div class="program-data-2023"
+         data-credential-types="{{selectedNames element="Credential Types" separator="|"}}"
+         data-credential-type-values="{{selectedValues element="Credential Types" separator="|"}}"
+         data-degree-types="{{selectedNames element="Degree Types" separator="|"}}"
+         data-areas-of-study="{{selectedNames element="Areas of Study" separator="|"}}"
+         data-link="{{publish element="Program URL"}}"
+         data-concentrations="{{publish element="Concentrations"}}"
+         data-name="{{publish element="Program Name"}}">
+    </div>
+</div>
+
+{# Mount Point for Vanilla JS Component #}
+<div id="program-finder-mountpoint"
+     aria-live="polite"
+     aria-relevant="additions removals">
+</div>
+
+{# Trigger Button (Optional) - Can be placed anywhere on the page #}
+<button class="program-finder-trigger"
+        data-widget="program-finder"
+        aria-label="Find your program"
+        aria-expanded="false"
+        aria-controls="program-finder-mountpoint">
+    <span class="trigger-text">Find your program</span>
+    <svg class="trigger-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M8 1L15 8L8 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>

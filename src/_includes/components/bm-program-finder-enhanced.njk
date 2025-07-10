@@ -1,0 +1,180 @@
+{{!-- Enhanced Program Finder Component for TerminalFour --}}
+{{!-- This component demonstrates improved Handlebars integration --}}
+
+<div class="program-finder-wrapper"
+     role="region"
+     aria-label="Program Finder"
+     data-program-finder
+     data-settings="{{programFinderSettings | default: '{}'}}"
+     {{#if lazyLoad}}data-lazy-load="true"{{/if}}
+     {{#if endpoint}}data-endpoint="{{endpoint}}"{{/if}}>
+
+    {{!-- Loading State --}}
+    {{#if lazyLoad}}
+    <div class="program-finder-loading" data-loading role="status" aria-live="polite">
+        <div class="loading-spinner" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40">
+                <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="4" fill="none" stroke-dasharray="113" stroke-dashoffset="113">
+                    <animate attributeName="stroke-dashoffset" dur="1.5s" values="113;0;113" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p>Loading programs...</p>
+    </div>
+    {{/if}}
+
+    {{!-- Program Data Container (Hidden) --}}
+    <div class="program-data-container" style="display: none;" aria-hidden="true">
+        {{#each programs}}
+            <div class="program-data-2023"
+                 data-credential-types="{{join credentialTypes '|'}}"
+                 data-credential-type-values="{{join credentialTypeValues '|'}}"
+                 data-degree-types="{{join degreeTypes '|'}}"
+                 data-areas-of-study="{{join areasOfStudy '|'}}"
+                 data-link="{{safeUrl programUrl}}"
+                 data-concentrations="{{concentrations}}"
+                 data-name="{{programName}}"
+                 data-program-id="{{programId}}"
+                 data-campus="{{campus}}"
+                 data-delivery-mode="{{deliveryMode}}"
+                 data-duration="{{duration}}"
+                 data-credits="{{credits}}"
+                 data-description="{{truncate description 200}}"
+                 data-featured-image="{{featuredImage}}">
+            </div>
+        {{/each}}
+    </div>
+
+    {{!-- Mount Point for Svelte Component --}}
+    <div id="program-finder-mountpoint"
+         aria-live="polite"
+         aria-relevant="additions removals">
+    </div>
+
+    {{!-- Trigger Button (Optional) --}}
+    {{#if showTrigger}}
+    <button class="program-finder-trigger"
+            data-widget="program-finder"
+            aria-label="{{triggerText | default: 'Open Program Finder'}}"
+            aria-expanded="false"
+            aria-controls="program-finder-mountpoint">
+        <span class="trigger-text">{{triggerText | default: 'Find Your Program'}}</span>
+        <svg class="trigger-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 1L15 8L8 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    {{/if}}
+</div>
+
+{{!-- Structured Data for SEO --}}
+{{#if includeStructuredData}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Wheaton College",
+  "url": "{{siteUrl}}",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Academic Programs",
+    "description": "{{catalogDescription | default: 'Academic programs offered by Wheaton College'}}",
+    "itemListElement": [
+      {{#each programs}}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "{{programName}}",
+          "description": "{{description}}",
+          "educationalLevel": "{{join credentialTypes ','}}",
+          "courseMode": "{{deliveryMode}}",
+          "coursePrerequisites": "{{prerequisites}}",
+          "educationalCredentialAwarded": "{{join degreeTypes ','}}",
+          "timeRequired": "{{duration}}",
+          "courseCode": "{{programId}}"
+        },
+        "category": "{{join areasOfStudy ','}}",
+        "availability": "{{#if isActive}}InStock{{else}}OutOfStock{{/if}}"
+      }{{#unless @last}},{{/unless}}
+      {{/each}}
+    ]
+  }
+}
+</script>
+{{/if}}
+
+{{!-- Enhanced CSS for loading states and animations --}}
+<style>
+  .program-finder-wrapper {
+    position: relative;
+  }
+
+  .program-finder-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--color--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .loading-spinner {
+    margin-bottom: 1rem;
+    color: var(--color--blue-600);
+  }
+
+  .loading-spinner svg {
+    animation: spin 1.5s linear infinite;
+  }
+
+  .program-finder-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--color--blue-600);
+    color: var(--color--white);
+    border: none;
+    border-radius: 4px;
+    font-size: var(--type-size--text-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .program-finder-trigger:hover {
+    background: var(--color--blue-700);
+    opacity: 0.9;
+  }
+
+  .program-finder-trigger:focus {
+    outline: 2px solid var(--color--accent);
+    outline-offset: 2px;
+  }
+
+  .trigger-icon {
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .program-finder-trigger:hover .trigger-icon {
+    opacity: 0.8;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .loading-spinner svg {
+      animation: none;
+    }
+
+    .program-finder-trigger,
+    .trigger-icon {
+      transition: none;
+    }
+  }
+</style>

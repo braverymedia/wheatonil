@@ -17,12 +17,13 @@ import './modules/accordion.js';
 import './modules/marquee.js';
 import './modules/faculty-filter.js';
 import './modules/gallery-staggered.js';
+import './modules/program-finder.js';
 
 // Initialize modules when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Add has-js class to body
     document.body.classList.add('has-js');
-    
+
     // Initialize modules
     const modules = [
         'navigation',
@@ -31,9 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'accordion',
         'galleryStaggered',
         'marquee',
-        'facultyFilter'
+        'facultyFilter',
+        'programFinder'
     ];
-    
+
     modules.forEach(module => {
         if (window.wheaton[module] && typeof window.wheaton[module].init === 'function') {
             window.wheaton[module].init();
