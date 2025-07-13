@@ -435,7 +435,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const accordionClick = (event) => {
 		const target = event.target;
 		if (target instanceof HTMLButtonElement) {
-			const panel = target.parentNode.nextElementSibling;
+			let panel;
+			const panelId = target.getAttribute("aria-controls");
+
+			// Try to find panel by ID first (new structure)
+			if (panelId) {
+				panel = document.getElementById(panelId);
+			}
+
+			// Fallback to sibling (old structure)
+			if (!panel) {
+				panel = target.parentNode.nextElementSibling;
+			}
+
+			if (!panel) {
+				console.warn('No panel found for accordion button:', target);
+				return;
+			}
+
 			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
 			target.setAttribute("aria-expanded", `${!isExpanded}`);
@@ -452,9 +469,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 	const hoverShow = (event) => {
 		const target = event.target;
-		const panel = target.parentNode.nextElementSibling;
+		let panel;
+		const panelId = target.getAttribute("aria-controls");
 
-		if (target instanceof HTMLButtonElement) {
+		// Try to find panel by ID first (new structure)
+		if (panelId) {
+			panel = document.getElementById(panelId);
+		}
+
+		// Fallback to sibling (old structure)
+		if (!panel) {
+			panel = target.parentNode.nextElementSibling;
+		}
+
+		if (target instanceof HTMLButtonElement && panel) {
 			target.setAttribute("aria-expanded", "true");
 			panel.classList.add("visible");
 			menuPanels.forEach((mpanel) => {

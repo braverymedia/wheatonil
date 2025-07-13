@@ -73,8 +73,7 @@
     .contact {
         padding-block-start: var(--space--gap-large);
     }
-    h2,
-    h2 > button {
+    h2 {
         appearance: none;
         background: transparent;
         color: inherit;
@@ -83,21 +82,6 @@
         border: 0;
         font-size: var(--type-size--medium);
         font-family: var(--wc-font-family--serif);
-    }
-    button[aria-expanded] {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        transform: rotate(0deg);
-        > svg {
-            width: 24px;
-            height: 24px;
-            transition: all .15s ease-in-out;
-        }
-    }
-    button[aria-expanded=true] > svg {
-        transform: rotate(-45deg);
     }
     section,
     address {

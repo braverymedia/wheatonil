@@ -339,7 +339,8 @@
     width: 24px;
 }
 
-.bravery .bm--menu-links {
+.bravery .bm--menu-links,
+[data-mobilemenu] {
     padding-block: var(--space--gap-large);
     display: flex;
     flex-direction: column;
