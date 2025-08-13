@@ -29,6 +29,16 @@ html {
     scroll-behavior: smooth !important;
 }
 
+/* Advertise support for both color schemes without forcing a visual theme.
+   This helps UA widgets (forms, scrollbars) adapt to user preference
+   without changing our palette. */
+:root {
+    color-scheme: light dark;
+}
+
+/* Dark-mode tokens and component styles can be introduced incrementally.
+   Avoid forcing palette changes here to prevent unexpected brand shifts. */
+
 /* Set core body defaults */
 body {
     min-height: 100vh;
@@ -269,4 +279,19 @@ hr {
             animation-play-state: paused;
         }
     }
+}
+
+ul,
+ol {
+  padding-inline-start: 2.5rem;
+  font-size: var(--type-size--regular);
+  &.bm--bullets-check {
+    padding-inline-start: 20px;
+    li{
+      text-indent: 8px;
+      line-height: 24px;
+      font-size: var(--type-size--regular);
+      list-style-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='20' rx='10' fill='%23DCEFFF'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.2471 6.15838L8.28042 11.9167L6.69709 10.2251C6.40542 9.95005 5.94709 9.93338 5.61375 10.1667C5.28875 10.4084 5.19709 10.8334 5.39709 11.1751L7.27209 14.2251C7.45542 14.5084 7.77209 14.6834 8.13042 14.6834C8.47209 14.6834 8.79709 14.5084 8.98042 14.2251C9.28042 13.8334 15.0054 7.00838 15.0054 7.00838C15.7554 6.24172 14.8471 5.56672 14.2471 6.15005V6.15838Z' fill='%233D68A2'/%3E%3C/svg%3E%0A");
+    }
+  }
 }

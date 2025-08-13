@@ -32,8 +32,12 @@ button.form_button_submit,
         border-color: var(--color--grey-400);
         box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
     }
-    &:focus {
-        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #F2F4F7;
+    &:focus-visible {
+        outline: 2px solid var(--color--blue-600);
+        outline-offset: 2px;
+    }
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 
     // Button Styles

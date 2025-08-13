@@ -11,7 +11,7 @@
 		"clean:modules": "[ -d _site/assets/js/modules ] && find _site/assets/js/modules -name '*.min.js' -delete || true",
 		"copy:modules": "mkdir -p _site/assets/js/modules && cp -r src/assets/js/modules/*.js _site/assets/js/modules/",
 		"build:js": "npm run clean:js && NODE_ENV=production rollup -c && NODE_ENV=development rollup -c",
-		"build:modules": "npm run copy:modules && npm run clean:modules && NODE_ENV=production rollup -c rollup.config.modules.mjs",
+		"build:modules": "npm run copy:modules && npm run clean:modules",
 		"build:css": "NODE_ENV=production rollup -c rollup.config.styles.mjs",
 		"build:eleventy": "ELEVENTY_ENV=production eleventy --config=eleventy.config.js",
 		"watch:js": "NODE_ENV=development rollup -c --watch",

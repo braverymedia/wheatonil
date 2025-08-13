@@ -19,16 +19,19 @@ select {
     border: 1px solid var(--color--grey-300);
     border-radius: var(--corner--radius);
     font-size: var(--type-size--small);
-    padding: 7px 14px !important;
+    padding-block: 7px !important;
+    padding-inline: 14px !important;
     font-family: var(--wc-font-family--sans-serif);
     &:hover {
         border-color: var(--color--grey-700);
     }
-    &:focus,
-    &:active {
+    &:focus-visible {
         border-color: var(--color--blue-600);
+        outline: 2px solid var(--color--blue-600);
         outline-offset: 2px;
-        outline-color: var(--color--blue-600);
+    }
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 }
 // Slate Embedded Form
@@ -109,8 +112,7 @@ input[type="checkbox"] {
     font: inherit;
     height: 1rem;
     margin: 0;
-    margin-right: 0px;
-    margin-right: 0.4375rem;
+    margin-inline-end: 0.4375rem;
     position: relative;
     transition: transform .2s ease-in-out;
     width: 1rem;

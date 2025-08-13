@@ -15,7 +15,7 @@
 .hero__content h2,
 .container--blue-dark h1,
 .container--blue-dark h2,
-.container--blue-dark, h3 {
+.container--blue-dark h3 {
     color: inherit;
 }
 
@@ -30,5 +30,24 @@
         @media (min-width: 64em) {
             float: none !important;
         }
+    }
+}
+
+.overlay-menu {
+    // existing styles
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .overlay-menu {
+        transition: none !important;
+    }
+    .overlay-menu .full-search,
+    .overlay-menu .nav-menu--header,
+    .bm-carousel--items .bm--card,
+    .finder,
+    .program-finder-2023 .col1,
+    .program-finder-2023 .col2 {
+        animation: none !important;
+        transition: none !important;
     }
 }

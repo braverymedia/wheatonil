@@ -57,6 +57,13 @@ a {
       text-decoration: none;
     }
   }
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
   &.has-arrow,
   .has-arrow & {
     display: inline-flex;
@@ -122,7 +129,7 @@ p {
   margin-inline-start: var(--space--gap-medium);
   > p {
     font-style: italic;
-    padding-right: var(--space--gap-xl);
+    padding-inline-end: var(--space--gap-xl);
     font-family: var(--wc-font-family--serif);
     font-size: var(--type-size--medium);
   }

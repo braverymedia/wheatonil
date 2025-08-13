@@ -76,8 +76,8 @@
 		content: '';
 		position: absolute;
 		top: 0;
-		right: 0;
-		bottom: 0;
+		inset-inline-end: 0;
+		inset-block-end: 0;
 		width: var(--scroll-indicator-size);
 		background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%);
 		pointer-events: none;
@@ -119,6 +119,14 @@
 			&:nth-child(#{$i}) {
 				animation-delay: #{$i * 0.05}s;
 			}
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		scroll-behavior: auto;
+		.bm--card {
+			animation: none !important;
+			transition: none !important;
 		}
 	}
 
