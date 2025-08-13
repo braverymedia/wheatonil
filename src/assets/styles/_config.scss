@@ -27,6 +27,7 @@ ol[role='list'] {
 /* Set core root defaults */
 html {
     scroll-behavior: smooth !important;
+    background-color: var(--color--white);
 }
 
 /* Advertise support for both color schemes without forcing a visual theme.
@@ -45,6 +46,8 @@ body {
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     font-size: var(--type-size--base) !important;
+    background-color: var(--color--white);
+    color: var(--color--grey-900);
 }
 
 /* A elements that don't have a class get default styles */
