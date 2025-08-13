@@ -1,1 +1,11 @@
-@import "config", "typescale", "typesetting", "buttons", "forms", "nav", "footer","components/01-breadcrumb", "components/10-section-menu", "components/12-collapsibles", "transition";
+@use "config" as *;
+@use "typescale" as *;
+@use "typesetting" as *;
+@use "buttons" as *;
+@use "forms" as *;
+@use "nav" as *;
+@use "footer" as *;
+@use "components/01-breadcrumb" as *;
+@use "components/10-section-menu" as *;
+@use "components/12-collapsibles" as *;
+@use "transition" as *;

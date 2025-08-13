@@ -1,27 +1,34 @@
-@import "typesetting", "buttons", "forms", "tables", "icons", "nav", "footer";
-@import "components/01-breadcrumb",
-        "components/02-program-header",
-        "components/03-menu-action",
-        "components/04-program-features",
-        "components/05-callouts",
-        "components/06-inquiry",
-        "components/07-cover-image",
-        "components/08-cards",
-        "components/09-section-title",
-        "components/10-section-menu",
-        "components/11-quotes",
-        "components/12-collapsibles",
-        "components/13-text-image",
-        "components/14-video",
-        "components/15-faculty",
-        "components/16-hero",
-        "components/17-content-cta",
-        "components/18-galleries",
-        "components/19-stats",
-        "components/20-carousels",
-        "components/21-overlap-section",
-        "components/22-program-finder",
-        "components/23-rep-finder",
-        "components/24-books",
-        "components/25-social";
-        @import "layouts", "content";
+@use "typesetting" as *;
+@use "buttons" as *;
+@use "forms" as *;
+@use "tables" as *;
+@use "icons" as *;
+@use "nav" as *;
+@use "footer" as *;
+@use "components/01-breadcrumb" as *;
+@use "components/02-program-header" as *;
+@use "components/03-menu-action" as *;
+@use "components/04-program-features" as *;
+@use "components/05-callouts" as *;
+@use "components/06-inquiry" as *;
+@use "components/07-cover-image" as *;
+@use "components/08-cards" as *;
+@use "components/09-section-title" as *;
+@use "components/10-section-menu" as *;
+@use "components/11-quotes" as *;
+@use "components/12-collapsibles" as *;
+@use "components/13-text-image" as *;
+@use "components/14-video" as *;
+@use "components/15-faculty" as *;
+@use "components/16-hero" as *;
+@use "components/17-content-cta" as *;
+@use "components/18-galleries" as *;
+@use "components/19-stats" as *;
+@use "components/20-carousels" as *;
+@use "components/21-overlap-section" as *;
+@use "components/22-program-finder" as *;
+@use "components/23-rep-finder" as *;
+@use "components/24-books" as *;
+@use "components/25-social" as *;
+@use "layouts" as *;
+@use "content" as *;

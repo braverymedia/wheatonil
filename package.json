@@ -25,7 +25,11 @@
 		"start": "npm run dev",
 		"test": "npm run test:modules",
 		"debug:start": "DEBUG=Eleventy* npm start",
-		"debug:build": "DEBUG=Eleventy* npm run build"
+		"debug:build": "DEBUG=Eleventy* npm run build",
+		"lint:css": "npx --yes stylelint \"src/**/*.scss\" --quiet || echo 'stylelint skipped'",
+		"lint:scss": "./node_modules/.bin/sass src/assets/styles/wheaton.scss:/tmp/wheaton.css",
+		"check:unused-css": "mkdir -p ./.purge-out && ./node_modules/.bin/purgecss --css src/assets/css/wheaton.css --content src/**/*.njk src/**/*.html src/**/*.js --safelist '/^bm-/', '/^wc-/', '/^is-/', '/^has-/' --rejected --output ./.purge-out || true",
+		"check": "run-s lint:scss lint:css build:css check:unused-css"
 	},
 	"repository": {
 		"type": "git",
@@ -62,7 +66,10 @@
 		"rollup-plugin-postcss": "^4.0.2",
 		"rollup-plugin-svelte": "^7.1.6",
 		"sass": "^1.65.1",
-		"terser": "^5.19.2"
+		"terser": "^5.19.2",
+		"stylelint": "^16.6.1",
+		"stylelint-config-wordpress": "^21.0.0",
+		"postcss-scss": "^4.0.9"
 	},
 	"dependencies": {
 		"a11y-dialog": "^8.0.0",

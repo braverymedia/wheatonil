@@ -1,1 +1,4 @@
-@import "vars", "config", "typescale", "typesetting";
+@use "vars" as *;
+@use "config" as *;
+@use "typescale" as *;
+@use "typesetting" as *;
