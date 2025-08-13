@@ -5,7 +5,7 @@ This guide explains how to implement and manage the modular JavaScript architect
 ## Table of Contents
 
 1. [Module Overview](#module-overview)
-2. [Implementation Options](#implementation-options)
+2. [Implementation Guide](#implementation-guide)
 3. [Module Reference](#module-reference)
 4. [TerminalFour Integration](#terminalfour-integration)
 5. [Program Finder Integration](#program-finder-integration)
@@ -14,90 +14,252 @@ This guide explains how to implement and manage the modular JavaScript architect
 
 ## Module Overview
 
-We've organized our JavaScript into focused modules, each responsible for specific functionality. This approach improves maintainability and performance.
+We've organized our JavaScript into focused, independent modules, each responsible for specific functionality. This modular approach offers several benefits:
+
+- **Better Performance**: Only load the JavaScript needed for each page
+- **Easier Maintenance**: Update individual modules without affecting others
+- **Improved Caching**: Changes to one module don't invalidate caches for others
 
 ### Available Modules
 
-1. **Carousel** - Handles image/content carousels
-2. **Navigation** - Manages site navigation and mobile menu
-3. **Modal** - Controls modal dialogs and lightboxes
-4. **Accordion** - Implements collapsible content sections
-5. **Marquee** - Manages scrolling/ticker content
-6. **Faculty Filter** - Handles filtering of faculty listings
+1. **Carousel** (`carousel.min.js`) - Handles image/content carousels
+2. **Navigation** (`navigation.min.js`) - Manages site navigation and mobile menu
+3. **Modal** (`modal.min.js`) - Controls modal dialogs and lightboxes
+4. **Accordion** (`accordion.min.js`) - Implements collapsible content sections
+5. **Marquee** (`marquee.min.js`) - Manages scrolling/ticker content
+6. **Faculty Filter** (`faculty-filter.min.js`) - Handles filtering of faculty listings
+7. **Gallery Staggered** (`gallery-staggered.min.js`) - Handles staggered image galleries
+8. **Program Finder** (`program-finder.min.js`) - Manages program search and filtering
 
-## Implementation Options
+## Implementation Guide
 
-### Option 1: Single Bundle (Recommended for Most Cases)
+### 1. Upload Required Files
 
-1. **Upload the bundled file** to TerminalFour's Media Library:
-   - Path: `/js/wheaton.bundle.js`
-   - Enable "Cache Control" with appropriate TTL
+Upload the following files to TerminalFour's Media Library:
 
-2. **Add to your base template** (e.g., `_layout.njk`):
+```
+/js/
+  └── modules/
+      ├── accordion.min.js
+      ├── carousel.min.js
+      ├── faculty-filter.min.js
+      ├── gallery-staggered.min.js
+      ├── marquee.min.js
+      ├── modal.min.js
+      ├── navigation.min.js
+      └── program-finder.min.js
+```
+
+### 2. Update Base Template
+
+In your TerminalFour base template (typically in the Template Manager), add the following code just before the closing `</body>` tag:
+
+```html
+<!-- Wheaton JavaScript Modules -->
+<script>
+// Module loader and initializer for Wheaton College website
+(function() {
+    // Map of module names to their media library paths
+    const modules = {
+        'accordion': 'js/modules/accordion.min.js',
+        'carousel': 'js/modules/carousel.min.js',
+        'faculty-filter': 'js/modules/faculty-filter.min.js',
+        'gallery-staggered': 'js/modules/gallery-staggered.min.js',
+        'marquee': 'js/modules/marquee.min.js',
+        'modal': 'js/modules/modal.min.js',
+        'navigation': 'js/modules/navigation.min.js',
+        'program-finder': 'js/modules/program-finder.min.js'
+    };
+
+    // Function to initialize a module
+    function initModule(el, moduleName) {
+        if (window.wheaton && window.wheaton[moduleName] &&
+            typeof window.wheaton[moduleName].init === 'function') {
+            window.wheaton[moduleName].init(el);
+        }
+    }
+
+    // Initialize modules when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('[data-module]').forEach(function(el) {
+            const moduleNames = el.getAttribute('data-module').split(' ');
+            
+            moduleNames.forEach(function(moduleName) {
+                if (modules[moduleName]) {
+                    // For TerminalFour, we'll use Handlebars to include the script
+                    // The actual script loading is handled by the template
+                    initModule(el, moduleName);
+                }
+            });
+        });
+    });
+})();
+</script>
+
+<!-- Include JavaScript Modules using Handlebars -->
+{{! Example of including a specific module }}
+{{! <script>
+    {{{media id="js/modules/accordion.min.js" layout="js/raw"}}}
+</script> }}
+
+{{! Example of including multiple modules }}
+{{#each siteSettings.jsModules}}
+    <script>
+        {{{media id=this.path layout="js/raw"}}}
+    </script>
+{{/each}}
+```
+
+### 3. Module Initialization
+
+Modules are automatically initialized when they're loaded. Each module should expose an `init` method on the `window.wheaton` namespace. For example:
+
+```javascript
+// Example module structure
+window.wheaton = window.wheaton || {};
+window.wheaton.accordion = {
+    init: function(element) {
+        // Module initialization code here
+    }
+};
+```
+```
+
+### 3. Module Initialization
+
+Modules are automatically initialized based on data attributes. For example:
+
+```html
+<!-- Initialize a single module -->
+<div data-module="accordion">
+    <!-- Accordion content -->
+</div>
+
+<!-- Initialize multiple modules on one element -->
+<nav data-module="navigation carousel">
+    <!-- Navigation and carousel content -->
+</nav>
+```
+
+### 4. Module Reference
+
+#### Accordion (`accordion.min.js`)
+- **Purpose**: Creates collapsible content sections
+- **HTML Structure**:
+  ```html
+  <div data-module="accordion">
+      <button aria-expanded="false" aria-controls="panel1">Section 1</button>
+      <div id="panel1" hidden>Content 1</div>
+      
+      <button aria-expanded="false" aria-controls="panel2">Section 2</button>
+      <div id="panel2" hidden>Content 2</div>
+  </div>
+  ```
+- **Options**: None required
+
+#### Carousel (`carousel.min.js`)
+- **Purpose**: Handles image and content carousels
+- **HTML Structure**:
+  ```html
+  <div data-module="carousel" data-carousel-options='{"autoplay": true, "interval": 5000}'>
+      <div class="carousel-container">
+          <!-- Slides go here -->
+      </div>
+      <button class="carousel-prev">Previous</button>
+      <button class="carousel-next">Next</button>
+  </div>
+  ```
+- **Options**: `autoplay` (boolean), `interval` (milliseconds)
+
+#### Faculty Filter (`faculty-filter.min.js`)
+- **Purpose**: Filters faculty listings based on selected criteria
+- **HTML Structure**:
+  ```html
+  <div data-module="faculty-filter">
+      <div class="filters">
+          <!-- Filter controls -->
+      </div>
+      <div class="faculty-results">
+          <!-- Faculty cards -->
+      </div>
+  </div>
+  ```
+
+#### Modal (`modal.min.js`)
+- **Purpose**: Manages modal dialogs and lightboxes
+- **HTML Structure**:
+  ```html
+  <button data-module="modal" data-modal-target="#myModal">Open Modal</button>
+  
+  <div id="myModal" class="modal" hidden>
+      <div class="modal-content">
+          <button class="modal-close">×</button>
+          <!-- Modal content -->
+      </div>
+  </div>
+  ```
+
+### 5. TerminalFour Integration
+
+#### File Uploads
+1. Navigate to **Media Library** in TerminalFour
+2. Create a `js` directory if it doesn't exist
+3. Upload `module-loader.js` to the `js` directory
+4. Create a `js/modules` subdirectory
+5. Upload all `*.min.js` module files to the `js/modules` directory
+
+#### Template Updates
+1. Edit your base template (e.g., `_layout.njk`)
+2. Add the module loader script before the closing `</body>` tag:
    ```handlebars
-   <!DOCTYPE html>
-   <html>
-   <head>
-       <!-- Other head elements -->
-       <script src="{{media url='js/wheaton.bundle.js'}}?v={{now 'yyyyMMdd'}}" defer></script>
-   </head>
-   <body>
-       {{! Template content }}
-   </body>
-   </html>
+   <script src="{{media url='js/module-loader.js'}}?v={{now 'yyyyMMdd'}}" defer></script>
    ```
 
-### Option 2: Dynamic Module Loading
+#### Content Type Configuration
+For content types that use specific modules (e.g., Accordion, Carousel), ensure the HTML structure matches the required patterns shown in the Module Reference section above.
 
-For more control over performance, you can implement dynamic loading:
+### 6. Performance Optimization
 
-1. **Upload these files** to your Media Library:
-   - `/js/core.bundle.js` (essential modules)
-   - `/js/module-loader.js` (dynamic loader)
-   - Individual module files in `/js/modules/`
+#### Lazy Loading
+Modules are automatically lazy-loaded when their corresponding `data-module` attribute is found in the DOM.
 
-2. **Base template** (`_layout.njk`):
-   ```handlebars
-   <!DOCTYPE html>
-   <html>
-   <head>
-       <!-- Other head elements -->
-       <script src="{{media url='js/core.bundle.js'}}?v={{now 'yyyyMMdd'}}" defer></script>
-       <script src="{{media url='js/module-loader.js'}}?v={{now 'yyyyMMdd'}}" defer></script>
-   </head>
-   <body>
-       {{! Template content }}
-   </body>
-   </html>
-   ```
+#### Caching Strategy
+- Set appropriate cache headers for all JavaScript files in TerminalFour
+- Use the `?v={{now 'yyyyMMdd'}}` parameter to force cache invalidation when needed
 
-3. **module-loader.js**:
+### 7. Troubleshooting
+
+#### Module Not Loading
+1. Check browser console for 404 errors on module files
+2. Verify file paths in TerminalFour Media Library match those in your templates
+3. Ensure the module name in `data-module` matches exactly with the module filename (without .js)
+
+#### JavaScript Errors
+1. Check for conflicts with other JavaScript libraries
+2. Ensure all required HTML structure and data attributes are present
+3. Verify that jQuery (if required by the module) is loaded before the module loader
+
+### 8. Module Development
+
+#### Adding a New Module
+1. Create a new JavaScript file in `/src/assets/js/modules/`
+2. Follow the module pattern:
    ```javascript
-   // Map of module names to their paths
-   const modules = {
-       'carousel': '/js/modules/carousel.js',
-       'navigation': '/js/modules/navigation.js',
-       'modal': '/js/modules/modal.js',
-       'accordion': '/js/modules/accordion.js',
-       'marquee': '/js/modules/marquee.js',
-       'faculty-filter': '/js/modules/faculty-filter.js'
-   };
-
-   // Initialize modules when DOM is ready
-   document.addEventListener('DOMContentLoaded', () => {
-       document.querySelectorAll('[data-module]').forEach(el => {
-           const moduleNames = el.getAttribute('data-module').split(' ');
-
-           moduleNames.forEach(moduleName => {
-               if (modules[moduleName]) {
-                   // Create script element
-                   const script = document.createElement('script');
-                   script.src = `{{media url='${modules[moduleName]}'}}?v={{now 'yyyyMMdd'}}`;
-                   script.onload = () => {
-                       // Initialize the module if it has an init function
-                       if (window.wheaton && window.wheaton[moduleName] &&
-                           typeof window.wheaton[moduleName].init === 'function') {
-                           window.wheaton[moduleName].init(el);
+   (() => {
+       const MyModule = {
+           init(element) {
+               // Initialization code
+           }
+       };
+       
+       // Register the module
+       window.wheaton = window.wheaton || {};
+       window.wheaton.myModule = MyModule;
+   })();
+   ```
+3. Add the module to the build process in `rollup.config.modules.mjs`
+4. Test the module with `npm run dev`
+5. Build for production with `npm run build`
                        }
                    };
                    document.head.appendChild(script);
