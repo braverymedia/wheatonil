@@ -1,8 +1,20 @@
 <footer class="main-footer bravery">
     <a href="/" aria-label="Wheaton College - For Christ &amp; His Kingdom" class="inverse-logo">{% include "components/svg/logo-inverted.njk" %}</a>
-    <nav class="footer-nav" data-accordion>
+    <nav class="footer-nav" data-accordion data-mobilemenu>
         <section>
-            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-academics" id="acc-academics">Academics <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
+            <h2 class="nav-menu--header">
+                <a href="/academics" class="nav-menu--link">Academics</a>
+                <button type="button"
+                        class="nav-menu--toggle"
+                        aria-expanded="false"
+                        aria-controls="fmenu-academics"
+                        aria-label="Toggle Academics submenu">
+                    <span class="sr-only">Toggle submenu</span>
+                    <svg class="icon-plus" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </button>
+            </h2>
             <div id="fmenu-academics" role="region" aria-labelledby="acc-academics" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -17,7 +29,19 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-cost" id="acc-cost">Cost &amp; Aid  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
+            <h2 class="nav-menu--header">
+                <a href="/cost-aid" class="nav-menu--link">Cost &amp; Aid</a>
+                <button type="button"
+                        class="nav-menu--toggle"
+                        aria-expanded="false"
+                        aria-controls="fmenu-cost"
+                        aria-label="Toggle Cost & Aid submenu">
+                    <span class="sr-only">Toggle submenu</span>
+                    <svg class="icon-plus" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </button>
+            </h2>
             <div id="fmenu-cost" role="region" aria-labelledby="acc-cost" class="accordion-panel">
                 <ul>
                     <li><a href="#">Cost &amp; Aid Overview</a></li>
@@ -29,7 +53,19 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-admissions" id="acc-admissions">Admissions <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
+            <h2 class="nav-menu--header">
+                <a href="/admissions" class="nav-menu--link">Admissions</a>
+                <button type="button"
+                        class="nav-menu--toggle"
+                        aria-expanded="false"
+                        aria-controls="fmenu-admissions"
+                        aria-label="Toggle Admissions submenu">
+                    <span class="sr-only">Toggle submenu</span>
+                    <svg class="icon-plus" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </button>
+            </h2>
             <div id="fmenu-admissions" role="region" aria-labelledby="acc-admissions" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -44,7 +80,19 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-campus" id="acc-campus">Campus Life <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
+            <h2 class="nav-menu--header">
+                <a href="/life-at-wheaton" class="nav-menu--link">Campus Life</a>
+                <button type="button"
+                        class="nav-menu--toggle"
+                        aria-expanded="false"
+                        aria-controls="fmenu-campus"
+                        aria-label="Toggle Campus Life submenu">
+                    <span class="sr-only">Toggle submenu</span>
+                    <svg class="icon-plus" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </button>
+            </h2>
             <div id="fmenu-campus" role="region" aria-labelledby="acc-campus" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
@@ -59,8 +107,20 @@
             </div>
         </section>
         <section>
-            <h2><button type="button" aria-expanded="false" class="accordion-trigger" aria-controls="fmenu-about" id="acc-about">About Wheaton <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 5v14"></path><path d="M5 12h14"></path></g></svg></button></h2>
-            <div id="fmenu-about" role="region" aria-labelledby="acc-about" class="accordion-panel"></div>
+            <h2 class="nav-menu--header">
+                <a href="/about" class="nav-menu--link">About Wheaton</a>
+                <button type="button"
+                        class="nav-menu--toggle"
+                        aria-expanded="false"
+                        aria-controls="fmenu-about"
+                        aria-label="Toggle About Wheaton submenu">
+                    <span class="sr-only">Toggle submenu</span>
+                    <svg class="icon-plus" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </button>
+            </h2>
+            <div id="fmenu-about" role="region" aria-labelledby="acc-about" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>

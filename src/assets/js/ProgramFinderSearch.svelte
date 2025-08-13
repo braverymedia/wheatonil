@@ -231,11 +231,13 @@
 <style>
   h1 {
     color: var(--color--white);
+    animation: fadeInUp 0.6s cubic-bezier(0, 0, 0.2, 1);
   }
   .finder {
     background-color: var(--color--blue-600);
     display: flex;
     flex-direction: column;
+    animation: fadeInUp 0.4s cubic-bezier(0, 0, 0.2, 1);
   }
   @media (min-width: 1024px) {
     .finder.notInOverlay {
@@ -247,9 +249,16 @@
     flex-direction: column;
     gap: var(--space--gap-xxl);
     flex-shrink: 1;
+    animation: fadeInUp 0.6s cubic-bezier(0, 0, 0.2, 1) 0.1s both;
   }
   label {
     display: block;
+  }
+  fieldset.credential_types button {
+    transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+  fieldset.credential_types button:hover {
+    opacity: 0.9;
   }
   fieldset.credential_types button.selected {
     background-color: var(--color--white) !important;
@@ -288,9 +297,18 @@
     color: var(--color--white);
     display: flex;
     align-items: center;
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+    animation: fadeInUp 0.4s cubic-bezier(0, 0, 0.2, 1);
+  }
+  label.checkbox:hover {
+    opacity: 0.8;
   }
   label.checkbox input {
     margin-right: var(--space--gap-regular);
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
+  }
+  label.checkbox input:checked {
+    opacity: 1;
   }
   .v-hidden {
     clip: rect(0, 0, 0, 0);
@@ -302,5 +320,28 @@
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>

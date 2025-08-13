@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Module Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: #0066cc;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Module Test</h1>
+    
+    <div class="test-section">
+        <h2>Module Loading Test</h2>
+        <div id="module-test">
+            <p>Testing module loading...</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Carousel Test</h2>
+        <div data-bravery-carousel>
+            <div data-bravery-carousel-items>
+                <div style="width: 300px; height: 200px; background: #f0f0f0; margin-right: 20px; display: flex; align-items: center; justify-content: center;">Slide 1</div>
+                <div style="width: 300px; height: 200px; background: #e0e0e0; margin-right: 20px; display: flex; align-items: center; justify-content: center;">Slide 2</div>
+                <div style="width: 300px; height: 200px; background: #d0d0d0; margin-right: 20px; display: flex; align-items: center; justify-content: center;">Slide 3</div>
+            </div>
+            <button data-bravery-carousel-prev>Previous</button>
+            <button data-bravery-carousel-next>Next</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Accordion Test</h2>
+        <div data-accordion>
+            <button aria-expanded="false" aria-controls="accordion-1">Accordion Item 1</button>
+            <div id="accordion-1" hidden>
+                <p>Content for accordion item 1</p>
+            </div>
+            <button aria-expanded="false" aria-controls="accordion-2">Accordion Item 2</button>
+            <div id="accordion-2" hidden>
+                <p>Content for accordion item 2</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Modal Test</h2>
+        <button data-bm-modal data-media-type="image" data-src="https://via.placeholder.com/800x600">Open Image Modal</button>
+        <button data-bm-modal data-media-type="video" data-src="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Open Video Modal</button>
+    </div>
+
+    <script type="module" src="/assets/js/wheaton.js"></script>
+    <script nomodule src="/assets/js/legacy.js"></script>
+    
+    <script>
+        // Test if modules loaded correctly
+        document.addEventListener('DOMContentLoaded', () => {
+            const moduleTest = document.getElementById('module-test');
+            
+            if (window.wheaton) {
+                moduleTest.innerHTML = `
+                    <p class="success">✓ JavaScript modules loaded successfully!</p>
+                    <p>Loaded modules: ${Object.keys(window.wheaton).filter(key => key !== 'utils').join(', ')}</p>
+                `;
+            } else {
+                moduleTest.innerHTML = '<p class="error">✗ Error loading JavaScript modules</p>';
+            }
+            
+            // Test modal functionality
+            const modalButtons = document.querySelectorAll('[data-bm-modal]');
+            modalButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Modal would open with: ' + button.getAttribute('data-src'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

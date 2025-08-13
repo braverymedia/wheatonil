@@ -37,46 +37,95 @@ main.is-new-style {
 }
 
 .bm-margins {
-    width: 100vw;
-    padding: var(--space--gap-medium);
-    margin-inline: -4vw;
-    @media (min-width: 1024px) {
-        margin-inline: -7vw;
-    }
-    @media ( min-width: 1300px ) {
-        padding-inline: var(--max-1280);
-        margin-inline: calc(var(--max-1280) * -1);
-    }
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--content-padding-mobile);
+
+  @media (min-width: 1024px) {
+    padding: var(--content-padding-tablet);
+  }
+
+  @media (min-width: 1300px) {
+    max-width: var(--content-max-width);
+    padding: var(--content-padding-desktop);
+    margin: 0 auto;
+  }
 }
 .is-fullwidth {
-    --full-bleed: 4vw;
+    --full-bleed: var(--content-padding-mobile);
     width: 100vw;
-    margin-inline: calc(var(--full-bleed) * -1);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-inline: -50vw;
     padding-inline: var(--full-bleed);
+
     @media (min-width: 1024px) {
-        --full-bleed: 7vw;
+        --full-bleed: var(--content-padding-tablet);
     }
-    @media ( min-width: 1300px ) {
-        --full-bleed: var(--max-1280);
-        margin-inline: calc((100vw - 1280px) * -0.5);
+
+    @media (min-width: 1300px) {
+        --full-bleed: calc((100vw - var(--content-max-width)) / 2);
+    }
+
+    // Reset for nested full-width elements
+    .is-fullwidth {
+        width: 100%;
+        margin-inline: 0;
+        left: auto;
+        right: auto;
     }
 }
+// Base container styles for layout classes
+.is-wide,
+.is-extrawide,
 .is-widewidth {
-    --offset: 3.5vw;
-    width: 100vw;
-    margin-inline: -4vw;
-    > * {
-        padding-inline: 4vw;
-    }
-    @media (min-width: 1024px) {
-        margin-inline: calc( var(--offset) * -1);
-        max-width: 95vw;
-    }
-    @media ( min-width: 1500px ) {
-        max-width: 1480px;
-        width: 100vw;
-        margin-inline: calc( ((100vw - 1480px) * -1) / 2 );
-    }
+  width: 100%;
+  margin-inline: auto;
+}
+
+// Standard wide variant (48px at 1500px)
+.is-wide {
+  --target-padding: calc(var(--wide-padding-ratio) * 100vw);
+  
+  padding-inline: clamp(
+    var(--wide-min-padding),
+    var(--target-padding),
+    var(--wide-max-padding)
+  );
+  
+  @media (min-width: 1024px) {
+    --wide-padding-ratio: 0.04; // Slightly more padding on tablet
+  }
+  
+  @media (min-width: 1500px) {
+    --wide-padding-ratio: 0.032; // 48px at 1500px
+  }
+}
+
+// Extra wide variant (96px at 1500px)
+.is-extrawide {
+  --target-padding: calc(var(--extrawide-padding-ratio) * 100vw);
+  
+  padding-inline: clamp(
+    var(--wide-min-padding),
+    var(--target-padding),
+    var(--wide-max-padding)
+  );
+  
+  @media (min-width: 1024px) {
+    --extrawide-padding-ratio: 0.08; // Slightly more padding on tablet
+  }
+  
+  @media (min-width: 1500px) {
+    --extrawide-padding-ratio: 0.064; // 96px at 1500px
+  }
+}
+
+// For backward compatibility
+.is-widewidth {
+  @extend .is-wide;
 }
 .has-jump-menu {
     @media (min-width: 1024px) {

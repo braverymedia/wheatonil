@@ -167,14 +167,14 @@ const initCarousel = (carousel) => {
 
 const initMarquee = (marquee) => {
 	const items = marquee.element.querySelectorAll("picture");
-	let images = [...items];
+	const images = [...items];
 	const half = Math.ceil(images.length / 2);
 	const firstHalf = images.slice(0, half);
 	const secondHalf = images.slice(half);
 
 	// Prep Group 1
 	const column = marquee.element.querySelector(".bm-gallery-col");
-	let group = document.createElement("div");
+	const group = document.createElement("div");
 	group.className = "bm-marquee--group";
 
 	const group1 = group.cloneNode(true);
@@ -187,7 +187,7 @@ const initMarquee = (marquee) => {
 	group1Copy.setAttribute("aria-hidden", true);
 	group2Copy.setAttribute("aria-hidden", true);
 
-	let reversed = document.createElement("section");
+	const reversed = document.createElement("section");
 	reversed.className = "bm-gallery-col bm-marquee";
 	reversed.setAttribute("data-direction", "reverse");
 
@@ -435,7 +435,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const accordionClick = (event) => {
 		const target = event.target;
 		if (target instanceof HTMLButtonElement) {
-			const panel = target.parentNode.nextElementSibling;
+			let panel;
+			const panelId = target.getAttribute("aria-controls");
+
+			// Try to find panel by ID first (new structure)
+			if (panelId) {
+				panel = document.getElementById(panelId);
+			}
+
+			// Fallback to sibling (old structure)
+			if (!panel) {
+				panel = target.parentNode.nextElementSibling;
+			}
+
+			if (!panel) {
+				console.warn('No panel found for accordion button:', target);
+				return;
+			}
+
 			const isExpanded = target.getAttribute("aria-expanded") === "true";
 
 			target.setAttribute("aria-expanded", `${!isExpanded}`);
@@ -452,13 +469,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 	const hoverShow = (event) => {
 		const target = event.target;
-		const panel = target.parentNode.nextElementSibling;
+		let panel;
+		const panelId = target.getAttribute("aria-controls");
 
-		if (target instanceof HTMLButtonElement) {
+		// Try to find panel by ID first (new structure)
+		if (panelId) {
+			panel = document.getElementById(panelId);
+		}
+
+		// Fallback to sibling (old structure)
+		if (!panel) {
+			panel = target.parentNode.nextElementSibling;
+		}
+
+		if (target instanceof HTMLButtonElement && panel) {
 			target.setAttribute("aria-expanded", "true");
 			panel.classList.add("visible");
 			menuPanels.forEach((mpanel) => {
-				let labeled = mpanel.getAttribute("id");
+				const labeled = mpanel.getAttribute("id");
 				if (labeled !== target.getAttribute("aria-controls")) {
 					mpanel.classList.remove("visible");
 					document
@@ -538,19 +566,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 	// Jump nav toggles
 	for (let i = 0; i < jumpNavs.length; i++) {
-		let jumpNav = jumpNavs[i];
+		const jumpNav = jumpNavs[i];
 		jumpNav.addEventListener("click", mobileSectionNav);
 
 		// Run mobileSectionNav when child "a" is clicked
 		for (let j = 0; j < jumpNav.children.length; j++) {
-			let jumpNavChild = jumpNav.children[j];
+			const jumpNavChild = jumpNav.children[j];
 			jumpNavChild.addEventListener("click", mobileJumpNavigation);
 		}
 	}
 
 	// Collapsibles toggle
 	for (let i = 0; i < collapsibles.length; i++) {
-		let collapsible = collapsibles[i];
+		const collapsible = collapsibles[i];
 		collapsible.addEventListener("click", accordionClick);
 	}
 
@@ -593,51 +621,56 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	const modalContentContainer = document.querySelector(".bm--modal-content");
 
 	function embedVideo(url) {
-		const videoId = url.includes('youtu')
-			? url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/)[1]
+		const videoId = url.includes("youtu")
+			? url.match(
+					/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/
+			  )[1]
 			: url.match(/vimeo\.com\/(?:.*\/)?([0-9]+)/)[1];
 
-		const iframe = document.createElement('iframe');
-		iframe.className = 'bm--modal-media';
+		const iframe = document.createElement("iframe");
+		iframe.className = "bm--modal-media";
 		// Set width to 100% to allow responsive scaling while maintaining 16:9 aspect ratio
-		iframe.style.width = '100%';
-		iframe.style.aspectRatio = '16 / 9';
-		iframe.style.height = 'auto';
-		if (url.includes('youtu')) {
+		iframe.style.width = "100%";
+		iframe.style.aspectRatio = "16 / 9";
+		iframe.style.height = "auto";
+		if (url.includes("youtu")) {
 			iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 		} else {
 			iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
 		}
 
-		iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+		iframe.allow =
+			"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
 		iframe.allowFullscreen = true;
 		return iframe;
 	}
 
 	function embedImage(url, trigger) {
 		// Find the parent figure element
-		const sourceFigure = trigger.closest('figure');
+		const sourceFigure = trigger.closest("figure");
 		if (!sourceFigure) {
 			// Fallback to simple image if no figure found
-			const img = document.createElement('img');
-			img.className = 'bm--modal-media';
+			const img = document.createElement("img");
+			img.className = "bm--modal-media";
 			img.src = url;
-			img.alt = trigger.getAttribute('data-alt') || '';
+			img.alt = trigger.getAttribute("data-alt") || "";
 			return img;
 		}
 
 		// Create a new figure for the modal
-		const figure = document.createElement('figure');
-		figure.className = 'bm--modal-media';
+		const figure = document.createElement("figure");
+		figure.className = "bm--modal-media";
 
 		// Get the source image, excluding the button
-		const sourceImg = sourceFigure.querySelector('img:not(.bm--modal-trigger)');
+		const sourceImg = sourceFigure.querySelector(
+			"img:not(.bm--modal-trigger)"
+		);
 		if (sourceImg) {
-			const img = document.createElement('img');
+			const img = document.createElement("img");
 			img.src = url;
-			img.alt = trigger.getAttribute('data-alt') || sourceImg.alt;
+			img.alt = trigger.getAttribute("data-alt") || sourceImg.alt;
 			// Copy any relevant attributes from source image
-			['loading', 'decoding'].forEach(attr => {
+			["loading", "decoding"].forEach((attr) => {
 				if (sourceImg.hasAttribute(attr)) {
 					img.setAttribute(attr, sourceImg.getAttribute(attr));
 				}
@@ -646,7 +679,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		}
 
 		// Clone the figcaption if it exists
-		const sourceCaption = sourceFigure.querySelector('figcaption');
+		const sourceCaption = sourceFigure.querySelector("figcaption");
 		if (sourceCaption) {
 			const figcaption = sourceCaption.cloneNode(true);
 			figure.appendChild(figcaption);
@@ -660,17 +693,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
 			e.preventDefault(); // Prevent default for links
 
 			// Get the media URL either from href (for links) or data-src (for buttons)
-			let url = trigger.tagName.toLowerCase() === 'a'
-				? trigger.getAttribute("href")
-				: trigger.getAttribute("data-src");
+			const url =
+				trigger.tagName.toLowerCase() === "a"
+					? trigger.getAttribute("href")
+					: trigger.getAttribute("data-src");
 
 			if (!url) {
-				console.warn('No media URL provided for modal trigger');
+				console.warn("No media URL provided for modal trigger");
 				return;
 			}
 
-			let mediaType = trigger.getAttribute("data-media-type") || "video";
-			let embedMarkup = mediaType === "image" ? embedImage(url, trigger) : embedVideo(url);
+			const mediaType = trigger.getAttribute("data-media-type") || "video";
+			const embedMarkup =
+				mediaType === "image"
+					? embedImage(url, trigger)
+					: embedVideo(url);
 			modalContentContainer.appendChild(embedMarkup);
 			dialog.show();
 		});
@@ -682,7 +719,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		.on("hide", function (event) {
 			document.documentElement.style.overflowY = "";
 			const container = event.target;
-			const mediaElement = container.querySelector('.bm--modal-media');
+			const mediaElement = container.querySelector(".bm--modal-media");
 			if (mediaElement) {
 				mediaElement.remove();
 			}

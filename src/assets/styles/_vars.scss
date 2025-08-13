@@ -64,6 +64,26 @@ body {
     --max-1280: calc((100vw - 1280px) * 0.5);
     --max-1480: calc((100vw - 1480px) * -0.5);
 
+    // Content widths
+    --content-max-width: 1280px;
+    --wide-max-width: 1480px;
+
+    // Spacing
+    --content-padding-mobile: var(--space--gap-medium);
+    --content-padding-tablet: 7vw;
+    --content-padding-desktop: 0;
+
+    // Breakpoints
+    --bp-tablet: 1024px;
+    --bp-desktop: 1280px;
+    --bp-wide: 1500px;
+    
+    // Fluid width calculations
+    --wide-padding-ratio: 0.032;  // 48px at 1500px
+    --extrawide-padding-ratio: 0.064;  // 96px at 1500px
+    --wide-min-padding: 16px;  // Minimum padding on mobile
+    --wide-max-padding: 96px;  // Maximum padding at largest screens
+
     // Style
     --corner--radius: calc(var(--space--grid-unit) / 2);
     --bm--primary-font: var(--font--serif);

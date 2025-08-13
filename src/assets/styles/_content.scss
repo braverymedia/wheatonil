@@ -1,5 +1,20 @@
 .bm {
     &--content {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: var(--content-padding-mobile);
+
+        @media (min-width: 1024px) {
+            padding: var(--content-padding-tablet);
+        }
+
+        @media (min-width: 1300px) {
+            max-width: var(--content-max-width);
+            padding: var(--content-padding-desktop);
+            margin: 0 auto;
+        }
+
         > section:not(:first-child) {
             margin-block-start: calc(var(--space--grid-unit) * 6);
             padding-block-start: var(--space--gap-xl);

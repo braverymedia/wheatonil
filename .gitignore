@@ -1,9 +1,34 @@
+# Dependencies
 node_modules/
 package-lock.json
 yarn-error.log
+
+# Environment variables
 .env
-config.codekit3
+
+# Build outputs
+_site/
+dist/
+*.log
+
+# Editor and OS files
 .DS_Store
-_site
-.direnv
-src/_includes/assets/css
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local development
+.direnv/
+
+# Build artifacts
+src/_includes/assets/css/
+src/_includes/assets/js/
+
+# Test files
+/test/
+/coverage/
+
+# Local development
+.cache/
+.temp/

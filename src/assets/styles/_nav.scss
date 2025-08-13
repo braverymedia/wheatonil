@@ -49,7 +49,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space--gap-medium);
 
     @media (min-width: 1024px) {
         padding-block-start: 0;
@@ -174,17 +173,55 @@
 }
 
 .overlay-menu {
-    background-color: var(--color--blue-600);
-    color: var(--color--white);
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 0;
     right: 0;
-    height: 100vh;
-    width: 100vw;
-    transition: all 200ms ease-in-out;
-    overflow: auto;
+    bottom: 0;
+    background-color: var(--color--blue-600);
+    color: var(--color--white);
+    width: 100%;
+    height: 100dvh;
+    z-index: 9999;
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+    overflow-y: auto;
+    padding: var(--space--gap-regular) var(--space--gap-medium);
+    transform: translateY(10px);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    -webkit-overflow-scrolling: touch;
+
+    /* When overlay is visible */
+    &[data-state="visible"] {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 300ms ease-out, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+        /* Animate search form */
+        .full-search {
+            animation: slideInDown 400ms cubic-bezier(0.16, 1, 0.3, 1) 100ms forwards;
+        }
+
+        /* Stagger the h2 animations */
+        .nav-menu--header {
+            @for $i from 1 through 10 {
+                &:nth-of-type(#{$i}) {
+                    animation: slideInDown 400ms cubic-bezier(0.16, 1, 0.3, 1) #{$i * 75}ms forwards;
+                }
+            }
+        }
+    }
+
+    /* Initially hide all animated elements */
+    .full-search,
+    .nav-menu--header {
+        opacity: 0;
+        transform: translateY(10px);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+    }
 
     * {
         color: var(--color--white);
@@ -302,25 +339,53 @@
     width: 24px;
 }
 
-.bravery .bm--menu-links {
-    padding: var(--space--gap-large) var(--space--gap-regular);
+.bravery .bm--menu-links,
+[data-mobilemenu] {
+    padding-block: var(--space--gap-large);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space--gap-regular);
 
-    h2 {
+    h2.nav-menu--header {
         margin-block-end: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        position: relative; // Ensure proper stacking context
+
+        > a {
+            text-underline-offset: 8px;
+            text-decoration-thickness: 2px;
+            &:not(:hover) {
+                text-decoration: none;
+            }
+            @media (min-width: 1024px) {
+                text-underline-offset: 16px;
+                text-decoration-thickness: 4px !important;
+                pointer-events: auto;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        /* Show underline when header has is-expanded class */
+        &.is-expanded > .nav-menu--link {
+            text-decoration-line: underline;
+            position: relative;
+        }
     }
 
     h2>button {
         appearance: none;
         background-color: transparent;
         border: 0;
-        padding: 0 var(--space--gap-regular);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+        padding: 0;
+        padding-inline-start:var(--space--gap-regular);
         color: inherit;
-        font-size: inherit;
-        font-family: inherit;
-        text-align: left;
 
         svg {
             transform: rotate();
@@ -330,10 +395,12 @@
 
     button:hover,
     button[aria-expanded="true"] {
-        text-decoration: underline;
+        text-decoration-line: underline;
         text-decoration-thickness: 2px;
         text-underline-offset: 6px;
+    }
 
+    [aria-expanded="true"] {
         svg {
             transform: rotate(-45deg);
         }
@@ -342,7 +409,8 @@
     ul {
         font-size: var(--type-size--regular);
         font-family: var(--wc-font-family--sans-serif);
-        margin-block-start: 1rem;
+        margin-block-start: 0;
+        padding-inline-start: var(--space--gap-medium);
 
         a {
             text-decoration: none;
@@ -354,76 +422,83 @@
     }
 
     .accordion-panel {
-        height: 0;
-        visibility: hidden;
-        transition: all 200ms ease-in-out;
+        // Base styles for all screens
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        will-change: max-height, opacity;
 
-        &.visible {
-            display: block;
-            height: auto;
-            visibility: visible;
+        // Mobile styles with height transition
+        @media (max-width: 1023px) {
+            position: static;
+            padding: 0;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 
+    // Expanded state for panels
+    .accordion-panel.is-expanded {
+        max-height: 2000px !important; // Override any other max-height
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        pointer-events: auto !important;
+        position: relative !important; // Ensure it's positioned
+        z-index: 1 !important; // Ensure it's above other elements
+    }
+
+    // Nested panels for submenus
+    .accordion-panel .accordion-panel {
+        position: static;
+        padding: 0;
+        background: transparent;
+        transition-duration: 0.2s;
+
+        &.is-expanded {
+            max-height: 1000px; // Adjust based on your content
+            opacity: 1;
+        }
+    }
+
+    // Keep existing styles for backward compatibility
     button[aria-expanded=true]+ul {
         height: auto;
-        visibility: visible;
     }
 
     @media (min-width: 1024px) {
-        border-right: 1px solid var(--color--blue-800);
         display: grid;
         gap: var(--space--gap-medium) var(--space--gap-large);
         grid-template-columns: 3fr 4fr;
         align-items: start;
-        padding-block-start: 0;
-        padding-block-end: 0;
+        padding-block: 0;
 
-        button {
-            cursor: auto;
-        }
-
-        button:hover,
-        button[aria-expanded="true"] {
-            text-decoration: underline;
+        h2:hover .nav-menu--link,
+        h2.is-expanded .nav-menu--link {
+            text-decoration-line: underline;
             text-decoration-thickness: 4px;
             text-underline-offset: 16px;
-
-            svg {
-                transform: rotate(-45deg);
-            }
         }
 
-        h2 {
+        h2.nav-menu--header {
             font-size: var(--type-size--xl-fluid);
             grid-column: 1;
             grid-auto-flow: row;
-
-            svg {
-                display: none;
+            button {
+                visibility: hidden;
             }
         }
 
-        h2>button {
-            justify-content: start;
-            white-space: ellipsis;
-        }
-
         .accordion-panel {
-            grid-column: 2;
-            grid-row: 1 / span 6;
-        }
-
-        .accordion-panel {
+            grid-area: 1 / 2 / span 6;
+            max-height: none;
             height: auto;
-            visibility: hidden;
-            opacity: 0;
-            transition: all 200ms ease-in-out;
 
-            &.visible {
-                height: auto;
-                opacity: 1;
-                visibility: visible;
+            // Nested panels in desktop
+            .accordion-panel {
+                padding: 0;
+                margin: 0;
             }
         }
     }
@@ -493,7 +568,18 @@
 
     @media (min-width: 1024px) {
         padding: 0;
+        padding-inline-start: var(--space--gap-large);
         display: block;
+        border-left: 1px solid var(--color--blue-800);
+
+        .nav-menu--header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space--gap-small);
+            position: relative;
+        }
     }
 }
 

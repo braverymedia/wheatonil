@@ -156,6 +156,57 @@ hr {
   }
 }
 
+// Animation keyframes
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Overlay menu animations */
+@keyframes slideInDown {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+// Optimize animation performance
+@keyframes scroll-y {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-100% + 100vh));
+  }
+}
+
+// Loading animation
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+// Loading animation
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes cardHover {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(-3px); }
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     html{
@@ -169,5 +220,53 @@ hr {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+/* Marquee Animations */
+@keyframes marquee-scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* Marquee Base Styles */
+.bm-marquee {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    &--group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space--gap-regular, 1rem);
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+        animation: marquee-scroll 30s linear infinite;
+
+        [data-direction="reverse"] & {
+            animation-direction: reverse;
+        }
+
+        @media (max-width: 768px) {
+            animation-duration: 40s; /* Slower on mobile */
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
+    }
+
+    /* Pause animation when not in viewport */
+    &:not(:hover) {
+        .bm-marquee--group {
+            animation-play-state: running;
+        }
+    }
+
+    &:hover {
+        .bm-marquee--group {
+            animation-play-state: paused;
+        }
     }
 }
