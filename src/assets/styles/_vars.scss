@@ -60,6 +60,14 @@ body {
     --space--gap-xxl: calc(var(--space--grid-unit) * 5); // 40px
     --space--gap-3xl: calc(var(--space--grid-unit) * 6); // 48px
 
+    /* Vertical rhythm aliases (optional semantic names) */
+    --vr-1: var(--space--gap-regular);  /* 8px */
+    --vr-2: var(--space--gap-medium);   /* 16px */
+    --vr-3: var(--space--gap-large);    /* 24px */
+    --vr-4: var(--space--gap-xl);       /* 32px */
+    --vr-5: var(--space--gap-xxl);      /* 40px */
+    --vr-6: var(--space--gap-3xl);      /* 48px */
+
     // Margins
     --max-1280: calc((100vw - 1280px) * 0.5);
     --max-1480: calc((100vw - 1480px) * -0.5);
