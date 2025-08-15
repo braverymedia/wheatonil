@@ -1,9 +1,9 @@
 <footer class="main-footer bravery">
     <a href="/" aria-label="Wheaton College - For Christ &amp; His Kingdom" class="inverse-logo">{% include "components/svg/logo-inverted.njk" %}</a>
-    <nav class="footer-nav" data-accordion data-mobilemenu>
+    <nav class="footer-nav" data-accordion data-mobilemenu aria-label="Footer navigation">
         <section>
             <h2 class="nav-menu--header">
-                <a href="/academics" class="nav-menu--link">Academics</a>
+                <a href="/academics" class="nav-menu--link" id="fmenu-academics-label">Academics</a>
                 <button type="button"
                         class="nav-menu--toggle"
                         aria-expanded="false"
@@ -15,7 +15,7 @@
                     </svg>
                 </button>
             </h2>
-            <div id="fmenu-academics" role="region" aria-labelledby="acc-academics" class="accordion-panel">
+            <div id="fmenu-academics" role="region" aria-labelledby="fmenu-academics-label" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>
@@ -30,7 +30,7 @@
         </section>
         <section>
             <h2 class="nav-menu--header">
-                <a href="/cost-aid" class="nav-menu--link">Cost &amp; Aid</a>
+                <a href="/cost-aid" class="nav-menu--link" id="fmenu-cost-label">Cost &amp; Aid</a>
                 <button type="button"
                         class="nav-menu--toggle"
                         aria-expanded="false"
@@ -42,7 +42,7 @@
                     </svg>
                 </button>
             </h2>
-            <div id="fmenu-cost" role="region" aria-labelledby="acc-cost" class="accordion-panel">
+            <div id="fmenu-cost" role="region" aria-labelledby="fmenu-cost-label" class="accordion-panel">
                 <ul>
                     <li><a href="#">Cost &amp; Aid Overview</a></li>
                     <li><a href="#">Types of Aid</a></li>
@@ -54,7 +54,7 @@
         </section>
         <section>
             <h2 class="nav-menu--header">
-                <a href="/admissions" class="nav-menu--link">Admissions</a>
+                <a href="/admissions" class="nav-menu--link" id="fmenu-admissions-label">Admissions</a>
                 <button type="button"
                         class="nav-menu--toggle"
                         aria-expanded="false"
@@ -66,7 +66,7 @@
                     </svg>
                 </button>
             </h2>
-            <div id="fmenu-admissions" role="region" aria-labelledby="acc-admissions" class="accordion-panel">
+            <div id="fmenu-admissions" role="region" aria-labelledby="fmenu-admissions-label" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>
@@ -81,7 +81,7 @@
         </section>
         <section>
             <h2 class="nav-menu--header">
-                <a href="/life-at-wheaton" class="nav-menu--link">Campus Life</a>
+                <a href="/life-at-wheaton" class="nav-menu--link" id="fmenu-campus-label">Campus Life</a>
                 <button type="button"
                         class="nav-menu--toggle"
                         aria-expanded="false"
@@ -93,7 +93,7 @@
                     </svg>
                 </button>
             </h2>
-            <div id="fmenu-campus" role="region" aria-labelledby="acc-campus" class="accordion-panel">
+            <div id="fmenu-campus" role="region" aria-labelledby="fmenu-campus-label" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>
@@ -108,7 +108,7 @@
         </section>
         <section>
             <h2 class="nav-menu--header">
-                <a href="/about" class="nav-menu--link">About Wheaton</a>
+                <a href="/about" class="nav-menu--link" id="fmenu-about-label">About Wheaton</a>
                 <button type="button"
                         class="nav-menu--toggle"
                         aria-expanded="false"
@@ -120,7 +120,7 @@
                     </svg>
                 </button>
             </h2>
-            <div id="fmenu-about" role="region" aria-labelledby="acc-about" class="accordion-panel">
+            <div id="fmenu-about" role="region" aria-labelledby="fmenu-about-label" class="accordion-panel">
                 <ul>
                     <li><a href="#">Undergraduate Programs</a></li>
                     <li><a href="#">Graduate Programs</a></li>
@@ -157,7 +157,7 @@
     </nav>
     <section class="legal">
         <p class="copyright">&copy; 2022 Wheaton College</p>
-        <nav>
+        <nav aria-label="Legal navigation">
             <ul>
                 <li><a href="#">Disclosures and Privacy Policy</a></li>
                 <li><a href="#">Emergency Information</a></li>

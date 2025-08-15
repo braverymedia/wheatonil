@@ -1,0 +1,88 @@
+/* Decorative background helpers */
+.has-bg--white { background: var(--color--white); }
+.has-bg--cream { background: var(--color--cream) !important; }
+.has-bg--light-blue { background: var(--color--cyan-25); }
+
+.has-bg--blue {
+  --color--accent: var(--color--cyan-400, #6E9BAE);
+  background-color: var(--color--blue-600);
+  color: var(--color--white);
+  h1, h2, h3 { color: inherit; }
+  a { color: inherit; }
+}
+
+.has-bg--blue-gradient {
+  --color--accent: var(--color--cyan-400, #6E9BAE);
+  background: var(--gradient--blue-primary);
+  color: var(--color--white);
+  h1, h2, h3 { color: inherit !important; }
+  a { color: inherit !important; }
+}
+
+.has-bg--blue-gradient-light {
+  --color--accent: var(--color--cyan-400, #6E9BAE);
+  background: var(--gradient--blue-light);
+}
+
+ 
+
+/* Fancy underline block */
+:is(h1, h2).is-fancy {
+  position: relative;
+  &:before {
+    content: "";
+    display: block;
+    width: calc(var(--space--grid-unit) * 9);
+    height: 3px;
+    background-color: var(--color--accent, #A84C11);
+    margin-block-end: 48px;
+  }
+}
+
+/* Keyframes (non-critical) */
+@keyframes fade-in { from { opacity: 0; } }
+
+@keyframes modal-in { from { opacity: 0; transform: translateY(-10%); } }
+@keyframes modal-out { to { opacity: 0; transform: translateY(-10%); } }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scroll-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(calc(-100% + 100vh)); }
+}
+
+@keyframes cardHover { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(-3px); } }
+
+/* Marquee */
+@keyframes marquee-scroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+.bm-marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  &--group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space--gap-regular, 1rem);
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0,0,0);
+    animation: marquee-scroll 30s linear infinite;
+
+    [data-direction="reverse"] & { animation-direction: reverse; }
+
+    @media (max-width: 768px) { animation-duration: 40s; }
+    @media (prefers-reduced-motion: reduce) { animation: none; }
+  }
+  &:not(:hover) .bm-marquee--group { animation-play-state: running; }
+  &:hover .bm-marquee--group { animation-play-state: paused; }
+}

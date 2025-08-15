@@ -1,0 +1,9 @@
+@import "src/assets/styles/vars", "src/assets/styles/config", "src/assets/styles/typescale", "src/assets/styles/typesetting", "src/assets/styles/performance";
+
+/* ===== CRITICAL PERFORMANCE OPTIMIZATIONS ===== */
+.critical-optimized {
+  contain: layout style paint;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

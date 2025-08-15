@@ -1,4 +1,5 @@
 @use "vars" as *;
-@use "config" as *;
+@use "config.reset" as *;
 @use "typescale" as *;
-@use "typesetting" as *;
+@use "typesetting.base" as *;
+@use "critical.abovefold" as *;

@@ -7,11 +7,11 @@ main.is-new-style {
     & > .bm--content + *.has-bg--white {
         padding-block-end: 0;
     }
-    & > *.has-bg--white + *.has-bg--white,
+    & > :not(.bm--overlap).has-bg--white + *.has-bg--white,
     & > *.bm--content + *.has-bg--white,
-    & > *.has-bg--cream + *.has-bg--cream,
-    & > *.has-bg--light-blue + *.has-bg--light-blue,
-    & > *.has-bg--blue + *.has-bg--blue {
+    & > :not(.bm--overlap).has-bg--cream + *.has-bg--cream,
+    & > :not(.bm--overlap).has-bg--light-blue + *.has-bg--light-blue,
+    & > :not(.bm--overlap).has-bg--blue + *.has-bg--blue {
         padding-block-start: 0 !important;
     }
     & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint):not(header) {
