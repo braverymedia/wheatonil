@@ -1,21 +1,33 @@
 main.is-new-style {
     padding: 0 4vw calc(var(--space--grid-unit) * 12);
-    & > * + *:not(.bm--section-nav):not(.accordion-single):not(span):not([data-size="small"]):not(.bm--cover-image) {
-        padding-block: clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18));
+    /* Default vertical rhythm token; can be overridden per page/section */
+    --section-space: clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18));
+    & > :is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap, .is-fullwidth, .alignfull, .is-widewidth, .alignwide)
+      + :is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap, .is-fullwidth, .alignfull, .is-widewidth, .alignwide) {
+        padding-block: var(--section-space, clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18)));
     }
     & > .bm--section-nav + .bm--content,
     & > .bm--content + *.has-bg--white {
         padding-block-end: 0;
     }
-    & > :not(.bm--overlap).has-bg--white + *.has-bg--white,
-    & > *.bm--content + *.has-bg--white,
-    & > :not(.bm--overlap).has-bg--cream + *.has-bg--cream,
-    & > :not(.bm--overlap).has-bg--light-blue + *.has-bg--light-blue,
-    & > :not(.bm--overlap).has-bg--blue + *.has-bg--blue {
+    & > :not(.bm--overlap):is(.has-bg--white, .has-bg--cream, .has-bg--light-blue, .has-bg--blue, .has-bg--blue-gradient)
+    + :is(.has-bg--white, .has-bg--cream, .has-bg--light-blue, .has-bg--blue, .has-bg--blue-gradient):not(.bm--overlap) {
+        padding-block-start: 0;
+    }
+    & > *.bm--content + *.has-bg--white {
         padding-block-start: 0 !important;
+    }
+    /* Ensure .bm--overlap has top padding when following a non-structural sibling */
+    & > :not(:is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap))
+      + .bm--overlap {
+        padding-block-start: var(--section-space);
     }
     & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint):not(header) {
         padding-block-start: clamp(calc(var(--space--grid-unit) * 8), 8vw, calc(var(--space--grid-unit) * 23));
+    }
+    /* Utility to suppress first-child top padding when needed */
+    & > :first-child.suppress-first-padding {
+        padding-block-start: 0;
     }
     & > .bm--content {
         max-width: 720px;
@@ -52,13 +64,14 @@ main.is-new-style {
     margin: 0 auto;
   }
 }
-.is-fullwidth {
+.is-fullwidth,
+.alignfull {
     --full-bleed: var(--content-padding-mobile);
     width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-inline: -50vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     padding-inline: var(--full-bleed);
 
     @media (min-width: 1024px) {
@@ -66,15 +79,16 @@ main.is-new-style {
     }
 
     @media (min-width: 1300px) {
-        --full-bleed: calc((100vw - var(--content-max-width)) / 2);
+        --full-bleed: var(--content-padding-desktop);
     }
 
     // Reset for nested full-width elements
-    .is-fullwidth {
+    .is-fullwidth,
+    .alignfull {
         width: 100%;
-        margin-inline: 0;
-        left: auto;
-        right: auto;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 // Base container styles for layout classes
@@ -123,9 +137,43 @@ main.is-new-style {
   }
 }
 
-// For backward compatibility
-.is-widewidth {
-  @extend .is-wide;
+// Wide (aka alignwide) – consistently between default and full width
+.is-widewidth,
+.alignwide {
+  /* Token: how much wider than default content we allow (can be overridden) */
+  --wide-extend: 320px;
+  --wide-max-width: calc(var(--content-max-width) + var(--wide-extend));
+
+  /* Center to viewport, independent of parent container width */
+  width: min(100vw, var(--wide-max-width));
+  position: relative;
+  left: 50%;
+  right: 50%;
+  box-sizing: border-box;
+  margin-left: calc(-0.5 * min(100vw, var(--wide-max-width)));
+  margin-right: calc(-0.5 * min(100vw, var(--wide-max-width)));
+
+  /* Safe edges so text doesn’t kiss the viewport */
+  padding-inline: var(--content-padding-mobile);
+
+  @media (min-width: 1024px) {
+    padding-inline: var(--content-padding-tablet);
+  }
+
+  @media (min-width: 1300px) {
+    padding-inline: var(--content-padding-desktop);
+  }
+
+  /* Nested wide blocks collapse to normal to avoid compounding */
+  .is-widewidth,
+  .alignwide {
+    width: 100%;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: 0;
+  }
 }
 .has-jump-menu {
     @media (min-width: 1024px) {
