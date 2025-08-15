@@ -13,10 +13,9 @@ h4,
 h5,
 h6 {
   font-family: var(--wc-font-family--display);
-  margin-block-end: 1rem;
+  margin-block-end: var(--space--gap-large);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.05;
 }
 
 h1,
@@ -27,9 +26,9 @@ h3 {
 
 /* Element heading sizes only (no helper classes here) */
 h1 { font-size: var(--type-size--xxl); font-weight: normal; line-height: 1; }
-h2 { font-size: var(--type-size--xl); font-weight: normal; }
-h3 { font-size: var(--type-size--large); }
-h4 { color: var(--color--blue-700); font-family: var(--wc-font-family--sans-serif); font-weight: 500; font-size: var(--wc-font-size--text-md); }
+h2 { font-size: var(--type-size--xl); font-weight: normal; line-height: 1.15; }
+h3 { font-size: var(--type-size--large); line-height: 1.2; }
+h4 { color: var(--color--blue-700); font-family: var(--wc-font-family--sans-serif); font-weight: 500; font-size: var(--wc-font-size--text-md); line-height: 1.4; }
 
 /* Anchor basics and focus styles */
 a {
@@ -51,6 +50,7 @@ a:focus:not(:focus-visible) {
 
 /* Paragraph sizing and rhythm */
 p {
-  margin-block-end: 2rem;
+  margin-block-end: var(--space--gap-xl);
   font-size: var(--wc-font-size--text-lg);
 }
+
