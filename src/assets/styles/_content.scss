@@ -4,6 +4,8 @@
         max-width: 100%;
         margin: 0 auto;
         padding: var(--content-padding-mobile);
+        /* Flow rhythm for content blocks */
+        --flow-space: var(--space--gap-3xl);
 
         @media (min-width: 1024px) {
             padding: var(--content-padding-tablet);
@@ -14,8 +16,7 @@
             padding: var(--content-padding-desktop);
             margin: 0 auto;
         }
-        /* Flow rhythm for content blocks */
-        --flow-space: var(--space--gap-3xl);
+        /* flow-space set at block start to avoid mixed-decls warning */
         > * + * {
             margin-block-start: var(--flow-space);
         }
