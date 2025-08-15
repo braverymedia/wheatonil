@@ -54,3 +54,12 @@ p {
   font-size: var(--wc-font-size--text-lg);
 }
 
+/* Default element margins to maintain rhythm */
+ul,
+ol,
+figure,
+blockquote,
+pre {
+  margin-block: 0 var(--space--gap-xl);
+}
+
