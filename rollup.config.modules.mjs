@@ -21,8 +21,8 @@ const input = moduleFiles.reduce((acc, filePath) => {
 export default {
   input,
   output: {
-    dir: '_site/assets/js/modules',  // Output directly to the modules directory
-    format: 'esm',
+    dir: '_site/assets/js/modules',
+    format: 'esm', // ESM required for multiple entry points
     sourcemap: process.env.NODE_ENV === 'development',
     entryFileNames: '[name].min.js',
     chunkFileNames: 'chunks/[name]-[hash].js',
@@ -38,13 +38,20 @@ export default {
       sourceMap: process.env.NODE_ENV === 'development',
       requireReturnsDefault: 'auto'
     }),
-    ...(process.env.NODE_ENV === 'production' ? [terser({
+    // Always minify, but drop console only in production
+    terser({
       format: {
         comments: false,
       },
       compress: {
-        drop_console: true,
+        drop_console: process.env.NODE_ENV === 'production',
+        drop_debugger: process.env.NODE_ENV === 'production',
+        passes: 2, // Run compression twice for better results
       },
-    })] : [])
+      mangle: {
+        // Preserve window.wheaton namespace
+        reserved: ['wheaton']
+      }
+    })
   ]
 };

@@ -1,0 +1,61 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  {{!-- Page Title --}}
+  <title>{{#ifSet (meta id="29")}}{{meta id="29"}} | {{else}} section name {{/ifSet}}Wheaton College</title>
+
+  {{!-- Meta Description --}}
+  <meta name="description" content="{{meta id="12"}}">
+  <meta name="author" content="Wheaton College">
+  <meta name="generator" content="TERMINALFOUR">
+
+  {{!-- Data Last Modified --}}
+  <meta name="lastmod" content="{{contentLastModifiedDate}}">
+
+  {{!-- Canonical URL --}}
+  {{nav id="441" name="retrieve Canonical URLs"}}
+  {{nav id="438" name="Get Redirects from current section"}}
+
+  {{!-- Open Graph / Social Meta --}}
+  <meta property="og:title" content="{{#ifSet (meta id="29")}}{{meta id="29"}}{{else}}Wheaton College{{/ifSet}}">
+  {{#ifSet (meta id="23")~}}
+    <meta property="og:description" content="{{meta id="23"}}">
+    {{else}}
+    <meta property="og:description" content="{{meta id="12"}}">
+  {{~/ifSet}}
+  <meta property="og:url" content="{{canonicalURL}}">
+  <meta property="og:type" content="website">
+  {{#ifSet (meta id="30")~}}
+    <meta property="og:image" content="{{meta id="30"}}">
+  {{~/ifSet}}
+
+  {{!-- Twitter Card --}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{#ifSet (meta id="29")}}{{meta id="29"}}{{else}}Wheaton College{{/ifSet}}">
+  {{#ifSet (meta id="26")~}}
+    <meta name="twitter:description" content="{{meta id="26"}}">
+    {{else}}
+    <meta name="twitter:description" content="{{meta id="12"}}">
+  {{~/ifSet}}
+
+  {{!-- Favicon --}}
+  <link rel="icon" type="image/x-icon" href="{{{media id="141444" layout="path/*"}}}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{{media id="217368" layout="path/*"}}}">
+
+  {{!-- Preconnect to CDN --}}
+  <link rel="preconnect" href="https://pxl-wheatonedu.terminalfour.net">
+  <link rel="dns-prefetch" href="https://pxl-wheatonedu.terminalfour.net">
+  <link rel="preconnect" href="https://use.typekit.net">
+
+  {{!-- Critical CSS (Inlined) --}}
+  <link rel="stylesheet" href="https://use.typekit.net/frw7phk.css" type="text/css" />
+  {{>criticalCss}}
+
+  {{!-- Global CSS (Deferred) --}}
+  <link rel="preload" href="{{{media id="317740" layout="file/url"}}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{{media id="317740" layout="file/url"}}}"></noscript>
+
+  {{>scripts}}
+</head>

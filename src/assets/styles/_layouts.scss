@@ -2,16 +2,20 @@ main.is-new-style {
     padding: 0 4vw calc(var(--space--grid-unit) * 12);
     /* Default vertical rhythm token; can be overridden per page/section */
     --section-space: clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18));
-    & > :is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap, .is-fullwidth, .alignfull, .is-widewidth, .alignwide)
-      + :is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap, .is-fullwidth, .alignfull, .is-widewidth, .alignwide) {
+    /* Apply block padding to each section-like child by default */
+    & > :is(section, article, [data-layout], .bm--content-container, .bm--content, .bm--overlap, .is-fullwidth, .alignfull, .is-widewidth, .alignwide):not(.bm-home--hero) {
         padding-block: var(--section-space, clamp(var(--space--gap-3xl), 8vw, calc(var(--space--grid-unit) * 18)));
     }
     & > .bm--section-nav + .bm--content,
     & > .bm--content + *.has-bg--white {
         padding-block-end: 0;
     }
-    & > :not(.bm--overlap):is(.has-bg--white, .has-bg--cream, .has-bg--light-blue, .has-bg--blue, .has-bg--blue-gradient)
-    + :is(.has-bg--white, .has-bg--cream, .has-bg--light-blue, .has-bg--blue, .has-bg--blue-gradient):not(.bm--overlap) {
+    /* Collapse top padding only when two adjacent sections share the SAME bg color */
+    & > :not(.bm--overlap).has-bg--white + .has-bg--white:not(.bm--overlap),
+    & > :not(.bm--overlap).has-bg--cream + .has-bg--cream:not(.bm--overlap),
+    & > :not(.bm--overlap).has-bg--light-blue + .has-bg--light-blue:not(.bm--overlap),
+    & > :not(.bm--overlap).has-bg--blue + .has-bg--blue:not(.bm--overlap),
+    & > :not(.bm--overlap).has-bg--blue-gradient + .has-bg--blue-gradient:not(.bm--overlap) {
         padding-block-start: 0;
     }
     & > *.bm--content + *.has-bg--white {
@@ -23,7 +27,11 @@ main.is-new-style {
         padding-block-start: var(--section-space);
     }
     & > *:first-child:not(.bm-home--hero):not(#program-finder-mountpoint):not(header) {
-        padding-block-start: clamp(calc(var(--space--grid-unit) * 8), 8vw, calc(var(--space--grid-unit) * 23));
+        /* Ensure first section has at least base spacing, possibly larger per design */
+        padding-block-start: max(
+            var(--section-space),
+            clamp(calc(var(--space--grid-unit) * 8), 8vw, calc(var(--space--grid-unit) * 23))
+        );
     }
     /* Utility to suppress first-child top padding when needed */
     & > :first-child.suppress-first-padding {

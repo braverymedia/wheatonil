@@ -1,0 +1,57 @@
+{{!-- Site Header / Navigation --}}
+<header class="site-header" role="banner">
+  <div class="header-container">
+    {{!-- Logo --}}
+    <div class="site-logo">
+      <a href="/" aria-label="Wheaton College Home">
+        {{{media id="images/wheaton-logo.svg" layout="svg/inline"}}}
+      </a>
+    </div>
+    
+    {{!-- Mobile Menu Toggle --}}
+    <button class="mobile-menu-toggle" 
+            aria-expanded="false" 
+            aria-controls="primary-navigation"
+            aria-label="Toggle navigation menu">
+      <span class="menu-icon"></span>
+    </button>
+    
+    {{!-- Primary Navigation --}}
+    <nav id="primary-navigation" 
+         class="primary-nav" 
+         role="navigation" 
+         aria-label="Primary navigation"
+         data-module="navigation">
+      {{!-- Navigation will be populated by T4 NavObj or custom navigation content type --}}
+      {{!-- This is a placeholder - actual implementation depends on your nav structure --}}
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="/academics/" class="nav-link">Academics</a>
+        </li>
+        <li class="nav-item">
+          <a href="/admissions/" class="nav-link">Admissions</a>
+        </li>
+        <li class="nav-item">
+          <a href="/student-life/" class="nav-link">Student Life</a>
+        </li>
+        <li class="nav-item">
+          <a href="/athletics/" class="nav-link">Athletics</a>
+        </li>
+      </ul>
+    </nav>
+    
+    {{!-- Utility Navigation --}}
+    <div class="utility-nav">
+      <a href="/search/" class="utility-link" aria-label="Search">
+        {{> icons/search}}
+      </a>
+      <a href="/apply/" class="bm--cta style-primary">Apply</a>
+    </div>
+  </div>
+</header>
+
+{{!-- Skip to Main Content Link (Accessibility) --}}
+<a href="#main-content" class="skip-link sr-only-focusable">Skip to main content</a>

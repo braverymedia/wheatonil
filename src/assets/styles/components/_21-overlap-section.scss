@@ -1,6 +1,6 @@
 .bm--overlap {
     & + * {
-        padding-block-start: var(--section-space) !important;
+        padding-block-start: max(var(--section-space), calc(var(--space--grid-unit) * 20)) !important;
     }
     article > *{
         max-width: 500px !important;
