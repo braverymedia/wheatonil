@@ -199,7 +199,7 @@ fieldset.credential_types .scroller,
 }
 
 .finder label.checkbox input {
-    margin-right: var(--space--gap-regular);
+    margin-inline-end: var(--space--gap-regular);
     transition: opacity 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 

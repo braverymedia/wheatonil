@@ -1,0 +1,82 @@
+// Reusable mixins for CTA/button variants
+// Note: Keep API minimal and values explicit to avoid surprises.
+
+// Fill-style CTA with optional hover and !important control
+@mixin cta-fill($bg, $color, $hover-bg: null, $important: false) {
+  @if $important {
+    background: #{$bg} !important;
+    color: #{$color} !important;
+  } @else {
+    background: #{$bg};
+    color: #{$color};
+  }
+
+  @if $hover-bg != null {
+    &:hover {
+      @if $important {
+        background-color: #{$hover-bg} !important;
+      } @else {
+        background-color: #{$hover-bg};
+      }
+    }
+  }
+}
+
+// Constant subtle shadow used across states
+@mixin cta-shadow-constant($color, $alpha: 0.05) {
+  box-shadow: 0px 1px 2px rgba($color, $alpha);
+}
+
+// Loud CTA used for strong emphasis (e.g., orange)
+// $shadow-color must be a static color (not a CSS variable) for rgba()
+@mixin cta-loud($bg, $border, $text, $hover-bg, $shadow-color) {
+  background-color: $bg;
+  border-color: $border;
+  color: $text;
+  @include cta-shadow-constant($shadow-color);
+
+  &:hover {
+    @include cta-shadow-constant($shadow-color);
+    background-color: $hover-bg;
+    border-color: $border;
+  }
+
+  &:active {
+    @include cta-shadow-constant($shadow-color);
+    border-color: $border;
+  }
+}
+
+// Outline-style CTA with configurable hover inversion
+// Defaults to transparent background with a visible border
+@mixin cta-outline(
+  $border,
+  $text,
+  $bg: transparent,
+  $hover-bg: null,
+  $hover-text: null,
+  $hover-border: null
+) {
+  border: 1px solid $border;
+  background-color: $bg;
+  color: $text;
+
+  &:hover {
+    @if $hover-bg != null { background-color: $hover-bg; }
+    @if $hover-text != null { color: $hover-text; }
+    @if $hover-border != null { border-color: $hover-border; }
+  }
+}
+
+// Ghost-style CTA (no border, transparent background)
+@mixin cta-ghost($text, $hover-bg: null, $hover-text: null) {
+  border: 0;
+  box-shadow: none !important;
+  background-color: transparent;
+  color: $text;
+
+  &:hover {
+    @if $hover-bg != null { background-color: $hover-bg; }
+    @if $hover-text != null { color: $hover-text; }
+  }
+}

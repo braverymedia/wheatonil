@@ -1,38 +1,7 @@
 
 .main-header.bravery {
-    background-color: var(--color--white);
-    width: 100%;
-    padding: var(--space--gap-medium);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 72px;
-    filter: drop-shadow(0px 1px 2px rgba(16, 24, 40, 0.05));
-    gap: var(--space--gap-medium);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-
-    .branding svg {
-        height: 45px;
-        width: auto;
-    }
-
-    @media (min-width: 1024px) {
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        padding: 0 var(--space--gap-large);
-
-        .branding svg {
-            height: 72px;
-        }
-    }
-
-    @media (min-width: 1300px) {
-        padding: 0 var(--space--gap-xl);
-    }
-
-    &,
+    /* Above-the-fold sizing and layout live in critical.css to avoid duplication. */
+    /* Keep descendant overlay-tools adjustments scoped here only. */
     .overlay-tools {
         width: 100%;
         height: 72px;
@@ -111,7 +80,8 @@
 .bravery button.menu-more,
 .bravery button.search {
     background-color: transparent;
-    padding: 10px 0;
+    padding-block: 10px;
+    padding-inline: 0;
     color: var(--color--blue-600);
     text-decoration: none;
     border: 2px solid transparent;
@@ -124,6 +94,13 @@
         border-bottom-color: var(--color--orange-600);
         transition: all 200ms linear;
     }
+    &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
 
     @media (min-width: 1024px) {
         display: flex;
@@ -133,6 +110,21 @@
     .style-graduate & {
         font-family: var(--wc-font-family--sans-serif-alt-bold);
         color: inherit;
+    }
+}
+
+/* Ensure header action button icons have explicit dimensions */
+.bravery button.menu-more > svg,
+.bravery button.search > svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+@media (min-width: 1024px) {
+    .bravery button.menu-more > svg,
+    .bravery button.search > svg {
+        width: 20px;
+        height: 20px;
     }
 }
 
@@ -175,9 +167,7 @@
 .overlay-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: var(--color--blue-600);
     color: var(--color--white);
     width: 100%;
@@ -281,7 +271,8 @@
         display: flex;
         align-items: center;
         color: var(--color--white);
-        padding: var(--space--gap-regular) var(--space--gap-medium);
+        padding-block: var(--space--gap-regular);
+        padding-inline: var(--space--gap-medium);
         position: relative;
 
         &:before {
@@ -291,8 +282,8 @@
             width: 100%;
             height: 100%;
             position: absolute;
-            left: 0;
-            top: 0;
+            inset-block-start: 0;
+            inset-inline-start: 0;
             z-index: -1;
         }
 
@@ -301,17 +292,26 @@
         }
 
         @media (min-width: 1024px) {
-            padding: var(--space--gap-medium) var(--space--gap-large);
+            padding-block: var(--space--gap-medium);
+            padding-inline: var(--space--gap-large);
         }
     }
 
     .close-menu {
         grid-row: 1;
-        padding: 10px 5px;
+        padding-block: 10px;
+        padding-inline: 5px;
         border: 0;
 
         &:hover {
             background-color: var(--color--blue-700);
+        }
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+        }
+        &:focus:not(:focus-visible) {
+            outline: none;
         }
     }
 
@@ -391,6 +391,13 @@
             transform: rotate();
             transition: all 200ms ease-in-out;
         }
+    }
+
+    /* Explicit size for submenu toggle icons to avoid 0x0 in flex contexts */
+    h2>button > svg {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
     }
 
     button:hover,
@@ -474,8 +481,7 @@
         align-items: start;
         padding-block: 0;
 
-        h2:hover .nav-menu--link,
-        h2.is-expanded .nav-menu--link {
+        h2:hover .nav-menu--link {
             text-decoration-line: underline;
             text-decoration-thickness: 4px;
             text-underline-offset: 16px;
@@ -494,6 +500,10 @@
             grid-area: 1 / 2 / span 6;
             max-height: none;
             height: auto;
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            display: block;
 
             // Nested panels in desktop
             .accordion-panel {
@@ -531,7 +541,8 @@
 .bm--utility-menus {
     grid-area: utilmenu;
     font-size: var(--type-size--regular);
-    padding: var(--space--gap-medium);
+    padding-block: var(--space--gap-medium);
+    padding-inline: var(--space--gap-medium);
     display: flex;
     gap: var(--space--gap-medium);
 
@@ -564,13 +575,20 @@
         &:hover {
             text-decoration: underline;
         }
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+        }
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
     }
 
     @media (min-width: 1024px) {
-        padding: 0;
+        padding-block: 0;
         padding-inline-start: var(--space--gap-large);
         display: block;
-        border-left: 1px solid var(--color--blue-800);
+        border-inline-start: 1px solid var(--color--blue-800);
 
         .nav-menu--header {
             display: flex;
@@ -587,6 +605,19 @@
     opacity: 0;
     visibility: hidden;
     transition: all .15s ease-in-out;
+    /* Ensure hidden overlay never intercepts clicks */
+    pointer-events: none;
+    /* Keep it in its off-screen transform state */
+    transform: translateY(10px);
+    /* Put below page content as a hard guard */
+    z-index: -1;
+}
+
+/* Defensive guards: hide when aria-hidden or inert are present */
+.overlay-menu[aria-hidden="true"],
+.overlay-menu[inert] {
+    visibility: hidden;
+    pointer-events: none !important;
 }
 
 .overlay-menu[data-state="visible"] {

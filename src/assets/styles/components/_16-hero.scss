@@ -1,60 +1,11 @@
 .bm {
     &-home--hero {
-        &.is-fullwidth {
-            padding: unset;
-        }
-        .bm-mobile {
-            margin-inline-start: calc(var(--space--gap-medium) * -1);
-            margin-inline-end: calc(var(--space--gap-medium) * -1);
-            width: 100vw;
-            overflow: hidden;
-            flex: 1 auto;
-            border-radius: 0;
-            align-items: stretch;
-        }
+        /* Mobile ATF styles deduped into critical.css */
         .home--greeting {
-            // Set up container queries
-            container-type: inline-size;
-            container-name: greeting;
-            
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding-inline: var(--space--gap-medium);
-            padding-block-end: var(--space--gap-xxl);
-            gap: var(--space--gap-large);
-            isolation: isolate;
-            color: var(--color--blue-600);
-            block-size: calc(100dvh - 72px);
-            
             h2 {
-                color: inherit;
-                max-width: 100%;
-                margin: 0 0 0.5em;
-                font-size: var(--type-size--xl-fluid);
-                line-height: 1.1;
-                letter-spacing: -0.02em;
-                
                 @container greeting (min-width: 48rem) {
                     max-width: 475px;
                 }
-            }
-            .prehead {
-                position: relative;
-                &:after {
-                    content: "";
-                    background-color: var(--color--orange-600);
-                    display: block;
-                    height: 3px;
-                    width: calc(9 * var(--space--grid-unit));
-                    bottom: 0;
-                    transform: translateY(var(--space--gap-xl));
-                    left: 0;
-                }
-            }
-            button {
-                width: 100%;
             }
         }
         @media (min-width: 1024px) {
@@ -73,13 +24,12 @@
                 justify-content: flex-end;
                 flex-basis: 500px;
                 max-width: 30%;
-
             }
         }
     }
     &-gallery-col {
         flex-basis: 50%;
-        
+
         /* Hide columns until JS initializes */
         .js & {
             display: none;
@@ -96,12 +46,12 @@
         gap: var(--space--gap-xl);
         overflow: hidden;
         padding-inline: 0 !important;
-        
+
         /* Hide content until JS initializes */
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-        
+
         /* Show once JS adds is-initialized class */
         &.is-initialized {
             opacity: 1;
@@ -124,7 +74,7 @@
         user-select: none;
         gap: var(--space--gap-xl);
         width: 100%;
-        
+
         /* Prevent FOUC (Flash of Unstyled Content) */
         .js & {
             display: none;

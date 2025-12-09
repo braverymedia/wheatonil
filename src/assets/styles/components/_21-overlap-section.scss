@@ -1,6 +1,6 @@
 .bm--overlap {
     & + * {
-        padding-block-start: calc(var(--space--grid-unit) * 20) !important;
+        padding-block-start: max(var(--section-space), calc(var(--space--grid-unit) * 20)) !important;
     }
     article > *{
         max-width: 500px !important;
@@ -43,12 +43,12 @@
             width: calc(var(--space--grid-unit) * 9);
             height: 3px;
             background-color: var(--color--cyan-400, #6E9BAE);
-            margin-block-end: 48px;
+            margin-block-end: var(--space--gap-3xl);
         }
     }
     @media (min-width: 1024px) {
         h2:before {
-            transform: translateY(-48px);
+            transform: translateY(calc(var(--space--gap-3xl) * -1));
             margin-block-end: unset;
         }
         aside {

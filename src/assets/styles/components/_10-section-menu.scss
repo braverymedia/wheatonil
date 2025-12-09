@@ -10,10 +10,18 @@
     button {
         display: flex;
         align-items: center;
-        padding: var(--space--gap-medium);
+        padding-block: var(--space--gap-medium);
+        padding-inline: var(--space--gap-medium);
         font-weight: 500;
         width: 100%;
         justify-content: space-between;
+        &:focus-visible {
+            outline: 2px solid var(--color--blue-600);
+            outline-offset: 2px;
+        }
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
         &:after {
             content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8V16M8 12H16M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
             color: var(--color--blue-600);
@@ -43,7 +51,8 @@
         display: flex;
         flex-direction: column;
         gap: var(--space--gap-large);
-        padding: 0 18px;
+        padding-inline: 18px;
+        padding-block: 0;
         max-height: 0;
         opacity: 0;
         transition: opacity 0.15s ease-in-out, padding 0.2s ease-in-out 0.15s, max-height 0.2s ease-in-out 0.15s;
@@ -51,11 +60,12 @@
         visibility: collapse;
         @media ( width <= 1023px ) {
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
             width: 100%;
             box-shadow: var(--elevation--large);
             &.visible {
-                padding: var(--space--gap-large) 18px;
+                padding-block: var(--space--gap-large);
+                padding-inline: 18px;
                 max-height: 78dvh;
                 opacity: 1;
                 transition: padding .25s ease-in-out, max-height .25s ease-in-out, opacity .15s ease-in-out .15s;
@@ -106,10 +116,18 @@
             text-decoration: none;
             display: flex;
             align-content: center;
-            padding: var(--space--gap-regular) 4px;
+            padding-block: var(--space--gap-regular);
+            padding-inline: 4px;
 
             &:hover {
                 background-color: var(--color--grey-100);
+            }
+            &:focus-visible {
+                outline: 2px solid var(--color--blue-600);
+                outline-offset: 2px;
+            }
+            &:focus:not(:focus-visible) {
+                outline: none;
             }
         }
         ul {
@@ -156,7 +174,7 @@
                 width: 100%;
             }
             li {
-                border-top: 1px solid var(--color--grey-300);
+                border-block-start: 1px solid var(--color--grey-300);
                 margin-block-end: 0 !important;
                 &:last-child {
                     border-block-end: 1px solid var(--color--grey-300);

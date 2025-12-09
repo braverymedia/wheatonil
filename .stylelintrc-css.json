@@ -1,7 +1,5 @@
 {
-	"extends": [
-		"stylelint-config-wordpress"
-	],
+	"customSyntax": "postcss-scss",
 	"rules": {
 		"indentation": "tab",
 		"no-duplicate-selectors": null,

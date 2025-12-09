@@ -1,1 +1,5 @@
-@import "vars", "config", "typescale", "typesetting";
+@use "vars" as *;
+@use "config.reset" as *;
+@use "typescale" as *;
+@use "typesetting.base" as *;
+@use "critical.abovefold" as *;

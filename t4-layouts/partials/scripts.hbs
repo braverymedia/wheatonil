@@ -1,0 +1,166 @@
+{{!-- Modular JavaScript Loader --}}
+<script>
+/**
+ * Wheaton College Modular JavaScript Loader
+ * Dynamically loads JavaScript modules based on data-module attributes
+ * Version: 1.0.0
+ */
+(function() {
+  'use strict';
+
+  // Module registry with media library paths
+  const MODULES = {
+    'navigation': '{{{media id="317993" layout="file/url"}}}',
+    'carousel': '{{{media id="317988" layout="file/url"}}}',
+    'accordion': '{{{media id="317987" layout="file/url"}}}',
+    'modal': '{{{media id="317992" layout="file/url"}}}',
+    'marquee': '{{{media id="317991" layout="file/url"}}}',
+    'gallery-staggered': '{{{media id="317990" layout="file/url"}}}',
+    'faculty-filter': '{{{media id="317989" layout="file/url"}}}',
+    'program-finder': '{{{media id="317994" layout="file/url"}}}',
+  };
+
+  // Track loaded modules to prevent duplicates
+  const loadedModules = new Set();
+  const loadingModules = new Map();
+
+  /**
+   * Load a JavaScript module
+   * @param {string} moduleName - Name of the module to load
+   * @returns {Promise} Promise that resolves when module is loaded
+   */
+  function loadModule(moduleName) {
+    // Return existing promise if already loading
+    if (loadingModules.has(moduleName)) {
+      return loadingModules.get(moduleName);
+    }
+
+    // Return resolved promise if already loaded
+    if (loadedModules.has(moduleName)) {
+      return Promise.resolve();
+    }
+
+    // Check if module exists in registry
+    if (!MODULES[moduleName]) {
+      console.warn(`Module "${moduleName}" not found in registry`);
+      return Promise.reject(new Error(`Module not found: ${moduleName}`));
+    }
+
+    // Create and track loading promise
+    const loadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = MODULES[moduleName];
+      script.type = 'module'; // Support ESM modules
+
+      script.onload = () => {
+        loadedModules.add(moduleName);
+        loadingModules.delete(moduleName);
+        console.log(`✓ Module loaded: ${moduleName}`);
+        resolve();
+      };
+
+      script.onerror = () => {
+        loadingModules.delete(moduleName);
+        console.error(`✗ Failed to load module: ${moduleName}`);
+        reject(new Error(`Failed to load: ${moduleName}`));
+      };
+
+      document.head.appendChild(script);
+    });
+
+    loadingModules.set(moduleName, loadPromise);
+    return loadPromise;
+  }
+
+  /**
+   * Initialize a module on an element
+   * @param {HTMLElement} element - Element to initialize
+   * @param {string} moduleName - Name of module to initialize
+   */
+  function initModule(element, moduleName) {
+    // Check if module has init function
+    if (window.wheaton &&
+        window.wheaton[moduleName] &&
+        typeof window.wheaton[moduleName].init === 'function') {
+      try {
+        window.wheaton[moduleName].init(element);
+        console.log(`✓ Module initialized: ${moduleName}`, element);
+      } catch (error) {
+        console.error(`✗ Failed to initialize ${moduleName}:`, error);
+      }
+    } else {
+      console.warn(`Module "${moduleName}" has no init function`);
+    }
+  }
+
+  /**
+   * Process elements with data-module attributes
+   */
+  function processModules() {
+    const elements = document.querySelectorAll('[data-module]');
+
+    // Group elements by module to batch load
+    const moduleGroups = new Map();
+
+    elements.forEach(element => {
+      const moduleAttr = element.getAttribute('data-module');
+      if (!moduleAttr) return;
+
+      // Support multiple modules per element (space-separated)
+      const moduleNames = moduleAttr.split(/\s+/).filter(Boolean);
+
+      moduleNames.forEach(moduleName => {
+        if (!moduleGroups.has(moduleName)) {
+          moduleGroups.set(moduleName, []);
+        }
+        moduleGroups.get(moduleName).push(element);
+      });
+    });
+
+    // Load and initialize modules
+    moduleGroups.forEach((elements, moduleName) => {
+      loadModule(moduleName)
+        .then(() => {
+          // Initialize module on all elements that need it
+          elements.forEach(element => {
+            initModule(element, moduleName);
+          });
+        })
+        .catch(error => {
+          console.error(`Failed to load module ${moduleName}:`, error);
+        });
+    });
+  }
+
+  /**
+   * Initialize on DOM ready
+   */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', processModules);
+  } else {
+    // DOM already loaded
+    processModules();
+  }
+
+  /**
+   * Expose API for dynamic module loading
+   */
+  window.wheatonModuleLoader = {
+    load: loadModule,
+    init: initModule,
+    modules: MODULES,
+    loaded: loadedModules
+  };
+
+})();
+</script>
+
+{{!-- Analytics (if applicable) --}}
+{{#ifSet element="Analytics Code"}}
+  {{{publish element="Analytics Code"}}}
+{{/ifSet}}
+
+{{!-- Additional Scripts (optional) --}}
+{{#ifSet element="Additional Scripts"}}
+  {{{publish element="Additional Scripts"}}}
+{{/ifSet}}

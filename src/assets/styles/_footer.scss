@@ -17,6 +17,12 @@
         width: 45vw;
         max-width: 240px;
     }
+    /* Clear keyboard focus indication in footer */
+    a:focus-visible,
+    button:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
     @media (min-width: 1024px) {
         padding: calc(var(--space--grid-unit) * 8) 5vw calc(var(--space--grid-unit) * 6);
         gap: calc(var(--space--grid-unit) * 9);
@@ -42,6 +48,9 @@
         a {
             text-decoration: none;
             &:hover {
+                text-decoration: underline;
+            }
+            &:focus-visible {
                 text-decoration: underline;
             }
         }
@@ -110,18 +119,37 @@
     }
     @media (min-width: 1144px) {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         gap: var(--space--gap-large);
+        h2 > a {
+            text-decoration: none !important;
+            text-underline-offset: 4px !important;
+        }
+        h2 > a:hover,
+        h2 > a:focus-visible {
+            text-decoration: underline !important;
+            text-decoration-thickness: 2px;
+        }
         > section {
             border: 0;
             flex-basis: 15%;
             button > svg {
                 display: none;
             }
-            *:not(h2):not(button) {
-                font-size: var(--type-size--xsmall);
-            }
+        }
+        /* Limit smaller type to panel content, not headings */
+        .accordion-panel *, .contact *:not(h2) {
+            font-size: var(--type-size--xsmall);
+        }
+        /* Footer accordion panels should always be visible on desktop */
+        .accordion-panel {
+            display: block !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            max-height: none !important;
+            visibility: visible !important;
         }
         .contact {
             padding-block-start: calc(var(--space--gap-regular) + 10px);
@@ -138,11 +166,30 @@
 }
 
 // Make these styles specific to footer accordions only
-@media ( max-width: 1024px ) {
-    .site-footer .has-js .accordion-panel {
+@media ( max-width: 1023px ) {
+    .has-js .main-footer.bravery .accordion-panel {
         display: none;
     }
-    .site-footer .has-js .accordion-panel.visible {
+    .has-js .main-footer.bravery .accordion-panel.visible {
         display: block;
+    }
+    /* Ensure touch target size for mobile toggle button */
+    .bravery .footer-nav .nav-menu--toggle {
+        min-width: 24px;
+        min-height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Ensure footer panels are visible at desktop sizes (>=1024px)
+@media ( min-width: 1024px ) {
+    .bravery .footer-nav .accordion-panel {
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        max-height: none !important;
+        visibility: visible !important;
     }
 }

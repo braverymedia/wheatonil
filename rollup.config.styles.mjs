@@ -1,6 +1,5 @@
 import postcss from 'rollup-plugin-postcss';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
+import lightningcss from 'postcss-lightningcss';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -30,11 +29,14 @@ export default styles.map(style => ({
   plugins: [
     postcss({
       extract: true,
-      minimize: isProduction,
+      // Minification handled by Lightning CSS
+      minimize: false,
       sourceMap: true,
       plugins: [
-        autoprefixer(),
-        ...(isProduction ? [cssnano()] : [])
+        // Lightning CSS handles prefixing and minification per browserslist
+        lightningcss({
+          minify: isProduction
+        })
       ],
       use: [
         [
