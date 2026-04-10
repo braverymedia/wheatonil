@@ -59,6 +59,7 @@ body {
     --space--gap-xl: calc(var(--space--grid-unit) * 4); // 32px
     --space--gap-xxl: calc(var(--space--grid-unit) * 5); // 40px
     --space--gap-3xl: calc(var(--space--grid-unit) * 6); // 48px
+    --space--gap-4xl: calc(var(--space--grid-unit) * 8); // 64px
 
     /* Vertical rhythm aliases (optional semantic names) */
     --vr-1: var(--space--gap-regular);  /* 8px */
@@ -67,7 +68,7 @@ body {
     --vr-4: var(--space--gap-xl);       /* 32px */
     --vr-5: var(--space--gap-xxl);      /* 40px */
     --vr-6: var(--space--gap-3xl);      /* 48px */
-
+    --vr-7: var(--space--gap-4xl);      /* 64px */
     // Margins
     --max-1280: calc((100vw - 1280px) * 0.5);
     --max-1480: calc((100vw - 1480px) * -0.5);
@@ -85,7 +86,7 @@ body {
     --bp-tablet: 1024px;
     --bp-desktop: 1280px;
     --bp-wide: 1500px;
-    
+
     // Fluid width calculations
     --wide-padding-ratio: 0.032;  // 48px at 1500px
     --extrawide-padding-ratio: 0.064;  // 96px at 1500px

@@ -1,0 +1,48 @@
+{{!-- News Single Page Layout for TerminalFour --}}
+{{> "partials/head"}}
+
+<body class="news-single">
+  {{> "partials/header"}}
+
+  <main id="main-content">
+    {{!-- Hero News Section --}}
+    {{> "partials/hero-news" heroNews}}
+
+    {{!-- News Article Section --}}
+    {{> "partials/news-article" newsArticle}}
+
+    {{!-- Related News Section --}}
+    {{#if relatedNews}}
+      <section class="related-news-section">
+        <div class="bm--content">
+          <div class="content">
+            <h2>Related News</h2>
+            <div class="related-news-grid">
+              {{#each relatedNews}}
+                <article class="related-news-item">
+                  {{#if this.image}}
+                    <div class="related-news-image">
+                      <img src="{{this.image}}" alt="{{this.alt}}" loading="lazy">
+                    </div>
+                  {{/if}}
+                  <div class="related-news-content">
+                    <h3>
+                      <a href="{{this.url}}">{{this.title}}</a>
+                    </h3>
+                    {{#if this.excerpt}}
+                      <p>{{this.excerpt}}</p>
+                    {{/if}}
+                  </div>
+                </article>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  </main>
+
+  {{> "partials/footer"}}
+  {{> "partials/scripts"}}
+</body>
+</html>

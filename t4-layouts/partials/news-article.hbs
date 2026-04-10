@@ -1,0 +1,44 @@
+{{!-- News Article Component for TerminalFour --}}
+<div class="news-article-container">
+  <article class="news-article">
+    {{!-- Article metadata --}}
+    <div class="news-article--meta">
+      {{#if date}}
+        <div class="news-article--date">
+          {{formatDate date}}
+        </div>
+      {{/if}}
+    </div>
+
+    {{!-- Article title --}}
+    {{#if title}}
+      <h1 class="news-article--title">
+        {{title}}
+      </h1>
+    {{/if}}
+
+    {{!-- Article body --}}
+    {{#if body}}
+      <div class="news-article--body">
+        {{{body}}}
+      </div>
+    {{/if}}
+
+    {{!-- Additional content blocks --}}
+    {{#if content}}
+      {{#each content}}
+        <div class="news-article--content-block">
+          {{#if this.heading}}
+            <h2>{{this.heading}}</h2>
+          {{/if}}
+          {{#if this.text}}
+            <p>{{this.text}}</p>
+          {{/if}}
+          {{#if this.html}}
+            {{{this.html}}}
+          {{/if}}
+        </div>
+      {{/each}}
+    {{/if}}
+  </article>
+</div>
