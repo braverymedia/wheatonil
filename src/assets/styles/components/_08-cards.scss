@@ -25,6 +25,68 @@
             }
         }
     }
+    &--card-news {
+        padding: 0 !important;
+        margin: 0;
+        a {
+            text-decoration-style: solid;
+            text-decoration-skip-ink: auto;
+            text-decoration-thickness: from-font;
+            text-underline-offset: auto;
+            text-underline-position: from-font;
+        }
+        > figure,
+        > picture {
+            margin: 0;
+        }
+        .news-meta {
+            font-size: var(--type-size--tiny);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            a {
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        .card--content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space--gap-medium);
+        }
+        &.is-featured {
+            background-color: var(--color--blue-800);
+            border-radius: var(--corner--radius);
+            color: var(--color--white);
+            * {color: inherit !important}
+            .card--content {
+                padding: var(--space--gap-medium);
+            }
+            @media (min-width: 1024px) {
+                align-items: center;
+                flex-direction: row;
+                gap: var(--space--gap-xxl);
+                > figure,
+                > picture {
+                    aspect-ratio: 1;
+                    overflow: hidden;
+                    width: 40%;
+                    flex: 0 0 40%;
+                }
+                .card-content {
+                    flex: 1 1 60%;
+                    padding: 0;
+                }
+            }
+        }
+        &:not(.is-featured) {
+            h2 {
+                font-size: var(--type-size--large);
+            }
+        }
+    }
 }
 .bm--is-card {
     box-shadow: var(--elevation--large);

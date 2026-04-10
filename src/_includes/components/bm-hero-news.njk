@@ -1,0 +1,42 @@
+<section class="bm-hero-news is-fullwidth">
+  <!-- Hero background image -->
+  <figure class="bm-hero-news--background">
+    <picture>
+      <source
+        type="image/webp"
+        srcset="
+          https://pxl-wheatonedu.terminalfour.net/fit-in/768x384/filters:quality(80)/filters:format(webp)/prod02/channel_1/media/marcomm/hero-image.jpg 768w,
+          https://pxl-wheatonedu.terminalfour.net/fit-in/1024x512/filters:quality(80)/filters:format(webp)/prod02/channel_1/media/marcomm/hero-image.jpg 1024w,
+          https://pxl-wheatonedu.terminalfour.net/fit-in/1440x720/filters:quality(80)/filters:format(webp)/prod02/channel_1/media/marcomm/hero-image.jpg 1440w"
+        sizes="100vw">
+      <source
+        type="image/jpeg"
+        srcset="
+          https://pxl-wheatonedu.terminalfour.net/fit-in/768x384/filters:quality(80)/prod02/channel_1/media/marcomm/hero-image.jpg 768w,
+          https://pxl-wheatonedu.terminalfour.net/fit-in/1024x512/filters:quality(80)/prod02/channel_1/media/marcomm/hero-image.jpg 1024w,
+          https://pxl-wheatonedu.terminalfour.net/fit-in/1440x720/filters:quality(80)/prod02/channel_1/media/marcomm/hero-image.jpg 1440w"
+        sizes="100vw">
+      <img
+        src="https://pxl-wheatonedu.terminalfour.net/fit-in/1440x720/filters:quality(80)/prod02/channel_1/media/marcomm/hero-image.jpg"
+        alt="Associate Professor of New Testament Dr. Esau McCaulley delivers a lecture at Wheaton College. Dr. McCaulley's scholarship focuses on Pauline Exegesis and Black Ecclesial Theology, examining how Black churches interpret Scripture through the lens of traditional Christian belief combined with concern for the oppressed."
+        title="Faculty Lecture: Dr. Esau McCaulley"
+        width="1440"
+        height="720"
+        loading="eager"
+        decoding="async" />
+    </picture>
+    <figcaption class="sr-only">Photo: Wheaton College Communications</figcaption>
+  </figure>
+    <nav class="bm-hero-news--breadcrumbs" aria-label="Breadcrumb">
+      <a href="#" class="bm--back-link icon-reverse">{% include "components/svg/icon-left-arrow.svg" %} All News</a>
+    </nav>
+        <!-- Photo caption -->
+    <div class="bm-hero-news--caption">
+        <div class="bm-hero-news--caption-content">
+            {% include "components/svg/icon-info.svg" %}
+            <p class="bm-hero-news--caption-text">
+            Photo: Wheaton College Communications
+            </p>
+        </div>
+    </div>
+</section>
